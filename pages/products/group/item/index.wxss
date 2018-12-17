@@ -1,0 +1,53 @@
+.trow {
+  display: flex;
+  /* border-bottom: 1px solid #ccc; */
+  padding: 20rpx;
+  background-color: #fff;
+}
+.img {
+  width: 128rpx;
+  height: 128rpx;
+  margin-left: 10rpx
+}
+.checkbox {
+  height: 128rpx;
+  line-height: 128rpx
+}
+.item-name {
+  font-size: 28rpx;
+}
+.item-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 20rpx
+}
+.item-attr {
+  display: flex;
+  font-size: 30rpx;
+  padding-top: 10rpx;
+  justify-content: space-between;
+}
+.item-attr .price {
+  color: #900;
+  font-size: 30rpx;
+}
+.item-attr .price text {
+  font-size: 20rpx
+}
+.itemTap {
+  background-color: #ddd;
+  opacity: 0.8;
+}
+.factory {
+  padding: 8rpx;
+  font-size: 20rpx;
+  border-radius: 6rpx;
+  border: 1px solid #999;
+  color: #999;
+}
+.self {
+  border-color: #f66;
+  color: #f66;
+}

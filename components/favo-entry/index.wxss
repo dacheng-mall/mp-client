@@ -1,0 +1,26 @@
+.favo-entry-wrap {
+  height: 88rpx;
+  width: 100%;
+}
+.favo-entry {
+  position: fixed;
+  right: 20rpx;
+  bottom: 20rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+  width: 88rpx;
+  height: 88rpx;
+  text-align: center;
+  line-height: 96rpx;
+}
+.count {
+  position: absolute;
+  width: 88rpx;
+  height: 88rpx;
+  left: 0;
+  top: 0;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 20rpx;
+  color: #fff
+}

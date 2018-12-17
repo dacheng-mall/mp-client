@@ -1,0 +1,13 @@
+<view class="trow" hover-class="itemTap" bind:tap="tap" data-id="{{data.id}}">
+  <view class="checkbox">
+    <checkbox value="{{data.id}}" checked="{{checked}}" />
+  </view>
+  <image class="img" src="{{data.mainImage}}" />
+  <view class="item-info">
+    <view class="item-name" bind:tap="goDetail" data-id="{{data.id}}">{{data.name}}</view>
+    <view class="item-attr">
+      <view class="price"><text>￥</text>{{data.price}}</view>
+      <view class="factory {{data.factoryType === 'self' ? 'self' : ''}}">{{data.factory}}</view>
+    </view>
+  </view>
+</view>

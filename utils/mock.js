@@ -1,0 +1,1 @@
+exports.favorites = ["p00", "p03", "p05"];

@@ -1,0 +1,82 @@
+.swiper-x {
+  position: relative
+}
+.swiper-x-wrap {
+  position: relative;
+  width: 200%;
+  height: 100%;
+  transition: left .3s;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.video {
+  left: 0;
+}
+.image {
+  left: -100%;
+}
+.swiper-video {
+  position: relative;
+  height: 100%;
+  width: 50%
+}
+.swiper-btn {
+  position: absolute;
+  top: 50%;
+  margin-top: -20rpx;
+  font-size: 32rpx;
+  z-index: 100;
+}
+.swiper-btn-inner {
+  background-color: #f66;
+  color: #fff;
+}
+.swiper-btn-right {
+  right: 10rpx
+}
+.swiper-btn-left {
+  left: 10rpx
+}
+.swiper-images {
+  position: relative;
+  height: 100%;
+  width: 50%
+}
+.swiper-imgs {
+  width: 100%;
+  height: 100%;
+}
+.type-change {
+  position: absolute;
+  width: 100%;
+  bottom: 88rpx;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: 1;
+  transition: opacity 1s;
+  opacity: 0
+}
+.type-change-btn {
+  font-size: 24rpx;
+  color: #777;
+  border: 1px solid #ddd;
+  background-color: #ccc;
+  margin: 0 10rpx;
+  width: 72rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  border-radius: 10rpx
+}
+.active {
+  color: #fff;
+  border: 1px solid #f66;
+  background-color: #f66;
+}
+.show {
+  opacity: 1
+}

@@ -1,0 +1,22 @@
+{
+  "name": "dacheng-mall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dacheng-mall/mini-program-client.git"
+  },
+  "author": "zhao xin ke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dacheng-mall/mini-program-client/issues"
+  },
+  "homepage": "https://github.com/dacheng-mall/mini-program-client#readme",
+  "dependencies": {
+    "wxapp-computed": "^1.0.1"
+  }
+}

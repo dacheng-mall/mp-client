@@ -1,0 +1,23 @@
+<view style="{{sizeStyle}}" class="swiper-x" bind:touchstart="ts" bind:touchend="te">
+  <view class="swiper-x-wrap {{current}}">
+    <video id="first-video" bind:tap="videoTap" class="swiper-video" wx:if="{{video}}" autoplay="{{false}}" src="{{video.url}}" poster="{{video.poster}}">
+      <cover-view wx:if="{{images}}" class="type-change {{showChangeBtn && current === 'video' && 'show'}}">
+        <cover-view bind:tap="changeViewType" class="type-change-btn {{current === 'video' && 'active'}}" data-code="video">视频</cover-view>
+        <cover-view bind:tap="changeViewType" class="type-change-btn {{current === 'image' && 'active'}}" data-code="image">图片</cover-view>
+      </cover-view>
+    </video>
+    <view class="swiper-images" wx:if="{{images && images.length > 0}}" bind:tap="setShowChangeBtn">
+      <view wx:if="{{video}}" class="type-change {{showChangeBtn && current === 'image' && 'show'}}">
+        <view bind:tap="changeViewType"  class="type-change-btn {{current === 'video' && 'active'}}" data-code="video">视频</view>
+        <view bind:tap="changeViewType" class="type-change-btn {{current === 'image' && 'active'}}" data-code="image">图片</view>
+      </view>
+      <swiper class="swiper-imgs" indicator-dots="{{true}}" autoplay="{{current === 'image'}}" interval="{{5000}}" duration="{{500}}" bind:animationfinish="change">
+        <block wx:for="{{images}}" wx:key="{{index}}_image">
+          <swiper-item>
+            <image class="swiper-image" mode="aspectFit" style="{{sizeStyle}}" src="{{item.url}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</view>

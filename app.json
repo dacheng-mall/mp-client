@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/logs/logs",
+    "pages/products/list/index",
+    "pages/products/detail/index",
+    "pages/products/group/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "#fff",
+    "navigationBarBackgroundColor": "#f66",
+    "navigationBarTitleText": "答橙礼品",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "icon-x": "/components/icon/index",
+    "favo-entry": "/components/favo-entry/index"
+  }
+}

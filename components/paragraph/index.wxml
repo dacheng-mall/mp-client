@@ -1,0 +1,6 @@
+<view>
+  <block wx:for="{{data}}" wx:key="{{index}}_content">
+    <text-item wx:if="{{item.type === 'text'}}" data="{{item}}"></text-item>
+    <img-item wx:if="{{item.type === 'image'}}" data="{{item}}"></img-item>
+  </block>
+</view>

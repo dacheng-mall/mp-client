@@ -1,0 +1,21 @@
+.products-list-wrap {
+  margin: 10rpx 44rpx
+}
+.products-group-title {
+  font-size: 36rpx;
+  margin: 24rpx 0;
+  color: #666;
+}
+.products-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.product-item {
+  width: 49%;
+  margin-bottom: 32rpx;
+}
+.product-item-double {
+  width: 100%;
+}

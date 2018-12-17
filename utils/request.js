@@ -1,0 +1,101 @@
+const CONTENT_TYPE = "Content-Type";
+const JSON_TYPE = "application/json";
+
+const baseURL = "http://localhost:3000/";
+let token = "";
+export function setToken(t) {
+  if (t === "") {
+    token = t;
+    wx.removeStorageSync("token");
+    return;
+  }
+  token = `Bearer ${t}`;
+  wx.setStorageSync("token", token);
+}
+function getToken() {
+  if (token) {
+    return token;
+  }
+  return wx.getStorageSync("token");
+}
+
+export function getType(res) {
+  return res.headers.get(CONTENT_TYPE);
+}
+
+export function parseResponse(res) {
+  // TODO 这里只处理了json类型的返回值, 如果有其他类型的需要再扩展
+  const data = res.data;
+  return Promise.resolve(data);
+}
+export function checkStatus(data) {
+  if (data.code > 0) {
+    // 业务码大于0时表示业务处理失败
+    return Promise.reject(`请求失败(code:${data.code}) ${data.msg}`);
+  }
+  return Promise.resolve(data);
+}
+
+export default function request(url, { data, method }, other) {
+  const options = {
+    url,
+    method,
+    data,
+    headers: { [CONTENT_TYPE]: JSON_TYPE, Authorization: getToken() },
+    ...other
+  };
+  switch (method.toUpperCase()) {
+    case "GET":
+    case "DELETE": {
+      delete options.data;
+      if (!data) {
+        break;
+      }
+      const uri = (function(url, data) {
+        let query = "?";
+        for (const d in data) {
+          if (data.hasOwnProperty(d)) {
+            query += `${d}=${data[d]}&`;
+          }
+        }
+        query.replace(/\&$/, "");
+        return `${baseURL}${url}${query}`;
+      })(url, data);
+      options.url = uri;
+      break;
+    }
+    case "POST":
+    case "PUT":
+    case "PATCH": {
+      // TODO 这三种请求方式没做任何处理
+      break;
+    }
+  }
+  // return wx.request(options)
+  //   .then(parseResponse)
+  //   .then(checkStatus)
+  //   .catch((err) => {
+  //     // MessageMessage.error(err);
+  //   });
+  return new Promise((resolve, reject) => {
+    wx.request({
+      ...options,
+      success: res => {
+        resolve(res);
+      },
+      fail: err => {
+        reject(err);
+      }
+    });
+  })
+    .then(parseResponse)
+    .then(checkStatus)
+    .catch(err => {});
+}
+const createMethod = method => (url, data, other) => {
+  return request(url, { method, data }, other);
+};
+export const get = createMethod("get");
+export const post = createMethod("post");
+export const del = createMethod("delete");
+export const put = createMethod("put");

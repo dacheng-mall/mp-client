@@ -1,0 +1,27 @@
+/* pages/home/index.wxss */
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-top: 1rpx solid #999;
+  border-bottom: 1rpx solid #999;
+  margin: 20rpx 0;
+}
+.cate-item {
+  text-align: center;
+  font-size: 32rpx;
+  width: 33.3333%;
+  height: 128rpx;
+}
+.cate-item-1 {
+  background-color: #999
+}
+.swiper-image {
+  background-color: #333;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999
+}

@@ -1,0 +1,14 @@
+.main-searcher {
+  padding: 5px;
+  padding-left: 32px;
+  margin: 5px;
+  border: 1px solid #eee;
+  font-size: 14px;
+  border-radius: 5px;
+  position: relative;
+}
+.main-searcher-icon {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}

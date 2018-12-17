@@ -1,0 +1,20 @@
+<view class="table-wrap" style="height: {{windowHeight || 100}}px">
+  <scroll-view class="tbody" scroll-y>
+    <checkbox-group bind:change="checkChange">
+      <block wx:for="{{list}}" wx:key="{{item.id}}">
+        <item state="{{state}}" data="{{item}}" ids="{{ids}}" bind:itemTap="itemTap" bind:titleTap="titleTap" />
+      </block>
+    </checkbox-group>
+  </scroll-view>
+  <view class="bottom-bar">
+    <button size="mini" class="cancel-btn btn" bindtap="chooseAll">
+      {{chooseState ? '全不选' : '全选'}}
+    </button>
+    <button wx:if="{{favorites}}" size="mini" class="operator-btn btn" type="warn" bindtap="onRemove">
+      取消收藏
+    </button>
+    <button size="mini" class="operator-btn btn" type="primary" bindtap="onShare">
+      分享商品
+    </button>
+  </view>
+</view>

@@ -1,0 +1,3 @@
+<view>
+  <products bind:click="clickProd" bind:dbClick="dbClickProd"  data="{{list}}"></products>
+</view>

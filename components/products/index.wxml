@@ -1,0 +1,16 @@
+<view class="products-list-wrap">
+  <slot name="before"></slot>
+  <view wx:if="{{title}}" class="products-group-title">{{title}}</view>
+  <view class="products-list">
+    <block wx:for="{{_data}}" wx:key="{{index}}" wx:for-item="itemData">
+      <product
+        test="{{test}}"
+        data="{{itemData}}"
+        bind:click="click"
+        bind:dbClick="dbClick"
+        class="product-item{{itemData.size === 2 ? ' product-item-double' : ''}}"
+      />
+    </block>
+  </view>
+  <slot name="after"></slot>
+</view>

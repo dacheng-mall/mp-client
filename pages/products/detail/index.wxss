@@ -1,0 +1,69 @@
+/* pages/products/detail/index.wxss */
+.background {
+  position: absolute;
+  z-index: 1;
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0
+}
+.detail-wrap {
+  position: relative;
+  z-index: 2;
+  background-color: #ccc
+}
+.detail-main {
+  padding-bottom: 128rpx;
+  position: relative;
+  background-color: #fff
+}
+.display {
+  width: 100%;
+  height: 100%;
+  background-color: #eee
+}
+.vadio {
+  width: 100%;
+  height: 100%;
+}
+.title {
+  font-size: 32rpx;
+  color: #000;
+  line-height: 1.5em;
+}
+.main-sttr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 36rpx;
+}
+.price {
+  color: #f00;
+}
+.stock-up {
+  color: #999;
+}
+.block {
+  padding: 16rpx
+}
+.detail-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 88rpx;
+  background: #eee;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.detail-toolbar-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx
+}

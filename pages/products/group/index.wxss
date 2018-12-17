@@ -1,0 +1,52 @@
+.table-wrap {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee
+}
+.title {
+  padding: 20rpx;
+  font-size: 32rpx;
+  color: #999
+}
+.thead {
+  display: flex;
+  padding: 10rpx;
+  border-bottom: 1px solid #ccc;
+  background-color: #ddd;
+  flex-shrink: 0
+}
+.thead view {
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.th-img {
+  width: 96rpx;
+}
+.th {
+  flex: 1;
+}
+.th-checkbox {
+  width: 58rpx
+}
+.tbody {
+  flex: 1;
+  overflow: auto;
+}
+.bottom-bar {
+  display: flex;
+  padding: 10rpx;
+  background-color: #ddd;
+  border-top: 1px solid #ccc;
+  justify-content: stretch
+}
+.btn {
+  width: 45%;
+}
+.cancel-btn {
+  width: 25%
+}
+.operator-btn {
+  width: 35%
+}

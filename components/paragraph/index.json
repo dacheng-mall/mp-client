@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "text-item": "/components/paragraph/text",
+    "img-item": "/components/paragraph/img"
+  }
+}

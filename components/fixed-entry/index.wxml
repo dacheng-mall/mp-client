@@ -1,0 +1,5 @@
+<template name="entry">
+  <view class="fixed">
+    <icon />
+  </view>
+</template>

@@ -1,0 +1,6 @@
+<view class="main-searcher">
+  <view class="main-searcher-icon">
+    <icon type="search" size="16" />
+  </view>
+  <input placeholder="{{placeholder}}" value="{{value}}" confirm-type="search" bindconfirm="submit" />
+</view>

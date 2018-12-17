@@ -1,0 +1,5 @@
+<view class="tags">
+  <block wx:for="{{data}}" wx:key="{{index}}">
+    <view class="tag-item" style="border-color: {{color}}; color: {{color}}">{{item}}</view>
+  </block>
+</view>
