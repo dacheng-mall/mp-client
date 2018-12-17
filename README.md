@@ -1,4 +1,17 @@
-# dcmall 答橙礼品商城
+# dcmall 答橙茂
+本地project.config.json文件如果无特殊需求, 忽略变更, appid空缺自行不全
+```
+$ git update-index --assume-unchanged project.config.json
+```
+```
+// 取消忽略
+$ git update-index --no-assume-unchanged project.config.json
+```
+```
+// 安装依赖, 虽然现在没用到什么依赖, computed装饰器估计还是会用的
+// 不按也行, 如果按了就要用开发工具生成miniprogram_npm, 这个目录是不提交的
+$ npm i --production
+```
 ## 2018-11-28
 ### 真机调试时可能会漏传某些必要文件
 ~~如果需要在真机调试时就把所有文件都上传的话, 就需要在app.json里的usingComponents字段里添加相关的组件信息~~  
