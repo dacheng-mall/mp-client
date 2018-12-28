@@ -39,7 +39,7 @@ response.data: {
 }
 ```
 
-### 获取用户当前收藏商品id列表
+### 获取用户当前收藏商品 id 列表
 
 ```
 get $pf/favorites
@@ -53,36 +53,53 @@ response.data: String[]
 get $pf/home
 
 response.data: {
-  swiper: [               // 首页滚动图组
+  list: [
     {
       id: String,
-      imageUrl: String,   // 图片url
-      name: String,       // 名称
-      path: String        // 跳转路径
-    }, ...
-  ],
-  categories: [           // 商品分类列表
-    {
-      id: String,         // 分类id
-      name: String        // 分类名称
-    }, ...
-  ],
-  products: [             // 多个商品组集合
-    {
-      id: String,     // 商品组的id
-      title: String,  // 商品组的名称
-      list: [         // 商品组中包含的商品列表
+      type: 'swiper',
+      scale: String,         // 长宽比, 例如: '16:9'
+      title: String,         // 素材名称, 可以不存在
+      value: [               // 首页滚动图组
         {
-          id: String,         // 商品id
-          name: String,       // 商品名称
-          price: Number,      // 商品单价,单位元
-          mainImage: String,  // 商品主图url
-          size: Enum(1,2)     // 商品元素尺寸, 1小, 2大
+          id: String,
+          imageUrl: String,   // 图片url
+          name: String,       // 名称
+          path: String        // 跳转路径
         }, ...
       ]
-    }, ...
+    },
+    {
+      id: String,
+      type: 'categories',     // 商品分类列表
+      title: String,          // 素材名称, 可以不存在
+      value: [
+        {
+          id: String,         // 分类id
+          name: String        // 分类名称
+          icon: String        // 图标资源地址
+        }, ...
+      ]
+    },
+    {
+      id: String,
+      type: 'products',
+      title: String,        // 素材名称, 可以不存在
+      value: [              // 多个商品组集合
+        {
+          id: String,       // 商品组的id
+          list: [           // 商品组中包含的商品列表
+            {
+              id: String,         // 商品id
+              name: String,       // 商品名称
+              price: Number,      // 商品单价,单位元
+              mainImage: String,  // 商品主图url
+              size: Enum(1,2)     // 商品元素尺寸, 1小, 2大
+            }, ...
+          ]
+        }, ...
+      ]
+    }
   ]
-
 }
 ```
 
@@ -133,11 +150,14 @@ response: {
 ```
 
 ### 获取收藏商品列表
+
 ```
 get $pf/favoProducts
 // 返回值结构同上, 不要分页, 返回全部
 ```
+
 ### 获取商品详情
+
 ```
 get $pf/detail/:id
 response.data: {
@@ -194,4 +214,3 @@ response.data: {
   ]
 }
 ```
-
