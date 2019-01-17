@@ -41,7 +41,7 @@ export default function request(url, { data, method }, other) {
     url,
     method,
     data,
-    headers: { [CONTENT_TYPE]: JSON_TYPE, Authorization: getToken() },
+    header: { [CONTENT_TYPE]: JSON_TYPE, Authorization: getToken() },
     ...other
   };
   switch (method.toUpperCase()) {
@@ -71,6 +71,12 @@ export default function request(url, { data, method }, other) {
       break;
     }
   }
+  
+  const VER = /^v\d\//;
+  if(VER.test(options.url)) {
+    options.url = options.url.replace(VER, '');
+  }
+
   return new Promise((resolve, reject) => {
     options.url = `${baseURL}${options.url}`;
     wx.request({
