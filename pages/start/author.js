@@ -1,0 +1,14 @@
+
+const app = getApp();
+
+Page({
+  bindGetUserInfo: function(e){
+    if (e.detail.userInfo){
+      //用户按了允许授权按钮
+      app.globalData.userInfo = e.detail.userInfo
+      app.getUserInfo()
+    } else {
+      //用户按了拒绝按钮
+    }
+  }
+});

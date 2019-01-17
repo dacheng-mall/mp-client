@@ -1,34 +1,69 @@
 //app.js
+import { get, post, setToken } from "./utils/request";
+
 App({
-  onLaunch: function () {
-    // 登录
+  onLaunch: function() {
+    this.login();
+  },
+  goHome: function() {},
+  login: function() {
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+        get("api/wx/token_bycode", { code: res.code })
+          .then(data => {
+            this.globalData.openid = data.openid;
+            if (data.user && data.token) {
+              // 有用户信息, 已经注册过了
+              this.afterLogin(data.user, data.token);
+            } else {
+              // 没注册过
+              // debugger
+              this.getUserInfo();
             }
           })
-        }
+          .catch(err => console.log("----", err));
       }
-    })
+    });
+  },
+  register: function(value) {
+    const { nickName: name, avatarUrl: avatar, gender, openid: openId } = value;
+    const body = {
+      name,
+      avatar,
+      gender,
+      openId,
+      userType: 2,
+      password: "defaultPassword"
+    };
+    post("api/public/registerUser", body).then(res => {
+      this.globalData.userInfo = res.user;
+      this.afterLogin(res.user, res.token);
+    });
+  },
+  getUserInfo: function() {
+    wx.getUserInfo({
+      success: res => {
+        const { userInfo } = res;
+        userInfo.openid = this.globalData.openid;
+        this.register(userInfo);
+      },
+      fail: () => {
+        wx.reLaunch({
+          url: "/pages/start/author"
+        });
+      }
+    });
+  },
+  afterLogin: function(user, token) {
+    this.globalData.userInfo = user;
+    wx.setStorageSync("user", user);
+    setToken(token);
+    wx.reLaunch({
+      url: "/pages/customPage/index?code=home"
+    });
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openid: ""
   }
-})
+});

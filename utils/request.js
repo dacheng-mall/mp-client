@@ -1,7 +1,8 @@
+import { apiUrl } from "../setting.js";
+
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";
-
-const baseURL = "http://localhost:3000/";
+const baseURL = apiUrl;
 let token = "";
 export function setToken(t) {
   if (t === "") {
@@ -23,15 +24,14 @@ export function getType(res) {
   return res.headers.get(CONTENT_TYPE);
 }
 
-export function parseResponse(res) {
+export function parseResponse(data) {
   // TODO 这里只处理了json类型的返回值, 如果有其他类型的需要再扩展
-  const data = res.data;
   return Promise.resolve(data);
 }
-export function checkStatus(data) {
-  if (data.code > 0) {
-    // 业务码大于0时表示业务处理失败
-    return Promise.reject(`请求失败(code:${data.code}) ${data.msg}`);
+export function checkStatus(res) {
+  const { statusCode, data } = res;
+  if (statusCode !== 200) {
+    return Promise.reject(`请求失败(code:${statusCode}) ${data}`);
   }
   return Promise.resolve(data);
 }
@@ -59,7 +59,7 @@ export default function request(url, { data, method }, other) {
           }
         }
         query.replace(/\&$/, "");
-        return `${baseURL}${url}${query}`;
+        return `${url}${query}`;
       })(url, data);
       options.url = uri;
       break;
@@ -71,13 +71,8 @@ export default function request(url, { data, method }, other) {
       break;
     }
   }
-  // return wx.request(options)
-  //   .then(parseResponse)
-  //   .then(checkStatus)
-  //   .catch((err) => {
-  //     // MessageMessage.error(err);
-  //   });
   return new Promise((resolve, reject) => {
+    options.url = `${baseURL}${options.url}`;
     wx.request({
       ...options,
       success: res => {
@@ -88,8 +83,8 @@ export default function request(url, { data, method }, other) {
       }
     });
   })
-    .then(parseResponse)
     .then(checkStatus)
+    .then(parseResponse)
     .catch(err => {});
 }
 const createMethod = method => (url, data, other) => {

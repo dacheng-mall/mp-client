@@ -1,10 +1,13 @@
 {
   "pages": [
+    "pages/start/index",
+    "pages/start/author",
     "pages/home/index",
     "pages/logs/logs",
     "pages/products/list/index",
     "pages/products/detail/index",
-    "pages/products/group/index"
+    "pages/products/group/index",
+    "pages/customPage/index"
   ],
   "window": {
     "backgroundTextStyle": "#fff",

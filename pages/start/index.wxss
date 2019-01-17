@@ -1,0 +1,23 @@
+/* pages/home/index.wxss */
+page {
+  height: 100%;
+}
+.start-wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+.btn {
+  width: 40%;
+  height: 196rpx;
+  line-height: 196rpx;
+  text-align: center;
+  color: #fff;
+}
+.patient {
+  background-color: rgba(54, 169, 206, 1)
+}
+.doctor {
+  background-color: rgba(16, 153, 19, 1)
+}

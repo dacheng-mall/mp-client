@@ -1,0 +1,4 @@
+<view class="author-wrap">
+  <view>请您授权</view>
+  <button bind:getuserinfo="bindGetUserInfo" open-type="getUserInfo" type="primary">授权</button>
+</view>
