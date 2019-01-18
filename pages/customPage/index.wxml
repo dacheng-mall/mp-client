@@ -1,0 +1,7 @@
+<view wx:for="{{elements}}" wx:key="{{item.id}}">
+  <view wx:if="{{item.type === 'swiper'}}">
+    <swiper-x data="{{item}}"></swiper-x>
+    {{index}}
+  </view>
+
+</view>

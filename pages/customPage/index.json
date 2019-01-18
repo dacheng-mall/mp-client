@@ -1,1 +1,6 @@
-{}
+{
+  "usingComponents": {
+    "swiper-x": "./components/swiper",
+    "list-x": "./components/list" 
+  }
+}
