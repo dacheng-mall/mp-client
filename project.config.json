@@ -14,8 +14,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.1",
-
-	"appid": "",
+	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
 		"hidedInDevtools": []

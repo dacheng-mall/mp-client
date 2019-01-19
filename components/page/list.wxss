@@ -1,0 +1,17 @@
+@import 'common.wxss';
+.products-list-wrap {
+  margin: 10rpx 0
+}
+.products-group-title {
+  font-size: 36rpx;
+  margin: 24rpx 0;
+  color: #666;
+}
+.products-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.product-item-double {
+  width: 100%;
+}

@@ -59,7 +59,7 @@ App({
     wx.setStorageSync("user", user);
     setToken(token);
     wx.reLaunch({
-      url: "/pages/customPage/index?code=test123"
+      url: "/pages/customPage/index?code=home"
     });
   },
   globalData: {

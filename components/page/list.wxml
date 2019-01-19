@@ -1,0 +1,17 @@
+<view class="products-list-wrap">
+  <slot name="before"></slot>
+  <view wx:if="{{title}}" class="products-group-title">{{title}}</view>
+  <view class="products-list" id="list-wrap">
+    <block wx:for="{{_data}}" wx:key="{{index}}" wx:for-item="itemData">
+      <listItem
+        test="{{test}}"
+        data="{{itemData}}"
+        bind:click="click"
+        bind:dbClick="dbClick"
+        styles="{{styles}}"
+        size="{{itemData.size}}"
+      />
+    </block>
+  </view>
+  <slot name="after"></slot>
+</view>

@@ -1,0 +1,4 @@
+@import 'common.wxss';
+.img {
+  width: 100%;
+}
