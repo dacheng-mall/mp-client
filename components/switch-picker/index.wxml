@@ -1,0 +1,8 @@
+<view class="switch-picker">
+  <picker mode="selector" bind:change="change" range="{{range}}" value="{{value}}">
+    <view class="picker">{{range[value]}}</view>
+  </picker>
+  <view class="wp-item">
+    {{cont[value]}}
+  </view>
+</view>

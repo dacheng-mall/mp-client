@@ -19,6 +19,9 @@ Component({
         value: "hello world",
         ...DEFAULT_STYLE
       }
+    },
+    index: {
+      type: Number
     }
   },
   data: {},

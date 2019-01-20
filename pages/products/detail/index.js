@@ -1,6 +1,8 @@
 // pages/products/index.js
 import { product } from "./mock";
 import { mockFetch, uri } from "../../../utils/util";
+import { get } from "../../../utils/request";
+import { source } from "../../../setting";
 
 Page({
   data: {
@@ -13,7 +15,9 @@ Page({
     screenWidth: 100
   },
   onLoad(opts) {
+    console.log('opts-----', opts)
     const { screenWidth } = wx.getSystemInfoSync();
+    const {id} = opts;
     const ids = opts.ids ? opts.ids.split(",") : [opts.id];
     const current = ids
       ? ids.indexOf(opts.id) === -1
@@ -25,11 +29,13 @@ Page({
       current,
       screenWidth
     });
+
     this.fetchDetail(opts.id)
       .then(data => {
         // 这里初始化详情数据, 可能是一条或者多条, 预请求临近的数据
         const detail = ids.length > 0 ? new Array(ids.length) : [];
         detail[current] = data;
+        console.log('data real: ', data);
         this.setData({
           detail
         });
@@ -44,10 +50,16 @@ Page({
         return preFetchByIds.join(",");
       })
       .then(data => {
+        if(!data) {
+          return false;
+        }
         // 预请求数据
         return this.fetchDetail(data);
       })
       .then(data => {
+        if(!data){
+          return
+        }
         // 更新状态数据
         const detail = this.data.detail;
         const ids = this.data.ids;
@@ -79,7 +91,76 @@ Page({
       return Promise.resolve(this.data.detail[index]);
     }
     // 这个mock就像一坨屎!!!
-    return mockFetch({ id: _ids[0], ...product }, 100);
+    this.mockFetchX().then(data => {
+      console.log('mock data is ', data)
+    })
+    return get('api/sys/product', {id: data}).then(data => {
+      if(data.length > 0) {
+        return this.normalize(data[0])
+      }
+      Promise.reject('没数据')
+    }).catch(err => {
+      console.log(err);
+    });
+  },
+  /**
+   * 序列化商品数据咯
+   * @param {*Object 远程获得的真实商品数据} data
+   * @returns 组件可用的渲染数据 
+   */
+  normalize(data){
+    for(let key in data) {
+      switch(key){
+        case 'attributes':
+        case 'content':
+        case 'information': {
+          const value = data[key];
+          if(value) {
+            data[key] = JSON.parse(value);
+            if(key === 'content') {
+              data[key].forEach((item, i) => {
+                if(item.type === 'image') {
+                  console.log(item);
+                  item.value = `${source}${item.value}`
+                }
+              })
+            }
+          }
+          break;
+        }
+        case 'images': {
+          const value = data[key];
+          const video = {};
+          const images = [];
+          if(value.length > 0) {
+            value.forEach((item) => {
+              const {type, name, poster} = item;
+              if(type === 'image') {
+                const image = {}
+                image.url = `${source}${name}`;
+                image.name = name;
+                image.type = type;
+                images.push(image);
+              } else if (type === 'video') {
+                video.poster = `${source}${poster}`;
+                video.url = `${source}${name}`;
+                data.video = video;
+              }
+            })
+            data.images = images;
+          }
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    }
+    return data
+  },
+  // todo 这是个过度方法, 稳定后删除
+  mockFetchX(){
+    return mockFetch({ id: 'p01', ...product }, 100);
   },
   onShareAppMessage(options) {
     console.log(options.webViewUrl);

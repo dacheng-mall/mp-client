@@ -10,7 +10,7 @@
     "pages/customPage/index"
   ],
   "window": {
-    "backgroundTextStyle": "#fff",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f66",
     "navigationBarTitleText": "答橙礼品",
     "navigationBarTextStyle": "white"

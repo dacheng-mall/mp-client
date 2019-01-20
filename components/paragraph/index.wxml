@@ -1,6 +1,7 @@
 <view>
   <block wx:for="{{data}}" wx:key="{{index}}_content">
-    <text-item wx:if="{{item.type === 'text'}}" data="{{item}}"></text-item>
-    <img-item wx:if="{{item.type === 'image'}}" data="{{item}}"></img-item>
+    <text-item wx:if="{{item.type === 'text'}}" index="{{index}}" data="{{item}}"></text-item>
+    <img-item wx:if="{{item.type === 'image'}}" index="{{index}}" data="{{item}}"></img-item>
+    <list-item wx:if="{{item.type === 'list'}}" index="{{index}}" data="{{item.value}}"></list-item>
   </block>
 </view>

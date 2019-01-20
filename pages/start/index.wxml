@@ -1,5 +1,4 @@
 <!-- pages/home/index.wxml -->
 <view class="start-wrap">
-  <view class="btn patient" data-type="1" bindtap="jump">注册患者端</view>
-  <view class="btn doctor" data-type="2" bindtap="jump">注册医生端</view>
+  hello idacheng
 </view>

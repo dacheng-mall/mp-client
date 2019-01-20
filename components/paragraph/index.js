@@ -5,6 +5,9 @@ Component({
     },
     "./img": {
       type: "child"
+    },
+    "./list": {
+      type: "child"
     }
   },
   properties: {

@@ -2,9 +2,7 @@
   "usingComponents": {
     "tags": "/components/tags/index",
     "paragraph": "/components/paragraph/index",
-    "swiper-x": "/components/swiper-x/index"
-  },
-  "window": {
-    "backgroundColor": "#999"
+    "swiper-x": "/components/swiper-x/index",
+    "switch-picker": "/components/switch-picker/index"
   }
 }

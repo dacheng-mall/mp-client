@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "text-item": "/components/paragraph/text",
-    "img-item": "/components/paragraph/img"
+    "img-item": "/components/paragraph/img",
+    "list-item": "/components/paragraph/list"
   }
 }

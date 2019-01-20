@@ -1,0 +1,6 @@
+<view class="list-wrap">
+  <view class="list-item {{item_index % 2 === 0 ? 'list-item-even' : ''}}" wx:for="{{data}}" wx:for-index="item_index" wx:key="list_item_{{index}}_{{item_index}}">
+    <view class="label">{{item.label}}</view>
+    <view class="content">{{item.content}}</view>
+  </view>
+</view>

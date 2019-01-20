@@ -2,13 +2,16 @@
   <scroll-view class="detail-main" animation="{{animation}}" style="position: relative">
     <swiper-x video="{{detail[current].video}}" images="{{detail[current].images}}" size="{{screenWidth}},{{screenWidth}}"></swiper-x>
     <view bind:touchstart="touchstart" bind:touchend="touchend">
-      <view class="title block">{{detail[current].title}}{{detail[current].id}}</view>
+      <view class="title block">{{detail[current].title}}</view>
       <view class="main-sttr block">
         <view class="price">单价: ¥{{detail[current].price}}</view>
         <view class="stock-up">备货周期: {{detail[current].stockUp}}天</view>
       </view>
       <view class="attributes block">
         <tags data="{{detail[current].attributes}}"></tags>
+      </view>
+      <view wx:if="{{detail[current].information.length > 0}}" class="block">
+        <switch-picker data="{{detail[current].information}}"></switch-picker>
       </view>
       <view class="content block">
         <paragraph data="{{detail[current].content}}"></paragraph>
