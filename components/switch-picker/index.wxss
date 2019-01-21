@@ -1,0 +1,14 @@
+.selector {
+  padding: 10rpx 20rpx;
+  border: 1px solid #ddd;
+  border-radius: 8rpx 8rpx 0 0;
+  font-size: 32rpx;
+}
+.wp-item {
+  padding: 10rpx 20rpx;
+  border: 1px solid #ddd;
+  border-top: none;
+  font-size: 26rpx;
+  background-color: #eee;
+  border-radius: 0 0 8rpx 8rpx;
+}

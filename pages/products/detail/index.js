@@ -120,7 +120,6 @@ Page({
             if(key === 'content') {
               data[key].forEach((item, i) => {
                 if(item.type === 'image') {
-                  console.log(item);
                   item.value = `${source}${item.value}`
                 }
               })
@@ -142,9 +141,13 @@ Page({
                 image.type = type;
                 images.push(image);
               } else if (type === 'video') {
-                video.poster = `${source}${poster}`;
-                video.url = `${source}${name}`;
-                data.video = video;
+                if(poster) {
+                  video.poster = `${source}${poster}`;
+                }
+                if(name){
+                  video.url = `${source}${name}`;
+                  data.video = video;
+                }
               }
             })
             data.images = images;

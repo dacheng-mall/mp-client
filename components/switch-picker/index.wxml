@@ -1,8 +1,8 @@
 <view class="switch-picker">
-  <picker mode="selector" bind:change="change" range="{{range}}" value="{{value}}">
-    <view class="picker">{{range[value]}}</view>
+  <picker class="selector" mode="selector" bind:change="change" range="{{data}}" range-key="label" value="{{value}}">
+    <view class="picker">{{data[value].label}}</view>
   </picker>
   <view class="wp-item">
-    {{cont[value]}}
+    {{data[value].content}}
   </view>
 </view>

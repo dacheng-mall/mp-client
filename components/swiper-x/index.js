@@ -5,6 +5,7 @@ Component({
       type: Object | null,
       value: null,
       observer: function(newVal){
+        console.log('video', newVal)
         if(newVal !== null) {
           this.setData({
             current: 'video'
@@ -23,11 +24,12 @@ Component({
           const [width, height] = newVal.split(",");
           this.sizer(width, height);
         }
+        console.log(this.data.current)
       }
     }
   },
   data: {
-    current: "",
+    current: "image",
     swiperCurrent: 0,
     sizeStyle: "",
     btnStyle: "padding: 0 12px",
@@ -36,13 +38,13 @@ Component({
   },
   lifetimes: {
     ready() {
-      if (this.properties.video) {
+      if (this.data.video) {
         this.videoCtx = wx.createVideoContext("first-video", this);
       }
       this.setData({
-        current: this.properties.video ? "video" : "image"
+        current: this.data.video ? "video" : "image"
       });
-      this.changeType(this.properties.video ? "video" : "image")
+      this.changeType(this.data.video ? "video" : "image")
     }
   },
   methods: {

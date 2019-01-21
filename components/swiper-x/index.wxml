@@ -1,6 +1,6 @@
 <view style="{{sizeStyle}}" class="swiper-x" bind:touchstart="ts" bind:touchend="te">
   <view class="swiper-x-wrap {{current}}">
-    <video id="first-video" bind:tap="videoTap" class="swiper-video" wx:if="{{video}}" autoplay="{{false}}" src="{{video.url}}" poster="{{video.poster}}">
+    <video id="first-video" bind:tap="videoTap" class="swiper-video" autoplay="{{false}}" src="{{video.url}}" poster="{{video.poster}}">
       <cover-view wx:if="{{images}}" class="type-change {{showChangeBtn && current === 'video' && 'show'}}">
         <cover-view bind:tap="changeViewType" class="type-change-btn {{current === 'video' && 'active'}}" data-code="video">视频</cover-view>
         <cover-view bind:tap="changeViewType" class="type-change-btn {{current === 'image' && 'active'}}" data-code="image">图片</cover-view>

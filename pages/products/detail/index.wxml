@@ -4,31 +4,36 @@
     <view bind:touchstart="touchstart" bind:touchend="touchend">
       <view class="title block">{{detail[current].title}}</view>
       <view class="main-sttr block">
-        <view class="price">单价: ¥{{detail[current].price}}</view>
-        <view class="stock-up">备货周期: {{detail[current].stockUp}}天</view>
+        <view class="price">¥{{detail[current].price}}</view>
+        <view class="institution {{!detail[current].institutionId ? 'isSelf' : ''}}">
+          {{detail[current].institutionName}}
+        </view>
       </view>
+      
+      <view class="divier">基础信息</view>
       <view class="attributes block">
         <tags data="{{detail[current].attributes}}"></tags>
       </view>
       <view wx:if="{{detail[current].information.length > 0}}" class="block">
         <switch-picker data="{{detail[current].information}}"></switch-picker>
       </view>
+      <view class="divier">商品详情</view>
       <view class="content block">
         <paragraph data="{{detail[current].content}}"></paragraph>
       </view>
     </view>
   </scroll-view>
   <view class="detail-toolbar" capture-bind:tap="detailTap">
-    <button open-type="share" plain="{{true}}" style="border: none; background: none;" size="mini">
-      <icon-x data-type="fenxiang" type="share" color="#f66" size="{{64}}" />
+    <button class="detail-toolbar-item" open-type="share" plain="{{true}}" style="border: none; background: none;">
+      <icon-x data-type="share" type="share" color="#f66" size="{{44}}" />
       分享
     </button>
     <view data-type="dianhua" class="detail-toolbar-item">
-      <icon-x data-type="dianhua" type="dianhua" color="#f66" size="{{64}}" />
-      咨询
+      <icon-x data-type="dianhua" type="phone" color="#f66" size="{{44}}" />
+      电话咨询
     </view>
     <view data-type="shoucang" class="detail-toolbar-item">
-      <icon-x data-type="shoucang" type="shoucang" color="#f66" size="{{64}}" />
+      <icon-x data-type="shoucang" type="heart" color="#f66" size="{{44}}" />
       收藏
     </view>
   </view>
