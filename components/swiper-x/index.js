@@ -5,7 +5,6 @@ Component({
       type: Object | null,
       value: null,
       observer: function(newVal){
-        console.log('video', newVal)
         if(newVal !== null) {
           this.setData({
             current: 'video'
@@ -24,7 +23,6 @@ Component({
           const [width, height] = newVal.split(",");
           this.sizer(width, height);
         }
-        console.log(this.data.current)
       }
     }
   },

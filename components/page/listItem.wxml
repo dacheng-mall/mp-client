@@ -1,7 +1,7 @@
 <view bind:touchstart="doubleTap" bind:touchmove="clearFirstTap" data-id="{{data.id}}" class="item-wrap" style="width: {{size === 2 ? styles.width_2x : styles.width_1x}}px;height: {{styles.height}}px">
   <image class="main-img" style="height:{{data.type === 'product' ? styles.width_1x : styles.height}}px" mode="aspectFill" src="{{data.image}}" />
   <view wx:if="{{data.favorite}}" class="favorite">
-    <icon-x data-type="like" type="like" color="#f66" size="{{32}}" />
+    <icon-x data-type="like" type="heart-fill" color="#fff" size="{{32}}" />
   </view>
   <view class="product-text" style="height: {{styles.height_txt}}px" wx:if="{{data.type === 'product'}}">
     <text class="name">{{data.name}}</text>

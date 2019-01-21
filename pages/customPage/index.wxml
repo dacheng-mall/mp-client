@@ -3,6 +3,6 @@
     <swiper-x data="{{item}}" bind:click="click" index="{{index}}"></swiper-x>
   </view>
   <view wx:if="{{item.type === 'list'}}">
-    <list-x data="{{item}}" bind:click="click" bind:dbClick="dbClick" index="{{index}}"></list-x>
+    <list-x data="{{item}}" index="{{index}}"></list-x>
   </view>
 </view>

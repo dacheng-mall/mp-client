@@ -1,11 +1,19 @@
 const { source, pathPrefix } = require("../../setting");
+import {
+  getFavorites,
+  setFavorites,
+  getStorageWithKey
+} from "../../utils/tools";
+
+import regeneratorRuntime  from "../../utils/regenerator-runtime/runtime";
 module.exports = Behavior({
   behaviors: [],
   properties: {
     data: {
       type: Object,
-      observer: function(val) {
+      observer: async function(val) {
         const attributes = val.attributes && JSON.parse(val.attributes);
+        const favorites = await getFavorites();
         const attr = {};
         if (attributes) {
           for (let key in attributes) {
@@ -44,7 +52,10 @@ module.exports = Behavior({
               res.type = 'product';
               res.path = `${pathPrefix.product}?id=${productId}`
               res.price = d.price;
-              res.isSelf = isSelf
+              res.isSelf = isSelf;
+              if(favorites.indexOf(productId) !== -1) {
+                res.favorite = true
+              }
               break;
             }
           }

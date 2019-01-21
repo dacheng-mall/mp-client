@@ -16,6 +16,15 @@ Component({
     },
     size: Number
   },
+  lifetimes: {
+    attached() {
+      // getFavorites('favorites').then(data => {
+      //   this.setData({
+      //     favorites: data
+      //   })
+      // })
+    },
+  },
   methods: {
     doubleTap(e) {
       const now = e.timeStamp;

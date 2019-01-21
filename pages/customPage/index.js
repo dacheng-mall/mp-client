@@ -13,11 +13,11 @@ Page({
     });
   },
   click: function(e) {
-    const {path} = e.detail;
-    
-    wx.navigateTo({
-      url: path
-    })
+    console.log('outer',e)
+    // const {path} = e.detail;
+    // wx.navigateTo({
+    //   url: path
+    // })
   },
   dbClick: function(e) {
     const {type, id} = e.detail;
