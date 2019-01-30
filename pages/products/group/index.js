@@ -1,13 +1,17 @@
 import { data } from "./mock";
+import { get } from "../../../utils/request";
+import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 Page({
   data: {
     list: [],
     favorites: false,
-    ids: [],
+    ids: []
   },
   onLoad(opts) {
     const { windowHeight } = wx.getSystemInfoSync();
+    const { id } = wx.getStorageSync("user");
+    this.fetch(id)
     if (opts.favorites === "yes") {
       // 这是收藏页面
       this.fetch().then(res => {
@@ -20,16 +24,20 @@ Page({
     } else {
       // 这是推荐商品组页面
       const ids = opts.ids;
-      this.fetch(ids).then(res => {
-        this.setData({
-          ...res,
-          favorites: false,
-          windowHeight
-        });
-      });
+      // this.fetch(ids).then(res => {
+      //   this.setData({
+      //     ...res,
+      //     favorites: false,
+      //     windowHeight
+      //   });
+      // });
     }
   },
-  fetch(ids) {
+  fetch: async function(userId) {
+    const data = await get("api/sys/favorites", { userId });
+    if(data && data.lenght > 0){
+      console.log(data)
+    }
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(data);
