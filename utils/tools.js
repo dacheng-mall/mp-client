@@ -11,11 +11,13 @@ export const getStorageWithKey = (key, fetchFromServer) => {
     wx.getStorage({
       key,
       success: ({ data }) => {
+        console.log(key, data)
         res(data);
       },
       fail: err => {
-        if (fetchFromServer && fetchFromServer.then) {
-          fetchFromServer.then(data => {
+        console.log('需要远程请求', key)
+        if (fetchFromServer) {
+          fetchFromServer().then(data => {
             wx.setStorageSync(key, data);
             res(data);
           });
@@ -34,7 +36,7 @@ export const getFavorites = () =>
     .then(userId => {
       return getStorageWithKey(
         "favorites",
-        get("api/sys/favorites/productIds", { userId })
+        () => get("api/sys/favorites/productIds", { userId })
       );
     })
     .then(data => {

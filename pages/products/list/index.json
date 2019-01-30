@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "products": "/components/products/index"
+    "products": "/components/products/index",
+    "list-x": "/components/page/list"
   },
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 60

@@ -1,0 +1,23 @@
+@import "common.wxss";
+.grid-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20rpx;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+  background-color: #fff;
+}
+.grid-item-shell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  /* background-color: #ffffff */
+}
+.grid-name {
+  font-size: 22rpx
+}

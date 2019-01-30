@@ -1,3 +1,4 @@
 <view>
-  <products bind:click="clickProd" bind:dbClick="dbClickProd"  data="{{list}}"></products>
+  <!-- <products bind:click="clickProd" bind:dbClick="dbClickProd"  data="{{list}}"></products> -->
+  <list-x data="{{value}}"></list-x>
 </view>

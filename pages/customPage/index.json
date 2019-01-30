@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "swiper-x": "/components/page/swiper",
-    "list-x": "/components/page/list"
+    "list-x": "/components/page/list",
+    "grid-x": "/components/page/grid"
   }
 }

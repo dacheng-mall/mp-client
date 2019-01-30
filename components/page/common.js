@@ -5,7 +5,7 @@ import {
   getStorageWithKey
 } from "../../utils/tools";
 
-import regeneratorRuntime  from "../../utils/regenerator-runtime/runtime";
+import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 module.exports = Behavior({
   behaviors: [],
   properties: {
@@ -13,16 +13,24 @@ module.exports = Behavior({
       type: Object,
       observer: async function(val) {
         const attributes = val.attributes && JSON.parse(val.attributes);
-        const favorites = await getFavorites();
+        let favorites = [];
+        if (val.type === "list") {
+          favorites = await getFavorites();
+        }
         const attr = {};
         if (attributes) {
           for (let key in attributes) {
             switch (key) {
               case "rate": {
                 const { windowWidth } = wx.getSystemInfoSync();
-                attr.swiperHeight = attributes[key][1] / attributes[key][0] * windowWidth;
+                attr.swiperHeight =
+                  (attributes[key][1] / attributes[key][0]) * windowWidth;
                 break;
               }
+              case "cols":
+              case "rows":
+                attr[key] = attributes[key];
+                break;
               default: {
                 break;
               }
@@ -30,59 +38,83 @@ module.exports = Behavior({
           }
         }
         // 如果swiper类型的元素没有属性值,默认比例是1:1
-        if(val.type === 'swiper' && !attr.swiperHeight) {
+        if (val.type === "swiper" && !attr.swiperHeight) {
           const { windowWidth } = wx.getSystemInfoSync();
-          attr.swiperHeight = windowWidth
+          attr.swiperHeight = windowWidth;
         }
-        let data = JSON.parse(val.data).map((d, i) => {
-          const {pageId, productId, mainImage} = d;
-          const res = {};
-          res.image = `${source}${mainImage}`;
-          res.name = d.displayName || d.name
-          switch(true) {
-            case !!pageId: {
-              res.id = pageId;
-              res.type = 'page';
-              res.path = `${pathPrefix.page}?id=${pageId}`
-              break;
-            }
-            case !!productId: {
-              const {isSelf} = d
-              res.id = productId;
-              res.type = 'product';
-              res.path = `${pathPrefix.product}?id=${productId}`
-              res.price = d.price;
-              res.isSelf = isSelf;
-              if(favorites.indexOf(productId) !== -1) {
-                res.favorite = true
+        let data = [];
+        if (typeof val.data === "string") {
+          data = JSON.parse(val.data).map((d, i) => {
+            const {
+              id,
+              image,
+              type,
+              displayName,
+              name,
+              institutionId,
+              price,
+              size
+            } = d;
+            const res = {
+              image: `${source}${image}`,
+              name: displayName || name,
+              id,
+              type,
+              path: `${pathPrefix[type]}?id=${id}`
+            };
+            switch (type) {
+              case "product": {
+                res.price = price;
+                res.isSelf = !institutionId;
+                if (favorites.indexOf(id) !== -1) {
+                  res.favorite = true;
+                }
+                break;
               }
-              break;
+              case "category": {
+                res.path = `${pathPrefix.category}?cateId=${id}`;
+                break;
+              }
             }
-          }
-          switch(val.type) {
-            case 'list': {
-              res.size = d.size;
-              break;
+            switch (val.type) {
+              case "list": {
+                res.size = size;
+                break;
+              }
+              default: {
+                break;
+              }
             }
-            case 'swiper': {
-              break;
+            return res;
+          });
+        } else {
+          // 这是list(商品列表页)在使用该组件
+          val.data.map((d) => {
+            if (favorites.indexOf(d.id) !== -1) {
+              d.favorite = true;
             }
-            default: {
-              break;
-            }
-          }
-          return res;
-        });
+          })
+          data = val.data;
+        }
+        let newState = {};
+        if (val.type === "grid") {
+          newState = this.init({
+            ...attr,
+            index: val.index,
+            data
+          });
+        }
         this.setData({
           _data: data,
-          id: val.id,
-          attributes: val.attributes && JSON.parse(val.attributes),
-          ...attr
+          id: val.id || "only",
+          attributes: (val.attributes && JSON.parse(val.attributes)) || {},
+          ...attr,
+          ...newState
         });
       }
     },
     index: {
-      type: Number,
+      type: Number
     }
   },
   data: {
@@ -90,6 +122,6 @@ module.exports = Behavior({
     source
   },
   methods: {
-    myBehaviorMethod() {},
+    myBehaviorMethod() {}
   }
 });

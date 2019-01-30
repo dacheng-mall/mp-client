@@ -1,27 +1,30 @@
-import { setFavorites } from "../../../utils/tools";
-import { mockFetch } from "../../../utils/util";
-import { data } from "./mock";
+import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
+import { get } from "../../../utils/request";
+import { source } from "../../../setting";
 
 Page({
-  onLoad(opt) {
-    // 假设5秒后加载完数据,这里是初始化
-    mockFetch(data, 300).then(res => {
+  data: {
+    value: { data: [], type: "list" }
+  },
+  onLoad: async function(opt) {
+    const data = await get("v1/api/sys/product", opt);
+    if (data.length > 0) {
+      const list = data.map(
+        ({ id, mainImageUrl, institutionId, title, price }) => ({
+          id,
+          image: `${source}${mainImageUrl}`,
+          isSelf: !institutionId,
+          name: title,
+          path: `/pages/products/detail/index?id=${id}`,
+          price,
+          size: 1,
+          type: "product"
+        })
+      );
       this.setData({
-        ...res
+        'value.data': list
       });
-    });
+    }
   },
-  onShow() {
-
-  },
-  clickProd(e) {
-    wx.navigateTo({
-      url: `/pages/products/detail/index?ids=${e.detail.id}`
-    });
-  },
-  dbClickProd(e) {
-    mockFetch(e.detail.id, 500).then(id => {
-      setFavorites(id);
-    });
-  }
+  onShow() {}
 });

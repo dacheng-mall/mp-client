@@ -32,7 +32,9 @@ App({
       avatar,
       gender,
       openId,
+      username: openId,
       userType: 2,
+      status: 1,
       password: "defaultPassword"
     };
     post("api/public/registerUser", body).then(res => {

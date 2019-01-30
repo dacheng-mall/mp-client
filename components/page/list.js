@@ -27,8 +27,8 @@ Component({
           const styles = {};
           styles.width_2x = width - 20;
           styles.width_1x = (width - 30) / 2;
-          styles.height = styles.width_1x * 1.5;
-          styles.height_txt = styles.width_1x / 2.2;
+          styles.height = styles.width_1x * 1.4;
+          styles.height_txt = styles.width_1x * 0.35;
           this.setData({
             styles
           });

@@ -9,6 +9,7 @@
 .main-img {
   width: 100%;
   background-color: #333;
+  float: left;
 }
 .favorite {
   position: absolute;
@@ -22,25 +23,21 @@
   color: #fff;
   border-radius: 50%;
 }
-.name {
-  font-size: 32rpx;
-  display: block;
-  height: 44rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .product-text {
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 10rpx
+  padding: 0 10rpx;
+  clear: both;
 }
 .name {
-  font-size: 28rpx;
+  position: relative;
+  font-size: 24rpx;
+  line-height: 1rem;
   display: block;
-  flex: 1
+  overflow: hidden;
+  flex: 1;
 }
 .footer {
   display: flex;
@@ -50,7 +47,7 @@
   color: #f66;
 }
 .price {
-  font-size: 48rpx;
+  font-size: 32rpx;
 }
 .is-self {
   font-size: 24rpx;
