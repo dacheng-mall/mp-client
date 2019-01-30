@@ -1,15 +1,22 @@
 import { get } from "../../utils/request";
+import { getFavorites } from "../../utils/tools";
+import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
+
 Page({
   data: {
     elements: [],
-    code: ""
+    code: "",
+    count: 0,
   },
-  onLoad(options) {
-    get("v1/api/sys/page", options).then(([data]) => {
+  onLoad: async function(options) {
+    const favo = await getFavorites();
+    const [data] = await get("v1/api/sys/page", options);
+    if (data) {
       this.setData({
-        ...data
+        ...data,
+        count: favo.length
       });
-    });
+    }
   },
   click: function(e) {
     const { path } = e.detail;
@@ -24,5 +31,13 @@ Page({
     if (type === "product") {
       // todo 执行收藏状态切换的逻辑
     }
+  },
+  submitHandle: e => {
+    console.log("home onSubmit: ", e.detail.value);
+  },
+  favoEntry(e) {
+    wx.navigateTo({
+      url: `/pages/products/group/index?favorites=yes`
+    });
   }
 });

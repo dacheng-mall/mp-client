@@ -7,6 +7,8 @@
   border-top: 1px solid #eee;
   border-left: 1px solid #eee;
   background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .grid-item-shell {
   display: flex;
@@ -16,7 +18,6 @@
   height: 100%;
   border-bottom: 1px solid #eee;
   border-right: 1px solid #eee;
-  /* background-color: #ffffff */
 }
 .grid-name {
   font-size: 22rpx

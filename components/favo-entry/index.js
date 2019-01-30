@@ -6,12 +6,8 @@ Component({
     },
     iconName: {
       type: String,
-      value: "like"
+      value: "heart-fill"
     }
   },
-  methods: {
-    navigator(e) {
-      // this.triggerEvent("favoEntry");
-    }
-  }
+  methods: {}
 });

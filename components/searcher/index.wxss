@@ -6,6 +6,7 @@
   font-size: 14px;
   border-radius: 5px;
   position: relative;
+  background-color: #fff;
 }
 .main-searcher-icon {
   position: absolute;

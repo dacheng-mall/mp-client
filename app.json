@@ -12,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f66",
-    "navigationBarTitleText": "答橙礼品",
+    "navigationBarTitleText": "答橙礼",
     "navigationBarTextStyle": "white"
   },
   "usingComponents": {

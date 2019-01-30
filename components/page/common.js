@@ -1,11 +1,7 @@
 const { source, pathPrefix } = require("../../setting");
-import {
-  getFavorites,
-  setFavorites,
-  getStorageWithKey
-} from "../../utils/tools";
-
+import { getFavorites } from "../../utils/tools";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
+
 module.exports = Behavior({
   behaviors: [],
   properties: {
@@ -89,11 +85,11 @@ module.exports = Behavior({
           });
         } else {
           // 这是list(商品列表页)在使用该组件
-          val.data.map((d) => {
+          val.data.map(d => {
             if (favorites.indexOf(d.id) !== -1) {
               d.favorite = true;
             }
-          })
+          });
           data = val.data;
         }
         let newState = {};
@@ -108,6 +104,7 @@ module.exports = Behavior({
           _data: data,
           id: val.id || "only",
           attributes: (val.attributes && JSON.parse(val.attributes)) || {},
+          favorites: favorites.length,
           ...attr,
           ...newState
         });

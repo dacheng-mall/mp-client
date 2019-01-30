@@ -2,6 +2,8 @@
   "usingComponents": {
     "swiper-x": "/components/page/swiper",
     "list-x": "/components/page/list",
-    "grid-x": "/components/page/grid"
+    "grid-x": "/components/page/grid",
+    "favo-entry": "/components/favo-entry/index",
+    "searcher": "/components/searcher/index"
   }
 }
