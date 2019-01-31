@@ -1,4 +1,5 @@
 <view class="table-wrap" style="height: {{windowHeight || 100}}px">
+  <nothing wx:if="{{list.length < 1}}" />
   <scroll-view class="tbody" scroll-y>
     <checkbox-group bind:change="checkChange">
       <block wx:for="{{list}}" wx:key="{{item.id}}">
@@ -13,8 +14,6 @@
     <button wx:if="{{favorites}}" size="mini" class="operator-btn btn" type="warn" bindtap="onRemove">
       取消收藏
     </button>
-    <button size="mini" class="operator-btn btn" type="primary" bindtap="onShare">
-      分享商品
-    </button>
+    <button size="mini" class="operator-btn btn" type="primary" bindtap="onShare">分享商品</button>
   </view>
 </view>

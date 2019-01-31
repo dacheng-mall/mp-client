@@ -1,3 +1,4 @@
+import { source } from "../../../../setting";
 Component({
   properties: {
     ids: {
@@ -17,7 +18,8 @@ Component({
     }
   },
   data: {
-    checked: false
+    checked: false,
+    source
   },
   methods: {
     tap(e) {

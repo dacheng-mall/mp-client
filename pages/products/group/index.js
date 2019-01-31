@@ -1,5 +1,5 @@
-import { data } from "./mock";
-import { get } from "../../../utils/request";
+import { get, post } from "../../../utils/request";
+import { getFavorites } from "../../../utils/tools";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 Page({
@@ -8,18 +8,16 @@ Page({
     favorites: false,
     ids: []
   },
-  onLoad(opts) {
+  onLoad: async function(opts) {
     const { windowHeight } = wx.getSystemInfoSync();
     const { id } = wx.getStorageSync("user");
-    this.fetch(id)
     if (opts.favorites === "yes") {
-      // 这是收藏页面
-      this.fetch().then(res => {
-        this.setData({
-          ...res,
-          favorites: true,
-          windowHeight
-        });
+      // 这是收藏页面, 请求个人搜藏的商品列表
+      const data = await get("api/sys/favorites", { userId: id });
+      this.setData({
+        list: this.normalizeFavoData(data),
+        favorites: true,
+        windowHeight
       });
     } else {
       // 这是推荐商品组页面
@@ -33,16 +31,8 @@ Page({
       // });
     }
   },
-  fetch: async function(userId) {
-    const data = await get("api/sys/favorites", { userId });
-    if(data && data.lenght > 0){
-      console.log(data)
-    }
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(data);
-      }, 300);
-    });
+  normalizeFavoData(data = []) {
+    return data.map(({ product }) => product);
   },
   chooseAll(e) {
     if (!this.data.chooseState) {
@@ -64,10 +54,28 @@ Page({
       chooseState: ids.length === this.data.list.length
     });
   },
-  onRemove() {
-    // TODO 对接api
-    const ids = this.data.ids;
-    console.log("取消收藏以下商品", ids.join(","));
+  onRemove: async function() {
+    const {ids, list} = this.data;
+    const { id } = wx.getStorageSync("user");
+    const data = await post("api/sys/favorites/delete", { ids, userId: id });
+    const newStore = await getFavorites();
+    const newList = [];
+    list.forEach((item) => {
+      const index = data.indexOf(item.id);
+      if(index === -1) {
+        newList.push(item)
+      }
+    })
+    data.forEach((d, i) => {
+      const index = newStore.indexOf(d);
+      if(index !== -1) {
+        newStore.splice(index, 1);
+      }
+    });
+    this.setData({
+      list: newList
+    })
+    wx.setStorageSync('favorites', newStore);
   },
   onShare() {
     // TODO 对接api

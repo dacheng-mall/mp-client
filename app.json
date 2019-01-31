@@ -17,6 +17,7 @@
   },
   "usingComponents": {
     "icon-x": "/components/icon/index",
-    "favo-entry": "/components/favo-entry/index"
+    "favo-entry": "/components/favo-entry/index",
+    "nothing": "/components/nothing/index"
   }
 }

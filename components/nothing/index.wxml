@@ -1,0 +1,4 @@
+<view class="nothing">
+  <icon-x type="{{iconName}}" color="#ccc" size="{{96}}" />
+  {{text}}
+</view>

@@ -1,4 +1,5 @@
 <view>
   <!-- <products bind:click="clickProd" bind:dbClick="dbClickProd"  data="{{list}}"></products> -->
-  <list-x data="{{value}}"></list-x>
+  <nothing wx:if="{{value.data.length < 1}}" />
+  <list-x wx:else data="{{value}}"></list-x>
 </view>

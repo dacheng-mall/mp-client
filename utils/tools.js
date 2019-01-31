@@ -11,11 +11,9 @@ export const getStorageWithKey = (key, fetchFromServer) => {
     wx.getStorage({
       key,
       success: ({ data }) => {
-        console.log(key, data)
         res(data);
       },
       fail: err => {
-        console.log('需要远程请求', key)
         if (fetchFromServer) {
           fetchFromServer().then(data => {
             wx.setStorageSync(key, data);
