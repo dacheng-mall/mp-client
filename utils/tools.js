@@ -10,8 +10,17 @@ export const getStorageWithKey = (key, fetchFromServer) => {
   return new Promise((res, rej) => {
     wx.getStorage({
       key,
-      success: ({ data }) => {
-        res(data);
+      success: ({ data = [] }) => {
+        if(key === 'favorites' && data.length === 0) {
+          if (fetchFromServer) {
+            fetchFromServer().then(data => {
+              wx.setStorageSync(key, data);
+              res(data);
+            });
+          } 
+        } else {
+          res(data);
+        }
       },
       fail: err => {
         if (fetchFromServer) {
