@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:10010/";
+const apiUrl = "http://192.168.0.105:10010/";
 const source = "http://res.idacheng.cn/";
 const pathPrefix = {
   product: "/pages/products/detail/index",

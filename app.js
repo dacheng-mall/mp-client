@@ -2,7 +2,8 @@
 import { get, post, setToken } from "./utils/request";
 
 App({
-  onLaunch: function() {
+  onLaunch: function(res) {
+    this.globalData.initState = res;
     this.login();
   },
   goHome: function() {},
@@ -60,9 +61,29 @@ App({
     this.globalData.userInfo = user;
     wx.setStorageSync("user", user);
     setToken(token);
-    wx.reLaunch({
-      url: "/pages/customPage/index?code=home"
-    });
+    const {path, query} = this.globalData.initState
+    if(path === 'pages/start/index') {
+      wx.reLaunch({
+        url: "/pages/customPage/index?code=home"
+      });
+    } else {
+      const url = (function (path, query) {
+        const keys = Object.keys(query);
+        if(keys.length > 0) {
+          let _url = path;
+          const _query = keys.map((key, i) => {
+            if(i === 0) {
+              return `?${key}=${query[key]}`
+            }
+            return `&${key}=${query[key]}`
+          })
+          return `/${_url}${_query}`
+        }
+      })(path, query)
+      wx.reLaunch({
+        url
+      });
+    }
   },
   globalData: {
     userInfo: null,

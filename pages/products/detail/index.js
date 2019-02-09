@@ -3,6 +3,7 @@ import { product } from "./mock";
 import { mockFetch, uri } from "../../../utils/util";
 import { get } from "../../../utils/request";
 import { source } from "../../../setting";
+import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 Page({
   data: {
@@ -15,9 +16,7 @@ Page({
     screenWidth: 100
   },
   onLoad(opts) {
-    console.log('opts-----', opts)
     const { screenWidth } = wx.getSystemInfoSync();
-    const {id} = opts;
     const ids = opts.ids ? opts.ids.split(",") : [opts.id];
     const current = ids
       ? ids.indexOf(opts.id) === -1
@@ -35,7 +34,6 @@ Page({
         // 这里初始化详情数据, 可能是一条或者多条, 预请求临近的数据
         const detail = ids.length > 0 ? new Array(ids.length) : [];
         detail[current] = data;
-        console.log('data real: ', data);
         this.setData({
           detail
         });
@@ -90,10 +88,6 @@ Page({
     if (this.data.detail[index]) {
       return Promise.resolve(this.data.detail[index]);
     }
-    // 这个mock就像一坨屎!!!
-    this.mockFetchX().then(data => {
-      console.log('mock data is ', data)
-    })
     return get('api/sys/product', {id: data}).then(data => {
       if(data.length > 0) {
         return this.normalize(data[0])
@@ -161,25 +155,8 @@ Page({
     }
     return data
   },
-  // todo 这是个过度方法, 稳定后删除
-  mockFetchX(){
-    return mockFetch({ id: 'p01', ...product }, 100);
-  },
   onShareAppMessage(options) {
     console.log(options.webViewUrl);
-  },
-  stockUpParse(data) {
-    const range = data.split(",");
-    if (range.length > 1) {
-      return `${range[0]}-${range[1]}天`;
-    } else if (range.length < 1) {
-      return "";
-    } else {
-      return `${range[0]}天`;
-    }
-  },
-  detailTap(e) {
-    const { type } = e.target.dataset;
   },
   touchstart(e) {
     if (this.data.ids.length > 1) {
@@ -198,28 +175,25 @@ Page({
             this.data.current < this.data.ids.length - 1)
         ) {
           this.animation
-            .left(offsetLeft > 0 ? 150 : -150)
             .opacity(0)
             .step({
-              duration: 200
+              duration: 100
             })
-            .left(offsetLeft > 0 ? -150 : 150)
-            .step({
-              duration: 0
-            })
-            .left(0)
             .opacity(1)
             .step({
-              duration: 200
+              duration: 100,
             });
           this.setData({
             animation: this.animation.export()
           });
-          if (offsetLeft > 0) {
-            this.changeDetail("left", this.data.current - 1);
-          } else {
-            this.changeDetail("right", this.data.current + 1);
-          }
+          const that = this
+          setTimeout(() => {
+            if (offsetLeft > 0) {
+              that.changeDetail("left", that.data.current - 1);
+            } else {
+              that.changeDetail("right", that.data.current + 1);
+            }
+          }, 0)
         }
       }
       delete this._x;
