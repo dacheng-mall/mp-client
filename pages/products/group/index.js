@@ -73,7 +73,8 @@ Page({
       }
     });
     this.setData({
-      list: newList
+      list: newList,
+      ids: newStore
     })
     wx.setStorageSync('favorites', newStore);
   },

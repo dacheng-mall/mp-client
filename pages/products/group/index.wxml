@@ -8,12 +8,12 @@
     </checkbox-group>
   </scroll-view>
   <view class="bottom-bar">
-    <button size="mini" class="cancel-btn btn" bindtap="chooseAll">
+    <button disabled="{{list.length === 0}}" size="mini" class="cancel-btn btn" bindtap="chooseAll">
       {{chooseState ? '全不选' : '全选'}}
     </button>
-    <button wx:if="{{favorites}}" size="mini" class="operator-btn btn" type="warn" bindtap="onRemove">
+    <button disabled="{{ids.length === 0}}" wx:if="{{favorites}}" size="mini" class="operator-btn btn" type="warn" bindtap="onRemove">
       取消收藏
     </button>
-    <button size="mini" class="operator-btn btn" type="primary" bindtap="onShare">分享商品</button>
+    <button disabled="{{ids.length === 0}}" size="mini" class="operator-btn btn" type="primary" bindtap="onShare">分享商品</button>
   </view>
 </view>
