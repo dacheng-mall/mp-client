@@ -24,6 +24,14 @@ Component({
           this.sizer(width, height);
         }
       }
+    },
+    needInit: {
+      type: Boolean,
+      observer: function(newVal) {
+        if(newVal) {
+          this.init();
+        }
+      }
     }
   },
   data: {
@@ -32,20 +40,24 @@ Component({
     sizeStyle: "",
     btnStyle: "padding: 0 12px",
     showChangeBtn: false,
-    delay: null
+    delay: null,
   },
   lifetimes: {
     ready() {
+      this.init();
+    }
+  },
+  methods: {
+    init: function () {
       if (this.data.video) {
         this.videoCtx = wx.createVideoContext("first-video", this);
       }
       this.setData({
-        current: this.data.video ? "video" : "image"
+        current: this.data.video ? "video" : "image",
+        swiperCurrent: 0,
       });
       this.changeType(this.data.video ? "video" : "image")
-    }
-  },
-  methods: {
+    },
     changeViewType: function(e) {
       this.changeType(e.target.dataset.code);
       if (e.target.dataset.code === "image" && this.videoCtx) {
