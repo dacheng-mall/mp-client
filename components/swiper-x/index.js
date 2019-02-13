@@ -30,6 +30,7 @@ Component({
       observer: function(newVal) {
         if(newVal) {
           this.init();
+          this.triggerEvent('initilized')
         }
       }
     }

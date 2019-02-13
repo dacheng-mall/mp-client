@@ -1,6 +1,6 @@
 <view class="detail-wrap">
   <scroll-view class="detail-main" animation="{{animation}}" style="position: relative">
-    <swiper-x video="{{detail[current].video}}" images="{{detail[current].images}}" size="{{screenWidth}},{{screenWidth}}"></swiper-x>
+    <swiper-x needInit="{{needInitSwiper}}" bind:initilized="initilized" video="{{detail[current].video}}" images="{{detail[current].images}}" size="{{screenWidth}},{{screenWidth}}"></swiper-x>
     <view bind:touchstart="touchstart" bind:touchend="touchend">
       <view class="title block">{{detail[current].title}}</view>
       <view class="main-sttr block">
@@ -9,7 +9,6 @@
           {{detail[current].institutionName}}
         </view>
       </view>
-      
       <view class="divier">基础信息</view>
       <view class="attributes block">
         <tags data="{{detail[current].attributes}}"></tags>

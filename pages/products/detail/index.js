@@ -13,7 +13,8 @@ Page({
     opacity: 1,
     ids: [],
     current: "",
-    screenWidth: 100
+    screenWidth: 100,
+    needInitSwiper: false
   },
   onLoad(opts) {
     const { screenWidth } = wx.getSystemInfoSync();
@@ -163,6 +164,11 @@ Page({
       this._x = e.changedTouches[0].clientX;
     }
   },
+  initilized(){
+    this.setData({
+      needInitSwiper: false
+    })
+  },
   touchend(e) {
     if (this.data.ids.length > 1) {
       const currentX = e.changedTouches[0].clientX;
@@ -175,13 +181,21 @@ Page({
             this.data.current < this.data.ids.length - 1)
         ) {
           this.animation
+            // .left(offsetLeft > 0 ? 150 : -150)
             .opacity(0)
             .step({
-              duration: 100
+              duration: 200
             })
+            // .left(offsetLeft > 0 ? -150 : 150)
+            // .opacity(0)
+            // .step({
+            //   duration: 0,
+            //   delay: 200
+            // })
+            // .left(0)
             .opacity(1)
             .step({
-              duration: 100,
+              duration: 200
             });
           this.setData({
             animation: this.animation.export()
@@ -203,11 +217,13 @@ Page({
     if (next < 0 || next > this.data.ids.length - 1) {
       return false;
     }
+    // 在这里执行swiper-x组件的初始化
     this.fetchDetail(this.data.ids[next])
       .then(data => {
         this.setData({
           current: next,
-          [`detail[${next}]`]: data
+          [`detail[${next}]`]: data,
+          needInitSwiper: true
         });
         return type === "right" ? next + 1 : next - 1;
       })

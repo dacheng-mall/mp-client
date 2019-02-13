@@ -11,7 +11,7 @@
         <view bind:tap="changeViewType"  class="type-change-btn {{current === 'video' && 'active'}}" data-code="video">视频</view>
         <view bind:tap="changeViewType" class="type-change-btn {{current === 'image' && 'active'}}" data-code="image">图片</view>
       </view>
-      <swiper class="swiper-imgs" indicator-dots="{{true}}" autoplay="{{current === 'image'}}" interval="{{5000}}" duration="{{500}}" bind:animationfinish="change">
+      <swiper class="swiper-imgs" current="{{swiperCurrent}}" indicator-dots="{{true}}" autoplay="{{current === 'image'}}" interval="{{5000}}" duration="{{500}}" bind:animationfinish="change">
         <block wx:for="{{images}}" wx:key="{{index}}_image">
           <swiper-item>
             <image class="swiper-image" mode="aspectFit" style="{{sizeStyle}}" src="{{item.url}}" />

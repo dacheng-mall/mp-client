@@ -39,8 +39,23 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "分享页面",
+					"pathName": "pages/products/group/index",
+					"query": "favorites=no&ids=1,2",
+					"scene": 1008
+				},
+				{
+					"id": -1,
+					"name": "浏览多个商品详情",
+					"pathName": "pages/products/detail/index",
+					"query": "ids=870b3c1b7fe34f838928161b7ad62525,3df3e84bc89b4ddc876d8cf9f66b2fae&id=870b3c1b7fe34f838928161b7ad62525",
+					"scene": null
+				}
+			]
 		}
 	}
 }
