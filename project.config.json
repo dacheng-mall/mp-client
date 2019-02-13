@@ -30,13 +30,25 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "商品详情",
+					"pathName": "pages/products/detail/index",
+					"query": "id=43fd029b9d2b400197ace74495a0c26f",
+					"scene": null
+				}
+			]
 		}
 	}
 }
