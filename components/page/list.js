@@ -4,7 +4,7 @@ import {
   getStorageWithKey
 } from "../../utils/tools";
 import { post } from "../../utils/request";
-import regeneratorRuntime  from "../../utils/regenerator-runtime/runtime";
+import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
 const common = require("./common");
 
@@ -16,7 +16,7 @@ Component({
   },
   lifetimes: {
     attached() {
-      getFavorites('favorites')
+      getFavorites();
     },
     ready() {
       const query = wx.createSelectorQuery().in(this);
@@ -36,6 +36,22 @@ Component({
         .exec();
     }
   },
+  pageLifetimes: {
+    async show() {
+      const favo = await getFavorites();
+      const { _data } = this.data;
+      _data.forEach(d => {
+        if (favo.includes(d.id)) {
+          d.favorite = true;
+        } else {
+          d.favorite = false;
+        }
+      });
+      this.setData({
+        _data: [..._data]
+      });
+    }
+  },
   methods: {
     click(e) {
       this.triggerEvent("click", e.detail);
@@ -47,24 +63,27 @@ Component({
     dbClick: async function(e) {
       this.triggerEvent("dbClick", e.detail);
       const { type, id } = e.detail;
-      let newFavo = []
+      let newFavo = [];
       if (type === "product") {
-        const {id: userId} = await getStorageWithKey("user");
-        const favo = await getFavorites()
-        if(favo.indexOf(id) !== -1) {
-          const res = await post("api/sys/favorites/delete", { userId, ids: [id] });
-          if(typeof res === 'object') {
+        const { id: userId } = await getStorageWithKey("user");
+        const favo = await getFavorites();
+        if (favo.indexOf(id) !== -1) {
+          const res = await post("api/sys/favorites/delete", {
+            userId,
+            ids: [id]
+          });
+          if (typeof res === "object") {
             newFavo = await setFavorites([id]);
           }
         } else {
-          const res = await post("api/sys/favorites", { userId, ids: [id] })
-          if(typeof res === 'object') {
+          const res = await post("api/sys/favorites", { userId, ids: [id] });
+          if (typeof res === "object") {
             newFavo = await setFavorites([id]);
           }
         }
         this.setData({
           favorites: newFavo
-        })
+        });
       }
     }
   }

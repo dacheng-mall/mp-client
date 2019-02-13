@@ -1,6 +1,6 @@
 import { get, post } from "../../../utils/request";
 import { getFavorites } from "../../../utils/tools";
-import { source} from '../../../setting';
+import { source } from "../../../setting";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 Page({
@@ -22,18 +22,18 @@ Page({
       });
     } else {
       // 这是推荐商品组页面
-      const autoIds = opts.ids.split(',');
-      const query = (function(ids){
-        let res = ''
+      const autoIds = opts.ids.split(",");
+      const query = (function(ids) {
+        let res = "";
         ids.forEach((autoId, i) => {
-          if(i === 0) {
-            res += `?autoIds=${autoId}`
+          if (i === 0) {
+            res += `?autoIds=${autoId}`;
           } else {
-            res += `&autoIds=${autoId}`
+            res += `&autoIds=${autoId}`;
           }
-        })
+        });
         return res;
-      })(autoIds)
+      })(autoIds);
       const data = await get(`api/sys/product/autoIds${query}`);
       this.setData({
         list: data,
@@ -42,8 +42,8 @@ Page({
       });
     }
   },
-  onShow(){
-    wx.hideShareMenu()
+  onShow() {
+    wx.hideShareMenu();
   },
   normalizeFavoData(data = []) {
     return data.map(({ product }) => product);
@@ -69,44 +69,39 @@ Page({
     });
   },
   onRemove: async function() {
-    const {ids, list} = this.data;
+    const { ids, list } = this.data;
     const { id } = wx.getStorageSync("user");
-    const data = await post("api/sys/favorites/delete", { ids, userId: id });
+    await post("api/sys/favorites/delete", { ids, userId: id });
     const newStore = await getFavorites();
-    const newList = [];
-    list.forEach((item) => {
-      const index = data.indexOf(item.id);
-      if(index === -1) {
-        newList.push(item)
-      }
-    })
-    data.forEach((d, i) => {
+    const newList = list.filter(d => !ids.includes(d.id));
+
+    ids.forEach((d, i) => {
       const index = newStore.indexOf(d);
-      if(index !== -1) {
+      if (index !== -1) {
         newStore.splice(index, 1);
       }
     });
     this.setData({
       list: newList,
-      ids: newStore
-    })
-    wx.setStorageSync('favorites', newStore);
+      ids: []
+    });
+    wx.setStorageSync("favorites", newStore);
   },
-  onShareAppMessage(){
+  onShareAppMessage() {
     const length = this.data.ids.length;
     const first = this.data.ids[0];
-    const target = this.data.list.find(({id}) => id === first);
+    const target = this.data.list.find(({ id }) => id === first);
     const autoIds = [];
-    this.data.list.forEach(({id, autoId}) => {
-      if(this.data.ids.includes(id)){
+    this.data.list.forEach(({ id, autoId }) => {
+      if (this.data.ids.includes(id)) {
         autoIds.push(autoId);
       }
-    })
-    const ids = this.data.ids.join(',')
+    });
+    const ids = this.data.ids.join(",");
     var shareObj = {
-      title: `分享 ${target.title}${length === 1 ? '' : ` 等${length}件商品`}`,
+      title: `分享 ${target.title}${length === 1 ? "" : ` 等${length}件商品`}`,
       path: `/pages/products/group/index?favorites=no&ids=${ids}`,
-      imageUrl: `${source}${target.mainImageUrl}`,
+      imageUrl: `${source}${target.mainImageUrl}`
     };
     return shareObj;
   },

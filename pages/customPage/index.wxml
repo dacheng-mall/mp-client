@@ -1,13 +1,16 @@
-<searcher wx:if="{{code === 'home'}}" default-value="" bind:submit="submitHandle" />
-<view wx:for="{{elements}}" wx:key="{{item.id}}">
-  <view wx:if="{{item.type === 'swiper'}}">
-    <swiper-x data="{{item}}" bind:click="click" index="{{index}}"></swiper-x>
+<scroll-view scroll-y="{{true}}" class="page-wrap">
+  <searcher wx:if="{{code === 'home'}}" default-value="" bind:submit="submitHandle" />
+  <view wx:for="{{elements}}" wx:key="{{item.id}}">
+    <view wx:if="{{item.type === 'swiper'}}">
+      <swiper-x data="{{item}}" bind:click="click" index="{{index}}"></swiper-x>
+    </view>
+    <view wx:if="{{item.type === 'grid'}}">
+      <grid-x data="{{item}}" bind:click="click" index="{{index}}"></grid-x>
+    </view>
+    <view wx:if="{{item.type === 'list'}}">
+      <list-x data="{{item}}" index="{{index}}"></list-x>
+    </view>
   </view>
-  <view wx:if="{{item.type === 'grid'}}">
-    <grid-x data="{{item}}" bind:click="click" index="{{index}}"></grid-x>
-  </view>
-  <view wx:if="{{item.type === 'list'}}">
-    <list-x data="{{item}}" index="{{index}}"></list-x>
-  </view>
-</view>
-<favo-entry wx:if="{{code === 'home'}}" count="{{count}}" bind:tap="favoEntry" />
+</scroll-view>
+<!-- <favo-entry wx:if="{{code === 'home'}}" bind:tap="favoEntry" /> -->
+<tab-bar wx:if="{{code === 'home'}}" />

@@ -18,6 +18,7 @@ Page({
       });
     }
   },
+
   click: function(e) {
     const { path } = e.detail;
     if (path) {
@@ -25,15 +26,6 @@ Page({
         url: path
       });
     }
-  },
-  dbClick: function(e) {
-    const { type, id } = e.detail;
-    if (type === "product") {
-      // todo 执行收藏状态切换的逻辑
-    }
-  },
-  submitHandle: e => {
-    console.log("home onSubmit: ", e.detail.value);
   },
   favoEntry(e) {
     wx.navigateTo({

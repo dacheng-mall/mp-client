@@ -9,4 +9,16 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
+page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex: 1
+}

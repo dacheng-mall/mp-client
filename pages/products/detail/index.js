@@ -18,7 +18,6 @@ Page({
   },
   onLoad(opts) {
     const { screenWidth } = wx.getSystemInfoSync();
-    debugger
     const ids = opts.ids ? opts.ids.split(",") : [opts.id];
     const current = ids
       ? ids.indexOf(opts.id) === -1
