@@ -4,7 +4,7 @@
   </view>
   <image class="img" src="{{source}}{{data.mainImageUrl}}" />
   <view class="item-info">
-    <view class="item-name" catchtap="goDetail" data-id="{{data.id}}">{{data.title}}</view>
+    <view class="item-name" catchtap="goDetail" data-id="{{data.id}}" data-index="{{data.index}}">{{data.title}}</view>
     <view class="item-attr">
       <view class="price"><text>￥</text>{{data.price}}</view>
       <view class="factory {{!data.institutionId ? 'self' : ''}}">{{data.institutionName}}</view>

@@ -1,5 +1,6 @@
 import { get, post } from "../../../utils/request";
 import { getFavorites } from "../../../utils/tools";
+import { source} from '../../../setting';
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 Page({
@@ -21,15 +22,28 @@ Page({
       });
     } else {
       // 这是推荐商品组页面
-      const ids = opts.ids;
-      // this.fetch(ids).then(res => {
-      //   this.setData({
-      //     ...res,
-      //     favorites: false,
-      //     windowHeight
-      //   });
-      // });
+      const autoIds = opts.ids.split(',');
+      const query = (function(ids){
+        let res = ''
+        ids.forEach((autoId, i) => {
+          if(i === 0) {
+            res += `?autoIds=${autoId}`
+          } else {
+            res += `&autoIds=${autoId}`
+          }
+        })
+        return res;
+      })(autoIds)
+      const data = await get(`api/sys/product/autoIds${query}`);
+      this.setData({
+        list: data,
+        favorites: false,
+        windowHeight
+      });
     }
+  },
+  onShow(){
+    wx.hideShareMenu()
   },
   normalizeFavoData(data = []) {
     return data.map(({ product }) => product);
@@ -73,14 +87,28 @@ Page({
       }
     });
     this.setData({
-      list: newList
+      list: newList,
+      ids: newStore
     })
     wx.setStorageSync('favorites', newStore);
   },
-  onShare() {
-    // TODO 对接api
-    const ids = this.data.ids;
-    console.log("分享以下商品", ids.join(","));
+  onShareAppMessage(){
+    const length = this.data.ids.length;
+    const first = this.data.ids[0];
+    const target = this.data.list.find(({id}) => id === first);
+    const autoIds = [];
+    this.data.list.forEach(({id, autoId}) => {
+      if(this.data.ids.includes(id)){
+        autoIds.push(autoId);
+      }
+    })
+    const ids = this.data.ids.join(',')
+    var shareObj = {
+      title: `分享 ${target.title}${length === 1 ? '' : ` 等${length}件商品`}`,
+      path: `/pages/products/group/index?favorites=no&ids=${ids}`,
+      imageUrl: `${source}${target.mainImageUrl}`,
+    };
+    return shareObj;
   },
   itemTap(e) {
     const { id } = e.detail;

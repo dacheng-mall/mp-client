@@ -45,7 +45,7 @@
   width: 45%;
 }
 .cancel-btn {
-  width: 25%
+  width: 25%;
 }
 .operator-btn {
   width: 35%
