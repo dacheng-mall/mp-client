@@ -2,8 +2,6 @@
   "pages": [
     "pages/start/index",
     "pages/start/author",
-    "pages/home/index",
-    "pages/logs/logs",
     "pages/products/list/index",
     "pages/products/detail/index",
     "pages/products/group/index",
@@ -12,7 +10,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f66",
-    "navigationBarTitleText": "答橙礼",
+    "navigationBarTitleText": "礼全有",
     "navigationBarTextStyle": "white"
   },
   "usingComponents": {

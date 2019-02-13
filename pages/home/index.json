@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "main-searcher": "/components/searcher/index",
-    "products": "/components/products/index" 
-  }
-}
