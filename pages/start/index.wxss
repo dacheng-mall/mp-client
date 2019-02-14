@@ -1,10 +1,20 @@
-/* pages/home/index.wxss */
-page {
-  height: 100%;
-}
+/* pages/start/index.wxss */
 .start-wrap {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
   align-items: center;
-  height: 100%;
+  background-color: #eee;
+}
+.logo {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 32rpx
+}
+.title {
+  color: #666;
+  font-size: 32rpx;
 }

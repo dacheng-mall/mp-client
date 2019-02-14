@@ -1,4 +1,5 @@
-<!-- pages/home/index.wxml -->
+<!-- pages/start/index.wxml -->
 <view class="start-wrap">
-  hello idacheng
+  <image animation="{{animationData}}" class="logo" src="../../access/logo.png" />
+  <text class="title">礼全有</text>
 </view>

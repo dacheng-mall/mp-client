@@ -1,7 +1,4 @@
 /* pages/start/author.wxss */
-page {
-  height: 100%;
-}
 .author-wrap {
   display: flex;
   height: 100%;
@@ -9,4 +6,18 @@ page {
   justify-content: center;
   align-items: center;
   padding: 10rpx;
+  background-color: #ddd
+}
+.avatar {
+  width: 196rpx;
+  height: 196rpx;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+.nickname {
+  margin-bottom: 40rpx;
+  color: #666;
+  font-size: 32rpx;
 }

@@ -1,4 +1,8 @@
 <view class="author-wrap">
-  <view>请您授权</view>
-  <button bind:getuserinfo="bindGetUserInfo" open-type="getUserInfo" type="primary">授权</button>
+  <open-data type="userAvatarUrl" class="avatar"></open-data>
+  <open-data type="userNickName" class="nickname"></open-data>
+  <button wx:if="{{canIUse}}" bind:getuserinfo="bindGetUserInfo" open-type="getUserInfo" type="primary">
+    授权登录
+  </button>
+  <view wx:else>请升级微信版本</view>
 </view>

@@ -8,7 +8,6 @@ App({
       this.login();
     }, 0)
   },
-  goHome: function() {},
   login: function() {
     wx.login({
       success: res => {
@@ -20,7 +19,6 @@ App({
               this.afterLogin(data.user, data.token);
             } else {
               // 没注册过
-              // debugger
               this.getUserInfo();
             }
           })
@@ -43,6 +41,8 @@ App({
     post("api/public/registerUser", body).then(res => {
       this.globalData.userInfo = res.user;
       this.afterLogin(res.user, res.token);
+    }).catch(e => {
+      console.log(e)
     });
   },
   getUserInfo: function() {
