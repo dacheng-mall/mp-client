@@ -26,6 +26,7 @@ export function getType(res) {
 
 export function parseResponse(data) {
   // TODO 这里只处理了json类型的返回值, 如果有其他类型的需要再扩展
+  wx.hideLoading()
   return Promise.resolve(data);
 }
 export function checkStatus(res) {
@@ -79,6 +80,9 @@ export default function request(url, { data, method }, other) {
 
   return new Promise((resolve, reject) => {
     options.url = `${baseURL}${options.url}`;
+    wx.showLoading({
+      title: '加载中...'
+    })
     wx.request({
       ...options,
       success: res => {
@@ -91,7 +95,19 @@ export default function request(url, { data, method }, other) {
   })
     .then(checkStatus)
     .then(parseResponse)
-    .catch(err => {});
+    .catch(err => {
+      // console.log('这是request的catch', err, wx);
+      wx.getNetworkType({
+        success(res){
+          if(res.networkType === 'none') {
+            wx.showToast({
+              title: '断网了',
+              icon: 'none'
+            })
+          }
+        }
+      })
+    });
 }
 const createMethod = method => (url, data, other) => {
   return request(url, { method, data }, other);
