@@ -1,1 +1,6 @@
-<cover-view>hello</cover-view>
+<view wx:if="{{actived || actived === 0}}" class="tabbar-wrap">
+  <view data-path="{{item.path}}" bind:tap="change" class="tabbar-item" wx:for="{{list}}" wx:key="tabbar_{{index}}">
+    <icon-x type="{{actived === index ? item.iconSelected : item.icon}}" color="{{actived === index ? item.colorSelected : item.color}}" size="{{44}}" />
+    <text style="color: {{actived === index ? item.colorSelected : item.color}}">{{acvtied}}{{item.text}}</text>
+  </view>
+</view>

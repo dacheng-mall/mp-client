@@ -1,5 +1,6 @@
 import { get } from "../../utils/request";
 import { getFavorites } from "../../utils/tools";
+import { uri } from "../../utils/util";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
 Page({
@@ -11,10 +12,12 @@ Page({
   onLoad: async function(options) {
     const favo = await getFavorites();
     const [data] = await get("v1/api/sys/page", options);
+    const path = uri(this.route, options)
     if (data) {
       this.setData({
         ...data,
-        count: favo.length
+        count: favo.length,
+        path,
       });
     }
   },

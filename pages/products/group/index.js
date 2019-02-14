@@ -1,5 +1,6 @@
 import { get, post } from "../../../utils/request";
 import { getFavorites } from "../../../utils/tools";
+import { uri } from "../../../utils/util";
 import { source } from "../../../setting";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
@@ -12,13 +13,15 @@ Page({
   onLoad: async function(opts) {
     const { windowHeight } = wx.getSystemInfoSync();
     const { id } = wx.getStorageSync("user");
+    const path = uri(this.route, opts);
     if (opts.favorites === "yes") {
       // 这是收藏页面, 请求个人搜藏的商品列表
       const data = await get("api/sys/favorites", { userId: id });
       this.setData({
         list: this.normalizeFavoData(data),
         favorites: true,
-        windowHeight
+        windowHeight,
+        path
       });
     } else {
       // 这是推荐商品组页面

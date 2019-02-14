@@ -4,12 +4,13 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"nodeModules": true,
+		"autoAudits": false,
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
@@ -39,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -53,6 +54,13 @@
 					"name": "浏览多个商品详情",
 					"pathName": "pages/products/detail/index",
 					"query": "ids=870b3c1b7fe34f838928161b7ad62525,3df3e84bc89b4ddc876d8cf9f66b2fae&id=870b3c1b7fe34f838928161b7ad62525",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试自定义页面",
+					"pathName": "pages/customPage/index",
+					"query": "code=hello",
 					"scene": null
 				}
 			]
