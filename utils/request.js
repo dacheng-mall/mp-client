@@ -96,7 +96,6 @@ export default function request(url, { data, method }, other) {
     .then(checkStatus)
     .then(parseResponse)
     .catch(err => {
-      // console.log('这是request的catch', err, wx);
       wx.getNetworkType({
         success(res){
           if(res.networkType === 'none') {

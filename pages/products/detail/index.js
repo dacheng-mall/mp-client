@@ -49,7 +49,6 @@ Page({
         return preFetchByIds.join(",");
       })
       .then(data => {
-        console.log('data', data)
         if (!data) {
           return false;
         }

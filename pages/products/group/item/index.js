@@ -26,7 +26,6 @@ Component({
       this.triggerEvent("itemTap", e.currentTarget.dataset);
     },
     goDetail(e) {
-      console.log(e.currentTarget)
       this.triggerEvent("titleTap", e.currentTarget.dataset);
     }
   }

@@ -15,14 +15,7 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLaunch : function(args) {
-    console.log('onLaunch', args)
-  },
-  onShow : function(args) {
-    console.log('onShow', wx.getLaunchOptionsSync())
-  },
   onLoad: function (args) {
-    console.log('onLoad', args)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -51,7 +44,6 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

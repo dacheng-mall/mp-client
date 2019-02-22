@@ -22,7 +22,6 @@ Page({
   },
   onShow() {
     const res = getRoute()
-    console.log(res.path, this.data.path)
     if(res.path !== this.data.path) {
       this.fetch(res.options)
     }

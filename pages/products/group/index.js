@@ -11,7 +11,6 @@ Page({
     ids: []
   },
   onLoad: async function(opts) {
-    console.log('opts', opts)
     const { windowHeight } = wx.getSystemInfoSync();
     const { id } = wx.getStorageSync("user");
     const path = uri(this.route, opts);

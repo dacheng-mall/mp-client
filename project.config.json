@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -71,16 +71,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "启动页",
 					"pathName": "pages/start/index",
 					"query": "",
-					"scene": null
+					"scene": 1017
 				},
 				{
 					"id": -1,
 					"name": "筛选页",
 					"pathName": "pages/filter/index",
+					"query": "",
 					"scene": null
 				}
 			]
