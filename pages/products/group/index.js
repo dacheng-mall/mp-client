@@ -11,6 +11,7 @@ Page({
     ids: []
   },
   onLoad: async function(opts) {
+    console.log('opts', opts)
     const { windowHeight } = wx.getSystemInfoSync();
     const { id } = wx.getStorageSync("user");
     const path = uri(this.route, opts);
@@ -98,14 +99,14 @@ Page({
   onShareAppMessage() {
     const length = this.data.ids.length;
     const first = this.data.ids[0];
-    const target = this.data.list.find(({ id }) => id === first);
+    const target = this.data.list.filter(({ id }) => id === first)[0];
     const autoIds = [];
     this.data.list.forEach(({ id, autoId }) => {
       if (this.data.ids.includes(id)) {
         autoIds.push(autoId);
       }
     });
-    const ids = this.data.ids.join(",");
+    const ids = autoIds.join(",");
     var shareObj = {
       title: `分享 ${target.title}${length === 1 ? "" : ` 等${length}件商品`}`,
       path: `/pages/products/group/index?favorites=no&ids=${ids}`,

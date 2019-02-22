@@ -3,7 +3,6 @@ import { get, post, setToken } from "./utils/request";
 
 App({
   onLaunch: function(res) {
-    console.log(' 被调用了')
     this.globalData.initState = res;
     setTimeout(() => {
       this.login();
