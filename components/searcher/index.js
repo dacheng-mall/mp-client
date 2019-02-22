@@ -20,6 +20,11 @@ Component({
     }
   },
   methods: {
+    touch(){
+      wx.navigateTo({
+        url: '/pages/filter/index'
+      })
+    },
     submit(event) {
       this.triggerEvent("submit", { value: event.detail.value });
     }

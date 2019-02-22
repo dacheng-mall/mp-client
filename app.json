@@ -5,7 +5,8 @@
     "pages/products/list/index",
     "pages/products/detail/index",
     "pages/products/group/index",
-    "pages/customPage/index"
+    "pages/customPage/index",
+    "pages/filter/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

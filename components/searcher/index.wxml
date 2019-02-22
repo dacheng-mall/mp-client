@@ -2,5 +2,5 @@
   <view class="main-searcher-icon">
     <icon type="search" size="16" />
   </view>
-  <input placeholder="{{placeholder}}" value="{{value}}" confirm-type="search" bindconfirm="submit" />
+  <input placeholder="{{placeholder}}" value="{{value}}" bind:touchstart="touch" confirm-type="search" bindconfirm="submit" />
 </view>

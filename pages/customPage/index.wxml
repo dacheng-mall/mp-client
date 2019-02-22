@@ -12,5 +12,4 @@
     </view>
   </view>
 </scroll-view>
-<!-- <favo-entry wx:if="{{code === 'home'}}" bind:tap="favoEntry" /> -->
 <tab-bar path="{{path}}" />

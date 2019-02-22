@@ -15,3 +15,9 @@
 .product-item-double {
   width: 100%;
 }
+.title {
+  display: block;
+  margin: 32rpx 0 10rpx 20rpx;
+  color: #666;
+  font-size: 32rpx;
+}

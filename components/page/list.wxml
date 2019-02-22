@@ -1,8 +1,9 @@
 <view class="products-list-wrap">
   <slot name="before"></slot>
   <view wx:if="{{title}}" class="products-group-title">{{title}}</view>
+  <text wx:if="{{_data.title}}" class="title">{{_data.title}}</text>
   <view class="products-list" id="list-wrap">
-    <block wx:for="{{_data}}" wx:key="{{index}}" wx:for-item="itemData">
+    <block wx:for="{{_data.data}}" wx:key="{{index}}" wx:for-item="itemData">
       <listItem
         test="{{test}}"
         data="{{itemData}}"

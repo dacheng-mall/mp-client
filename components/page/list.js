@@ -27,8 +27,8 @@ Component({
           const styles = {};
           styles.width_2x = width - 20;
           styles.width_1x = (width - 30) / 2;
-          styles.height = styles.width_1x * 1.4;
-          styles.height_txt = styles.width_1x * 0.35;
+          styles.height = styles.width_1x * 1.45;
+          styles.height_txt = styles.width_1x * 0.4;
           this.setData({
             styles
           });
@@ -40,7 +40,7 @@ Component({
     async show() {
       const favo = await getFavorites();
       const { _data } = this.data;
-      _data.forEach(d => {
+      _data.data.forEach(d => {
         if (favo.includes(d.id)) {
           d.favorite = true;
         } else {
@@ -48,7 +48,7 @@ Component({
         }
       });
       this.setData({
-        _data: [..._data]
+        '_data.data': [..._data.data]
       });
     }
   },

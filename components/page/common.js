@@ -101,7 +101,7 @@ module.exports = Behavior({
           });
         }
         this.setData({
-          _data: data,
+          _data: { data, title: val.name },
           id: val.id || "only",
           attributes: (val.attributes && JSON.parse(val.attributes)) || {},
           favorites: favorites.length,

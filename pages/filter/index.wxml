@@ -1,0 +1,32 @@
+<form class="form-wrap" bindsubmit="formSubmit" bindreset="formReset">
+  <view class="section section_gap">
+    <view class="section__title">名称关键字</view>
+    <view class="section__cont">
+      <input class="section__input" name="keywords" placeholder="请输入商品名称关键字" />
+    </view>
+  </view>
+  <view class="section section_gap">
+    <view class="section__title">是否自营</view>
+    <view class="section__cont">
+      <switch name="self" />
+    </view>
+  </view>
+  <view class="section section_gap">
+    <view class="section__title">最小单价(元)</view>
+    <view class="section__cont">
+      <input class="section__input" name="price-min" type="number" placeholder="请输入数字" />
+      <!-- <slider min="{{0}}" max="{{100}}" block-color="#ddd" name="price-min" show-value></slider> -->
+    </view>
+  </view>
+  <view class="section section_gap">
+    <view class="section__title">最大单价(元)</view>
+    <view class="section__cont">
+      <input class="section__input" name="price-min" type="number" placeholder="请输入数字" />
+      <!-- <slider min="{{0}}" max="{{100}}" block-color="#ddd" name="price-max" show-value></slider> -->
+    </view>
+  </view>
+  <view class="btn-area">
+    <button form-type="submit">搜索</button>
+    <button form-type="reset">重置</button>
+  </view>
+</form>

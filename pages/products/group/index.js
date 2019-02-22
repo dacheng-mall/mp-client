@@ -49,7 +49,13 @@ Page({
     wx.hideShareMenu();
   },
   normalizeFavoData(data = []) {
-    return data.map(({ product }) => product);
+    const res = [];
+    data.forEach(({ product }) => {
+      if(product.id) {
+        res.push(product)
+      }
+    });
+    return res;
   },
   chooseAll(e) {
     if (!this.data.chooseState) {
@@ -77,7 +83,6 @@ Page({
     await post("api/sys/favorites/delete", { ids, userId: id });
     const newStore = await getFavorites();
     const newList = list.filter(d => !ids.includes(d.id));
-
     ids.forEach((d, i) => {
       const index = newStore.indexOf(d);
       if (index !== -1) {

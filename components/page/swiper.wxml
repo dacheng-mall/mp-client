@@ -1,5 +1,5 @@
 <swiper style="height: {{swiperHeight}}px" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
-  <block wx:for="{{_data}}" wx:key="{{item.id}}">
+  <block wx:for="{{_data.data}}" wx:key="{{item.id}}">
     <swiper-item bind:tap="click" data-path="{{item.path}}">
       <image class="img" mode="widthFix" src="{{item.image}}" />
     </swiper-item>
