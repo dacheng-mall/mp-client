@@ -27,11 +27,11 @@ Component({
       },
       {
         path: "/pages/products/group/index?favorites=yes",
-        icon: "heart",
-        iconSelected: "heart-fill",
+        icon: "cart",
+        iconSelected: "cart-fill",
         color: "#333",
         colorSelected: "#00bcbd",
-        text: "我的收藏"
+        text: "购物车"
       }
     ]
   },

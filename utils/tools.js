@@ -58,13 +58,13 @@ export const setFavorites = ids => {
         // 取消收藏
         data.splice(favoIndex, 1);
         wx.showToast({
-          title: "取消收藏"
+          title: "移出购物车"
         });
       } else {
         // 收藏
         data.push(id);
         wx.showToast({
-          title: "收藏成功"
+          title: "加入购物车"
         });
       }
       wx.setStorageSync("favorites", data);
