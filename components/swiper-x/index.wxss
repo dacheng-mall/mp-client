@@ -30,7 +30,7 @@
   z-index: 100;
 }
 .swiper-btn-inner {
-  background-color: #f66;
+  background-color: #00bcbd;
   color: #fff;
 }
 .swiper-btn-right {
@@ -74,8 +74,8 @@
 }
 .active {
   color: #fff;
-  border: 1px solid #f66;
-  background-color: #f66;
+  border: 1px solid #00bcbd;
+  background-color: #00bcbd;
 }
 .show {
   opacity: 1

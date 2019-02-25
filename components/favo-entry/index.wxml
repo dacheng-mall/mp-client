@@ -1,6 +1,6 @@
 <view class="favo-entry-wrap">
   <view class="favo-entry">
-    <icon-x type="{{iconName}}" color="#f66" size="{{64}}" />
+    <icon-x type="{{iconName}}" color="#00bcbd" size="{{64}}" />
     <view class="count">{{count}}</view>
   </view>
 </view>

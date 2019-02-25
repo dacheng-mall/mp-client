@@ -22,7 +22,7 @@ Component({
         icon: "gift",
         iconSelected: "gift-fill",
         color: "#333",
-        colorSelected: "#f66",
+        colorSelected: "#00bcbd",
         text: "有礼"
       },
       {
@@ -30,7 +30,7 @@ Component({
         icon: "heart",
         iconSelected: "heart-fill",
         color: "#333",
-        colorSelected: "#f66",
+        colorSelected: "#00bcbd",
         text: "我的收藏"
       }
     ]

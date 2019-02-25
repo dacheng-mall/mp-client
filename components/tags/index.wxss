@@ -4,10 +4,10 @@
   flex-wrap: wrap;
 }
 .tag-item {
-  border: 1px solid #f66;
+  border: 1px solid #00bcbd;
   padding: 10rpx;
   border-radius: 10rpx;
   font-size: 32rpx;
   margin: 10rpx 10rpx 10rpx 0;
-  color: #f66;
+  color: #00bcbd;
 }

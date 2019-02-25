@@ -48,6 +48,6 @@
   color: #999;
 }
 .self {
-  border-color: #f66;
-  color: #f66;
+  border-color: #00bcbd;
+  color: #00bcbd;
 }

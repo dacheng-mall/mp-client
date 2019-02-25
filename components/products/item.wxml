@@ -1,6 +1,6 @@
 <view bind:touchstart="doubleTap" bind:touchmove="clearFirstTap" data-id="{{data.id}}" class="item-wrap">
   <image class="main-img" mode="aspectFill" src="{{data.mainImage}}" />
-  <view wx:if="{{data.favorite}}" class="favorite"><icon-x data-type="like" type="like" color="#f66" size="{{32}}" /></view>
+  <view wx:if="{{data.favorite}}" class="favorite"><icon-x data-type="like" type="like" color="#00bcbd" size="{{32}}" /></view>
   <text class="product-name">{{data.name}}</text>
   <text class="product-price">￥{{data.price}}</text>
 </view>

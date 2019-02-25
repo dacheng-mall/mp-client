@@ -24,15 +24,15 @@
   </scroll-view>
   <view class="detail-toolbar" capture-bind:tap="detailTap">
     <button class="detail-toolbar-item" open-type="share" plain="{{true}}" style="border: none; background: none;">
-      <icon-x data-type="share" type="share" color="#f66" size="{{44}}" />
+      <icon-x data-type="share" type="share" color="#00bcbd" size="{{44}}" />
       分享
     </button>
     <view data-type="dianhua" class="detail-toolbar-item" catch:tap="callServer">
-      <icon-x data-type="dianhua" type="phone" color="#f66" size="{{44}}" />
+      <icon-x data-type="dianhua" type="phone" color="#00bcbd" size="{{44}}" />
       电话咨询
     </view>
     <view data-id="{{detail[current].id}}" data-favo="{{detail[current].favorite}}" data-type="shoucang" class="detail-toolbar-item" catch:tap="changeFavo">
-      <icon-x data-type="shoucang" type="heart{{detail[current].favorite ? '-fill' : ''}}" color="#f66" size="{{44}}" />
+      <icon-x data-type="shoucang" type="heart{{detail[current].favorite ? '-fill' : ''}}" color="#00bcbd" size="{{44}}" />
       收藏
     </view>
   </view>

@@ -91,7 +91,7 @@ Page({
 ## 2018-12-02
 在wxml里非事件监听的时候如何使用model里的方法呢??  
 ***
-<font color=#f66 size=6 face="黑体">下午, 果果帮我开箱出了Spike!!!!</font>  
+<font color=#00bcbd size=6 face="黑体">下午, 果果帮我开箱出了Spike!!!!</font>  
 我不久前开出了<font color=#f00 size=3 face="黑体">Mortis</font>, 和前几天用170个gem换了<font color=#93e size=3 face="黑体">Frank</font>, 现在就差<font color=#f00 size=3 face="黑体">Tara</font>就全收集了!!
 ## 2018-12-03
 昨天的问题不搞了,还是采用Component的形式来写商品展示的图文部分,  
