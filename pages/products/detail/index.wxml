@@ -2,7 +2,12 @@
   <scroll-view class="detail-main" animation="{{animation}}" style="position: relative">
     <swiper-x needInit="{{needInitSwiper}}" bind:initilized="initilized" video="{{detail[current].video}}" images="{{detail[current].images}}" size="{{screenWidth}},{{screenWidth}}"></swiper-x>
     <view bind:touchstart="touchstart" bind:touchend="touchend">
-      <view class="title block">{{detail[current].title}}</view>
+      <view class="title block">
+        <text>{{detail[current].title}}</text>
+        <button class="share-btn" open-type="share" plain="{{true}}" style="border: none; background: none;">
+          <icon-x type="share" color="#00bcbd" size="{{44}}" /> <text>分享</text> 
+        </button>
+      </view>
       <view class="main-sttr block">
         <view class="price">¥{{detail[current].price}}</view>
         <view class="institution {{!detail[current].institutionId ? 'isSelf' : ''}}">
@@ -23,17 +28,17 @@
     </view>
   </scroll-view>
   <view class="detail-toolbar" capture-bind:tap="detailTap">
-    <button class="detail-toolbar-item" open-type="share" plain="{{true}}" style="border: none; background: none;">
+    <!-- <button class="detail-toolbar-item" open-type="share" plain="{{true}}" style="border: none; background: none;">
       <icon-x data-type="share" type="share" color="#00bcbd" size="{{44}}" />
       分享
-    </button>
+    </button> -->
     <view data-type="dianhua" class="detail-toolbar-item" catch:tap="callServer">
       <icon-x data-type="dianhua" type="phone" color="#00bcbd" size="{{44}}" />
       电话咨询
     </view>
     <view data-id="{{detail[current].id}}" data-favo="{{detail[current].favorite}}" data-type="shoucang" class="detail-toolbar-item" catch:tap="changeFavo">
       <icon-x data-type="shoucang" type="cart{{detail[current].favorite ? '-fill' : ''}}" color="#00bcbd" size="{{44}}" />
-      收藏
+      {{detail[current].favorite ? '移出' : '加入'}}购物车
     </view>
   </view>
 </view>

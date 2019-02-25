@@ -26,7 +26,7 @@ export function getType(res) {
 
 export function parseResponse(data) {
   // TODO 这里只处理了json类型的返回值, 如果有其他类型的需要再扩展
-  wx.hideLoading()
+  wx.hideLoading();
   return Promise.resolve(data);
 }
 export function checkStatus(res) {
@@ -72,17 +72,27 @@ export default function request(url, { data, method }, other) {
       break;
     }
   }
-  
+
   const VER = /^v\d\//;
-  if(VER.test(options.url)) {
-    options.url = options.url.replace(VER, '');
+  if (VER.test(options.url)) {
+    options.url = options.url.replace(VER, "");
   }
 
   return new Promise((resolve, reject) => {
+    // 不需要显示loading的请求
+    switch (options.url) {
+      case "api/sys/favorites/delete":
+      case "api/sys/favorites": {
+        break;
+      }
+      default: {
+        wx.showLoading({
+          title: "加载中..."
+        });
+        break;
+      }
+    }
     options.url = `${baseURL}${options.url}`;
-    wx.showLoading({
-      title: '加载中...'
-    })
     wx.request({
       ...options,
       success: res => {
@@ -97,15 +107,15 @@ export default function request(url, { data, method }, other) {
     .then(parseResponse)
     .catch(err => {
       wx.getNetworkType({
-        success(res){
-          if(res.networkType === 'none') {
+        success(res) {
+          if (res.networkType === "none") {
             wx.showToast({
-              title: '断网了',
-              icon: 'none'
-            })
+              title: "断网了",
+              icon: "none"
+            });
           }
         }
-      })
+      });
     });
 }
 const createMethod = method => (url, data, other) => {

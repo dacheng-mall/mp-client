@@ -28,9 +28,21 @@
   height: 100%;
 }
 .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   font-size: 32rpx;
   color: #000;
   line-height: 1.5em;
+}
+.share-btn {
+  flex-shrink: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  margin: 0;
+  height: 64rpx
 }
 .main-sttr {
   display: flex;

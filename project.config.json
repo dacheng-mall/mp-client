@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -82,6 +82,13 @@
 					"name": "筛选页",
 					"pathName": "pages/filter/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "详情",
+					"pathName": "pages/products/detail/index",
+					"query": "id=799feccefb33400b89628dc370a99693",
 					"scene": null
 				}
 			]
