@@ -7,14 +7,25 @@
       </block>
     </checkbox-group>
   </scroll-view>
-  <view class="bottom-bar">
+  <view class="bottom-bar" wx:if="{{!favorites}}">
     <button disabled="{{list.length === 0}}" size="mini" class="cancel-btn btn" bindtap="chooseAll">
       {{chooseState ? '不选' : '全选'}}
     </button>
-    <button disabled="{{ids.length === 0}}" wx:if="{{favorites}}" size="mini" class="operator-btn btn" type="warn" bindtap="onRemove">
-      取消收藏
+    <button disabled="{{ids.length === 0}}" size="mini" class="operator-btn btn" type="primary" open-type="share">
+      分享
     </button>
-    <button disabled="{{ids.length === 0}}" size="mini" class="operator-btn btn" type="primary" open-type="share">分享商品</button>
+  </view>
+  <view wx:if="{{favorites}}" class="bottom-bar">
+    <button disabled="{{list.length === 0}}" size="mini" class="cancel-btn btn" bindtap="chooseAll">
+      {{chooseState ? '不选' : '全选'}}
+    </button>
+    <button disabled="{{ids.length === 0}}" size="mini" class="operator-btn btn" type="warn" bindtap="onRemove">
+      移出购物车
+    </button>
+    <button disabled="{{ids.length === 0}}" size="mini" class="operator-btn btn" type="primary" open-type="share">
+      分享
+    </button>
   </view>
 </view>
 <tab-bar path="{{path}}" />
+<back-home wx:if="{{!favorites}}" />

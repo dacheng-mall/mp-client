@@ -16,7 +16,7 @@
   },
   "usingComponents": {
     "icon-x": "/components/icon/index",
-    "favo-entry": "/components/favo-entry/index",
+    "back-home": "/components/favo-entry/index",
     "nothing": "/components/nothing/index",
     "tab-bar": "/components/tabbar/index"
   }

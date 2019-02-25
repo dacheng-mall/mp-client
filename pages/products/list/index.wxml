@@ -3,3 +3,4 @@
   <nothing wx:if="{{value.data.length < 1}}" />
   <list-x wx:else data="{{value}}"></list-x>
 </view>
+<back-home />

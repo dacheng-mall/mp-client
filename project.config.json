@@ -14,7 +14,7 @@
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.1",
+	"libVersion": "2.6.1",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -43,10 +43,10 @@
 			"current": 6,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "分享页面",
 					"pathName": "pages/products/group/index",
-					"query": "favorites=no&ids=1,2",
+					"query": "favorites=no&ids=33,30,29,31,32,28,27,26,25",
 					"scene": 1008
 				},
 				{
@@ -85,11 +85,11 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "详情",
 					"pathName": "pages/products/detail/index",
 					"query": "id=799feccefb33400b89628dc370a99693",
-					"scene": null
+					"scene": 1007
 				}
 			]
 		}

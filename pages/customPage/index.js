@@ -3,22 +3,18 @@ import { getFavorites } from "../../utils/tools";
 import { uri, getRoute } from "../../utils/util";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
+const app = getApp();
+
 Page({
   data: {
     elements: [],
     code: "",
     count: 0,
   },
-  onLoad: async function(options) {
-    // const [data] = await get("v1/api/sys/page", options);
-    // const path = uri(this.route, options)
-    // if (data) {
-    //   this.setData({
-    //     ...data,
-    //     path,
-    //   });
-    // }
-    // this.fetch(options)
+  onLoad: function(options) {
+    if(options.code === 'home') {
+      app.globalData.scene = null;
+    }
   },
   onShow() {
     const res = getRoute()

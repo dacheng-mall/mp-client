@@ -1,31 +1,41 @@
-import { getFavorites } from "../../utils/tools";
-import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
+const app = getApp();
 Component({
   properties: {
     iconName: {
       type: String,
-      value: "heart-fill"
+      value: "home"
     }
   },
   data: {
-    count: 0
+    show: false
   },
   pageLifetimes: {
-    async show() {
-      this.updateCount();
-    }
-  },
-  lifetimes: {
-    created() {
-      this.updateCount();
+    show() {
+      const scene = app.globalData.scene;
+      switch(scene) {
+        case 1007:
+        case 1008:
+        case 1011:
+        case 1013:
+        case 1025: {
+          this.setData({
+            show: true
+          })
+          break;
+        }
+        default: {
+          this.setData({
+            show: false
+          })
+        }
+      }
     }
   },
   methods: {
-    async updateCount() {
-      const favo = await getFavorites();
-      this.setData({
-        count: favo.length || 0
-      });
+    gohome(){
+      wx.reLaunch({
+        url: '/pages/customPage/index?code=home'
+      })
     }
   }
 });

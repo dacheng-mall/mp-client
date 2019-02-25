@@ -1,13 +1,20 @@
-<view class="trow" hover-class="itemTap" catchtap="tap" data-id="{{data.id}}">
-  <view class="checkbox">
-    <checkbox value="{{data.id}}" checked="{{checked}}" />
+<view class="trow" hover-class="itemTap" >
+  <view class="checkbox" catchtap="tap" data-id="{{data.id}}">
+    <icon-x type="check-circle{{checked ? '-fill' : ''}}" color="{{checked ? '#00bcbd' : '#eee'}}" size="{{64}}" />
   </view>
-  <image class="img" src="{{source}}{{data.mainImageUrl}}" />
-  <view class="item-info">
-    <view class="item-name" catchtap="goDetail" data-id="{{data.id}}" data-index="{{data.index}}">{{data.title}}</view>
-    <view class="item-attr">
-      <view class="price"><text>￥</text>{{data.price}}</view>
-      <view class="factory {{!data.institutionId ? 'self' : ''}}">{{data.institutionName}}</view>
+  <view class="cont-wrap" catchtap="goDetail" data-id="{{data.id}}">
+    <image class="img" src="{{source}}{{data.mainImageUrl}}" />
+    <view class="item-info">
+      <view class="item-name" data-index="{{data.index}}">
+        {{data.title}}
+      </view>
+      <view class="item-attr">
+        <view class="price">
+          <text>￥</text>
+          {{data.price}}
+        </view>
+        <view class="factory {{!data.institutionId ? 'self' : ''}}">{{data.institutionName}}</view>
+      </view>
     </view>
   </view>
 </view>

@@ -10,9 +10,6 @@ Component({
       },
       value: []
     },
-    state: {
-      type: String | null
-    },
     data: {
       type: Object
     }

@@ -186,7 +186,7 @@ Page({
     }
   },
   onShareAppMessage(options) {
-    console.log(options.webViewUrl);
+    // console.log(options.webViewUrl);
   },
   touchstart(e) {
     if (this.data.ids.length > 1) {

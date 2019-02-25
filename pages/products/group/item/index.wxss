@@ -51,3 +51,9 @@
   border-color: #00bcbd;
   color: #00bcbd;
 }
+.cont-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 1
+}

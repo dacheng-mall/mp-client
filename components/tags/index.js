@@ -6,7 +6,7 @@ Component({
     },
     color: {
       type: String,
-      value: '#999',
+      value: '#00bcbd',
     }
   }
 })

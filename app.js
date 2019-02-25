@@ -7,6 +7,19 @@ App({
     setTimeout(() => {
       this.login();
     }, 1000)
+    const {scene} = wx.getLaunchOptionsSync();
+    this.globalData.scene = scene
+    this.setNavHeight();
+  },
+  setNavHeight: function(){
+    wx.getSystemInfo({
+      success: res => {
+        this.globalData.navHeight = res.statusBarHeight + 46;
+      },
+      fail(err) {
+        console.log(err);
+      }
+    })
   },
   login: function() {
     wx.login({
@@ -73,6 +86,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    openid: ""
+    openid: "",
+    navHeight: 0
   }
 });

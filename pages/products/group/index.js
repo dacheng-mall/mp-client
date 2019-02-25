@@ -137,5 +137,10 @@ Page({
   },
   getListIds() {
     return this.data.list.map(({ id }) => id);
+  },
+  gohome(){
+    wx.redirectTo({
+      url: '/pages/customPage/index?code=home'
+    })
   }
 });
