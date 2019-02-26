@@ -2,8 +2,8 @@
   <block wx:for="{{_data}}" wx:key="{{item.id}}">
     <view style="width: {{width}}; height: {{height}}" class="grid-item" bind:tap="click" data-path="{{item.path}}">
       <view class="grid-item-shell">
-        <image style="width: {{imgSize}}; height: {{imgSize}}" src="{{item.image}}" />
-        <text class="grid-name">{{item.name}}</text>
+        <image wx:if="{{item.image}}" style="width: {{imgSize}}; height: {{imgSize}}" src="{{item.image}}" />
+        <text wx:if="{{item.name}}" class="grid-name">{{item.name}}</text>
       </view>
     </view>
   </block>

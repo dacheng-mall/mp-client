@@ -1,5 +1,3 @@
-import { mockFetch } from "./util";
-import { favorites } from "./mock";
 import { get } from "./request";
 
 // TODO 临时封装本地存储工具函数,接现网api后需要重构
