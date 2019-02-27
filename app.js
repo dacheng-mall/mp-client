@@ -1,5 +1,6 @@
 //app.js
 import { get, post, setToken } from "./utils/request";
+import { getRoute } from "./utils/util";
 
 App({
   onLaunch: function(res) {
@@ -60,6 +61,7 @@ App({
     });
   },
   getUserInfo: function() {
+    debugger
     wx.getUserInfo({
       success: res => {
         const { userInfo } = res;
@@ -79,10 +81,14 @@ App({
     setToken(token);
     const { path, query } = this.globalData.initState;
     if (path === "pages/start/index") {
-      
       wx.reLaunch({
         url: "/pages/customPage/index?code=home"
       });
+      return;
+    }
+    const route = getRoute()
+    if(route.path === 'pages/start/author') {
+      console.log(route);
     }
   },
   checkUpdate: function(){
