@@ -31,18 +31,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 32rpx;
+  font-size: 44rpx;
   color: #000;
   line-height: 1.5em;
 }
 .share-btn {
-  flex-shrink: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24rpx;
+  flex-shrink: 1;
+  font-size: 36rpx;
   margin: 0;
-  height: 64rpx
+  height: 68rpx
 }
 .main-sttr {
   display: flex;

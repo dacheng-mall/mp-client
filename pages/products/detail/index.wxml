@@ -5,7 +5,7 @@
       <view class="title block">
         <text>{{detail[current].title}}</text>
         <button class="share-btn" open-type="share" plain="{{true}}" style="border: none; background: none;">
-          <icon-x type="share" color="#00bcbd" size="{{44}}" /> <text>分享</text> 
+          <icon-x type="share" color="#00bcbd" size="{{64}}" /> <text>分享</text> 
         </button>
       </view>
       <view class="main-sttr block">
