@@ -79,6 +79,10 @@ Page({
   onReady: function() {
     this.animation = wx.createAnimation();
   },
+  
+  onShow() {
+    wx.showShareMenu();
+  },
   fetchDetail(data) {
     const _ids = data.split(",");
     if (_ids.length > 1) {

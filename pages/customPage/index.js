@@ -11,13 +11,9 @@ Page({
     code: "",
     count: 0,
   },
-  onLoad: function(options) {
-    if(options.code === 'home') {
-      app.globalData.scene = null;
-    }
-  },
   onShow() {
-    const res = getRoute()
+    wx.showShareMenu();
+    const res = getRoute();
     if(res.path !== this.data.path) {
       this.fetch(res.options)
     }
@@ -28,6 +24,7 @@ Page({
     if (data) {
       this.setData({
         ...data,
+        ...options,
         path,
       });
     }

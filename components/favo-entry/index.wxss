@@ -1,15 +1,14 @@
 .favo-entry-wrap {
   position: fixed;
-  z-index: 100;
+  z-index: 999;
   right: 20rpx;
   bottom: 20rpx;
-}
-.favo-entry {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #00bcbd;
   border-radius: 50%;
   width: 88rpx;
   height: 88rpx;
+}
+.favo-entry {
   text-align: center;
-  line-height: 64rpx;
+  line-height: 88rpx;
 }

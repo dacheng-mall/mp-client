@@ -13,3 +13,4 @@
   </view>
 </scroll-view>
 <tab-bar path="{{path}}" />
+<back-home path="{{path}}" />

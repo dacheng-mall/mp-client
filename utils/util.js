@@ -55,7 +55,8 @@ function getRoute(){
   return {
     path: urlWithArgs,
     url,
-    options
+    options,
+    length: pages.length
   }
 }
 module.exports = {

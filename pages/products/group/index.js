@@ -11,7 +11,6 @@ Page({
     ids: []
   },
   onLoad: async function(opts) {
-    wx.hideShareMenu();
     const { windowHeight } = wx.getSystemInfoSync();
     const { id } = wx.getStorageSync("user");
     const path = uri(this.route, opts);
@@ -46,8 +45,8 @@ Page({
       });
     }
   },
-  onUnload() {
-    wx.showShareMenu();
+  onShow() {
+    wx.hideShareMenu();
   },
   normalizeFavoData(data = []) {
     const res = [];

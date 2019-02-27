@@ -26,5 +26,7 @@ Page({
       });
     }
   },
-  onShow() {}
+  onShow() {
+    wx.showShareMenu();
+  }
 });

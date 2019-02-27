@@ -1,5 +1,5 @@
 <view wx:if="{{show}}" class="favo-entry-wrap" bind:tap="gohome">
   <view class="favo-entry">
-    <icon-x type="{{iconName}}" color="#00bcbd" size="{{64}}" />
+    <icon-x type="{{iconName}}" color="#fff" size="{{64}}" />
   </view>
 </view>
