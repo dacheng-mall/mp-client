@@ -3,6 +3,7 @@
   /* border-bottom: 1px solid #ccc; */
   padding: 20rpx;
   background-color: #fff;
+  align-items: stretch
 }
 .img {
   width: 128rpx;
@@ -10,8 +11,10 @@
   margin-left: 10rpx
 }
 .checkbox {
-  height: 128rpx;
-  line-height: 128rpx
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0
 }
 .item-name {
   font-size: 28rpx;
