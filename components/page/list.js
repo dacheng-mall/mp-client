@@ -48,7 +48,7 @@ Component({
         }
       });
       this.setData({
-        '_data.data': [..._data.data]
+        "_data.data": [..._data.data]
       });
     }
   },
@@ -63,26 +63,18 @@ Component({
     dbClick: async function(e) {
       this.triggerEvent("dbClick", e.detail);
       const { type, id } = e.detail;
-      let newFavo = [];
       if (type === "product") {
         const { id: userId } = await getStorageWithKey("user");
-        const favo = await getFavorites();
-        if (favo.indexOf(id) !== -1) {
-          const res = await post("api/sys/favorites/delete", {
-            userId,
-            ids: [id]
-          });
-          if (typeof res === "object") {
-            newFavo = await setFavorites([id]);
-          }
-        } else {
-          const res = await post("api/sys/favorites", { userId, ids: [id] });
-          if (typeof res === "object") {
-            newFavo = await setFavorites([id]);
-          }
-        }
+        const res = await post("api/sys/favorites/set", {
+          userId,
+          ids: [id]
+        });
+        const title = res.type === "remove" ? "移出购物车" : "加入购物车";
+        wx.showToast({
+          title
+        });
         this.setData({
-          favorites: newFavo
+          favorites: await setFavorites(res.ids)
         });
       }
     }

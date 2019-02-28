@@ -1,7 +1,11 @@
 // pages/products/index.js
 import { uri } from "../../../utils/util";
 import { get, post } from "../../../utils/request";
-import { getFavorites, setFavorites, getStorageWithKey } from "../../../utils/tools";
+import {
+  getFavorites,
+  setFavorites,
+  getStorageWithKey
+} from "../../../utils/tools";
 import { source, tel } from "../../../setting";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
@@ -14,7 +18,7 @@ Page({
     ids: [],
     current: "",
     screenWidth: 100,
-    needInitSwiper: false,
+    needInitSwiper: false
   },
   onLoad(opts) {
     const { screenWidth } = wx.getSystemInfoSync();
@@ -79,7 +83,7 @@ Page({
   onReady: function() {
     this.animation = wx.createAnimation();
   },
-  
+
   onShow() {
     wx.showShareMenu();
   },
@@ -174,20 +178,18 @@ Page({
         dataset: { id, favo }
       }
     } = e;
-    const {id: userId} = await getStorageWithKey("user");
-    let res;
-    if(favo) {
-      res = await post("api/sys/favorites/delete", { userId, ids: [id] });
-    } else {
-      res = await post("api/sys/favorites", { userId, ids: [id] })
-    }
-    if(typeof res === 'object') {
-      await setFavorites([id]);
-      this.data.detail[this.data.current].favorite = !favo
-      this.setData({
-        detail: [...this.data.detail]
-      })
-    }
+    const { id: userId } = await getStorageWithKey("user");
+    const res = await post("api/sys/favorites/set", { userId, ids: [id] });
+    const title = res.type === "remove" ? "移出购物车" : "加入购物车";
+    wx.showToast({
+      title
+    });
+    await setFavorites(res.ids);
+    this.data.detail[this.data.current].favorite =
+      res.type === "remove" ? false : true;
+    this.setData({
+      detail: [...this.data.detail]
+    });
   },
   onShareAppMessage(options) {
     // console.log(options.webViewUrl);

@@ -24,20 +24,38 @@ export function getType(res) {
   return res.headers.get(CONTENT_TYPE);
 }
 
-export function parseResponse(data) {
+const showLoading = (url, show) => {
+  switch (url) {
+    case "api/sys/favorites/set": {
+      break;
+    }
+    default: {
+      if(show) {
+        wx.showLoading({
+          title: "加载中..."
+        });
+      } else {
+        wx.hideLoading();
+      }
+      break;
+    }
+  }
+}
+export function parseResponse({data, _url}) {
   // TODO 这里只处理了json类型的返回值, 如果有其他类型的需要再扩展
-  wx.hideLoading();
+  showLoading(_url)
   return Promise.resolve(data);
 }
-export function checkStatus(res) {
+export function checkStatus({res, _url}) {
   const { statusCode, data } = res;
   if (statusCode !== 200) {
     return Promise.reject(`请求失败(code:${statusCode}) ${data}`);
   }
-  return Promise.resolve(data);
+  return Promise.resolve({data, _url});
 }
 
 export default function request(url, { data, method }, other) {
+  const _url = url;
   const options = {
     url,
     method,
@@ -77,26 +95,13 @@ export default function request(url, { data, method }, other) {
   if (VER.test(options.url)) {
     options.url = options.url.replace(VER, "");
   }
-
   return new Promise((resolve, reject) => {
-    // 不需要显示loading的请求
-    switch (options.url) {
-      case "api/sys/favorites/delete":
-      case "api/sys/favorites": {
-        break;
-      }
-      default: {
-        wx.showLoading({
-          title: "加载中..."
-        });
-        break;
-      }
-    }
+    showLoading(_url, true)
     options.url = `${baseURL}${options.url}`;
     wx.request({
       ...options,
       success: res => {
-        resolve(res);
+        resolve({res, _url});
       },
       fail: err => {
         reject(err);

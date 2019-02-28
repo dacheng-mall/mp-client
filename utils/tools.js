@@ -9,13 +9,15 @@ export const getStorageWithKey = (key, fetchFromServer) => {
     wx.getStorage({
       key,
       success: ({ data = [] }) => {
-        if(key === 'favorites' && data.length === 0) {
+        if (key === "favorites" && data.length === 0) {
           if (fetchFromServer) {
             fetchFromServer().then(data => {
               wx.setStorageSync(key, data);
               res(data);
             });
-          } 
+          } else {
+            res(data);
+          }
         } else {
           res(data);
         }
@@ -39,9 +41,8 @@ export const getFavorites = () =>
       return user.id;
     })
     .then(userId => {
-      return getStorageWithKey(
-        "favorites",
-        () => get("api/sys/favorites/productIds", { userId })
+      return getStorageWithKey("favorites", () =>
+        get("api/sys/favorites/productIds", { userId })
       );
     })
     .then(data => {
@@ -49,24 +50,6 @@ export const getFavorites = () =>
     });
 
 export const setFavorites = ids => {
-  return getFavorites().then(data => {
-    ids.forEach(id => {
-      const favoIndex = data.indexOf(id);
-      if (favoIndex !== -1) {
-        // 取消收藏
-        data.splice(favoIndex, 1);
-        wx.showToast({
-          title: "移出购物车"
-        });
-      } else {
-        // 收藏
-        data.push(id);
-        wx.showToast({
-          title: "加入购物车"
-        });
-      }
-      wx.setStorageSync("favorites", data);
-    });
-    return data
-  });
+  wx.setStorageSync("favorites", ids);
+  return ids;
 };
