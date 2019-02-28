@@ -82,15 +82,18 @@ App({
     setToken(token);
     // path, query 是最初访问的小程序时的目标页面
     const { path, query } = this.globalData.initState;
-    if (path === "pages/start/index") {
+    get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
+      wx.setStorageSync('favorites', res);
+      if (path === "pages/start/index") {
+        wx.redirectTo({
+          url: "/pages/customPage/index?code=home"
+        });
+        return;
+      }
       wx.redirectTo({
-        url: "/pages/customPage/index?code=home"
+        url: uri(path, query, true)
       });
-      return;
-    }
-    wx.redirectTo({
-      url: uri(path, query, true)
-    });
+    })
   },
   checkUpdate: function() {
     const updateManager = wx.getUpdateManager();

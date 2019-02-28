@@ -1,5 +1,4 @@
 import { get } from "../../utils/request";
-import { getFavorites } from "../../utils/tools";
 import { uri, getRoute } from "../../utils/util";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 

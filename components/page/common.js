@@ -11,7 +11,7 @@ module.exports = Behavior({
         const attributes = val.attributes && JSON.parse(val.attributes);
         let favorites = [];
         if (val.type === "list") {
-          favorites = await getFavorites();
+          favorites = wx.getStorageSync('favorites');
         }
         const attr = {};
         if (attributes) {

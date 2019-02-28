@@ -16,7 +16,7 @@ Component({
   },
   lifetimes: {
     attached() {
-      getFavorites();
+      // getFavorites();
     },
     ready() {
       const query = wx.createSelectorQuery().in(this);
@@ -38,7 +38,7 @@ Component({
   },
   pageLifetimes: {
     async show() {
-      const favo = await getFavorites();
+      const favo = wx.getStorageSync('favorites') || [];
       const { _data } = this.data;
       _data.data.forEach(d => {
         if (favo.includes(d.id)) {
