@@ -27,7 +27,7 @@ const mockFetch = (data, delay = 1000) => {
   });
 };
 
-const uri = (url, query = {}) => (function(q){
+const uri = (url, query = {}, startWithLine) => (function(q){
   let res = ''
   for(let key in q) {
     res += `${key}=${q[key]}&`
@@ -35,6 +35,9 @@ const uri = (url, query = {}) => (function(q){
   if(res !== '') {
     res = res.replace(/&$/, '');
     res = `?${res}`;
+  }
+  if(startWithLine && !/^\//.test(url)) {
+    return `/${url}${res}`
   }
   return `${url}${res}`
 }(query));

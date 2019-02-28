@@ -1,19 +1,19 @@
 //app.js
 import { get, post, setToken } from "./utils/request";
-import { getRoute } from "./utils/util";
+import { uri } from "./utils/util";
 
 App({
   onLaunch: function(res) {
     this.globalData.initState = res;
-    this.checkUpdate()
+    this.checkUpdate();
     setTimeout(() => {
       this.login();
-    }, 1000)
-    const {scene} = wx.getLaunchOptionsSync();
-    this.globalData.scene = scene
+    }, 1000);
+    const { scene } = wx.getLaunchOptionsSync();
+    this.globalData.scene = scene;
     this.setNavHeight();
   },
-  setNavHeight: function(){
+  setNavHeight: function() {
     wx.getSystemInfo({
       success: res => {
         this.globalData.navHeight = res.statusBarHeight + 46;
@@ -21,7 +21,7 @@ App({
       fail(err) {
         console.log(err);
       }
-    })
+    });
   },
   login: function() {
     wx.login({
@@ -53,15 +53,16 @@ App({
       status: 1,
       password: "defaultPassword"
     };
-    post("api/public/registerUser", body).then(res => {
-      this.globalData.userInfo = res.user;
-      this.afterLogin(res.user, res.token);
-    }).catch(e => {
-      console.log(e)
-    });
+    post("api/public/registerUser", body)
+      .then(res => {
+        this.globalData.userInfo = res.user;
+        this.afterLogin(res.user, res.token);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   },
   getUserInfo: function() {
-    debugger
     wx.getUserInfo({
       success: res => {
         const { userInfo } = res;
@@ -79,39 +80,39 @@ App({
     this.globalData.userInfo = user;
     wx.setStorageSync("user", user);
     setToken(token);
+    // path, query 是最初访问的小程序时的目标页面
     const { path, query } = this.globalData.initState;
     if (path === "pages/start/index") {
-      wx.reLaunch({
+      wx.redirectTo({
         url: "/pages/customPage/index?code=home"
       });
       return;
     }
-    const route = getRoute()
-    if(route.path === 'pages/start/author') {
-      console.log(route);
-    }
+    wx.redirectTo({
+      url: uri(path, query, true)
+    });
   },
-  checkUpdate: function(){
+  checkUpdate: function() {
     const updateManager = wx.getUpdateManager();
     // 检查是否有新版本
-    updateManager.onCheckForUpdate(function (res) {
-      if(res.hasUpdate) {
+    updateManager.onCheckForUpdate(function(res) {
+      if (res.hasUpdate) {
         // 如果有新版本就下载
-        updateManager.onUpdateReady(function () {
+        updateManager.onUpdateReady(function() {
           // 下载完成后强制更新
           wx.showModal({
-            title: '更新提示',
-            content: '新版本已经准备好，是否重启应用？',
+            title: "更新提示",
+            content: "新版本已经准备好，是否重启应用？",
             success(r) {
               if (r.confirm) {
                 // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                 updateManager.applyUpdate();
               }
             }
-          })
-        })
+          });
+        });
       }
-    })
+    });
   },
   globalData: {
     userInfo: null,
