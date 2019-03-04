@@ -16,7 +16,7 @@ Component({
     data: {
       type: Object,
       value: {
-        value: "hello world",
+        value: "",
         ...DEFAULT_STYLE
       }
     },

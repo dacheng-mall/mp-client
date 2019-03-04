@@ -10,6 +10,9 @@
     <view wx:if="{{item.type === 'list'}}">
       <list-x data="{{item}}" index="{{index}}"></list-x>
     </view>
+    <view wx:if="{{item.type === 'article'}}">
+      <paragraph-x data="{{item.data}}" index="{{index}}"></paragraph-x>
+    </view>
   </view>
 </scroll-view>
 <tab-bar path="{{path}}" />

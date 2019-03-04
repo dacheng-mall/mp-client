@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 7,
 			"list": [
 				{
 					"id": 0,
@@ -90,6 +90,13 @@
 					"pathName": "pages/products/detail/index",
 					"query": "id=799feccefb33400b89628dc370a99693",
 					"scene": 1007
+				},
+				{
+					"id": -1,
+					"name": "测试自定义页面的图文",
+					"pathName": "pages/customPage/index",
+					"query": "code=ttt",
+					"scene": null
 				}
 			]
 		}
