@@ -175,7 +175,7 @@ Page({
   async changeFavo(e) {
     const {
       currentTarget: {
-        dataset: { id, favo }
+        dataset: { id }
       }
     } = e;
     const { id: userId } = await getStorageWithKey("user");
