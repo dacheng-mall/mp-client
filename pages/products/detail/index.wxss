@@ -39,10 +39,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-shrink: 1;
+  flex-shrink: 0;
   font-size: 36rpx;
   margin: 0;
-  height: 68rpx
+  width: 196rpx;
+  height: 68rpx;
 }
 .main-sttr {
   display: flex;
@@ -61,7 +62,7 @@
   align-items: center
 }
 .isSelf {
-  background-color: #f33;
+  background-color: #00bcbd;
   color: #fff;
   padding: 0 20rpx;
   border-radius: 8rpx
