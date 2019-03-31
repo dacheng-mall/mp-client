@@ -92,10 +92,10 @@
 					"scene": 1007
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "测试自定义页面的图文",
-					"pathName": "pages/customPage/index",
-					"query": "code=ttt",
+					"pathName": "pages/start/index",
+					"query": "id=5fa03802b4644b5586dc3e65ab97dee0",
 					"scene": null
 				}
 			]

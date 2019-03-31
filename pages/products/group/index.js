@@ -14,7 +14,7 @@ Page({
     const { windowHeight } = wx.getSystemInfoSync();
     const { id } = wx.getStorageSync("user");
     const path = uri(this.route, opts);
-    if (opts.favorites === "yes") {
+    if (!opts.ids) {
       // 这是收藏页面, 请求个人搜藏的商品列表
       const data = await get("api/sys/favorites", { userId: id });
       this.setData({
@@ -25,6 +25,7 @@ Page({
       });
     } else {
       // 这是推荐商品组页面
+      wx.hideTabBar()
       const autoIds = opts.ids.split(",");
       const query = (function(ids) {
         let res = "";
@@ -139,7 +140,7 @@ Page({
   },
   gohome(){
     wx.redirectTo({
-      url: '/pages/customPage/index?code=home'
+      url: '/pages/home/index'
     })
   }
 });

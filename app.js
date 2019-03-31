@@ -86,7 +86,7 @@ App({
       wx.setStorageSync('favorites', res);
       if (path === "pages/start/index") {
         wx.redirectTo({
-          url: "/pages/customPage/index?code=home"
+          url: "/pages/home/index"
         });
         return;
       }

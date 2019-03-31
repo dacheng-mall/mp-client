@@ -33,7 +33,7 @@ Page({
     if (id) {
       setTimeout(() => {
         wx.reLaunch({
-          url: "/pages/customPage/index?code=home"
+          url: "/pages/home/index"
         });
       }, 1000);
     }

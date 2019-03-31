@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "swiper-x": "/components/page/swiper",
+    "list-x": "/components/page/list",
+    "grid-x": "/components/page/grid",
+    "paragraph-x": "/components/paragraph/index",
+    "searcher": "/components/searcher/index"
+  }
+}

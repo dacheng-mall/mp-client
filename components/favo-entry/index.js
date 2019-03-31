@@ -13,7 +13,7 @@ Component({
     show() {
       const route = getRoute();
       if (
-        route.path !== "pages/customPage/index?code=home" &&
+        route.path !== "pages/home/index" &&
         route.length === 1
       ) {
         this.setStatus(true);
@@ -30,7 +30,7 @@ Component({
     },
     gohome() {
       wx.reLaunch({
-        url: "/pages/customPage/index?code=home"
+        url: "/pages/home/index"
       });
     }
   }

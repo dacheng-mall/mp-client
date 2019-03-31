@@ -1,7 +1,8 @@
 .table-wrap {
   display: flex;
   flex-direction: column;
-  background-color: #eee
+  background-color: #eee;
+  flex: 1
 }
 .title {
   padding: 20rpx;

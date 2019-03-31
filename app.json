@@ -6,8 +6,28 @@
     "pages/products/detail/index",
     "pages/products/group/index",
     "pages/customPage/index",
+    "pages/home/index",
     "pages/filter/index"
   ],
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#00bcbd",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "access/gift-fill.png",
+        "iconPath": "access/gift.png",
+        "pagePath": "pages/home/index",
+        "text": "有礼"
+      },
+      {
+        "selectedIconPath": "access/cart-fill.png",
+        "iconPath": "access/cart.png",
+        "pagePath": "pages/products/group/index",
+        "text": "购物车"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#00bcbd",

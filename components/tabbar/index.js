@@ -18,7 +18,7 @@ Component({
     actived: null,
     list: [
       {
-        path: "/pages/customPage/index?code=home",
+        path: "/pages/home/index",
         icon: "gift",
         iconSelected: "gift-fill",
         color: "#333",
@@ -26,7 +26,7 @@ Component({
         text: "有礼"
       },
       {
-        path: "/pages/products/group/index?favorites=yes",
+        path: "/pages/products/group/index",
         icon: "cart",
         iconSelected: "cart-fill",
         color: "#333",

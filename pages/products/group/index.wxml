@@ -1,4 +1,4 @@
-<view class="table-wrap" style="height: {{windowHeight}}px">
+<view class="table-wrap">
   <nothing wx:if="{{list.length < 1}}" />
   <scroll-view class="tbody" scroll-y>
     <block wx:for="{{list}}" wx:key="{{item.id}}">
@@ -25,5 +25,4 @@
     </button>
   </view>
 </view>
-<tab-bar path="{{path}}" />
 <back-home wx:if="{{!favorites}}" />
