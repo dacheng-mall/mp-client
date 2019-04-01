@@ -10,8 +10,22 @@ Page({
     favorites: false,
     ids: []
   },
-  onLoad: async function(opts) {
-    const { windowHeight } = wx.getSystemInfoSync();
+  onShow() {
+    wx.hideShareMenu();
+    const favorites = wx.getStorageSync("favorites");
+    if(this.data.list.length !== favorites.length) {
+      this.fetch();
+    } else {
+      for(let fid of favorites) {
+        if(!this.data.list.find(({id}) => fid === id)) {
+          this.fetch();
+          break;
+        }
+      }
+    }
+  },
+  fetch: async function() {
+    const opts = this.options;
     const { id } = wx.getStorageSync("user");
     const path = uri(this.route, opts);
     if (!opts.ids) {
@@ -20,12 +34,11 @@ Page({
       this.setData({
         list: this.normalizeFavoData(data),
         favorites: true,
-        windowHeight,
         path
       });
     } else {
       // 这是推荐商品组页面
-      wx.hideTabBar()
+      wx.hideTabBar();
       const autoIds = opts.ids.split(",");
       const query = (function(ids) {
         let res = "";
@@ -42,18 +55,14 @@ Page({
       this.setData({
         list: data,
         favorites: false,
-        windowHeight
       });
     }
-  },
-  onShow() {
-    wx.hideShareMenu();
   },
   normalizeFavoData(data = []) {
     const res = [];
     data.forEach(({ product }) => {
-      if(product.id) {
-        res.push(product)
+      if (product.id) {
+        res.push(product);
       }
     });
     return res;
@@ -138,9 +147,9 @@ Page({
   getListIds() {
     return this.data.list.map(({ id }) => id);
   },
-  gohome(){
+  gohome() {
     wx.redirectTo({
-      url: '/pages/home/index'
-    })
+      url: "/pages/home/index"
+    });
   }
 });
