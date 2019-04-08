@@ -1,0 +1,5 @@
+.wrap {
+  border: 1px solid #eee;
+  border-radius: 16rpx;
+  background-color: #fff;
+}

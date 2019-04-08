@@ -1,0 +1,5 @@
+<view bindtap="jump" wx:if="{{!data.userType || userType === data.userType}}" class="item {{isFirst ? 'first' : ''}}">
+  <icon-x type="{{data.icon}}" color="{{data.iconColor}}" />
+  <text class="name">{{data.name}}</text>
+  <icon-x wx:if="{{data.path}}" type="right" color="#999" size="{{26}}" />
+</view>

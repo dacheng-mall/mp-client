@@ -1,0 +1,5 @@
+<view class="wrap">
+  <block wx:for="{{data}}" wx:key="{{index}}_list_item">
+    <item data="{{item}}" userType="{{userType}}" isFirst="{{index === 0}}" />
+  </block>
+</view>

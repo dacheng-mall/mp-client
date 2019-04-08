@@ -1,0 +1,2 @@
+<nothing wx:if="{{list.length < 1}}" />
+<gifts wx:else data="{{list}}" />

@@ -1,0 +1,1 @@
+<scroll-view scroll-y="{{true}}" class="page-wrap">activity</scroll-view>

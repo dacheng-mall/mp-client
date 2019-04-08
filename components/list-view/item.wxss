@@ -1,0 +1,18 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  padding: 16rpx;
+  border-top: 1px solid #ddd;
+  align-items: center;
+}
+.first {
+  border: none;
+}
+.name {
+  flex: 1;
+  font-size: 28rpx;
+  line-height: 32rpx;
+  padding-left: 8rpx;
+  color: #666;
+
+}

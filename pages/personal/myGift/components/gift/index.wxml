@@ -1,0 +1,5 @@
+<scroll-view class="gifts" scroll-y="{{true}}">
+  <block wx:for="{{data}}" wx:key="{{item.id}}">
+    <listItem id="{{item.id}}" data="{{item}}" />
+  </block>
+</scroll-view>

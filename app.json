@@ -6,6 +6,9 @@
     "pages/products/detail/index",
     "pages/products/group/index",
     "pages/customPage/index",
+    "pages/personal/index",
+    "pages/personal/myGift/index",
+    "pages/activity/index",
     "pages/home/index",
     "pages/filter/index"
   ],
@@ -21,10 +24,22 @@
         "text": "有礼"
       },
       {
+        "selectedIconPath": "access/thunderbolt-fill.png",
+        "iconPath": "access/thunderbolt.png",
+        "pagePath": "pages/activity/index",
+        "text": "活动"
+      },
+      {
         "selectedIconPath": "access/cart-fill.png",
         "iconPath": "access/cart.png",
         "pagePath": "pages/products/group/index",
         "text": "购物车"
+      },
+      {
+        "selectedIconPath": "access/user-fill.png",
+        "iconPath": "access/user.png",
+        "pagePath": "pages/personal/index",
+        "text": "我的"
       }
     ]
   },

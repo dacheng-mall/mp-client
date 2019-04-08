@@ -14,7 +14,7 @@
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.1",
+	"libVersion": "2.6.4",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 9,
 			"list": [
 				{
 					"id": 0,
@@ -96,6 +96,19 @@
 					"name": "测试自定义页面的图文",
 					"pathName": "pages/start/index",
 					"query": "id=5fa03802b4644b5586dc3e65ab97dee0",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/personal/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "领取记录",
+					"pathName": "pages/personal/myGift/index",
 					"scene": null
 				}
 			]
