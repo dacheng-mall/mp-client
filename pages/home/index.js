@@ -17,6 +17,9 @@ Page({
   },
   fetch: async function(options) {
     const [data] = await get("v1/api/sys/page", options);
+    if (!data) {
+      return;
+    }
     const path = uri(this.route, options);
     data.elements.forEach(elem => {
       if (elem.type === "article") {
