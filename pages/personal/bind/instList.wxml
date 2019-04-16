@@ -1,0 +1,8 @@
+<scroll-view scroll-x="{{true}}">
+  <block wx:for="{{list}}" wx:key="{{item.id}}">
+    <view class="instItem" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="next">
+      {{item.name}}
+      <icon-x type="right" />
+    </view>
+  </block>
+</scroll-view>

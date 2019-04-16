@@ -8,35 +8,43 @@ Page({
     source,
     list: [
       {
-        name: '我的礼品',
-        icon: 'gift-fill',
-        iconColor: '#00bcbd',
-        color: '#999',
-        path: '/pages/personal/myGift/index',
+        name: "我的礼品",
+        icon: "gift-fill",
+        iconColor: "#00bcbd",
+        color: "#999",
+        path: "/pages/personal/myGift/index",
         userType: null
       },
       {
-        name: '我的活动',
-        icon: 'thunderbolt-fill',
-        iconColor: '#00bcbd',
-        color: '#999',
-        path: '',
-        userType: 3
+        name: "我的活动",
+        icon: "thunderbolt-fill",
+        iconColor: "#00bcbd",
+        color: "#999",
+        path: "",
+        userType: 4
       },
       {
-        name: '我的机构',
-        icon: 'info-circle-fill',
-        iconColor: '#00bcbd',
-        color: '#999',
-        path: '',
-        userType: 3
-      },
+        name: "我的机构",
+        icon: "info-circle-fill",
+        iconColor: "#00bcbd",
+        color: "#999",
+        path: "",
+        userType: 4
+      }
     ]
   },
   onShow: async function() {
-    const user = wx.getStorageSync('user');
+    const user = wx.getStorageSync("user");
     this.setData({
       user
-    })
+    });
+  },
+  bindInst() {
+    wx.removeStorageSync('bind_rootid')
+    wx.removeStorageSync('bind_id')
+    wx.removeStorageSync('bind_name')
+    wx.navigateTo({
+      url: "/pages/personal/bind/index"
+    });
   }
-})
+});

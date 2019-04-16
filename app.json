@@ -8,6 +8,8 @@
     "pages/customPage/index",
     "pages/personal/index",
     "pages/personal/myGift/index",
+    "pages/personal/bind/index",
+    "pages/personal/bind/instList",
     "pages/activity/index",
     "pages/home/index",
     "pages/filter/index"

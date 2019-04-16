@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 10,
 			"list": [
 				{
 					"id": 0,
@@ -109,6 +109,13 @@
 					"id": -1,
 					"name": "领取记录",
 					"pathName": "pages/personal/myGift/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "绑定机构",
+					"pathName": "pages/personal/bind/index",
 					"scene": null
 				}
 			]
