@@ -84,13 +84,13 @@ App({
     const { path, query } = this.globalData.initState;
     get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
       wx.setStorageSync('favorites', res);
-      if (path === "pages/start/index") {
-        wx.redirectTo({
+      if (path === "pages/start/index" || path === "pages/start/author") {
+        wx.reLaunch({
           url: "/pages/home/index"
         });
         return;
       }
-      wx.redirectTo({
+      wx.reLaunch({
         url: uri(path, query, true)
       });
     })
