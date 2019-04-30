@@ -22,6 +22,11 @@ Component({
         wx.navigateTo({
           url: this.properties.data.path
         });
+      } else {
+        wx.showToast({
+          title: '此功能即将开放, 敬请期待...',
+          icon: 'none'
+        })
       }
     }
   }

@@ -1,5 +1,3 @@
-const app = getApp();
-
 Component({
   relations: {
     "./list": {

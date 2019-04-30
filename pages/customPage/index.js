@@ -3,8 +3,6 @@ import { uri, getRoute } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
-const app = getApp();
-
 Page({
   data: {
     elements: [],

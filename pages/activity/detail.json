@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "swiper-x": "/components/page/swiper"
+  }
+}

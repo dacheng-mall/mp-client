@@ -55,18 +55,39 @@ Page({
   formSubmit: async function(e) {
     const { value } = e.detail;
     value.institutionId = this.data.institutionId;
-    if(this.data.grade.length > 0) {
+    if (this.data.grade.length > 0) {
       const index = value.gradeId;
       value.gradeId = this.data.grade[index].id;
       value.gradeName = this.data.grade[index].name;
     }
-    const user = wx.getStorageSync('user');
+    const user = wx.getStorageSync("user");
     value.id = user.id;
     value.userType = 4;
+    switch (true) {
+      case !value.institutionId: {
+        wx.showToast({ title: "未选择机构", icon: "none" });
+        return;
+      }
+      case !value.gradeId: {
+        wx.showToast({ title: "未选择职级", icon: "none" });
+        return;
+      }
+      case !value.name: {
+        wx.showToast({ title: "未录入真实姓名", icon: "none" });
+        return;
+      }
+      case !value.mobile: {
+        wx.showToast({ title: "未录入手机号", icon: "none" });
+        return;
+      }
+      case !value.code: {
+        wx.showToast({ title: "未录入工号", icon: "none" });
+        return;
+      }
+    }
     const data = await put("v1/api/sys/user", value);
-    console.log(data);
-    if(data.userType === 4) {
-      wx.showToast('已加入机构')
+    if (data.userType === "4") {
+      wx.showToast("已加入机构");
       wx.setStorageSync("user", data);
       wx.navigateBack(1);
     }

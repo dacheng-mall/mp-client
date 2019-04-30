@@ -11,6 +11,7 @@
     "pages/personal/bind/index",
     "pages/personal/bind/instList",
     "pages/activity/index",
+    "pages/activity/detail",
     "pages/home/index",
     "pages/filter/index"
   ],
@@ -56,5 +57,6 @@
     "back-home": "/components/favo-entry/index",
     "nothing": "/components/nothing/index",
     "tab-bar": "/components/tabbar/index"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

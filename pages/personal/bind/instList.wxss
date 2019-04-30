@@ -1,3 +1,6 @@
+.instWrap {
+  /* height: 100%; */
+}
 .instItem {
   padding: 20rpx;
   border-bottom: 1px solid #eee;

@@ -12,7 +12,8 @@ Page({
         icon: "gift-fill",
         iconColor: "#00bcbd",
         color: "#999",
-        path: "/pages/personal/myGift/index",
+        // path: "/pages/personal/myGift/index",
+        path: "",
         userType: null
       },
       {

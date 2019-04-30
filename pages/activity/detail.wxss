@@ -1,0 +1,79 @@
+.img {
+  width: 100%;
+  height: 100%;
+}
+.title {
+  font-size: 44rpx;
+  margin: 0 0 32rpx;
+  color: #333
+}
+.content {
+  padding: 40rpx;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+.salesman {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20rpx 0;
+  background-color: #eee;
+  padding: 16rpx;
+  border-radius: 20rpx
+}
+.salesman image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.salesman .salesman-info {
+  flex: 1;
+  margin-left: 10rpx;
+  font-size: 28rpx
+}
+.salesman .salesman-grade {
+  font-size: 28rpx
+}
+@import "common.wxss";
+
+.info {
+  margin: 20rpx 0;
+  padding: 20rpx 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.info .info-item {
+  position: relative;
+  padding-left: 196rpx;
+  line-height: 1.5em;
+  font-size: 32rpx;
+  margin: 16rpx 0;
+  color: #666;
+}
+.info .info-item .label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 256rpx;
+  color: #999;
+}
+.description {
+  font-size: 30rpx;
+  line-height: 2em;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx;
+}
+.footer button {
+  flex: 1;
+}
+.footer .foot-info {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+@import "getGift.wxss";

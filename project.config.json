@@ -10,11 +10,11 @@
 		"minified": true,
 		"newFeature": true,
 		"nodeModules": true,
-		"autoAudits": false,
+		"autoAudits": true,
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.4",
+	"libVersion": "2.6.5",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -22,6 +22,13 @@
 	},
 	"isGameTourist": false,
 	"miniprogramRoot": "/",
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -40,7 +47,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 13,
 			"list": [
 				{
 					"id": 0,
@@ -116,6 +123,28 @@
 					"id": -1,
 					"name": "绑定机构",
 					"pathName": "pages/personal/bind/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "活动列表",
+					"pathName": "pages/activity/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 12,
+					"name": "活动详情",
+					"pathName": "pages/activity/detail",
+					"query": "id=01fe9c82f0da405ca480bfe8e93e3e2c",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "活动详情withsalesman",
+					"pathName": "pages/activity/detail",
+					"query": "id=01fe9c82f0da405ca480bfe8e93e3e2c&sid=a7cde5f268d64d2192c4c876eac43194",
 					"scene": null
 				}
 			]

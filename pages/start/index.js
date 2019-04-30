@@ -1,5 +1,4 @@
 // pages/start/index.js
-const app = getApp();
 
 let timer;
 let timer2;

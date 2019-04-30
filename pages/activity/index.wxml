@@ -1,1 +1,5 @@
-<scroll-view scroll-y="{{true}}" class="page-wrap">activity</scroll-view>
+<scroll-view scroll-y="{{true}}" class="page-wrap">
+  <block wx:for="{{data}}" wx:key="{{item.id}}">
+    <item data="{{item}}" bind:itemTouch="tap" />
+  </block>
+</scroll-view>

@@ -14,7 +14,7 @@ export function setToken(t) {
   token = `Bearer ${t}`;
   wx.setStorageSync("token", token);
 }
-function getToken() {
+export function getToken() {
   if (token) {
     return token;
   }

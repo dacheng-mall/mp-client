@@ -1,5 +1,5 @@
 //app.js
-import { get, post, setToken } from "./utils/request";
+import { get, post, setToken, getToken } from "./utils/request";
 import { uri } from "./utils/util";
 
 App({
@@ -24,6 +24,12 @@ App({
     });
   },
   login: function() {
+    const _user = wx.getStorageSync('user');
+    const token = getToken()
+    if(token && _user) {
+      this.afterLogin(_user)
+      return;
+    }
     wx.login({
       success: res => {
         get("api/wx/token_bycode", { code: res.code })
@@ -79,7 +85,9 @@ App({
   afterLogin: function(user, token) {
     this.globalData.userInfo = user;
     wx.setStorageSync("user", user);
-    setToken(token);
+    if(token) {
+      setToken(token);
+    }
     // path, query 是最初访问的小程序时的目标页面
     const { path, query } = this.globalData.initState;
     get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
