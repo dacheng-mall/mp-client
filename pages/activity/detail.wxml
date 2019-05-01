@@ -1,9 +1,9 @@
 <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff">
   <scroll-view scroll-y="{{true}}" style="height: 100%;">
     <swiper wx:if="{{images && images.length > 1}}" style="height: {{width * 0.75}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
-      <block wx:for="{{images}}" wx:key="{{id}}">
+      <block wx:for="{{images}}" wx:key="{{id}}" wx:for-item="img">
         <swiper-item>
-          <image class="img" mode="aspectFill" src="{{source}}{{url}}" />
+          <image class="img" mode="aspectFill" src="{{source}}{{img.url}}" />
         </swiper-item>
       </block>
     </swiper>
@@ -58,7 +58,8 @@
           {{gradesItem}}
         </view>
       </view>
-      <view class="description">{{description}}</view>
+      <!-- <view class="description">{{description}}</view> -->
+      <rich-text nodes="{{description}}" />
     </view>
   </scroll-view>
 </view>
