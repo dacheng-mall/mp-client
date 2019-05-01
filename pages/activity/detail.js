@@ -134,9 +134,11 @@ Page({
     if (data) {
       console.log(data);
       wx.showToast({
-        title: '报名成功',
-        success: function(){}
-      })
+        title: "报名成功"
+      });
+      this.setData({
+        sign: [data]
+      });
     }
   },
   formSubmit: async function(e) {
@@ -172,20 +174,20 @@ Page({
         status: 1
       };
       const param = [];
-      this.data.products.map((prod) => {
-        if(prod.checked) {
+      this.data.products.map(prod => {
+        if (prod.checked) {
           param.push({
             ...baseInfo,
             productId: prod.id,
             count: prod.totalCount
-          })
+          });
         }
-      })
+      });
       const gifts = await post("v1/api/sys/gift", param);
-      console.log()
+      console.log();
       this.setData({
         gifts
-      })
+      });
     }
   },
   getGift: function() {
@@ -202,10 +204,10 @@ Page({
       animation: this.animation.export()
     });
   },
-  gotoMyGifts: function(){
+  gotoMyGifts: function() {
     wx.switchTab({
-      url: "/pages/personal/index",
-    })
+      url: "/pages/personal/index"
+    });
   },
   cancel: function() {},
   onShareAppMessage: function() {
