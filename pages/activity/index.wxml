@@ -1,4 +1,5 @@
 <scroll-view scroll-y="{{true}}" class="page-wrap">
+  <nothing wx:if="{{data.length < 1}}" />
   <block wx:for="{{data}}" wx:key="{{item.id}}">
     <item data="{{item}}" bind:itemTouch="tap" />
   </block>
