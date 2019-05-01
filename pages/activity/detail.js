@@ -115,7 +115,7 @@ Page({
     const gradesItem = grades
       .split(",")
       .map(gid => {
-        return data.find(({ id }) => gid !== id).name;
+        return data.find(({ id }) => gid === id).name;
       })
       .join(", ");
 
@@ -132,6 +132,11 @@ Page({
       status: 1
     });
     if (data) {
+      console.log(data);
+      wx.showToast({
+        title: '报名成功',
+        success: function(){}
+      })
     }
   },
   formSubmit: async function(e) {
