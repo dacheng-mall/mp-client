@@ -1,10 +1,17 @@
 <view class="page-wrap wrap">
   <view class="header">
-    <view class="avatar"><image src="{{user.avatar}}" /></view>
+    <view class="avatar">
+      <image src="{{user.avatar}}" />
+    </view>
     <view class="user-info">
-      <text class="name">{{user.name}}</text>
-      <view wx:if="{{user.userType === 2}}"><button size="mini" type="primary" bindtap="bindInst">立即注册成为业务员</button></view>
-      <view class="grade" wx:if="{{user.userType === 4}}">{{user.gradeName}}</view>
+      <view>
+        <text class="name">{{user.name}}</text>
+        <text wx:if="{{user.userType === '4'}}" class="grade" style=""> ({{user.gradeName}})</text>
+      </view>
+      <view wx:if="{{user.userType === 2}}">
+        <button size="mini" type="primary" bindtap="bindInst">立即注册成为业务员</button>
+      </view>
+      <view class="inst" wx:if="{{user.userType === '4'}}">{{user.institution.name}}</view>
     </view>
   </view>
   <view class="list">

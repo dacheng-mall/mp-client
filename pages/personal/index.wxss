@@ -32,6 +32,10 @@
   margin: 20rpx 0 4rpx;
 }
 .header .user-info .grade {
+  font-size: 28rpx;
+  color: #666;
+}
+.header .user-info .inst {
   font-size: 32rpx;
   color: #999;
   margin: 4rpx 0 20rpx;

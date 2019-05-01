@@ -1,5 +1,5 @@
 .instWrap {
-  /* height: 100%; */
+  height: 100%;
 }
 .instItem {
   padding: 20rpx;

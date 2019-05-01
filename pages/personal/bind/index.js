@@ -87,9 +87,14 @@ Page({
     }
     const data = await put("v1/api/sys/user", value);
     if (data.userType === "4") {
-      wx.showToast("已加入机构");
-      wx.setStorageSync("user", data);
-      wx.navigateBack(1);
+      try {
+        wx.showToast("已加入机构");
+        wx.setStorageSync("user", data);
+        wx.removeStorage("bind_rootid");
+        wx.removeStorage("bind_id");
+        wx.removeStorage("bind_name");
+        wx.navigateBack(1);
+      } catch (e) {}
     }
   }
 });
