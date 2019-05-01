@@ -15,7 +15,6 @@ Component({
         newVal.createTime = moment(newVal.createTime).format(
           "YYYY-MM-DD HH:mm:ss"
         );
-        console.log(newVal);
         this.setData({
           item: newVal
         });
