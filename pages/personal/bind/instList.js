@@ -25,7 +25,6 @@ Page({
         rootid
       });
     } else {
-      console.log('ppp', delta)
       wx.navigateBack({
         delta: parseInt(delta, 10),
       })

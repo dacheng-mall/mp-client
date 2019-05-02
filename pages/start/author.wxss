@@ -1,12 +1,11 @@
 /* pages/start/author.wxss */
 .author-wrap {
   display: flex;
-  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10rpx;
-  background-color: #ddd
+  margin-top: 20%;
 }
 .avatar {
   width: 196rpx;

@@ -12,14 +12,18 @@ Page({
     step: 0
   },
   onLoad: function(options) {
-    this.fetch(options.id);
-    if (options.sid) {
-      // 如果有业务员信息则请求, 这是分享连接进来的普通用户
-      this.fetchSaleman(options.sid);
-    }
+    // if (options.sid) {
+    //   // 如果有业务员信息则请求, 这是分享连接进来的普通用户
+    //   this.fetchSaleman(options.sid);
+    // }
   },
   onShow: function() {
+    this.fetch(this.options);
     // 初始化动画
+    const user = wx.getStorageSync("user");
+    this.setData({
+      user
+    });
     this.animation = wx.createAnimation({
       duration: 200,
       timingFunction: "ease"
@@ -32,7 +36,7 @@ Page({
       .opacity(1)
       .step();
     this.setData({
-      animationData: this.animation.export()
+      animationData: this.animation.export(),
     });
   },
   hideGetPanel: function() {
@@ -84,26 +88,26 @@ Page({
       this.animation = wx.createAnimation();
     }
   },
-  fetch: async function(id) {
-    const user = wx.getStorageSync("user");
-    this.setData({
-      user
-    });
+  fetch: async function({id, sid}) {
     const [data] = await get("v1/api/sys/activity", { id });
     if (data) {
-      const { screenWidth } = wx.getSystemInfoSync();
+      const { screenWidth, windowHeight } = wx.getSystemInfoSync();
       data.dateStart = moment(data.dateStart).format("YYYY-MM-DD");
       data.dateEnd = moment(data.dateEnd).format("YYYY-MM-DD");
       data.createTime = moment(data.createTime).format("YYYY-MM-DD");
       this.setData({
         ...data,
-        width: screenWidth
+        width: screenWidth,
+        height: windowHeight
       });
       this.fetchGrades(data.institutionId, data.grades);
     }
+    if(sid) {
+      this.fetchSaleman(sid)
+    }
   },
   fetchSaleman: async function(id) {
-    const [data] = await get(`v1/api/sys/user`, { id });
+    const data = await get(`v1/api/sys/user/${id}`);
     if (data) {
       this.setData({
         salesman: data
@@ -132,7 +136,6 @@ Page({
       status: 1
     });
     if (data) {
-      console.log(data);
       wx.showToast({
         title: "报名成功"
       });
@@ -184,7 +187,6 @@ Page({
         }
       });
       const gifts = await post("v1/api/sys/gift", param);
-      console.log();
       this.setData({
         gifts
       });

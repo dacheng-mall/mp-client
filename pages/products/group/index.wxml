@@ -1,4 +1,4 @@
-<view class="table-wrap">
+<view class="table-wrap" style="height: {{height}}px">
   <nothing wx:if="{{list.length < 1}}" />
   <scroll-view class="tbody" scroll-y>
     <block wx:for="{{list}}" wx:key="{{item.id}}">

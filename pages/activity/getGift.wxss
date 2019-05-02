@@ -7,6 +7,7 @@
   background-color: #eee;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 .getGift .top {
   height: 88rpx;

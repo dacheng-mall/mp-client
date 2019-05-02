@@ -1,92 +1,94 @@
-<view style="display: flex; flex-direction: column; flex: 1; background-color: #fff">
-  <nothing wx:if="{{!id}}" />
-  <scroll-view wx:else scroll-y="{{true}}" style="height: 100%;">
-    <swiper wx:if="{{images && images.length > 1}}" style="height: {{width * 0.75}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
-      <block wx:for="{{images}}" wx:key="{{id}}" wx:for-item="img">
-        <swiper-item>
-          <image class="img" mode="aspectFill" src="{{source}}{{img.url}}" />
-        </swiper-item>
-      </block>
-    </swiper>
-    <view wx:if="{{images && images.length === 1}}" style="height: {{width * 0.75}}px; background-color: #fff">
-      <image class="img" mode="aspectFill" src="{{source}}{{images[0].url}}" />
-    </view>
-    <view class="content">
-      <view class="title">{{name}}</view>
-      <!-- 这里是邀请人信息, 就是业务员信息, 当前用户未普通客户时可见 -->
-      <view wx:if="{{user.userType === 2 && salesman}}" class="salesman">
-        <image src="{{salesman.avatar}}" mode="aspectFill" />
-        <view class="salesman-info">
-          <text>{{salesman.name}}</text>
-          <text>{{salesman.mobile}}</text>
+<view style="display: flex; flex-direction: column; flex: 1; height: {{height}}px;">
+  <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff">
+    <nothing wx:if="{{!id}}" />
+    <scroll-view wx:else scroll-y="{{true}}" style="height: 100%;">
+      <swiper wx:if="{{images && images.length > 1}}" style="height: {{width * 0.75}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
+        <block wx:for="{{images}}" wx:key="{{id}}" wx:for-item="img">
+          <swiper-item>
+            <image class="img" mode="aspectFill" src="{{source}}{{img.url}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view wx:if="{{images && images.length === 1}}" style="height: {{width * 0.75}}px; background-color: #fff">
+        <image class="img" mode="aspectFill" src="{{source}}{{images[0].url}}" />
+      </view>
+      <view class="content">
+        <view class="title">{{name}}</view>
+        <!-- 这里是邀请人信息, 就是业务员信息, 当前用户未普通客户时可见 -->
+        <view wx:if="{{user.userType === 2 && salesman}}" class="salesman">
+          <image src="{{salesman.avatar}}" mode="aspectFill" />
+          <view class="salesman-info">
+            <text>{{salesman.name}}</text>
+            <text>{{salesman.mobile}}</text>
+          </view>
+          <view class="salesman-grade">{{salesman.gradeName}}</view>
         </view>
-        <view class="salesman-grade">{{salesman.gradeName}}</view>
-      </view>
-      <view wx:if="{{products.length > totalCount}}" class="gift-title">
-        {{products.length}} 选 {{totalCount}}
-      </view>
-      <scroll-view class="gift-wrap detail-gift" scroll-x="{{true}}" style="">
-        <view class="gift-list" style="width: {{products.length * 276}}rpx">
-          <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
-            <view class="gift-item">
-              <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
-              <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
-              <view class="gift-price">￥{{gift.price}}</view>
+        <view wx:if="{{products.length > totalCount}}" class="gift-title">
+          {{products.length}} 选 {{totalCount}}
+        </view>
+        <scroll-view class="gift-wrap detail-gift" scroll-x="{{true}}" style="">
+          <view class="gift-list" style="width: {{products.length * 276}}rpx">
+            <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
+              <view class="gift-item">
+                <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
+                <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
+                <view class="gift-price">￥{{gift.price}}</view>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+        <view class="info">
+          <view class="info-item">
+            <view class="label">
+              <icon-x type="sync" size="{{32}}" color="#00bcbd" />
+              活动时间:
             </view>
-          </block>
-        </view>
-      </scroll-view>
-      <view class="info">
-        <view class="info-item">
-          <view class="label">
-            <icon-x type="sync" size="{{32}}" color="#00bcbd" />
-            活动时间:
+            {{dateStart}} 到 {{dateEnd}}
           </view>
-          {{dateStart}} 到 {{dateEnd}}
-        </view>
-        <view class="info-item">
-          <view class="label">
-            <icon-x type="shop" size="{{32}}" color="#00bcbd" />
-            主办机构:
+          <view class="info-item">
+            <view class="label">
+              <icon-x type="shop" size="{{32}}" color="#00bcbd" />
+              主办机构:
+            </view>
+            {{institution.name}}
           </view>
-          {{institution.name}}
-        </view>
-        <view class="info-item">
-          <view class="label">
-            <icon-x type="user" size="{{32}}" color="#00bcbd" />
-            参与人群:
+          <view class="info-item">
+            <view class="label">
+              <icon-x type="user" size="{{32}}" color="#00bcbd" />
+              参与人群:
+            </view>
+            {{gradesItem}}
           </view>
-          {{gradesItem}}
         </view>
+        <!-- <view class="description">{{description}}</view> -->
+        <rich-text nodes="{{description}}" />
       </view>
-      <!-- <view class="description">{{description}}</view> -->
-      <rich-text nodes="{{description}}" />
-    </view>
-  </scroll-view>
-</view>
-<!-- 业务员, 没有报名时看到的 -->
-<view wx:if="{{user.userType === '4' && sign.length < 1}}" class="footer">
-  <text class="foot-info">已报名 {{salesmanCount}}人</text>
-  <button class="btn" type="primary" catch:tap="sign" disabled="{{!enable}}">
-    {{enable ? '立即报名' : '抱歉, 无法参与'}}
-  </button>
-</view>
-<!-- 业务员, 报名后看到的 -->
-<view wx:if="{{user.userType === '4' && sign.length > 0}}" class="footer">
-  <text class="foot-info">我有 {{myCustomCount}}客户</text>
-  <button class="btn" type="primary" open-type="share" style="background-color: #00bcbd; color: #fff">
-    发给我的客户
-  </button>
-</view>
-<!-- 客户看到的 -->
-<view wx:if="{{user.userType === '2' }}" class="footer">
-  <text class="foot-info">已领取 {{customCount}}次</text>
-  <button wx:if="{{gifts.length > 0}}" class="btn" type="danger" catch:tap="gotoMyGifts" style="background-color: #00bcbd; color: #fff">
-    查看我的礼品
-  </button>
-  <button wx:else class="btn" type="danger" catch:tap="showGetPanel" style="background-color: #00bcbd; color: #fff">
-    立即领取
-  </button>
+    </scroll-view>
+  </view>
+  <!-- 业务员, 没有报名时看到的 -->
+  <view wx:if="{{user.userType === 4 && sign.length < 1}}" class="footer">
+    <text class="foot-info">已报名 {{salesmanCount}}人</text>
+    <button class="btn" type="primary" catch:tap="sign" disabled="{{!enable}}">
+      {{enable ? '立即报名' : '抱歉, 无法参与'}}
+    </button>
+  </view>
+  <!-- 业务员, 报名后看到的 -->
+  <view wx:if="{{user.userType === 4 && sign.length > 0}}" class="footer">
+    <text class="foot-info">我有 {{myCustomCount}}客户</text>
+    <button class="btn" type="primary" open-type="share" style="background-color: #00bcbd; color: #fff">
+      发给我的客户
+    </button>
+  </view>
+  <!-- 客户看到的 -->
+  <view wx:if="{{user.userType === 2 }}" class="footer">
+    <text class="foot-info">已领取 {{customCount}}次</text>
+    <button wx:if="{{gifts.length > 0}}" class="btn" type="danger" catch:tap="gotoMyGifts" style="background-color: #00bcbd; color: #fff">
+      查看我的礼品
+    </button>
+    <button wx:else class="btn" type="danger" catch:tap="showGetPanel" style="background-color: #00bcbd; color: #fff">
+      立即领取
+    </button>
+  </view>
 </view>
 <!-- 领取礼物面板 -->
 <view class="getGift" animation="{{animationData}}">

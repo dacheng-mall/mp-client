@@ -43,7 +43,6 @@ Page({
   },
 
   click: function(e) {
-    console.log(e.detail)
     const { path } = e.detail;
     if (path) {
       wx.navigateTo({

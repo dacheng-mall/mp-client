@@ -86,7 +86,7 @@ Page({
       }
     }
     const data = await put("v1/api/sys/user", value);
-    if (data.userType === "4") {
+    if (data.userType === 4) {
       try {
         wx.showToast("已加入机构");
         wx.setStorageSync("user", data);

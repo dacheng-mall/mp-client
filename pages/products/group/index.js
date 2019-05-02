@@ -13,6 +13,10 @@ Page({
   onShow() {
     wx.hideShareMenu();
     const favorites = wx.getStorageSync("favorites");
+    const { windowHeight } = wx.getSystemInfoSync();
+    this.setData({
+      height: windowHeight
+    })
     if(this.data.list.length !== favorites.length) {
       this.fetch();
     } else {

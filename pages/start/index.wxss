@@ -2,10 +2,9 @@
 .start-wrap {
   display: flex;
   flex-direction: column;
-  flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #eee;
+  margin: 40% 0 0
 }
 .logo {
   width: 128rpx;

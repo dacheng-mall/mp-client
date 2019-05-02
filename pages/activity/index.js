@@ -1,5 +1,4 @@
 import { get } from "../../utils/request";
-import { uri, getRoute } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
@@ -11,7 +10,7 @@ Page({
     source
   },
   onLoad: function(){
-    this.fetch()
+    this.fetch();
   },
   fetch: async function() {
     const data = await get("v1/api/sys/activity");

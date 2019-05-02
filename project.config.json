@@ -142,10 +142,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 13,
 					"name": "活动详情withsalesman",
 					"pathName": "pages/activity/detail",
-					"query": "id=01fe9c82f0da405ca480bfe8e93e3e2c&sid=a7cde5f268d64d2192c4c876eac43194",
+					"query": "id=7d1cd512d90e4b36ac19b48f115f8ece&sid=2ae51c46a012478e923231fc474b7063",
 					"scene": null
 				}
 			]
