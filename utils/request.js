@@ -112,6 +112,11 @@ export default function request(url, { data, method }, other) {
     .then(checkStatus)
     .then(parseResponse)
     .catch(err => {
+      showLoading()
+      wx.showToast({
+        title: err,
+        icon: "none"
+      });
       wx.getNetworkType({
         success(res) {
           if (res.networkType === "none") {

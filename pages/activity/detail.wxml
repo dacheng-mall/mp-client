@@ -95,13 +95,25 @@
 </view>
 <!-- 领取礼物面板 -->
 <view class="getGift" animation="{{animationData}}">
-  <view class="top" wx:if="{{step === 0}}">
+  <form bindsubmit="checkSalesman" class="formWrap" wx:if="{{step === 0}}">
+    <view class="top">
+      <view class="getInfo">您的客户经理是谁?</view>
+      <button form-type="submit" class="nextBtn" size="mini" type="primary">
+        下一步
+      </button>
+    </view>
+    <view class="section">
+      <view class="section__title">通过手机号查询您的客户经理</view>
+      <input name="salesmanMobile" value="" type="number" placeholder="请输入您的客户经理的手机号" />
+    </view>
+  </form>
+  <view class="top" wx:if="{{step === 1}}">
     <view class="getInfo">最多选{{totalCount}}个礼品, 您已选择{{iWantThem.length}}个</view>
-    <button class="nextBtn" size="mini" type="primary" data-next="{{1}}" catch:tap="goStep">
-      继续
+    <button class="nextBtn" size="mini" type="primary" data-next="{{2}}" catch:tap="goStep">
+      下一步
     </button>
   </view>
-  <scroll-view scroll-y="{{true}}" class="middle" wx:if="{{step === 0}}">
+  <scroll-view scroll-y="{{true}}" class="middle" wx:if="{{step === 1}}">
     <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
       <view class="gifItem">
         <view class="giftCheckbox" catch:tap="chooseGift" data-id="{{gift.id}}" data-index="{{index}}">
@@ -116,7 +128,7 @@
       </view>
     </block>
   </scroll-view>
-  <form bindsubmit="formSubmit" wx:if="{{step === 1}}" class="formWrap">
+  <form bindsubmit="formSubmit" wx:if="{{step === 2}}" class="formWrap">
     <view class="top" style="height: 144rpx">
       <scroll-view scroll-x="{{true}}" class="getInfo">
         <view class="hasChoosed" style="width: {{iWantThem.length * 129}}rpx">
@@ -125,15 +137,15 @@
           </block>
         </view>
       </scroll-view>
-      <button form-type="submit" class="nextBtn" size="mini" type="primary">领取</button>
+      <button form-type="submit" class="nextBtn" size="mini" type="primary">完成领取</button>
     </view>
     <view class="middle">
       <view class="section">
-        <view class="section__title">姓名</view>
+        <view class="section__title">姓名<text style="color: #f00">*</text></view>
         <input name="name" value="{{user.name}}" placeholder="请输入真实姓名" />
       </view>
       <view class="section">
-        <view class="section__title">手机号</view>
+        <view class="section__title">手机号<text style="color: #f00">*</text></view>
         <input name="mobile" value="{{user.mobile}}" type="number" placeholder="请输入手机号" />
       </view>
       <view class="section">

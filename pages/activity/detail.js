@@ -4,6 +4,7 @@ import moment from "moment";
 import { uri, getRoute } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
+const validateMobile = /^1(3|4|5|7|8)\d{9}$/;
 
 Page({
   data: {
@@ -47,8 +48,38 @@ Page({
       .step();
     this.setData({
       animationData: this.animation.export(),
-      step: 0
+      step: this.options.sid ? 1 : 0
     });
+  },
+  checkSalesman: async function(e) {
+    const { salesmanMobile: mobile } = e.detail.value;
+    const { id: activityId } = this.data;
+    if (!validateMobile.test(mobile)) {
+      wx.showToast({
+        title: "无效手机号",
+        icon: "none"
+      });
+      return;
+    }
+    const { id } = await post("v1/api/sys/activity/salesmanActivityEnable", {
+      activityId,
+      mobile
+    });
+    console.log(id);
+    if (id) {
+      wx.showToast({
+        title: "查询成功"
+      });
+      this.setData({
+        salesmanId: id,
+        step: 1
+      });
+    } else {
+      wx.showToast({
+        title: "无效客户经理, 请重新输入手机号",
+        icon: "none"
+      });
+    }
   },
   goStep: function(e) {
     const { next } = e.currentTarget.dataset;
@@ -104,13 +135,18 @@ Page({
     }
     if (sid) {
       this.fetchSaleman(sid);
+    } else {
+      this.setData({
+        step: 0
+      });
     }
   },
   fetchSaleman: async function(id) {
     const data = await get(`v1/api/sys/user/${id}`);
     if (data) {
       this.setData({
-        salesman: data
+        salesman: data,
+        step: 1
       });
     }
   },
@@ -162,6 +198,12 @@ Page({
         icon: "none"
       });
       return;
+    } else if (!validateMobile.test(body.mobile)) {
+      wx.showToast({
+        title: "无效手机号",
+        icon: "none"
+      });
+      return;
     }
     // 先提交用户信息
     const data = await put("v1/api/sys/user", body);
@@ -173,9 +215,20 @@ Page({
       const baseInfo = {
         customId,
         activityId: this.data.id,
-        salesmanId: this.data.salesman && this.data.salesman.id,
+        salesmanId:
+          (this.data.salesman && this.data.salesman.id) || this.data.salesmanId,
         status: 1
       };
+      if (!baseInfo.salesmanId) {
+        wx.showToast({
+          title: "未绑定有效客户经理, 请重新绑定",
+          icon: "none"
+        });
+        this.setData({
+          step: 0
+        });
+        return;
+      }
       const param = [];
       this.data.products.map(prod => {
         if (prod.checked) {
@@ -186,10 +239,13 @@ Page({
           });
         }
       });
+
       const gifts = await post("v1/api/sys/gift", param);
       this.setData({
-        gifts
+        gifts,
+        customCount: this.data.customCount + 1
       });
+      this.hideGetPanel();
     }
   },
   getGift: function() {
