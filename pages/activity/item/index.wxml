@@ -15,8 +15,8 @@
           <block wx:for="{{item.products}}" wx:for-item="gift" wx:key="{{gift.id}}">
             <view class="gift-item">
               <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
-              <view class="gift-name">{{gift.title}}</view>
-              <view class="gift-price">￥{{gift.price}}</view>
+              <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
+              <view class="gift-price">￥{{gift.price * gift.totalCount}}</view>
             </view>
           </block>
         </view>

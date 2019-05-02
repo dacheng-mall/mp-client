@@ -67,6 +67,7 @@
   flex-direction: row;
   align-items: center;
   padding: 20rpx;
+  border-top: 1px solid #ccc
 }
 .footer button {
   flex: 1;

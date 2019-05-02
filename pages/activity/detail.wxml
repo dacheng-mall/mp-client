@@ -26,13 +26,16 @@
         <view wx:if="{{products.length > totalCount}}" class="gift-title">
           {{products.length}} 选 {{totalCount}}
         </view>
+        <view wx:if="{{products.length === totalCount}}" class="gift-title">
+          本期礼品
+        </view>
         <scroll-view class="gift-wrap detail-gift" scroll-x="{{true}}" style="">
           <view class="gift-list" style="width: {{products.length * 276}}rpx">
             <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
               <view class="gift-item">
                 <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
                 <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
-                <view class="gift-price">￥{{gift.price}}</view>
+                <view class="gift-price">￥{{gift.price * gift.totalCount}}</view>
               </view>
             </block>
           </view>
