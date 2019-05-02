@@ -36,7 +36,7 @@ Page({
       .opacity(1)
       .step();
     this.setData({
-      animationData: this.animation.export(),
+      animationData: this.animation.export()
     });
   },
   hideGetPanel: function() {
@@ -88,7 +88,7 @@ Page({
       this.animation = wx.createAnimation();
     }
   },
-  fetch: async function({id, sid}) {
+  fetch: async function({ id, sid }) {
     const [data] = await get("v1/api/sys/activity", { id });
     if (data) {
       const { screenWidth, windowHeight } = wx.getSystemInfoSync();
@@ -102,8 +102,8 @@ Page({
       });
       this.fetchGrades(data.institutionId, data.grades);
     }
-    if(sid) {
-      this.fetchSaleman(sid)
+    if (sid) {
+      this.fetchSaleman(sid);
     }
   },
   fetchSaleman: async function(id) {
@@ -220,5 +220,13 @@ Page({
       path: `/pages/activity/detail?id=${this.data.id}&sid=${sid}`,
       imageUrl: `${source}${this.data.images[0].url}`
     };
+  },
+  makePhoneCall: function(e) {
+    const { mobile } = e.currentTarget.dataset;
+    if (mobile) {
+      wx.makePhoneCall({
+        phoneNumber: mobile
+      });
+    }
   }
 });

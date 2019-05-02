@@ -15,11 +15,11 @@
       <view class="content">
         <view class="title">{{name}}</view>
         <!-- 这里是邀请人信息, 就是业务员信息, 当前用户未普通客户时可见 -->
-        <view wx:if="{{user.userType === 2 && salesman}}" class="salesman">
+        <view wx:if="{{!enable && salesman}}" class="salesman" catch:tap="makePhoneCall" data-mobile="{{salesman.mobile}}">
           <image src="{{salesman.avatar}}" mode="aspectFill" />
           <view class="salesman-info">
-            <text>{{salesman.name}}</text>
-            <text>{{salesman.mobile}}</text>
+            <view>{{salesman.name}}</view>
+            <view>{{salesman.mobile}}</view>
           </view>
           <view class="salesman-grade">{{salesman.gradeName}}</view>
         </view>
