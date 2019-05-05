@@ -28,6 +28,18 @@ Component({
   data: {
     source
   },
+  lifetimes: {
+    attached: function() {
+  
+      const { screenWidth } = wx.getSystemInfoSync();
+      console.log('------', screenWidth);
+
+      this.setData({
+        width: screenWidth - 20,
+        height: screenWidth - 20
+      });
+    },
+  },
   methods: {
     tap() {
       this.triggerEvent("itemTouch", this.data.item.id);

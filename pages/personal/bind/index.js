@@ -57,8 +57,10 @@ Page({
     value.institutionId = this.data.institutionId;
     if (this.data.grade.length > 0) {
       const index = value.gradeId;
-      value.gradeId = this.data.grade[index].id;
-      value.gradeName = this.data.grade[index].name;
+      if (this.data.grade[index]) {
+        value.gradeId = this.data.grade[index].id;
+        value.gradeName = this.data.grade[index].name;
+      }
     }
     const user = wx.getStorageSync("user");
     value.id = user.id;

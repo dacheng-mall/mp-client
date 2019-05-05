@@ -2,14 +2,14 @@
   <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff">
     <nothing wx:if="{{!id}}" />
     <scroll-view wx:else scroll-y="{{true}}" style="height: 100%;">
-      <swiper wx:if="{{images && images.length > 1}}" style="height: {{width * 0.75}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
+      <swiper wx:if="{{images && images.length > 1}}" style="height: {{width}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
         <block wx:for="{{images}}" wx:key="{{id}}" wx:for-item="img">
           <swiper-item>
             <image class="img" mode="aspectFill" src="{{source}}{{img.url}}" />
           </swiper-item>
         </block>
       </swiper>
-      <view wx:if="{{images && images.length === 1}}" style="height: {{width * 0.75}}px; background-color: #fff">
+      <view wx:if="{{images && images.length === 1}}" style="height: {{width}}px; background-color: #fff">
         <image class="img" mode="aspectFill" src="{{source}}{{images[0].url}}" />
       </view>
       <view class="content">

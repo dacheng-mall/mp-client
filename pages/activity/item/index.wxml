@@ -1,7 +1,7 @@
 <view class="item-wrap" catch:tap="tap">
   <view class="institution-name">{{item.institution.name}}</view>
   <view class="body">
-    <image class="img" mode="aspectFill" src="{{source}}{{item.images[0].url}}" />
+    <image class="img" style="width:{{width}}px;height:{{height}}px" mode="aspectFill" src="{{source}}{{item.images[0].url}}" />
     <view class="info">
       <view class="title">{{item.name}}</view>
       <view class="range">{{item.dateStart}} 到 {{item.dateEnd}}</view>
