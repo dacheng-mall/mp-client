@@ -65,7 +65,6 @@ Page({
       activityId,
       mobile
     });
-    console.log(id);
     if (id) {
       wx.showToast({
         title: "查询成功"
@@ -213,7 +212,6 @@ Page({
       });
       wx.setStorageSync("user", data);
       const baseInfo = {
-        customId,
         activityId: this.data.id,
         salesmanId:
           (this.data.salesman && this.data.salesman.id) || this.data.salesmanId,
@@ -229,18 +227,16 @@ Page({
         });
         return;
       }
-      const param = [];
+      baseInfo.products = [];
       this.data.products.map(prod => {
         if (prod.checked) {
-          param.push({
-            ...baseInfo,
+          baseInfo.products.push({
             productId: prod.id,
             count: prod.totalCount
           });
         }
       });
-
-      const gifts = await post("v1/api/sys/gift", param);
+      const gifts = await post("v1/api/sys/giftNew", baseInfo);
       this.setData({
         gifts,
         customCount: this.data.customCount + 1
@@ -262,9 +258,10 @@ Page({
       animation: this.animation.export()
     });
   },
-  gotoMyGifts: function() {
-    wx.switchTab({
-      url: "/pages/personal/index"
+  gotoMyGifts: function(e) {
+    const { id } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/personal/myGift/index?id=${id}`
     });
   },
   cancel: function() {},

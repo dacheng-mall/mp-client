@@ -1,22 +1,22 @@
 <view class="wrap">
   <view class="activity-info">
     <view class="activity-info-left">
-      <view class="title">{{data.activityName}}</view>
-      <view class="institution">{{data.institutionName}}</view>
-      <view class="createTime">{{data.createTime}}</view>
+      <view class="title">{{_data.activity.name}}</view>
+      <view class="institution">{{_data.activity.institution.name}}</view>
+      <view class="createTime">{{_data.createTime}}</view>
     </view>
     <view class="activity-info-right">
-      <button wx:if="{{data.status === 0}}" size="mini" type="primary">签收</button>
+      <button wx:if="{{_data.status === 1}}" catch:tap="check" data-id="{{_data.id}}" data-aid="{{_data.activityId}}" size="mini" type="primary">签收</button>
       <view wx:else class="sign">已签收</view>
     </view>
   </view>
   <view class="activity-products">
-    <block wx:for="{{data.products}}" wx:key="{{item.id}}">
+    <block wx:for="{{_data.giftProducts}}" wx:key="{{item.product.id}}">
       <view class="product">
-        <image src="{{source}}{{item.image}}" class="img" />
+        <image src="{{source}}{{item.product.mainImageUrl}}" class="img" />
         <view class="product-info">
-          <view class="product-info-title">{{item.title}}</view>
-          <view class="product-info-price">￥{{item.price}}</view>
+          <view class="product-info-title">{{item.product.title}}</view>
+          <view class="product-info-price">￥{{item.product.price}}</view>
         </view>
         <view class="product-count">{{item.count}}件</view>
       </view>
@@ -25,9 +25,9 @@
   <view class="seller">
     <view class="from">客户经理</view>
     <view class="seller-info">
-      <view>{{data.seller.name}}</view>
-      <view>{{data.seller.mobile}}</view>
+      <view>{{_data.salesman.name}}</view>
+      <view>{{_data.salesman.mobile}}</view>
     </view>
-    <image src="{{data.seller.avatar}}" />
+    <image wx:if="{{_data.seller.avatar}}" src="{{_data.seller.avatar}}" />
   </view>
 </view>

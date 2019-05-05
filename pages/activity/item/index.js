@@ -30,10 +30,7 @@ Component({
   },
   lifetimes: {
     attached: function() {
-  
       const { screenWidth } = wx.getSystemInfoSync();
-      console.log('------', screenWidth);
-
       this.setData({
         width: screenWidth - 20,
         height: screenWidth - 20
