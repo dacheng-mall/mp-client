@@ -26,9 +26,7 @@
         <view wx:if="{{products.length > totalCount}}" class="gift-title">
           {{products.length}} 选 {{totalCount}}
         </view>
-        <view wx:if="{{products.length === totalCount}}" class="gift-title">
-          本期礼品
-        </view>
+        <view wx:if="{{products.length === totalCount}}" class="gift-title">本期礼品</view>
         <scroll-view class="gift-wrap detail-gift" scroll-x="{{true}}" style="">
           <view class="gift-list" style="width: {{products.length * 276}}rpx">
             <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
@@ -74,23 +72,32 @@
     <button class="btn" type="primary" catch:tap="sign" disabled="{{!enable}}">
       {{enable ? '立即报名' : '抱歉, 无法参与'}}
     </button>
+    <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
+      <icon-x type="home" size="{{32}}" color="#00bcbd" />
+    </view>
   </view>
   <!-- 业务员, 报名后看到的 -->
   <view wx:if="{{user.userType === 4 && sign.length > 0}}" class="footer">
     <text class="foot-info">我有 {{myCustomCount}}客户</text>
     <button class="btn" type="primary" open-type="share" style="background-color: #00bcbd; color: #fff">
-      发给我的客户
+      分享给客户
     </button>
+    <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
+      <icon-x type="home" size="{{32}}" color="#00bcbd" />
+    </view>
   </view>
   <!-- 客户看到的 -->
   <view wx:if="{{user.userType === 2 }}" class="footer">
     <text class="foot-info">已领取 {{customCount}}次</text>
     <button wx:if="{{gifts.id}}" class="btn" type="danger" data-id="{{gifts.id}}" catch:tap="gotoMyGifts" style="background-color: #00bcbd; color: #fff">
-      查看我的礼品
+      我的礼品
     </button>
     <button wx:else class="btn" type="danger" catch:tap="showGetPanel" style="background-color: #00bcbd; color: #fff">
       立即领取
     </button>
+    <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
+      <icon-x type="home" size="{{32}}" color="#00bcbd" />
+    </view>
   </view>
 </view>
 <!-- 领取礼物面板 -->
@@ -98,9 +105,7 @@
   <form bindsubmit="checkSalesman" class="formWrap" wx:if="{{step === 0}}">
     <view class="top">
       <view class="getInfo">您的客户经理是谁?</view>
-      <button form-type="submit" class="nextBtn" size="mini" type="primary">
-        下一步
-      </button>
+      <button form-type="submit" class="nextBtn" size="mini" type="primary">下一步</button>
     </view>
     <view class="section">
       <view class="section__title">通过手机号查询您的客户经理</view>
@@ -141,11 +146,17 @@
     </view>
     <view class="middle">
       <view class="section">
-        <view class="section__title">姓名<text style="color: #f00">*</text></view>
+        <view class="section__title">
+          姓名
+          <text style="color: #f00">*</text>
+        </view>
         <input name="name" value="{{user.name}}" placeholder="请输入真实姓名" />
       </view>
       <view class="section">
-        <view class="section__title">手机号<text style="color: #f00">*</text></view>
+        <view class="section__title">
+          手机号
+          <text style="color: #f00">*</text>
+        </view>
         <input name="mobile" value="{{user.mobile}}" type="number" placeholder="请输入手机号" />
       </view>
       <view class="section">

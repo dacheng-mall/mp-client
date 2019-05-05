@@ -76,5 +76,13 @@
   font-size: 28rpx;
   margin-right: 10rpx;
 }
-
+.showHome {
+  height: 44px;
+  line-height: 44px;
+  padding: 0 12px;
+  border: 1px solid #999;
+  background-color: #eee;
+  border-radius: 10rpx;
+  margin-left: 10px;
+}
 @import "getGift.wxss";

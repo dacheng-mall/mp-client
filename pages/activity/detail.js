@@ -19,12 +19,21 @@ Page({
     // }
   },
   onShow: function() {
-    this.fetch(this.options);
-    // 初始化动画
+    const { scene } = wx.getLaunchOptionsSync();
     const user = wx.getStorageSync("user");
     this.setData({
-      user
+      user,
+      showHome:
+        scene === 1011 ||
+        scene === 1012 ||
+        scene === 1013 ||
+        scene === 1096 ||
+        scene === 1036 ||
+        scene === 1077
     });
+
+    this.fetch(this.options);
+    // 初始化动画
     this.animation = wx.createAnimation({
       duration: 200,
       timingFunction: "ease"
@@ -281,5 +290,10 @@ Page({
         phoneNumber: mobile
       });
     }
+  },
+  showHome: function() {
+    wx.switchTab({
+      url: '/pages/home/index'
+    });
   }
 });
