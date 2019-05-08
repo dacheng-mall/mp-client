@@ -1,0 +1,35 @@
+/* pages/personal/myActivity/index.wxss */
+.activiyItem {
+  display: flex;
+  flex-direction: row;
+  margin: 10rpx;
+  padding: 10rpx;
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  align-items: center
+}
+.img {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 3px;
+}
+.info {
+  margin: 0 0 0 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1
+}
+.info .title {
+  font-size: 32rpx;
+}
+.info .date {
+  font-size: 28rpx;
+  color: #999
+}
+.status {
+  font-size: 28rpx;
+  height: 1.5em;
+  color: #00bcbd
+}

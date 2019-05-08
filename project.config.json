@@ -10,7 +10,7 @@
 		"minified": true,
 		"newFeature": true,
 		"nodeModules": true,
-		"autoAudits": true,
+		"autoAudits": false,
 		"uglifyFileName": false,
 		"checkInvalidKey": true
 	},
@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 17,
 			"list": [
 				{
 					"id": 0,
@@ -160,6 +160,20 @@
 					"name": "领取记录页面(自己)",
 					"pathName": "pages/personal/myGift/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我包名的活动列表",
+					"pathName": "pages/personal/myActivity/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的客户",
+					"pathName": "pages/personal/myActivity/myCustomer",
+					"query": "sid=2ae51c46a012478e923231fc474b7063&aid=01fe9c82f0da405ca480bfe8e93e3e2c",
 					"scene": null
 				}
 			]

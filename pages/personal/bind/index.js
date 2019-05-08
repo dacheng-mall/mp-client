@@ -1,6 +1,7 @@
-import { get, put } from "../../../utils/request";
+import { get, put, setToken } from "../../../utils/request";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
+const app = getApp()
 Page({
   data: {
     rootInst: "",
@@ -91,12 +92,32 @@ Page({
     if (data.userType === 4) {
       try {
         wx.showToast("已加入机构");
-        wx.setStorageSync("user", data);
-        wx.removeStorage("bind_rootid");
-        wx.removeStorage("bind_id");
-        wx.removeStorage("bind_name");
-        wx.navigateBack(1);
+        wx.removeStorage({key: "bind_rootid"});
+        wx.removeStorage({key: "bind_id"});
+        wx.removeStorage({key: "bind_name"});
+        wx.login({
+          success: res => {
+            get("api/wx/token_bycode", { code: res.code })
+              .then(data => {
+                if (data.user && data.token) {
+                  this.afterLogin(data.user, data.token);
+                }
+              })
+              .catch(err => console.log("登录失败: ", err));
+          }
+        });
       } catch (e) {}
     }
+  },
+
+  afterLogin: function(user, token) {
+    app.userInfo = user;
+    wx.setStorageSync("user", user);
+    if (token) {
+      setToken(token);
+    }
+    wx.switchTab({
+      url: "/pages/personal/index"
+    });
   }
 });

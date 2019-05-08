@@ -9,10 +9,9 @@ Page({
     count: 0,
     source
   },
-  onLoad: function(){
+  onShow: function(){
     this.fetch();
   },
-  onShow: function(){},
   fetch: async function() {
     const data = await get("v1/api/sys/activity");
     if (data) {

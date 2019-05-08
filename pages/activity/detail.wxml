@@ -67,13 +67,13 @@
     </scroll-view>
   </view>
   <!-- 业务员, 没有报名时看到的 -->
-  <view wx:if="{{user.userType === 4 && sign.length < 1}}" class="footer">
+  <view wx:if="{{user.userType === 4 && sign && sign.length < 1}}" class="footer">
     <text class="foot-info">已报名 {{salesmanCount}}人</text>
     <button class="btn" type="primary" catch:tap="sign" disabled="{{!enable}}">
       {{enable ? '立即报名' : '抱歉, 无法参与'}}
     </button>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
-      <icon-x type="home" size="{{32}}" color="#00bcbd" />
+      <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
   </view>
   <!-- 业务员, 报名后看到的 -->
@@ -83,11 +83,11 @@
       分享给客户
     </button>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
-      <icon-x type="home" size="{{32}}" color="#00bcbd" />
+      <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
   </view>
   <!-- 客户看到的 -->
-  <view wx:if="{{user.userType === 2 }}" class="footer">
+  <view wx:if="{{user.userType === 2}}" class="footer">
     <text class="foot-info">已领取 {{customCount}}次</text>
     <button wx:if="{{gifts.id}}" class="btn" type="danger" data-id="{{gifts.id}}" catch:tap="gotoMyGifts" style="background-color: #00bcbd; color: #fff">
       我的礼品
@@ -96,7 +96,7 @@
       立即领取
     </button>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
-      <icon-x type="home" size="{{32}}" color="#00bcbd" />
+      <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
   </view>
 </view>

@@ -80,8 +80,8 @@
   height: 44px;
   line-height: 44px;
   padding: 0 12px;
-  border: 1px solid #999;
-  background-color: #eee;
+  border: 1px solid #00bcbd;
+  background-color: #fff;
   border-radius: 10rpx;
   margin-left: 10px;
 }

@@ -122,6 +122,13 @@ App({
             }
           });
         });
+        updateManager.onUpdateFailed(function(){
+          wx.showModal({
+            title: "抱歉! 新版本程序下载失败!",
+            content: "请将当前小程序删除, 重新搜索小程序'礼全有', 并点击安装即可!",
+            confirmText: "我知道了"
+          });
+        })
       }
     });
   },

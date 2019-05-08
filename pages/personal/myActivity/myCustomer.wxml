@@ -1,0 +1,27 @@
+<nothing wx:if="{{list.length < 1}}" />
+<view wx:else style="height: {{windowHeight}}px" class="pageWrap">
+  <view class="activity">
+    <view>
+      您在 {{activity.institutionName}} 主办的
+      <text class="key">{{activity.name}}</text>
+      活动中, 已获得
+      <text class="key">{{pagination.total}}</text>
+      位客户!
+    </view>
+  </view>
+  <scroll-view scroll-y="{{true}}" class="list">
+    <block wx:for="{{list}}" wx:key="{{item.id}}">
+      <view class="item">
+        <view class="customer" catch:tap="makePhoneCall" data-mobile="{{item.mobile}}">
+          <image class="avatar" src="{{item.avatar}}" mode="aspectFill" />
+          <view class="info">
+            <view class="name">{{item.name}}</view>
+            <view class="mobile">{{item.mobile}}</view>
+          </view>
+          <view class="status">{{item.status === 1 ? '待签收' : '已签收'}}</view>
+        </view>
+      </view>
+    </block>
+    <view>{{loading ? '正在加载...' : ''}}</view>
+  </scroll-view>
+</view>

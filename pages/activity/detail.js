@@ -19,17 +19,12 @@ Page({
     // }
   },
   onShow: function() {
-    const { scene } = wx.getLaunchOptionsSync();
+    // const { scene } = wx.getLaunchOptionsSync();
+    wx.hideShareMenu();
     const user = wx.getStorageSync("user");
     this.setData({
       user,
-      showHome:
-        scene === 1011 ||
-        scene === 1012 ||
-        scene === 1013 ||
-        scene === 1096 ||
-        scene === 1036 ||
-        scene === 1077
+      showHome: true
     });
 
     this.fetch(this.options);

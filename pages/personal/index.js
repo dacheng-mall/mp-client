@@ -12,8 +12,7 @@ Page({
         icon: "gift-fill",
         iconColor: "#00bcbd",
         color: "#999",
-        // path: "/pages/personal/myGift/index",
-        path: "",
+        path: "/pages/personal/myGift/index",
         userType: null
       },
       {
@@ -21,7 +20,7 @@ Page({
         icon: "thunderbolt-fill",
         iconColor: "#00bcbd",
         color: "#999",
-        path: "",
+        path: "/pages/personal/myActivity/index",
         userType: 4
       },
       {
