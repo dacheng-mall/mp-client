@@ -16,16 +16,20 @@ Page({
     const { windowHeight } = wx.getSystemInfoSync();
     this.setData({
       height: windowHeight
-    })
-    if(this.data.list.length !== favorites.length) {
+    });
+    if (this.data.list.length !== favorites.length) {
       this.fetch();
     } else {
-      for(let fid of favorites) {
-        if(!this.data.list.find(({id}) => fid === id)) {
+      for (let fid of favorites) {
+        if (!this.data.list.find(({ id }) => fid === id)) {
           this.fetch();
           break;
         }
       }
+    }
+    if (this.options.ids) {
+      this.fetch();
+      wx.hideTabBar({animation:false});
     }
   },
   fetch: async function() {
@@ -33,6 +37,7 @@ Page({
     const { id } = wx.getStorageSync("user");
     const path = uri(this.route, opts);
     if (!opts.ids) {
+      console.log("zheshi shoucang ");
       // 这是收藏页面, 请求个人搜藏的商品列表
       const data = await get("api/sys/favorites", { userId: id });
       this.setData({
@@ -58,7 +63,7 @@ Page({
       const data = await get(`api/sys/product/autoIds${query}`);
       this.setData({
         list: data,
-        favorites: false,
+        favorites: false
       });
     }
   },

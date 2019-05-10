@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 18,
 			"list": [
 				{
 					"id": 0,
@@ -174,6 +174,13 @@
 					"name": "我的客户",
 					"pathName": "pages/personal/myActivity/myCustomer",
 					"query": "sid=2ae51c46a012478e923231fc474b7063&aid=01fe9c82f0da405ca480bfe8e93e3e2c",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分享商品列表",
+					"pathName": "pages/products/group/index",
+					"query": "favorites=no&ids=158,132,186",
 					"scene": null
 				}
 			]
