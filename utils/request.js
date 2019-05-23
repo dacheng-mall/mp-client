@@ -31,7 +31,7 @@ const showLoading = (url, show) => {
       break;
     }
     default: {
-      if(show) {
+      if (show) {
         wx.showLoading({
           title: "加载中..."
         });
@@ -41,18 +41,18 @@ const showLoading = (url, show) => {
       break;
     }
   }
-}
-export function parseResponse({data, _url}) {
+};
+export function parseResponse({ data, _url }) {
   // TODO 这里只处理了json类型的返回值, 如果有其他类型的需要再扩展
-  showLoading(_url)
+  showLoading(_url);
   return Promise.resolve(data);
 }
-export function checkStatus({res, _url}) {
+export function checkStatus({ res, _url }) {
   const { statusCode, data } = res;
   if (statusCode !== 200) {
-    return Promise.reject(`请求失败(code:${statusCode}) ${data}`);
+    return Promise.reject(`${statusCode}-${data}`);
   }
-  return Promise.resolve({data, _url});
+  return Promise.resolve({ data, _url });
 }
 
 export default function request(url, { data, method }, other) {
@@ -97,12 +97,12 @@ export default function request(url, { data, method }, other) {
     options.url = options.url.replace(VER, "");
   }
   return new Promise((resolve, reject) => {
-    showLoading(_url, true)
+    showLoading(_url, true);
     options.url = `${baseURL}${options.url}`;
     wx.request({
       ...options,
       success: res => {
-        resolve({res, _url});
+        resolve({ res, _url });
       },
       fail: err => {
         reject(err);
@@ -112,11 +112,18 @@ export default function request(url, { data, method }, other) {
     .then(checkStatus)
     .then(parseResponse)
     .catch(err => {
-      showLoading()
-      wx.showToast({
-        title: err,
-        icon: "none"
-      });
+      showLoading();
+      if (!/^401/.test(err)) {
+        wx.showToast({
+          title: err,
+          icon: "none"
+        });
+      } else {
+        const app = getApp();
+        if(app && app._login) {
+          app._clear(app._login);
+        }
+      }
       wx.getNetworkType({
         success(res) {
           if (res.networkType === "none") {

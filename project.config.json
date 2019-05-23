@@ -15,7 +15,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "2.7.0",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 18,
+			"current": 19,
 			"list": [
 				{
 					"id": 0,
@@ -181,6 +181,13 @@
 					"name": "分享商品列表",
 					"pathName": "pages/products/group/index",
 					"query": "favorites=no&ids=158,132,186",
+					"scene": null
+				},
+				{
+					"id": 19,
+					"name": "更新",
+					"pathName": "pages/activity/index",
+					"query": "",
 					"scene": null
 				}
 			]

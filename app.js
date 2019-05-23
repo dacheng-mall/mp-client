@@ -3,15 +3,9 @@ import { get, post, setToken, getToken } from "./utils/request";
 import { uri } from "./utils/util";
 
 App({
-  onLaunch: function(res) {
+  onShow: function(res) {
     this.globalData.initState = res;
     this.checkUpdate();
-    setTimeout(() => {
-      this.login();
-    }, 1000);
-    const { scene } = wx.getLaunchOptionsSync();
-    this.globalData.scene = scene;
-    this.setNavHeight();
   },
   setNavHeight: function() {
     wx.getSystemInfo({
@@ -23,29 +17,40 @@ App({
       }
     });
   },
-  login: function() {
-    const _user = wx.getStorageSync('user');
-    const token = getToken()
-    if(token && _user) {
-      this.afterLogin(_user)
-      return;
+  _clear: function(callback) {
+    try {
+      wx.clearStorage({
+        success: function() {
+          if (callback instanceof Function) {
+            callback();
+          }
+        }
+      });
+    } catch (e) {}
+  },
+  _login: function() {
+    const _user = wx.getStorageSync("user");
+    const token = getToken();
+    if (token && _user) {
+      this.afterLogin(_user);
+    } else {
+      wx.login({
+        success: res => {
+          get("api/wx/token_bycode", { code: res.code })
+            .then(data => {
+              this.globalData.openid = data.openid;
+              if (data.user && data.token) {
+                // 有用户信息, 已经注册过了
+                this.afterLogin(data.user, data.token);
+              } else {
+                // 没注册过
+                this.getUserInfo();
+              }
+            })
+            .catch(err => console.log("----", err));
+        }
+      });
     }
-    wx.login({
-      success: res => {
-        get("api/wx/token_bycode", { code: res.code })
-          .then(data => {
-            this.globalData.openid = data.openid;
-            if (data.user && data.token) {
-              // 有用户信息, 已经注册过了
-              this.afterLogin(data.user, data.token);
-            } else {
-              // 没注册过
-              this.getUserInfo();
-            }
-          })
-          .catch(err => console.log("----", err));
-      }
-    });
   },
   register: function(value) {
     const { nickName: name, avatarUrl: avatar, gender, openid: openId } = value;
@@ -85,13 +90,13 @@ App({
   afterLogin: function(user, token) {
     this.globalData.userInfo = user;
     wx.setStorageSync("user", user);
-    if(token) {
+    if (token) {
       setToken(token);
     }
     // path, query 是最初访问的小程序时的目标页面
     const { path, query } = this.globalData.initState;
     get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
-      wx.setStorageSync('favorites', res);
+      wx.setStorageSync("favorites", res);
       if (path === "pages/start/index" || path === "pages/start/author") {
         wx.reLaunch({
           url: "/pages/home/index"
@@ -101,10 +106,11 @@ App({
       wx.reLaunch({
         url: uri(path, query, true)
       });
-    })
+    });
   },
   checkUpdate: function() {
     const updateManager = wx.getUpdateManager();
+    const that = this;
     // 检查是否有新版本
     updateManager.onCheckForUpdate(function(res) {
       if (res.hasUpdate) {
@@ -122,13 +128,19 @@ App({
             }
           });
         });
-        updateManager.onUpdateFailed(function(){
+        updateManager.onUpdateFailed(function() {
           wx.showModal({
             title: "抱歉! 新版本程序下载失败!",
-            content: "请将当前小程序删除, 重新搜索小程序'礼全有', 并点击安装即可!",
+            content:
+              "请将当前小程序删除, 重新搜索小程序'礼全有', 并点击安装即可!",
             confirmText: "我知道了"
           });
-        })
+        });
+      } else {
+        const { scene } = wx.getLaunchOptionsSync();
+        that.globalData.scene = scene;
+        that.setNavHeight();
+        that._login();
       }
     });
   },
