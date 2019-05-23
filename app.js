@@ -99,7 +99,7 @@ App({
       wx.setStorageSync("favorites", res);
       if (path === "pages/start/index" || path === "pages/start/author") {
         wx.reLaunch({
-          url: "/pages/home/index"
+          url: "/pages/activity/index"
         });
         return;
       }

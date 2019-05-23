@@ -290,5 +290,11 @@ Page({
     wx.switchTab({
       url: '/pages/home/index'
     });
+  },
+  productDetail: function(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/products/detail/index?id=${id}`
+    })
   }
 });

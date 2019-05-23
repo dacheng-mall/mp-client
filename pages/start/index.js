@@ -32,7 +32,7 @@ Page({
     if (id) {
       setTimeout(() => {
         wx.reLaunch({
-          url: "/pages/home/index"
+          url: "/pages/activity/index"
         });
       }, 1000);
     }

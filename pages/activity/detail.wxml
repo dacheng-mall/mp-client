@@ -26,11 +26,11 @@
         <view wx:if="{{products.length > totalCount}}" class="gift-title">
           {{products.length}} 选 {{totalCount}}
         </view>
-        <view wx:if="{{products.length === totalCount}}" class="gift-title">本期礼品</view>
+        <view wx:if="{{products.length === totalCount}}" class="gift-title">免费领取</view>
         <scroll-view class="gift-wrap detail-gift" scroll-x="{{true}}" style="">
           <view class="gift-list" style="width: {{products.length * 276}}rpx">
             <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
-              <view class="gift-item">
+              <view class="gift-item" catch:tap="productDetail" data-id="{{gift.id}}">
                 <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
                 <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
                 <view class="gift-price">￥{{gift.price * gift.totalCount}}</view>
@@ -53,13 +53,13 @@
             </view>
             {{institution.name}}
           </view>
-          <view class="info-item">
+          <!-- <view class="info-item">
             <view class="label">
               <icon-x type="user" size="{{32}}" color="#00bcbd" />
               参与人群:
             </view>
             {{gradesItem}}
-          </view>
+          </view> -->
         </view>
         <!-- <view class="description">{{description}}</view> -->
         <rich-text nodes="{{description}}" />
@@ -78,7 +78,8 @@
   </view>
   <!-- 业务员, 报名后看到的 -->
   <view wx:if="{{user.userType === 4 && sign.length > 0}}" class="footer">
-    <text class="foot-info">我有 {{myCustomCount}}客户</text>
+    <!-- <text class="foot-info">我有 {{myCustomCount}}客户</text> -->
+    <text class="foot-info">{{customCount}}人领取</text>
     <button class="btn" type="primary" open-type="share" style="background-color: #00bcbd; color: #fff">
       分享给客户
     </button>
