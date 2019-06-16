@@ -1,0 +1,12 @@
+<scroll-view>
+  <view wx:if="{{!data}}">加载中</view>
+  <view wx:else>
+    <image src="{{data.mainImageUrl}}" style="height: 256rpx;width: 100%" />
+    <view>
+      <button type="primary" wx:if="{{!data.salesmanId}}">我是业务员</button>
+      <button type="default" style="background-color: #f00; color: #fff" wx:if="{{!data.userId}}">
+        立即领取
+      </button>
+    </view>
+  </view>
+</scroll-view>

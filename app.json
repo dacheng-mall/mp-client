@@ -15,7 +15,8 @@
     "pages/activity/index",
     "pages/activity/detail",
     "pages/home/index",
-    "pages/filter/index"
+    "pages/filter/index",
+    "pages/qrcode/index"
   ],
   "tabBar": {
     "color": "#707070",

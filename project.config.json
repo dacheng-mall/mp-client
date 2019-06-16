@@ -15,7 +15,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.0",
+	"libVersion": "2.7.1",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 20,
 			"list": [
 				{
 					"id": 0,
@@ -189,6 +189,13 @@
 					"pathName": "pages/activity/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 20,
+					"name": "扫码(业务员初次扫码)",
+					"pathName": "pages/qrcode/index",
+					"query": "scene=init",
+					"scene": 1011
 				}
 			]
 		}

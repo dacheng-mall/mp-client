@@ -1,6 +1,5 @@
 //app.js
 import { get, post, setToken, getToken } from "./utils/request";
-import { uri } from "./utils/util";
 
 App({
   onShow: function(res) {
@@ -97,16 +96,16 @@ App({
     const { path, query } = this.globalData.initState;
     get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
       wx.setStorageSync("favorites", res);
-      if (path === "pages/start/index" || path === "pages/start/author") {
-        wx.reLaunch({
-          url: "/pages/activity/index"
-        });
-        return;
-      }
-      wx.reLaunch({
-        url: uri(path, query, true)
-      });
+      // wx.reLaunch({
+      //   url: uri(path, query, true)
+      // });
     });
+    if (path === "pages/start/index" || path === "pages/start/author") {
+      wx.reLaunch({
+        url: "/pages/activity/index"
+      });
+      return;
+    }
   },
   checkUpdate: function() {
     const updateManager = wx.getUpdateManager();
