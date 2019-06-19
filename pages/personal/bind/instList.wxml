@@ -1,8 +1,16 @@
-<scroll-view scroll-y="{{true}}" class="instWrap">
-  <block wx:for="{{list}}" wx:key="{{item.id}}">
-    <view class="instItem" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="next">
-      {{item.name}}
-      <icon-x type="right" />
-    </view>
-  </block>
-</scroll-view>
+<view class="instWrap">
+  <view class="break" wx:if="{{name}}">
+    <text class="instName">我直属于: {{name}}</text>
+    <button class="breakBtn" size="mini" type="primary" bind:tap="back">确认</button>
+  </view>
+  <view style="flex: 1; overflow:hidden">
+    <scroll-view scroll-y="{{true}}" style="height: 100%">
+      <block wx:for="{{list}}" wx:key="{{item.id}}">
+        <view class="instItem" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="next">
+          {{item.name}}
+          <icon-x type="right" />
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

@@ -5,7 +5,8 @@ Page({
   data: {
     list: [],
     delta: 0,
-    rootid: ""
+    rootid: "",
+    name: ""
   },
   onShow() {
     const { pid, delta, rootid = null, name = null } = this.options;
@@ -14,21 +15,27 @@ Page({
       wx.setStorageSync('bind_id', pid);
       wx.setStorageSync('bind_name', name);
     } catch (e) { }
-    this.fetch(pid, delta, rootid);
+    this.fetch(pid, delta, rootid, name);
   },
-  fetch: async function(pid, delta, rootid) {
+  fetch: async function(pid, delta, rootid, name) {
     const data = await get("v1/api/sys/institution", { pid });
     if (data.length > 0) {
       this.setData({
         list: data,
         delta,
-        rootid
+        rootid,
+        name
       });
     } else {
       wx.navigateBack({
         delta: parseInt(delta, 10),
       })
     }
+  },
+  back(){
+    wx.navigateBack({
+      delta: parseInt(this.data.delta, 10),
+    })
   },
   next(e) {
     const { rootid, delta } = this.data;
