@@ -1,4 +1,4 @@
-const apiUrl = "http://192.168.0.105:10010/";
+const apiUrl = "http://192.168.1.97:10010/";
 const pcApiUrl = "http://localhost:10010/";
 const aliApiUrl = "https://api.idacheng.cn:443/";
 const source = "http://res.idacheng.cn/";

@@ -115,7 +115,7 @@ export default function request(url, { data, method }, other) {
       showLoading();
       if (!/^401/.test(err)) {
         wx.showToast({
-          title: err,
+          title: '请求异常',
           icon: "none"
         });
       } else {

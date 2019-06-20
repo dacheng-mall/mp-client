@@ -1,5 +1,6 @@
 //app.js
-import { get, post, setToken, getToken } from "./utils/request";
+import { get, post, put, setToken, getToken } from "./utils/request";
+import { uri } from "./utils/util";
 
 App({
   onShow: function(res) {
@@ -12,7 +13,7 @@ App({
         this.globalData.navHeight = res.statusBarHeight + 46;
       },
       fail(err) {
-        console.log(err);
+        console.log(JSON.stringify(err));
       }
     });
   },
@@ -28,28 +29,16 @@ App({
     } catch (e) {}
   },
   _login: function() {
-    const _user = wx.getStorageSync("user");
-    const token = getToken();
-    if (token && _user) {
-      this.afterLogin(_user);
-    } else {
-      wx.login({
-        success: res => {
-          get("api/wx/token_bycode", { code: res.code })
-            .then(data => {
-              this.globalData.openid = data.openid;
-              if (data.user && data.token) {
-                // 有用户信息, 已经注册过了
-                this.afterLogin(data.user, data.token);
-              } else {
-                // 没注册过
-                this.getUserInfo();
-              }
-            })
-            .catch(err => console.log("----", err));
-        }
-      });
-    }
+    wx.login({
+      success: res => {
+        get("api/wx/token_bycode", { code: res.code })
+          .then(data => {
+            this.globalData.openid = data.openid;
+            this.getUserInfo(data);
+          })
+          .catch(err => console.log("----", err));
+      }
+    });
   },
   register: function(value) {
     const { nickName: name, avatarUrl: avatar, gender, openid: openId } = value;
@@ -72,12 +61,40 @@ App({
         console.log(e);
       });
   },
-  getUserInfo: function() {
+  getUserInfo: function(data) {
     wx.getUserInfo({
       success: res => {
-        const { userInfo } = res;
-        userInfo.openid = this.globalData.openid;
-        this.register(userInfo);
+        if (data && data.user && data.token) {
+          // 有用户信息, 已经注册过了, 依然获取用户最新的信息
+          const { nickName: name, avatarUrl: avatar, gender } = res.userInfo;
+          if (
+            data.user.name !== name ||
+            data.user.avatar !== avatar ||
+            data.user.gender !== gender
+          ) {
+            put("api/sys/user", {
+              id: data.user.id,
+              name,
+              gender,
+              avatar
+            })
+              .then(res => {
+                this.globalData.userInfo = res;
+                this.afterLogin(res, data.token);
+              })
+              .catch(() => {
+                this.afterLogin(data.user, data.token);
+              });
+          } else {
+            this.afterLogin(data.user, data.token);
+          }
+        } else {
+          const { userInfo } = res;
+          userInfo.openid = this.globalData.openid;
+          if (userInfo.openid) {
+            this.register(userInfo);
+          }
+        }
       },
       fail: () => {
         wx.reLaunch({
@@ -96,11 +113,23 @@ App({
     const { path, query } = this.globalData.initState;
     get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
       wx.setStorageSync("favorites", res);
-      // wx.reLaunch({
-      //   url: uri(path, query, true)
-      // });
     });
-    if (path === "pages/start/index" || path === "pages/start/author") {
+    const routes = getCurrentPages();
+    if (routes.length > 0) {
+      const cur = routes[routes.length - 1].route;
+      if (
+        (cur === "pages/start/index" || cur === "pages/start/author") &&
+        (path !== "pages/start/index" && path !== "pages/start/author")
+      ) {
+        wx.reLaunch({
+          url: uri(path, query, true)
+        });
+      } else {
+        wx.reLaunch({
+          url: "/pages/activity/index"
+        });
+      }
+    } else {
       wx.reLaunch({
         url: "/pages/activity/index"
       });

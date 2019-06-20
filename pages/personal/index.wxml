@@ -8,7 +8,7 @@
         <text class="name">{{user.name}}</text>
         <text wx:if="{{user.userType === 4}}" class="grade" style=""> ({{user.gradeName}})</text>
       </view>
-      <view wx:if="{{user.userType === 2}}">
+      <view wx:if="{{user.userType === 2 }}">
         <button size="mini" type="primary" bindtap="bindInst">成为保险经纪人</button>
       </view>
       <view class="inst" wx:if="{{user.userType === 4}}">{{user.institution.name}}</view>
