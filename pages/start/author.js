@@ -9,7 +9,7 @@ Page({
     if (e.detail.userInfo){
       //用户按了允许授权按钮
       app.globalData.userInfo = e.detail.userInfo
-      app.getUserInfo()
+      app.getUserInfo(e.detail)
     } else {
       //用户按了拒绝按钮
     }

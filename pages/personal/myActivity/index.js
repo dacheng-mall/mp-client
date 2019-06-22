@@ -83,7 +83,6 @@ Page({
   tap: function(e) {
     const { aid } = e.currentTarget.dataset;
     const salesmanId = this.data.salesmanId;
-    console.log(aid);
     wx.navigateTo({
       url: `/pages/personal/myActivity/myCustomer?sid=${salesmanId}&aid=${aid}`
     });

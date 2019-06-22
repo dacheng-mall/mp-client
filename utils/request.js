@@ -1,9 +1,13 @@
-import { apiUrl, pcApiUrl, aliApiUrl } from "../setting.js";
+import { apiUrl, pcApiUrl, aliApiUrl, temporaryUrl } from "../setting.js";
 
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";
 
 const baseURL = aliApiUrl;
+export function getApi() {
+  return baseURL;
+}
+let errorTimer = "";
 let token = "";
 export function setToken(t) {
   if (t === "") {
@@ -11,7 +15,11 @@ export function setToken(t) {
     wx.removeStorageSync("token");
     return;
   }
-  token = `Bearer ${t}`;
+  if(!/^Bearer\s/.test(t)) {
+    token = `Bearer ${t}`;
+  } else {
+    token = t
+  }
   wx.setStorageSync("token", token);
 }
 export function getToken() {
@@ -115,14 +123,21 @@ export default function request(url, { data, method }, other) {
       showLoading();
       if (!/^401/.test(err)) {
         wx.showToast({
-          title: '请求异常',
+          title: "请求异常",
           icon: "none"
         });
       } else {
-        const app = getApp();
-        if(app && app._login) {
-          app._clear(app._login);
+        // 401异常在这里处理
+        if (errorTimer) {
+          clearTimeout(errorTimer);
         }
+        errorTimer = setTimeout(() => {
+          const app = getApp();
+          if (app && app._login) {
+            app._clear(app._login);
+          }
+          clearTimeout(errorTimer);
+        }, 1000);
       }
       wx.getNetworkType({
         success(res) {

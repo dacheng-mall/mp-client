@@ -1,11 +1,15 @@
 //app.js
 import { get, post, put, setToken, getToken } from "./utils/request";
 import { uri } from "./utils/util";
+import { homePath } from "./setting";
 
 App({
   onShow: function(res) {
     this.globalData.initState = res;
-    this.checkUpdate();
+    const onShowTimer = setTimeout(() => {
+      this.checkUpdate();
+      clearTimeout(onShowTimer);
+    }, 1000);
   },
   setNavHeight: function() {
     wx.getSystemInfo({
@@ -19,6 +23,7 @@ App({
   },
   _clear: function(callback) {
     try {
+      this.globalData.needReLaunch = true;
       wx.clearStorage({
         success: function() {
           if (callback instanceof Function) {
@@ -29,11 +34,17 @@ App({
     } catch (e) {}
   },
   _login: function() {
+    const user = wx.getStorageSync("user");
+    const token = getToken();
+    if (user && token) {
+      this.afterLogin(user, token);
+      return;
+    }
     wx.login({
       success: res => {
         get("api/wx/token_bycode", { code: res.code })
           .then(data => {
-            this.globalData.openid = data.openid;
+            this.globalData.openid = data.user ? data.user.openid : data.openid;
             this.getUserInfo(data);
           })
           .catch(err => console.log("----", err));
@@ -62,46 +73,33 @@ App({
       });
   },
   getUserInfo: function(data) {
-    wx.getUserInfo({
-      success: res => {
-        if (data && data.user && data.token) {
-          // 有用户信息, 已经注册过了, 依然获取用户最新的信息
-          const { nickName: name, avatarUrl: avatar, gender } = res.userInfo;
-          if (
-            data.user.name !== name ||
-            data.user.avatar !== avatar ||
-            data.user.gender !== gender
-          ) {
-            put("api/sys/user", {
-              id: data.user.id,
-              name,
-              gender,
-              avatar
-            })
-              .then(res => {
-                this.globalData.userInfo = res;
-                this.afterLogin(res, data.token);
-              })
-              .catch(() => {
-                this.afterLogin(data.user, data.token);
-              });
-          } else {
-            this.afterLogin(data.user, data.token);
-          }
-        } else {
-          const { userInfo } = res;
-          userInfo.openid = this.globalData.openid;
-          if (userInfo.openid) {
-            this.register(userInfo);
-          }
-        }
-      },
-      fail: () => {
-        wx.reLaunch({
-          url: "/pages/start/author"
-        });
+    const { openid, user, token, userInfo } = data;
+    if (openid) {
+      // 没注册过
+      wx.navigateTo({
+        url: "/pages/start/author"
+      });
+    } else if (user && token) {
+      // 注册过
+      this.afterLogin(user, token);
+    } else if (userInfo) {
+      // 刚获取过用户信息, 注册
+      userInfo.openid = this.globalData.openid;
+      if (userInfo.openid) {
+        this.register(userInfo);
+      } else {
+        // this._login();
       }
-    });
+    }
+    return;
+  },
+  goHome: function(cur) {
+    // 如果当前页面不是首页, 那么跳转到首页
+    if (cur !== homePath) {
+      wx.reLaunch({
+        url: `/${homePath}`
+      });
+    }
   },
   afterLogin: function(user, token) {
     this.globalData.userInfo = user;
@@ -118,22 +116,38 @@ App({
     if (routes.length > 0) {
       const cur = routes[routes.length - 1].route;
       if (
-        (cur === "pages/start/index" || cur === "pages/start/author") &&
+        cur === path &&
+        (cur !== "pages/start/index" && cur !== "pages/start/author")
+      ) {
+        // 当前页面和预期页面相同, 且不是授权页面时
+        // 如果401之后清理了storage, 那么重新加载, 否则不做任何事
+        if (this.globalData.needReLaunch) {
+          wx.reLaunch({
+            url: uri(path, query, true)
+          });
+          this.globalData.needReLaunch = null;
+        }
+      } else if (
+        cur === path &&
+        (cur === "pages/start/index" || cur === "pages/start/author")
+      ) {
+        // 当前页面和预期页面相同, 且是授权页面或启动页时
+        // 跳转活动页
+        this.goHome(cur);
+      } else if (
+        cur !== path &&
         (path !== "pages/start/index" && path !== "pages/start/author")
       ) {
+        // 当前页面和预期页面不同, 且是预期页面不是授权页面或启动页时
+        // 跳转预期页面
         wx.reLaunch({
           url: uri(path, query, true)
         });
       } else {
-        wx.reLaunch({
-          url: "/pages/activity/index"
-        });
+        this.goHome(cur);
       }
     } else {
-      wx.reLaunch({
-        url: "/pages/activity/index"
-      });
-      return;
+      this.goHome();
     }
   },
   checkUpdate: function() {
