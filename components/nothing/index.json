@@ -1,6 +1,3 @@
 {
-  "component": true,
-  "usingComponents": {
-    "icon-x": "../icon/index"
-  }
+  "component": true
 }

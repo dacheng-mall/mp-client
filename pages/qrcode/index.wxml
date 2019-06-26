@@ -1,12 +1,12 @@
-<scroll-view>
-  <view wx:if="{{!data}}">加载中</view>
-  <view wx:else>
-    <image src="{{data.mainImageUrl}}" style="height: 256rpx;width: 100%" />
-    <view>
-      <button type="primary" wx:if="{{!data.salesmanId}}">我是业务员</button>
-      <button type="default" style="background-color: #f00; color: #fff" wx:if="{{!data.userId}}">
-        立即领取
-      </button>
+<nothing wx:if="{{invalid === 'yes'}}" iconName="frown" text="无效二维码" />
+<view class="wrap" wx:esleif="{{id}}">
+  <tab style="height: 100%; overflow: hidden" keys="{{keys}}" currentKey="{{currentKey}}" bind:onChange="changeTab">
+    <view slot="detail" class="detail">
+      <detail bottom="{{batch.description}}" img="{{mainImage}}" typeName="{{qrType.name}}" fields="{{qrType.fields}}" wokao="{{fields}}" template="{{qrType.template}}" />
     </view>
-  </view>
-</scroll-view>
+    <linked slot="linked" canBindUser="{{canBindUser}}" canBindSalesman="{{canBindSalesman}}" bind:bindEvent="bindEvent" product="{{product}}" institution="{{institution}}" activity="{{activity}}" custom="{{custom}}" salesman="{{salesman}}" />
+    <view slot="editor">
+      <editor-x fields="{{qrType.fields}}" value="{{defaultValues}}" bind:onSubmit="onSubmit" />
+    </view>
+  </tab>
+</view>

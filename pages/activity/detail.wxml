@@ -93,7 +93,7 @@
     <button wx:if="{{gifts.id}}" class="btn" type="danger" data-id="{{gifts.id}}" catch:tap="gotoMyGifts" style="background-color: #00bcbd; color: #fff">
       我的礼品
     </button>
-    <button wx:else class="btn" type="danger" catch:tap="showGetPanel" style="background-color: #00bcbd; color: #fff">
+    <button disabled="{{stauts === 0}}" wx:else class="btn" type="danger" catch:tap="showGetPanel" style="background-color: #00bcbd; color: #fff">
       立即领取
     </button>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">

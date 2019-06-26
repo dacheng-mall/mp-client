@@ -30,7 +30,23 @@ Page({
         color: "#999",
         path: "",
         userType: 4
-      }
+      },
+      {
+        name: "我发放的码",
+        icon: "qrcode",
+        iconColor: "#ff3366",
+        color: "#999",
+        path: "/pages/qrcode/list/index?type=salesman",
+        userType: 4
+      },
+      {
+        name: "我领取的码",
+        icon: "qrcode",
+        iconColor: "#00bcbd",
+        color: "#999",
+        path: "/pages/qrcode/list/index?type=user",
+        userType: null
+      },
     ]
   },
   onShow: async function() {

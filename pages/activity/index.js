@@ -9,27 +9,27 @@ Page({
     count: 0,
     source
   },
-  onShow: function(){
+  onShow: function() {
     this.fetch();
   },
   fetch: async function() {
-    const data = await get("v1/api/sys/activity");
+    const data = await get("v1/api/sys/activity", { status: 1 });
     if (data) {
       this.setData({
-        data,
+        data
       });
     }
   },
-  onPullDownRefresh(){
+  onPullDownRefresh() {
     // wx.startPullDownRefresh({
     //   complates: function(){
     //     console.log('刷新')
     //   }
     // })
   },
-  tap:function(e){
+  tap: function(e) {
     wx.navigateTo({
       url: `/pages/activity/detail?id=${e.detail}`
-    })
+    });
   }
-})
+});

@@ -1,0 +1,17 @@
+.qrWrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column
+}
+.content {
+  flex: 1;
+  overflow-y: auto
+}
+.description {
+  font-size: 16px;
+  font-style: italic;
+  color: #aaa;
+  font-weight: 200;
+  padding: 10px 10px 30px;
+  text-align: center;
+}

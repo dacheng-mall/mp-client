@@ -1,0 +1,19 @@
+<view class="qrWrap">
+  <view class="content">
+    <view style="padding: 0 10px;">
+      <image style="width: 100%;margin: 0 auto" wx:if="{{img}}" mode="aspectFit" src="{{img}}" />
+    </view>
+    <!-- <view style="text-align: center;color: #999;font-size: 24px">{{typeName}}</view> -->
+    <view class="main">
+      <rich-text class="content" nodes="{{temp.nodes}}"></rich-text>
+      <view>
+        <block wx:for="{{temp.more}}" wx:key="{{item.key}}">
+          <button wx:if="{{!item.disabled}}" class="btn" style="{{item.style}}" bindtap="onTap" data-info="{{item}}">
+            {{item.text}}
+          </button>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="description">{{bottom}}</view>
+</view>

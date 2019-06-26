@@ -1,0 +1,55 @@
+<view wx:if="{{!hasCont}}" class="noLinked">未关联任何实体</view>
+<view wx:else style="flex: 1;">
+  <view class="btns">
+    <btn wx:if="{{canBindUser}}" icon="gift" value="领取" type="primary" bindclick="bindUser" style="flex: 1; margin: 0 10rpx" />
+    <btn wx:if="{{canBindSalesman}}" icon="link" value="绑定" type="danger" bindclick="bindSalesman" style="flex: 1; margin: 0 10rpx" />
+    <btn wx:if="{{salesman.id && isMine}}" icon="disconnect" value="解除绑定" type="warning" bindclick="unbindSalesman" style="flex: 1; margin: 0 10rpx" />
+  </view>
+  <view wx:if="{{institution}}" class="linkedItem">
+    <view class="label">机构</view>
+    <view class="cont">
+      <view>{{institution.name}}</view>
+      <view class="subTitle">{{institution.address}}</view>
+    </view>
+  </view>
+  <view wx:if="{{salesman.id}}" class="linkedItem" bindtap="makePhoneCall" data-phone="{{salesman.mobile}}">
+    <view class="label">经理人(发放者)</view>
+    <view class="cont flexCont">
+      <image src="{{salesman.avatar}}" class="avatar" mode="aspectFit" />
+      <view class="main">
+        <view>{{salesman.name}}</view>
+        <view class="subTitle">{{salesman.gradeName}}</view>
+      </view>
+      <view wx:if="{{salesman.mobile}}">
+        <icon-x type="phone" color="#00bcbd" size="{{44}}" />
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{activity}}" class="linkedItem" bindtap="goDetail" data-type="activity" data-id="{{activity.id}}">
+    <view class="label">活动</view>
+    <view class="cont flexCont">
+      <image src="{{source}}{{activity.images[0].url}}" class="productImg" mode="aspectFit" />
+      <view class="main">
+        <view>{{activity.name}}</view>
+        <view class="subTitle">报名人数: {{activity.salesmanCount}}</view>
+        <view class="subTitle">领取次数: {{activity.customCount}}</view>
+      </view>
+      <view>
+        <icon-x type="right" color="#00bcbd" size="{{44}}" />
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{product}}" class="linkedItem" bindtap="goDetail" data-type="product" data-id="{{product.id}}">
+    <view class="label">商品</view>
+    <view class="cont flexCont">
+      <image src="{{source}}{{product.mainImageUrl}}" class="productImg" mode="aspectFit" />
+      <view class="main">
+        <view>{{product.title}}</view>
+        <view class="price">¥{{product.price}}</view>
+      </view>
+      <view>
+        <icon-x type="right" color="#00bcbd" size="{{44}}" />
+      </view>
+    </view>
+  </view>
+</view>

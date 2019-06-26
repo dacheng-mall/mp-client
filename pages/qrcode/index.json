@@ -1,1 +1,9 @@
-{}
+{
+  "usingComponents": {
+    "editor-x": "./editor/index",
+    "detail": "./detail/index",
+    "linked": "./linked/index",
+    "tab": "./tabs/index"
+  },
+  "navigationBarTitleText": "二维码"
+}

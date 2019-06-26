@@ -1,0 +1,68 @@
+.wrap {
+  background: #eee;
+  text-align: center;
+  color: #999;
+  font-weight: 200;
+  letter-spacing: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.hover {
+  opacity: 0.5;
+}
+.large {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 44rpx
+}
+.default {
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  font-size: 32rpx
+}
+.small {
+  height: 58rpx;
+  line-height: 58rpx;
+  border-radius: 29rpx;
+  font-size: 29rpx
+}
+.primary {
+  background: linear-gradient(to right, #00bcbd , #0e85bd);
+  color: #fff;
+}
+.primary-icon {
+  color: #fff;
+}
+.danger {
+  background: linear-gradient(to right, #ff1a53 , #b3002c);
+  color: #fff;
+}
+.danger-icon {
+  color: #fff;
+}
+.warning {
+  background: linear-gradient(to right, #ff9933 , #cc3f00);
+  color: #fff;
+}
+.warning-icon {
+  color: #fff;
+}
+.ghost {
+  background: transparent;
+  border: 1px dashed #ddd;
+  color: #999;
+}
+.ghost-icon {
+  color: #999;
+}
+.disabled {
+  background: linear-gradient(to right, #eee , #ccc);
+  color: #aaa;
+}
+.disabled-icon {
+  color: #aaa;
+}

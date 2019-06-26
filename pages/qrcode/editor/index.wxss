@@ -1,0 +1,50 @@
+.title {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #666;
+  font-weight: 200;
+  font-size: 32rpx;
+}
+.section {
+  padding: 20rpx;
+}
+.required {
+  font-size: 24rpx;
+  color: #f36;
+}
+.section {
+  border: 1px solid #ddd;
+  margin: 40rpx 20rpx;
+  padding: 30rpx 24rpx;
+  border-radius: 20rpx;
+  position: relative;
+  box-shadow: 0 5px 10px #eee
+}
+.sectionTitle {
+  position: absolute;
+  top: -20rpx;
+  background-color: #fff;
+  font-size: 32rpx;
+  color: #666;
+  padding: 0 10rpx
+}
+.sectionInput {
+  border: none;
+  background-color: #fff;
+  padding: 4px;
+}
+.sectionHelp {
+  font-size: 32rpx;
+  color: #999;
+}
+.btnWrap {
+  padding: 20rpx;
+}
+.btn {
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 32rpx;
+  background: linear-gradient(to right, #00bcbd, #0e85bd);
+  color: #fff;
+}

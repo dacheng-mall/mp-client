@@ -1,0 +1,4 @@
+<view class="wrap {{size}} {{type}} {{disabled && 'disabled'}}" hover-class="{{!disabled && 'hover'}}" style="{{style}}" catchtap="tap">
+  <icon-x wx:if="{{icon}}" color="{{color}}" size="{{iconSize}}" type="{{icon}}" />
+  {{value}}
+</view>

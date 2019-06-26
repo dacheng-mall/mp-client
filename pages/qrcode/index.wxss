@@ -1,1 +1,13 @@
 /* pages/qrcode/index.wxss */
+page {
+  height: 100%;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.detail {
+  flex: 1;
+  overflow-y: auto
+}

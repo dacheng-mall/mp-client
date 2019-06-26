@@ -1,4 +1,4 @@
-import { apiUrl, pcApiUrl, aliApiUrl, temporaryUrl } from "../setting.js";
+import { apiUrl, pcApiUrl, aliApiUrl } from "../setting.js";
 
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";

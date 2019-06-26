@@ -6,6 +6,7 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
@@ -22,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.1",
+	"libVersion": "2.7.2",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -55,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 23,
 			"list": [
 				{
 					"id": 0,
@@ -209,6 +210,34 @@
 					"name": "商城首页",
 					"pathName": "pages/home/index",
 					"query": "scene=init",
+					"scene": null
+				},
+				{
+					"id": 22,
+					"name": "扫码",
+					"pathName": "pages/qrcode/index",
+					"query": "scene=%3Fid%3D221",
+					"scene": 1047
+				},
+				{
+					"id": 23,
+					"name": "扫码2",
+					"pathName": "pages/qrcode/index",
+					"query": "scene=%3Fid%3D237",
+					"scene": 1047
+				},
+				{
+					"id": 24,
+					"name": "扫码3",
+					"pathName": "pages/qrcode/index",
+					"query": "scene=%3Fid%3D90",
+					"scene": 1047
+				},
+				{
+					"id": -1,
+					"name": "\b我发放的码列表",
+					"pathName": "pages/qrcode/list/index",
+					"query": "type=salesman",
 					"scene": null
 				}
 			]

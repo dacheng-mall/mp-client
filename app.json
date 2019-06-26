@@ -16,7 +16,8 @@
     "pages/activity/detail",
     "pages/home/index",
     "pages/filter/index",
-    "pages/qrcode/index"
+    "pages/qrcode/index",
+    "pages/qrcode/list/index"
   ],
   "tabBar": {
     "color": "#707070",
@@ -59,7 +60,7 @@
     "icon-x": "/components/icon/index",
     "back-home": "/components/favo-entry/index",
     "nothing": "/components/nothing/index",
-    "tab-bar": "/components/tabbar/index"
+    "btn": "/components/button/index"
   },
   "sitemapLocation": "sitemap.json"
 }
