@@ -47,11 +47,13 @@ Component({
           wx.navigateTo({
             url: `/pages/products/detail/index?id=${id}`
           })
+          break;
         }
         case 'activity':{
           wx.navigateTo({
             url: `/pages/activity/detail?id=${id}`
           })
+          break;
         }
       }
     },
