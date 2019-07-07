@@ -1,9 +1,8 @@
 <view class="qrWrap">
   <view class="content">
-    <view style="padding: 0 10px;">
-      <image style="width: 100%;margin: 0 auto" wx:if="{{img}}" mode="aspectFit" src="{{img}}" />
+    <view>
+      <image style="width: 100%;margin: 0 auto" wx:if="{{img}}" mode="widthFix" src="{{img}}" />
     </view>
-    <!-- <view style="text-align: center;color: #999;font-size: 24px">{{typeName}}</view> -->
     <view class="main">
       <rich-text class="content" nodes="{{temp.nodes}}"></rich-text>
       <view>

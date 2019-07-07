@@ -7,7 +7,7 @@ page {
   flex-direction: column;
 }
 .instItem {
-  padding: 20rpx;
+  padding: 32rpx 20rpx;
   border-bottom: 1px solid #eee;
   background-color: #fff;
   display: flex;
@@ -18,10 +18,11 @@ page {
 .break {
   display: flex;
   flex-direction: row;
-  padding: 20rpx;
+  padding: 32rpx 20rpx;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd
+  border-bottom: 1px solid #ddd;
+  background-color: #eee
 }
 .breakBtn {
   display: inline-block;

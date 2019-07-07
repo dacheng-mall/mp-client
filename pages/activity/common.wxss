@@ -47,6 +47,7 @@
   margin: 0 auto;
 }
 .gift-wrap .gift-list .gift-item {
+  position: relative;
   width: 276rpx;
   text-align: center;
 }
@@ -56,9 +57,27 @@
   border: 1px solid #00bcbd;
   border-radius: 10px;
 }
+.gift-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
 .gift-name {
   font-size: 28rpx;
   color: #333
+}
+.gift-count {
+  position: absolute;
+  right: 12rpx;
+  top: 6rpx;
+  background-color: #ff3366;
+  color: #fff;
+  border-radius: 50%;
+  height: 44rpx;
+  line-height: 44rpx;
+  min-width: 44rpx;
+  text-align: center;
+  font-size: 24rpx;
 }
 .gift-price {
   font-size: 28rpx;

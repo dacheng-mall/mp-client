@@ -23,7 +23,7 @@
       </view>
     </scroll-view>
     <view class="btn">
-      <button type="primary" form-type="submit">加入机构</button>
+      <button type="primary" form-type="submit">提交信息</button>
     </view>
   </view>
 </form>

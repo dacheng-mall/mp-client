@@ -58,7 +58,8 @@ export function parseResponse({ data, _url }) {
 export function checkStatus({ res, _url }) {
   const { statusCode, data } = res;
   if (statusCode !== 200) {
-    return Promise.reject(`${statusCode}-${data}`);
+    return Promise.reject({statusCode, data});
+    // return Promise.reject(`${statusCode}-${data}`);
   }
   return Promise.resolve({ data, _url });
 }
@@ -121,9 +122,9 @@ export default function request(url, { data, method }, other) {
     .then(parseResponse)
     .catch(err => {
       showLoading();
-      if (!/^401/.test(err)) {
+      if (err.statusCode !== 401) {
         wx.showToast({
-          title: "请求异常",
+          title: err.data || "请求异常",
           icon: "none"
         });
       } else {

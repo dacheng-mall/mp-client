@@ -8,7 +8,7 @@
       "children": [
         {
           "name": "li",
-          "key": "carLisence",
+          "key": "license",
           "attrs": {
             "style": "margin: 10px auto; font-size: 32px; list-style: none; text-align: center; padding: 10px; border: 1px solid #ddd; border-left: none; border-right: none; color: #666;"
           },

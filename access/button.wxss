@@ -1,0 +1,46 @@
+.btn-hover {
+  opacity: 0.5;
+}
+.btn-large {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  padding: 0 44rpx;
+  font-size: 32rpx
+}
+.btn-default {
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  padding: 0 32rpx;
+  font-size: 28rpx;
+  border: 1px solid #ddd;
+}
+.btn-small {
+  height: 58rpx;
+  line-height: 58rpx;
+  border-radius: 29rpx;
+  padding: 0 29rpx;
+  font-size: 24rpx
+}
+.btn-primary {
+  background: linear-gradient(to right, #00bcbd , #0e85bd);
+  color: #fff;
+}
+.btn-danger {
+  background: linear-gradient(to right, #ff1a53 , #b3002c);
+  color: #fff;
+}
+.btn-warning {
+  background: linear-gradient(to right, #ff9933 , #cc3f00);
+  color: #fff;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px dashed #ddd;
+  color: #999;
+}
+.btn-disabled {
+  background: linear-gradient(to right, #eee , #ccc);
+  color: #aaa;
+}

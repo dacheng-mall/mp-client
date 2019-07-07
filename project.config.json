@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.2",
+	"libVersion": "2.7.3",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 23,
+			"current": 27,
 			"list": [
 				{
 					"id": 0,
@@ -160,7 +160,7 @@
 					"id": 14,
 					"name": "领取记录页面",
 					"pathName": "pages/personal/myGift/index",
-					"query": "id=1dc4be89a7ac4efb83a9962142f40fd7",
+					"query": "id= c5ae329a126e4cfb8dc2dc0b0d44ffa3",
 					"scene": null
 				},
 				{
@@ -199,13 +199,6 @@
 					"scene": null
 				},
 				{
-					"id": 20,
-					"name": "扫码(业务员初次扫码)",
-					"pathName": "pages/qrcode/index",
-					"query": "scene=init",
-					"scene": 1011
-				},
-				{
 					"id": -1,
 					"name": "商城首页",
 					"pathName": "pages/home/index",
@@ -216,7 +209,7 @@
 					"id": 22,
 					"name": "扫码",
 					"pathName": "pages/qrcode/index",
-					"query": "scene=%3Fid%3D221",
+					"query": "scene=%3Fid%3D75",
 					"scene": 1047
 				},
 				{
@@ -239,6 +232,27 @@
 					"pathName": "pages/qrcode/list/index",
 					"query": "type=salesman",
 					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "\b我领取的码列表",
+					"pathName": "pages/qrcode/list/index",
+					"query": "type=user",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试生成海报功能",
+					"pathName": "pages/qrcode/createTest/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 27,
+					"name": "扫码进活动",
+					"pathName": "pages/activity/detail",
+					"query": "scene=%3Fa%3D10%26sa%3D392",
+					"scene": 1047
 				}
 			]
 		}

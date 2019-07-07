@@ -3,6 +3,8 @@ import { uri, getRoute } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
+let timer = null;
+
 Page({
   data: {
     source,
@@ -24,14 +26,6 @@ Page({
         userType: 4
       },
       {
-        name: "我的机构",
-        icon: "info-circle-fill",
-        iconColor: "#00bcbd",
-        color: "#999",
-        path: "",
-        userType: 4
-      },
-      {
         name: "我发放的码",
         icon: "qrcode",
         iconColor: "#ff3366",
@@ -47,18 +41,43 @@ Page({
         path: "/pages/qrcode/list/index?type=user",
         userType: null
       },
+      {
+        name: "我的机构",
+        icon: "info-circle-fill",
+        iconColor: "#00bcbd",
+        color: "#999",
+        path: "",
+        userType: 4
+      }
     ]
   },
-  onShow: async function() {
+  onShow: function() {
     const user = wx.getStorageSync("user");
-    this.setData({
-      user
-    });
+    const timestamp = new Date().valueOf();
+    if (
+      !this.data.timestamp ||
+      !user ||
+      timestamp - this.data.timestamp > 7200000
+    ) {
+      timer = setInterval(this.getUser, 1000);
+    }
+  },
+  getUser: function() {
+    const user = wx.getStorageSync("user");
+    if (user) {
+      const timestamp = new Date().valueOf();
+      this.setData({
+        user,
+        timestamp
+      });
+      clearInterval(timer);
+      timer = null;
+    }
   },
   bindInst() {
-    wx.removeStorageSync('bind_rootid')
-    wx.removeStorageSync('bind_id')
-    wx.removeStorageSync('bind_name')
+    wx.removeStorageSync("bind_rootid");
+    wx.removeStorageSync("bind_id");
+    wx.removeStorageSync("bind_name");
     wx.navigateTo({
       url: "/pages/personal/bind/index"
     });

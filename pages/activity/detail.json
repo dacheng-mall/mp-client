@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "swiper-x": "/components/page/swiper"
+    "swiper-x": "/components/page/swiper",
+    "poster": "/components/poster/index"
   }
 }

@@ -1,0 +1,41 @@
+@import '../../access/button.wxss';
+
+.preview {
+  background-color: #eee;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+.preview_img {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.preview_img image {
+  background-color: #333;
+  border-radius: 20rpx;
+  box-shadow: 0 0 20px #999;
+  width: 80%;
+}
+.button_wrap {
+  height: 128rpx;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center
+}
+.button_wrap button{
+  flex: auto;
+  margin: 0 10rpx;
+}
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

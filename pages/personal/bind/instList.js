@@ -18,7 +18,7 @@ Page({
     this.fetch(pid, delta, rootid, name);
   },
   fetch: async function(pid, delta, rootid, name) {
-    const data = await get("v1/api/sys/institution", { pid });
+    const data = await get("v1/api/sys/institution", { pid, status: 1 });
     if (data.length > 0) {
       this.setData({
         list: data,

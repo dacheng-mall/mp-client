@@ -37,7 +37,12 @@ App({
     const user = wx.getStorageSync("user");
     const token = getToken();
     if (user && token) {
-      this.afterLogin(user, token);
+      if (!user.autoId) {
+        // 如果没有autoId, 重新获取下
+        this._clear(this._login);
+      } else {
+        this.afterLogin(user, token);
+      }
       return;
     }
     wx.login({

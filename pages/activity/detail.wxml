@@ -1,4 +1,4 @@
-<view style="display: flex; flex-direction: column; flex: 1; height: {{height}}px;">
+<view wx:if="{{step === null}}" style="display: flex; flex-direction: column; flex: 1; height: {{height}}px;">
   <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff">
     <nothing wx:if="{{!id}}" />
     <scroll-view wx:else scroll-y="{{true}}" style="height: 100%;">
@@ -32,8 +32,9 @@
             <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
               <view class="gift-item" catch:tap="productDetail" data-id="{{gift.id}}">
                 <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
-                <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
+                <view class="gift-name">{{gift.title}}</view>
                 <view class="gift-price">￥{{gift.price * gift.totalCount}}</view>
+                <view class="gift-count">x{{gift.totalCount}}</view>
               </view>
             </block>
           </view>
@@ -53,6 +54,13 @@
             </view>
             {{institution.name}}
           </view>
+          <view class="info-item">
+            <view class="label">
+              <icon-x type="gift" size="{{32}}" color="#00bcbd" />
+              预约人数:
+            </view>
+            {{customCount + 3482}}人
+          </view>
           <!-- <view class="info-item">
             <view class="label">
               <icon-x type="user" size="{{32}}" color="#00bcbd" />
@@ -66,36 +74,37 @@
       </view>
     </scroll-view>
   </view>
-  <!-- 业务员, 没有报名时看到的 -->
-  <view wx:if="{{user.userType === 4 && sign && sign.length < 1}}" class="footer">
-    <text class="foot-info">已报名 {{salesmanCount}}人</text>
-    <button class="btn" type="primary" catch:tap="sign" disabled="{{!enable}}">
-      {{enable ? '立即报名' : '抱歉, 无法参与'}}
+  <!-- 业务员, 有权限, 没有报名时看到的 -->
+  <view wx:if="{{(user.userType === 4 && enable) && sign && sign.length < 1}}" class="footer">
+    <!-- <text class="foot-info">已报名 {{salesmanCount}}人</text> -->
+    <button wx:if="{{activityType === 'at_gift'}}" class="btn btn-large btn-primary" catch:tap="sign">
+      立即报名
     </button>
+    <view wx:else>请稍候...</view>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
   </view>
-  <!-- 业务员, 报名后看到的 -->
-  <view wx:if="{{user.userType === 4 && sign.length > 0}}" class="footer">
+  <!-- 业务员, 有权限, 报名后看到的 -->
+  <view wx:if="{{(user.userType === 4 && enable) && sign.length > 0}}" class="footer">
     <!-- <text class="foot-info">我有 {{myCustomCount}}客户</text> -->
-    <text class="foot-info">{{customCount}}人领取</text>
-    <button class="btn" type="primary" open-type="share" style="background-color: #00bcbd; color: #fff">
-      分享给客户
-    </button>
+    <!-- <text class="foot-info">{{customCount}}人预约</text> -->
+    <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
+    <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{poster.page}}" bg="{{poster.bg}}" scene="{{poster.scene}}" title="{{poster.title}}"></poster>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
   </view>
-  <!-- 客户看到的 -->
-  <view wx:if="{{user.userType === 2}}" class="footer">
-    <text class="foot-info">已领取 {{customCount}}次</text>
-    <button wx:if="{{gifts.id}}" class="btn" type="danger" data-id="{{gifts.id}}" catch:tap="gotoMyGifts" style="background-color: #00bcbd; color: #fff">
-      我的礼品
+  <!-- 无权限的业务员和客户看到的 -->
+  <view wx:if="{{user.userType === 2 || (user.userType === 4 && !enable)}}" class="footer">
+    <!-- <text class="foot-info">已预约 {{customCount}}次</text> -->
+    <button wx:if="{{gifts.id}}" disabled="{{true}}" class="btn btn-large btn-disabled" data-id="{{gifts.id}}" catch:tap="gotoMyGifts">
+      预约成功
     </button>
-    <button disabled="{{stauts === 0}}" wx:else class="btn" type="danger" catch:tap="showGetPanel" style="background-color: #00bcbd; color: #fff">
-      立即领取
+    <button disabled="{{stauts === 0}}" wx:else class="btn btn-large btn-primary" catch:tap="showGetPanel">
+      预约申请
     </button>
+    <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{poster.page}}" bg="{{poster.bg}}" scene="{{poster.scene}}" title="{{poster.title}}"></poster>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
@@ -106,7 +115,7 @@
   <form bindsubmit="checkSalesman" class="formWrap" wx:if="{{step === 0}}">
     <view class="top">
       <view class="getInfo">您的客户经理是谁?</view>
-      <button form-type="submit" class="nextBtn" size="mini" type="primary">下一步</button>
+      <button form-type="submit" class="btn btn-small btn-warning">下一步</button>
     </view>
     <view class="section">
       <view class="section__title">通过手机号查询您的客户经理</view>
@@ -115,11 +124,11 @@
   </form>
   <view class="top" wx:if="{{step === 1}}">
     <view class="getInfo">最多选{{totalCount}}个礼品, 您已选择{{iWantThem.length}}个</view>
-    <button class="nextBtn" size="mini" type="primary" data-next="{{2}}" catch:tap="goStep">
-      下一步
+    <button class="btn btn-small btn-warning" data-next="{{activityType !== 'at_book' ? 2 : null}}" catch:tap="goStep">
+      {{activityType !== 'at_book' ? '下一步' : '预约'}}
     </button>
   </view>
-  <scroll-view scroll-y="{{true}}" class="middle" wx:if="{{step === 1}}">
+  <view class="middle" wx:if="{{step === 1}}">
     <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
       <view class="gifItem">
         <view class="giftCheckbox" catch:tap="chooseGift" data-id="{{gift.id}}" data-index="{{index}}">
@@ -133,17 +142,17 @@
         <view class="gifItemPrice">￥{{gift.price * gift.totalCount}}</view>
       </view>
     </block>
-  </scroll-view>
-  <form bindsubmit="formSubmit" wx:if="{{step === 2}}" class="formWrap">
+  </view>
+  <form wx:if="{{activityType !== 'at_book'}}" bindsubmit="formSubmit" wx:if="{{step === 2}}" class="formWrap">
     <view class="top" style="height: 144rpx">
-      <scroll-view scroll-x="{{true}}" class="getInfo">
+      <view class="getInfo">
         <view class="hasChoosed" style="width: {{iWantThem.length * 129}}rpx">
           <block wx:for="{{products}}" wx:for-item="got" wx:key="{{got.id}}">
             <image wx:if="{{got.checked}}" src="{{source}}{{got.mainImageUrl}}" mode="aspectFill" />
           </block>
         </view>
-      </scroll-view>
-      <button form-type="submit" class="nextBtn" size="mini" type="primary">完成领取</button>
+      </view>
+      <button form-type="submit" class="btn btn-small btn-warning">完成预约</button>
     </view>
     <view class="middle">
       <view class="section">
@@ -171,6 +180,6 @@
     </view>
   </form>
   <view class="bottom">
-    <icon-x type="close-circle" size="{{88}}" color="#ddd" catch:tap="hideGetPanel"></icon-x>
+    <icon-x type="close-circle" size="{{88}}" color="#ccc" catch:tap="hideGetPanel"></icon-x>
   </view>
 </view>
