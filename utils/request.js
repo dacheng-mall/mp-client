@@ -15,10 +15,10 @@ export function setToken(t) {
     wx.removeStorageSync("token");
     return;
   }
-  if(!/^Bearer\s/.test(t)) {
+  if (!/^Bearer\s/.test(t)) {
     token = `Bearer ${t}`;
   } else {
-    token = t
+    token = t;
   }
   wx.setStorageSync("token", token);
 }
@@ -34,14 +34,18 @@ export function getType(res) {
 }
 
 const showLoading = (url, show) => {
-  switch (url) {
-    case "api/sys/favorites/set": {
+  switch (true) {
+    case url === "api/sys/favorites/set":
+    case /^v1\/api\/public\/saveImg/.test(url):
+    case /^v1\/api\/sys\/favorites\/productIds/.test(url):
+    case /^v1\/api\/wx\/createWXAQRCode/.test(url): {
       break;
     }
     default: {
       if (show) {
         wx.showLoading({
-          title: "加载中..."
+          title: "加载中...",
+          mask: true,
         });
       } else {
         wx.hideLoading();
@@ -58,7 +62,7 @@ export function parseResponse({ data, _url }) {
 export function checkStatus({ res, _url }) {
   const { statusCode, data } = res;
   if (statusCode !== 200) {
-    return Promise.reject({statusCode, data});
+    return Promise.reject({ statusCode, data });
     // return Promise.reject(`${statusCode}-${data}`);
   }
   return Promise.resolve({ data, _url });

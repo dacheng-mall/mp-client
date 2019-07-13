@@ -1,7 +1,18 @@
-<view class="instWrap">
-  <view class="break" wx:if="{{name}}">
-    <text class="instName">我直属于: {{name}}</text>
-    <button class="breakBtn" size="mini" type="primary" bind:tap="back">确认</button>
+<view class="choose-role" wx:if="{{!role}}">
+  <view class="iam">我是...</view>
+  <view class="roles">
+    <button class="role-inner" bind:tap="choose" data-role="inner">内勤</button>
+    <button class="role-outer" bind:tap="choose" data-role="outer">外勤</button>
+  </view>
+  <view class="info">请如实选择, 以便根据您的职能提供更精准的服务</view>
+</view>
+<view wx:else class="instWrap">
+  <view class="break-wrap" wx:if="{{role === 'inner' && name}}">
+    <view class="break">
+      <text class="instName">我是 {{name}} 的内勤</text>
+      <button class="btn-primary btn-small breakBtn" bind:tap="back">确认</button>
+    </view>
+    <view class="goon">如果不是, 请继续选择...</view>
   </view>
   <view style="flex: 1; overflow:hidden">
     <scroll-view scroll-y="{{true}}" style="height: 100%">

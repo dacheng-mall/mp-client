@@ -15,14 +15,22 @@ page {
   justify-content: space-between;
   align-items: center;
 }
+.break-wrap {
+  background-color: #eee;
+  border-bottom: 1px solid #ddd;
+}
+.break-wrap .goon {
+  text-align: left;
+  padding: 10rpx 20rpx;
+  font-size: 28rpx;
+  color: #b64e08;
+}
 .break {
   display: flex;
   flex-direction: row;
-  padding: 32rpx 20rpx;
+  padding: 32rpx 20rpx 20rpx;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  background-color: #eee
 }
 .breakBtn {
   display: inline-block;
@@ -30,4 +38,42 @@ page {
 }
 .instName {
   font-size: 32rpx
+}
+.iam {
+  font-size: 44rpx;
+  color: #999;
+  margin: 88rpx auto 40rpx;
+}
+.choose-role {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.choose-role .roles {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly
+}
+.choose-role .roles button {
+  color: #fff;
+  width: 240rpx;
+  height: 240rpx;
+  line-height: 240rpx;
+  font-size: 44rpx
+}
+.role-outer {
+  background: linear-gradient(to bottom, #ff1a53 , #b3002c);
+}
+.role-inner {
+  background: linear-gradient(to bottom, #00bcbd , #0e85bd);
+}
+.info {
+  border: 1px solid #f0c85b;
+  color: #b64e08;
+  margin: 40rpx 64rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  font-size: 32rpx;
 }

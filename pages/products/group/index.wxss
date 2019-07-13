@@ -44,6 +44,7 @@
 }
 .btn {
   width: 45%;
+  color: #fff
 }
 .cancel-btn {
   width: 25%;

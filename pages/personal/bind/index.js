@@ -1,16 +1,38 @@
-import { get, put, setToken } from "../../../utils/request";
+import { get, put } from "../../../utils/request";
+import {
+  validateMobile,
+  validateIdcard,
+  validateName
+} from "../../../utils/util";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
-const app = getApp()
+const INIT_STATE = {
+  rootInst: "",
+  institutionId: "",
+  institutionName: "",
+  grade: [],
+  gradeName: null,
+  role: null
+};
+
 Page({
-  data: {
-    rootInst: "",
-    institutionId: "",
-    institutionName: "",
-    grade: [],
-    gradeName: null
-  },
-  onShow() {
+  data: { ...INIT_STATE },
+  onShow: async function() {
+    const user = wx.getStorageSync("user");
+    if (!this.data.user) {
+      const params = {
+        user
+      };
+      if (user.userType === 4) {
+        const { name, id } = user.institution;
+        params.institutionId = id;
+        params.institutionName = name;
+        await this.initGrades(id, user.gradeId, user.gradeName);
+      }
+      this.setData({
+        ...params
+      });
+    }
     const timer = setTimeout(() => {
       const rootInst = wx.getStorageSync("bind_rootid");
       const institutionId = wx.getStorageSync("bind_id");
@@ -28,6 +50,24 @@ Page({
       clearTimeout(timer);
     }, 0);
   },
+  onUnload: function() {
+    this.setData({ ...INIT_STATE });
+  },
+  initGrades: async function(insId, gid, gname) {
+    const grade = await get(`v1/api/sys/grade/findGradesByInsId`, { insId });
+    let gradeIndex = 0;
+    grade.forEach(({ id }, i) => {
+      if (id === gid) {
+        gradeIndex = i;
+        return;
+      }
+    });
+    this.setData({
+      grade,
+      gradeIndex,
+      gradeName: gname
+    });
+  },
   pickInst() {
     wx.navigateTo({
       url: "/pages/personal/bind/instList?pid=&delta=1"
@@ -37,7 +77,7 @@ Page({
     const data = await get("v1/api/sys/grade", { institutionId: rootInst });
     if (data.length < 1) {
       wx.showModal({
-        title: "数据异常",
+        title: "警告!",
         content: "您选择的机构没有职级数据, 请联系机构管理员添加职级信息"
       });
     } else {
@@ -88,36 +128,50 @@ Page({
         return;
       }
     }
+
+    if (value.mobile) {
+      const msg = validateMobile(value.mobile);
+      if (msg) {
+        wx.showToast({
+          title: msg,
+          icon: "none"
+        });
+        return;
+      }
+    }
+    if (value.name) {
+      const msg = validateName(value.name);
+      if (msg) {
+        wx.showToast({
+          title: msg,
+          icon: "none"
+        });
+        return;
+      }
+    }
+    if (value.idCard) {
+      const msg = validateIdcard(value.idCard);
+      if (msg) {
+        wx.showToast({
+          title: msg,
+          icon: "none"
+        });
+        return;
+      }
+    }
     const data = await put("v1/api/sys/user", value);
     if (data.userType === 4) {
       try {
         wx.showToast("已加入机构");
-        wx.removeStorage({key: "bind_rootid"});
-        wx.removeStorage({key: "bind_id"});
-        wx.removeStorage({key: "bind_name"});
-        wx.login({
-          success: res => {
-            get("api/wx/token_bycode", { code: res.code })
-              .then(data => {
-                if (data.user && data.token) {
-                  this.afterLogin(data.user, data.token);
-                }
-              })
-              .catch(err => console.log("登录失败: ", err));
-          }
+        wx.removeStorage({ key: "bind_rootid" });
+        wx.removeStorage({ key: "bind_id" });
+        wx.removeStorage({ key: "bind_name" });
+        wx.setStorageSync('user', data);
+        wx.setStorageSync('force', true);
+        wx.switchTab({
+          url: "/pages/personal/index"
         });
       } catch (e) {}
     }
-  },
-
-  afterLogin: function(user, token) {
-    app.userInfo = user;
-    wx.setStorageSync("user", user);
-    if (token) {
-      setToken(token);
-    }
-    wx.switchTab({
-      url: "/pages/personal/index"
-    });
   }
 });

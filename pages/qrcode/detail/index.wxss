@@ -15,3 +15,9 @@
   padding: 10px 10px 30px;
   text-align: center;
 }
+.none {
+  font-size: 44rpx;
+  text-align: center;
+  padding: 64rpx 0;
+  color: #aaa
+}

@@ -66,7 +66,7 @@ export const getFavorites = () =>
     })
     .then(userId => {
       return getStorageWithKey("favorites", () =>
-        get("api/sys/favorites/productIds", { userId })
+        get("v1/api/sys/favorites/productIds", { userId })
       );
     })
     .then(data => {

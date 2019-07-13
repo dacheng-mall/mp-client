@@ -1,20 +1,19 @@
 /* pages/personal/index.wxss */
-.wrap {
-  background-color: #f5f5f5
-}
 .header {
   padding: 32rpx 0;
-  background-color: #fff;
+  background-color: #00bcbd;
   border-bottom: 1px solid #eee;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 .header .avatar {
   border-radius: 50%;
   overflow: hidden;
-  margin: 40rpx auto 20rpx;
-  border: 2px solid #eee;
+  margin: 0 20rpx;
+  border: 2px solid #fff;
+  flex-shrink: 0;
 }
 .header .avatar image {
   width: 128rpx;
@@ -23,23 +22,34 @@
 }
 .header .user-info {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  align-items: center
+  align-items: stretch;
+  justify-content: center;
 }
 .header .user-info .name {
-  font-size: 48rpx;
-  color: #333;
-  margin: 20rpx 0 4rpx;
+  font-size: 40rpx;
+  color: #fff;
+  word-break: break-all;
+  margin-bottom: 4rpx;
 }
 .header .user-info .grade {
   font-size: 28rpx;
-  color: #666;
+  color: #fff;
 }
 .header .user-info .inst {
-  font-size: 32rpx;
-  color: #999;
-  margin: 4rpx 0 20rpx;
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 200
+}
+
+.header .user-info .grade {
+  font-size: 24rpx;
+}
+.header-btn {
+  margin: 0 20rpx;
+  flex-shrink: 0;
 }
 .list {
-  margin: 16rpx;
+  margin: 20rpx;
 }

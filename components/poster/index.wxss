@@ -16,7 +16,7 @@
   align-items: center;
 }
 .preview_img image {
-  background-color: #333;
+  background-color: #aaa;
   border-radius: 20rpx;
   box-shadow: 0 0 20px #999;
   width: 80%;

@@ -9,7 +9,7 @@
     <view class="label">机构</view>
     <view class="cont">
       <view>{{institution.name}}</view>
-      <view class="subTitle">{{institution.address}}</view>
+      <view class="subTitle" wx:if="{{institution.address}}">{{institution.address}}</view>
     </view>
   </view>
   <view wx:if="{{salesman.id}}" class="linkedItem" bindtap="makePhoneCall" data-phone="{{salesman.mobile}}">

@@ -1,6 +1,8 @@
 const fsm = wx.getFileSystemManager();
-const FILE_BASE_NAME = "tmp_base64src"; //自定义文件名
-
+export function makeRandom() {
+  const r = Math.random() * 10000;
+  return r.toString(32);
+}
 export function base64src(base64data) {
   try {
     const [, format, bodyData] =
@@ -8,7 +10,8 @@ export function base64src(base64data) {
     if (!format) {
       return new Error("ERROR_BASE64SRC_PARSE");
     }
-    const filePath = `${wx.env.USER_DATA_PATH}/${FILE_BASE_NAME}.${format}`;
+    const filePath = `${wx.env.USER_DATA_PATH}/${makeRandom()}.${format}`;
+
     const buffer = wx.base64ToArrayBuffer(bodyData);
     return new Promise((res, rej) => {
       fsm.writeFile({

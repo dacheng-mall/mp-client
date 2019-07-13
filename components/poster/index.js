@@ -1,5 +1,5 @@
 import { post, get } from "../../utils/request";
-import { source, sourceSSL } from "../../setting";
+import { sourceSSL } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 import { base64src } from "./base64src";
 
@@ -82,23 +82,14 @@ Component({
         });
       });
     },
-    getToken: async function() {
-      const [data] = await get("v1/api/sys/appsettings?code=access_token");
-      if (data && data.content) {
-        return JSON.parse(data.content).access_token;
-      }
-      return await get("v1/api/sys/appsettings/getWXAccess_Token");
-    },
     getImageUrl: async function(url, prefix = "https://") {
-      let _url = await get(`api/public/saveImg?url=${url}`);
+      let _url = await get(`v1/api/public/saveImg?url=${url}`);
       _url = _url.replace(/\\/g, "/");
       return `${sourceSSL}${_url}`;
     },
     getQr: async function() {
-      console.log("++++++++++", this.properties);
       try {
         const data = await post("v1/api/wx/createWXAQRCode", {
-          // page: "pages/activity/detail",
           page: this.properties.page,
           scene: this.properties.scene,
           width: this.properties.width
@@ -111,7 +102,7 @@ Component({
         }
         return `data:image/jpg;base64,${data}`;
       } catch (e) {
-        console.log('',e)
+        console.log("", e);
       }
     },
     drawQr: async function(ctx, qr, { x, y, w, h, bgc }) {
@@ -207,6 +198,9 @@ Component({
                   step: 2,
                   preview: url.tempFilePath
                 });
+                setTimeout(() => {
+                  wx.hideLoading();
+                }, 300);
               }, 500);
             },
             fail(e) {
@@ -234,8 +228,12 @@ Component({
         step: 0,
         preview: ""
       });
+      wx.hideLoading();
     },
     create: async function(e) {
+      wx.showLoading({
+        title: "海报生产中..."
+      });
       this.setData({
         step: 1
       });
@@ -256,6 +254,7 @@ Component({
         this.setData({
           step: 0
         });
+        wx.hideLoading();
         return;
       }
       const _qr = await base64src(qr);
@@ -272,8 +271,8 @@ Component({
       // 画文字
       this.text(context, this.properties.title);
       context.draw(false, () => {
-        setTimeout(() => {
-          this.save();
+        setTimeout(async () => {
+          await this.save();
         }, 200);
       });
     }

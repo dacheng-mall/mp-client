@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.3",
+	"libVersion": "2.7.4",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 27,
+			"current": 23,
 			"list": [
 				{
 					"id": 0,
@@ -206,24 +206,24 @@
 					"scene": null
 				},
 				{
-					"id": 22,
+					"id": 21,
 					"name": "扫码",
 					"pathName": "pages/qrcode/index",
-					"query": "scene=%3Fid%3D75",
+					"query": "scene=%3Fid%3D235",
+					"scene": 1047
+				},
+				{
+					"id": 22,
+					"name": "扫码2",
+					"pathName": "pages/qrcode/index",
+					"query": "scene=%3Fid%3D262",
 					"scene": 1047
 				},
 				{
 					"id": 23,
-					"name": "扫码2",
-					"pathName": "pages/qrcode/index",
-					"query": "scene=%3Fid%3D237",
-					"scene": 1047
-				},
-				{
-					"id": 24,
 					"name": "扫码3",
 					"pathName": "pages/qrcode/index",
-					"query": "scene=%3Fid%3D90",
+					"query": "scene=%3Fid%3D257",
 					"scene": 1047
 				},
 				{
@@ -253,6 +253,13 @@
 					"pathName": "pages/activity/detail",
 					"query": "scene=%3Fa%3D10%26sa%3D392",
 					"scene": 1047
+				},
+				{
+					"id": -1,
+					"name": "扫码进活动",
+					"pathName": "pages/activity/detail",
+					"query": "scene=%3Fa%3D11",
+					"scene": null
 				}
 			]
 		}

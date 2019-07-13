@@ -1,16 +1,16 @@
 <view class="wrap">
-  <canvas wx:if="{{step === 1}}" class="canvas" style="width: {{ww}}px;height:{{wh}}px;background-color: #333" canvas-id="poster" />
+  <canvas wx:if="{{step === 1}}" class="canvas" style="width: {{ww}}px;height:{{wh}}px;" canvas-id="poster" />
   <view wx:if="{{step === 2}}" class="preview" style="width: {{ww}}px;height:{{wh}}px;">
     <view class="preview_img">
       <image src="{{preview}}" mode="aspectFit" style="height: {{wh * 0.8}}px" />
     </view>
     <view class="button_wrap">
-      <button bindtap="preview" class="btn btn-primary btn-large">预览并分享</button>
-      <button bindtap="saveToAlbum" class="btn-danger btn-large">保存到本地</button>
+      <button bindtap="preview" class="btn btn-primary btn-large">预览</button>
+      <button bindtap="saveToAlbum" class="btn-danger btn-large">保存并分享朋友圈</button>
       <button bindtap="cancel" class="btn-default btn-ghost">取消</button>
     </view>
   </view>
-  <button wx:if="{{step === 0}}" style="{{styles}}" class="{{className}}" bindtap="create" class="share_button">
+  <button wx:if="{{step === 0}}" style="{{styles}}"  bindtap="create" class="share_button">
     {{btnText}}
   </button>
 </view>

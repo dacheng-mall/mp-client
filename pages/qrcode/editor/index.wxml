@@ -2,11 +2,14 @@
 <form bindsubmit="formSubmit" bindreset="formReset">
   <block wx:for="{{data}}" wx:key="{{item.code}}">
     <view class="section">
-      <view class="sectionTitle">{{item.label}}<text class="required">{{item.required ? '(必填)' : ''}}</text></view>
+      <view class="sectionTitle">
+        {{item.label}}
+        <text class="required">{{item.required ? '(必填)' : ''}}</text>
+      </view>
       <input class="sectionInput" name="{{item.code}}" placeholder="{{item.help}}" value="{{value[item.code]}}" />
     </view>
   </block>
   <view class="btnWrap">
-    <button form-type="submit" type="primary" class="btn">提交信息</button>
+    <button form-type="submit" class="submitBtn">提交信息</button>
   </view>
 </form>

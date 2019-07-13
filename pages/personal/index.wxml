@@ -4,14 +4,15 @@
       <image src="{{user.avatar}}" />
     </view>
     <view class="user-info">
-      <view>
-        <text class="name">{{user.name}}</text>
-        <text wx:if="{{user.userType === 4}}" class="grade" style=""> ({{user.gradeName}})</text>
-      </view>
-      <view wx:if="{{user.userType === 2 }}">
-        <button size="mini" type="primary" bindtap="bindInst">添加机构和职级</button>
-      </view>
+      <view class="name">{{user.name}}</view>
       <view class="inst" wx:if="{{user.userType === 4}}">{{user.institution.name}}</view>
+      <view wx:if="{{user.userType === 4}}" class="inst grade" style="">{{user.gradeName}}</view>
+    </view>
+    <view wx:if="{{user.userType === 2 }}" class="header-btn">
+      <button bindtap="bindInst" class="btn-large btn-warning">加入机构</button>
+    </view>
+    <view wx:if="{{user.userType === 4 }}" class="header-btn">
+      <button bindtap="bindInst" class="btn-small btn-success">修改机构信息</button>
     </view>
   </view>
   <view class="list">

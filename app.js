@@ -1,6 +1,6 @@
 //app.js
 import { get, post, put, setToken, getToken } from "./utils/request";
-import { uri } from "./utils/util";
+import { uri, getRoute } from "./utils/util";
 import { homePath } from "./setting";
 
 App({
@@ -9,7 +9,7 @@ App({
     const onShowTimer = setTimeout(() => {
       this.checkUpdate();
       clearTimeout(onShowTimer);
-    }, 1000);
+    }, 500);
   },
   setNavHeight: function() {
     wx.getSystemInfo({
@@ -33,10 +33,13 @@ App({
       });
     } catch (e) {}
   },
-  _login: function() {
+  _login: function(force) {
     const user = wx.getStorageSync("user");
     const token = getToken();
-    if (user && token) {
+    if (force) {
+      this._clear();
+    }
+    if (!force && (user && token)) {
       if (!user.autoId) {
         // 如果没有autoId, 重新获取下
         this._clear(this._login);
@@ -81,9 +84,12 @@ App({
     const { openid, user, token, userInfo } = data;
     if (openid) {
       // 没注册过
-      wx.navigateTo({
-        url: "/pages/start/author"
-      });
+      const { path } = getRoute();
+      if (path !== "pages/start/author") {
+        wx.navigateTo({
+          url: "/pages/start/author"
+        });
+      }
     } else if (user && token) {
       // 注册过
       this.afterLogin(user, token);
@@ -114,7 +120,7 @@ App({
     }
     // path, query 是最初访问的小程序时的目标页面
     const { path, query } = this.globalData.initState;
-    get("api/sys/favorites/productIds", { userId: user.id }).then(res => {
+    get("v1/api/sys/favorites/productIds", { userId: user.id }).then(res => {
       wx.setStorageSync("favorites", res);
     });
     const routes = getCurrentPages();

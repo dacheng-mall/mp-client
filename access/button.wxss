@@ -21,19 +21,24 @@
   line-height: 58rpx;
   border-radius: 29rpx;
   padding: 0 29rpx;
-  font-size: 24rpx
+  font-size: 24rpx;
+  border: none;
 }
 .btn-primary {
   background: linear-gradient(to right, #00bcbd , #0e85bd);
-  color: #fff;
+  color: #fff !important;
 }
 .btn-danger {
   background: linear-gradient(to right, #ff1a53 , #b3002c);
-  color: #fff;
+  color: #fff !important;
+}
+.btn-success {
+  background: linear-gradient(to right, #1077a0 , #004a6d);
+  color: #fff !important;
 }
 .btn-warning {
   background: linear-gradient(to right, #ff9933 , #cc3f00);
-  color: #fff;
+  color: #fff !important;
 }
 .btn-ghost {
   background: transparent;
@@ -42,5 +47,5 @@
 }
 .btn-disabled {
   background: linear-gradient(to right, #eee , #ccc);
-  color: #aaa;
+  color: #fff !important;
 }

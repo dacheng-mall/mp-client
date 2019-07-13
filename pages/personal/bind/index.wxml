@@ -1,29 +1,52 @@
 <form bindsubmit="formSubmit" bindreset="formReset" style="flex: 1;">
   <view style="" class="wrap">
-    <scroll-view class="form-wrap" scroll-y="{{true}}">
+    <view class="form-wrap">
       <view class="section">
-        <input class="input" value="{{institutionName}}" catchtap="pickInst" disabled="{{true}}" name="institutionId" placeholder="请选择所属机构" />
+        <view class="sectionTitle">
+          机构
+          <text class="required">(必填)</text>
+        </view>
+        <input class="sectionInput" value="{{institutionName}}" catchtap="pickInst" disabled="{{true}}" name="institutionId" placeholder="请选择所属机构" />
       </view>
       <view wx:if="{{grade.length > 0}}" class="section">
-        <picker bindchange="changeGrade" mode="selector" range="{{grade}}" range-key="name" class="input" name="gradeId" placeholder="请选择所属机构">
+        <view class="sectionTitle">
+          职级
+          <text class="required">(必填)</text>
+        </view>
+        <picker bindchange="changeGrade" value="{{gradeIndex}}" mode="selector" range="{{grade}}" range-key="name" class="sectionInput" name="gradeId" placeholder="请选择所属机构">
           <view class="picker">{{gradeName || '请选择职级'}}</view>
         </picker>
       </view>
       <view class="section">
-        <input class="input" name="name" placeholder="请输入真实姓名" />
+        <view class="sectionTitle">
+          真实姓名
+          <text class="required">(必填)</text>
+        </view>
+        <input class="sectionInput" name="name" value="{{user.name}}" placeholder="请输入真实姓名" />
       </view>
       <view class="section">
-        <input class="input" name="code" placeholder="请输入工号" />
+        <view class="sectionTitle">
+          工号
+          <text class="required">(必填)</text>
+        </view>
+        <input class="sectionInput" name="code" value="{{user.code}}" placeholder="请输入工号" />
       </view>
       <view class="section">
-        <input class="input" type="number" name="mobile" placeholder="请输入手机号" />
+        <view class="sectionTitle">
+          手机号
+          <text class="required">(必填)</text>
+        </view>
+        <input class="sectionInput" type="number" name="mobile" value="{{user.mobile}}" placeholder="请输入手机号" />
       </view>
       <view class="section">
-        <input class="input" type="idcard" name="idCard" placeholder="请输入身份证号" />
+        <view class="sectionTitle">
+          身份证号
+        </view>
+        <input class="sectionInput" type="idcard" name="idCard" value="{{user.idCard}}" placeholder="请输入身份证号" />
       </view>
-    </scroll-view>
+    </view>
     <view class="btn">
-      <button type="primary" form-type="submit">提交信息</button>
+      <button class="submitBtn" form-type="submit">提交信息</button>
     </view>
   </view>
 </form>

@@ -12,7 +12,7 @@ Page({
     iWantThem: [], //用户想要领取的礼物,
     step: null
   },
-  onLoad: function() {
+  onShow: function() {
     wx.hideShareMenu();
     const user = wx.getStorageSync("user");
     this.setData({
@@ -34,7 +34,7 @@ Page({
       timingFunction: "ease"
     });
   },
-  onShow: function() {},
+  // onShow: function() {},
   showGetPanel: function() {
     this.animation
       .top(0)
@@ -147,23 +147,23 @@ Page({
       data.createTime = moment(data.createTime).format("YYYY-MM-DD");
       // 初始化海报信息
       const poster = {
-        page: 'pages/activity/detail',
-        title: data.name,
-        scene: `?a=${data.autoId}`
+        p_page: 'pages/activity/detail',
+        p_title: data.name,
+        p_scene: `?a=${data.autoId}`
       };
       // 获取海报背景
       const [lastImg] = data.images.splice(data.images.length - 1, 1);
-      poster.bg = `${source}${lastImg.url}`;
+      poster.p_bg = `${source}${lastImg.url}`;
       // 获取场景值
       if (data.enable) {
         const user = wx.getStorageSync("user");
         if (user) {
-          poster.scene += `&sa=${user.autoId}`;
+          poster.p_scene += `&sa=${user.autoId}`;
         }
       }
       this.setData({
         ...data,
-        poster,
+        ...poster,
         width: screenWidth,
         height: windowHeight
       });

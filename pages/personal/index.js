@@ -1,16 +1,15 @@
-import { get } from "../../utils/request";
+import { get, setToken } from "../../utils/request";
 import { uri, getRoute } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
-let timer = null;
-
 Page({
   data: {
     source,
+    timestamp: null,
     list: [
       {
-        name: "我的礼品",
+        name: "我的预约",
         icon: "gift-fill",
         iconColor: "#00bcbd",
         color: "#999",
@@ -26,7 +25,7 @@ Page({
         userType: 4
       },
       {
-        name: "我发放的码",
+        name: "我送出的礼物",
         icon: "qrcode",
         iconColor: "#ff3366",
         color: "#999",
@@ -34,45 +33,59 @@ Page({
         userType: 4
       },
       {
-        name: "我领取的码",
+        name: "我领取的礼物",
         icon: "qrcode",
         iconColor: "#00bcbd",
         color: "#999",
         path: "/pages/qrcode/list/index?type=user",
         userType: null
-      },
-      {
-        name: "我的机构",
-        icon: "info-circle-fill",
-        iconColor: "#00bcbd",
-        color: "#999",
-        path: "",
-        userType: 4
       }
     ]
   },
   onShow: function() {
-    const user = wx.getStorageSync("user");
-    const timestamp = new Date().valueOf();
-    if (
-      !this.data.timestamp ||
-      !user ||
-      timestamp - this.data.timestamp > 7200000
-    ) {
-      timer = setInterval(this.getUser, 1000);
+    const ts = new Date().valueOf();
+    const force = wx.getStorageSync("force");
+    wx.removeStorage({
+      key: "force"
+    });
+    if (force || !this.data.timestamp || ts - this.data.timestamp > 7200000) {
+      wx.startPullDownRefresh();
     }
   },
-  getUser: function() {
-    const user = wx.getStorageSync("user");
-    if (user) {
-      const timestamp = new Date().valueOf();
-      this.setData({
-        user,
-        timestamp
+  fetch: function() {
+    return new Promise((resolve, rej) => {
+      wx.login({
+        success: res => {
+          get("api/wx/token_bycode", { code: res.code })
+            .then(data => {
+              if (data.user) {
+                // 注册过的, 用数据库的最新数据渲染页面
+                this.setData({
+                  user: data.user,
+                  timestamp: new Date().valueOf()
+                });
+                setToken(data.token);
+                resolve(data.user);
+              } else {
+                // 没注册过, 请缓存, 坐等app的注册
+                const app = getApp();
+                app._clear();
+              }
+            })
+            .catch(err => rej(err));
+        }
       });
-      clearInterval(timer);
-      timer = null;
-    }
+    });
+  },
+  onPullDownRefresh: function() {
+    this.fetch()
+      .then(() => {
+        wx.stopPullDownRefresh();
+      })
+      .catch(err => {
+        wx.stopPullDownRefresh();
+        wx.showToast(err);
+      });
   },
   bindInst() {
     wx.removeStorageSync("bind_rootid");

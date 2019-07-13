@@ -3,7 +3,7 @@ import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 Page({
   data: {
-    invalid: '',
+    invalid: "",
     type: "",
     currentKey: "",
     mainImage: null,
@@ -32,7 +32,7 @@ Page({
   onLoad() {
     this.fetch(this.options);
   },
-
+  // 业务员绑定码
   bSalesman() {
     wx.showModal({
       title: "这是我的码, 立即绑定",
@@ -87,13 +87,13 @@ Page({
     const user = wx.getStorageSync("user");
     const keys = this.data.keys;
     const [data] = await get(`v1/api/sys/qr${query}`);
-    if(!data) {
+    if (!data) {
       wx.showToast({
-        title: '无效二维码'
-      })
+        title: "无效二维码"
+      });
       this.setData({
-        invalid: 'yes',
-      })
+        invalid: "yes"
+      });
       return;
     }
     let initTag = "detail";
@@ -101,24 +101,215 @@ Page({
     // 如果salesmanId, institutionId, activityId, productId有任意一个, 关联常态显示
     // 如果qrType.bindSalesman === 0 不需要绑定业务员, 否则判断是否存在institutionId, 如果不存在, 所有业务员都可以绑定, 如果有institutionId, 则仅属于该机构的业务员可以绑定
 
-    if (!data.qrType.fields) {
-      // 如果data.qrType.fields为空, 不可编辑, 没有详情, 只能绑定客户和业务员
-      initTag = "linked";
-      keys[2].disabled = true;
-      keys[0].disabled = true;
-    } else if (!data.userId) {
-      // 如果data.qrtype.fields存在, 但是data.fields为空, 可编辑, 暂时无内容, 未被绑定过, 无详情
-      keys[0].disabled = true;
-      initTag = "editor";
-    } else if (data.userId === user.id) {
-      // 已经绑定过了, 绑定者是当前用户
-      initTag = "detail";
-      keys[0].disabled = false;
-    } else {
-      // 已经绑定过了, 但是绑的是别人
-      initTag = "detail";
-      keys[0].disabled = false;
-      keys[2].disabled = true;
+    switch (user.userType) {
+      case 2: {
+        const { bindSalesman } = data.qrType;
+        // 这是客户
+        if (!data.qrType.fields) {
+          // 如果data.qrType.fields为空, 不可编辑, 没有详情, 只能绑定客户和业务员
+          initTag = "linked";
+          keys[0].disabled = true;
+          keys[1].disabled = false;
+          keys[2].disabled = true;
+        } else if (!data.userId) {
+          // 如果data.qrtype.fields存在, 但是data.fields为空, 可编辑, 暂时无内容, 未被绑定过, 无详情
+          switch (bindSalesman) {
+            case 0:
+            case 1:
+            case 3: {
+              // 不强制绑定业务员信息的时候, 采集信息作为公开信息, 所有用户可见
+              initTag = "editor";
+              keys[0].disabled = true;
+              keys[2].disabled = false;
+              break;
+            }
+            case 2: {
+              this.bUser(2);
+              initTag = "linked";
+              keys[0].disabled = true;
+              keys[2].disabled = true;
+              break;
+            }
+          }
+          keys[1].disabled = false;
+        } else if (data.userId === user.id) {
+          // 已经绑定过了, 绑定者是当前用户
+          switch (bindSalesman) {
+            case 0:
+            case 1:
+            case 3: {
+              initTag = "detail";
+              keys[2].disabled = false;
+              break;
+            }
+            default: {
+              // 仅业务员可以编辑的信息
+              initTag = "linked";
+              keys[2].disabled = true;
+              break;
+            }
+          }
+          keys[0].disabled = false;
+          keys[1].disabled = false;
+        } else {
+          // 已经绑定过了, 但是绑的是别人
+          switch (bindSalesman) {
+            case 0: {
+              initTag = "detail";
+              keys[0].disabled = false;
+              keys[2].disabled = true;
+              break;
+            }
+            default: {
+              initTag = "linked";
+              keys[0].disabled = true;
+              keys[2].disabled = true;
+              break;
+            }
+          }
+          keys[1].disabled = false;
+        }
+        break;
+      }
+      case 4: {
+        // 这是业务员
+        if (!data.qrType.fields) {
+          // 如果data.qrType.fields为空, 不可编辑, 没有详情, 只能绑定客户和业务员
+          initTag = "linked";
+          keys[0].disabled = true;
+          keys[1].disabled = false;
+          keys[2].disabled = true;
+        } else if (!data.salesmanId) {
+          // 如果data.qrtype.fields存在, 需要采集信息, 无业务员信息
+          // 此时业务员需要会接收到绑定询问, 可以不绑, 可以作为客户绑定
+          if (!data.userId) {
+            // 没有客户绑定过
+            // 当前业务员作为客户领取了码
+            initTag = "linked";
+            keys[0].disabled = true;
+            keys[1].disabled = false;
+            switch (data.qrType.bindSalesman) {
+              case 2: {
+                // 业务员可编辑
+                keys[2].disabled = true;
+                break;
+              }
+              default: {
+                // 客户或业务员可编辑
+                keys[2].disabled = false;
+                break;
+              }
+            }
+          } else if (data.userId && data.userId === user.id) {
+            // 当前业务员作为客户领取了码
+            switch (data.qrType.bindSalesman) {
+              case 0:
+              case 1: {
+                // 客户可编辑
+                initTag = "editor";
+                keys[2].disabled = false;
+                break;
+              }
+              case 2:
+              // 业务员可编辑
+              case 3: {
+                // 业务员和客户均可编辑
+                initTag = "detail";
+                keys[2].disabled = true;
+                break;
+              }
+            }
+            keys[0].disabled = false;
+            keys[1].disabled = false;
+          } else {
+            // 当前业务员作扫了其他客户领取过的码
+            initTag = "detail";
+            keys[0].disabled = false;
+            keys[1].disabled = false;
+            keys[2].disabled = true;
+          }
+        } else if (data.salesmanId === user.id) {
+          // 已经绑定过业务员, 且绑定者是当前用户
+          if (!data.userId) {
+            initTag = "linked";
+            keys[0].disabled = true;
+          } else {
+            initTag = "detail";
+            keys[0].disabled = false;
+          }
+          keys[1].disabled = false;
+          switch (data.qrType.bindSalesman) {
+            case 0:
+            case 1: {
+              // 客户可编辑
+              keys[2].disabled = true;
+              break;
+            }
+            case 2:
+            // 业务员可编辑
+            case 3: {
+              // 业务员和客户均可编辑
+              keys[2].disabled = false;
+              break;
+            }
+          }
+        } else {
+          // 已经绑定其他业务员了(salesmanId不是自己的)
+          if (!data.userId) {
+            // 无客户信息, 业务员可以作为客户领取码
+            switch (data.qrType.bindSalesman) {
+              case 2: {
+                // 仅业务员可编辑
+                initTag = "linked";
+                keys[2].disabled = true;
+                break;
+              }
+              case 0:
+              case 1:
+              // 客户可编辑
+              case 3: {
+                // 业务员和客户均可编辑
+                initTag = "editor";
+                keys[2].disabled = false;
+                break;
+              }
+            }
+            keys[0].disabled = true;
+            keys[1].disabled = false;
+          } else if (data.userId === user.id) {
+            // 业务员作为客户领取了其他业务员的码
+            if (data.qrType.bindSalesman === 2) {
+              // 仅允许业务员采集信息的
+              initTag = "detail";
+              keys[2].disabled = true;
+            } else {
+              // 强绑业务员, 不能看其他同行的客户信息
+              initTag = "editor";
+              keys[2].disabled = false;
+            }
+            keys[0].disabled = false;
+            keys[1].disabled = false;
+          } else {
+            // 有客户信息, 业务员作为第三方客户, 查看采集信息
+            if (data.qrType.bindSalesman === 0) {
+              // 不强绑业务员, 被视为客户采集信息是公开的(商品类型的码, 比如挪车码)
+              initTag = "detail";
+              keys[0].disabled = false;
+            } else {
+              // 强绑业务员, 不能看其他同行的客户信息
+              initTag = "linked";
+              keys[0].disabled = true;
+            }
+            // 可以看关联信息, 但不能编辑
+            keys[1].disabled = false;
+            keys[2].disabled = true;
+          }
+        }
+        break;
+      }
+      default: {
+        return;
+      }
     }
     const freeCount = keys.filter(({ disabled }) => !disabled).length;
     let canBindUser = false,
@@ -137,7 +328,7 @@ Page({
     } else if (
       user.userType === 4 &&
       !data.salesmanId &&
-      data.qrType.bindSalesman === 1
+      data.qrType.bindSalesman > 0
     ) {
       // 这是业务员, 当前码没有绑定业务员, 当前码类型强制绑定业务员
       // 如果批次里有关联机构, 那么需要验证当前用户所在机构是否是关联机构的子机构, 如果不是不允许绑定
@@ -159,7 +350,7 @@ Page({
     this.setData({
       ...data,
       currentKey: initTag,
-      keys:[...keys],
+      keys: [...keys],
       query,
       freeCount,
       canBindUser,
@@ -229,8 +420,13 @@ Page({
     }
   },
   onSubmit: async function(e) {
-    const { id } = this.data;
-    const { id: userId } = wx.getStorageSync("user");
+    const {
+      id,
+      userId: qrUserId,
+      qrType: { bindSalesman },
+      salesmanId
+    } = this.data;
+    const { id: userId, userType } = wx.getStorageSync("user");
     const fields = e.detail;
     if (fields === "salesmanClear") {
       // 清空业务员信息
@@ -257,10 +453,17 @@ Page({
         });
       }
     } else if (fields === "bindSalesman") {
-      const data = await put("v1/api/sys/qr", {
+      const params = {
         id,
         salesmanId: userId
-      });
+      };
+      if (qrUserId && qrUserId === userId) {
+        // 如果已经绑定过客户, 且绑定的客户信息是即将绑定的业务员, 此时清掉客户信息
+        params.userId = null;
+        params.userBindTime = null;
+        params.fields = null;
+      }
+      const data = await put("v1/api/sys/qr", params);
       if (data.id) {
         this.fetch(this.data.query);
         wx.showToast({
@@ -268,15 +471,39 @@ Page({
         });
       }
     } else {
-      const data = await put("v1/api/sys/qr", {
+      // 有采集信息的
+      const params = {
         id,
-        userId,
         fields: JSON.stringify(fields)
-      });
+      };
+      switch (bindSalesman) {
+        case 0:
+        case 1: {
+          // 仅允许客户绑定的
+          params.userId = userId;
+          break;
+        }
+        case 2: {
+          // 仅允许业务员绑定的
+          params.salesmanId = userId;
+          break;
+        }
+        case 3: {
+          // 允许业务员或客户绑定的
+          if (salesmanId === userId) {
+            // 如果当前
+            params.salesmanId = userId;
+          } else {
+            params.userId = userId;
+          }
+          break;
+        }
+      }
+      const data = await put("v1/api/sys/qr", params);
       if (data.id) {
         this.fetch(this.data.query);
         wx.showToast({
-          title: "领取成功!"
+          title: "提交信息成功!"
         });
       }
     }

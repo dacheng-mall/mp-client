@@ -6,12 +6,6 @@
 .form-wrap {
   flex: 1;
 }
-.form-wrap .section {
-  border: 1px solid #ddd;
-  margin: 44rpx 32rpx;
-  padding: 20rpx 16rpx;
-  border-radius: 10rpx;
-}
 .input {
   padding: 10rpx;
 }

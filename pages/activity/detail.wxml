@@ -59,7 +59,7 @@
               <icon-x type="gift" size="{{32}}" color="#00bcbd" />
               预约人数:
             </view>
-            {{customCount + 3482}}人
+            {{customCount}}人
           </view>
           <!-- <view class="info-item">
             <view class="label">
@@ -90,7 +90,7 @@
     <!-- <text class="foot-info">我有 {{myCustomCount}}客户</text> -->
     <!-- <text class="foot-info">{{customCount}}人预约</text> -->
     <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
-    <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{poster.page}}" bg="{{poster.bg}}" scene="{{poster.scene}}" title="{{poster.title}}"></poster>
+    <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
@@ -104,7 +104,7 @@
     <button disabled="{{stauts === 0}}" wx:else class="btn btn-large btn-primary" catch:tap="showGetPanel">
       预约申请
     </button>
-    <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{poster.page}}" bg="{{poster.bg}}" scene="{{poster.scene}}" title="{{poster.title}}"></poster>
+    <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
     <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
     </view>
