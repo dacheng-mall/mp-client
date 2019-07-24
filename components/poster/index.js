@@ -23,7 +23,31 @@ Component({
     },
     bg: {
       type: String,
-      value: ""
+      value: "",
+      observer: function(val, old) {
+        if (!old) {
+          this.getImageUrl(val).then(url => {
+            wx.getImageInfo({
+              src: url,
+              success: res => {
+                wx.getSystemInfo({
+                  success: sys => {
+                    this.setData({
+                      ww: sys.windowWidth,
+                      wh: sys.windowWidth * (res.height / res.width),
+                      _wh: sys.windowHeight,
+                      bg: url
+                    });
+                  }
+                });
+              },
+              fail: function(err) {
+                console.log("--------", err);
+              }
+            });
+          });
+        }
+      }
     },
     scene: {
       type: String,
@@ -42,16 +66,6 @@ Component({
   data: {
     step: 0,
     preview: ""
-  },
-  ready: function() {
-    wx.getSystemInfo({
-      success: res => {
-        this.setData({
-          ww: res.windowWidth,
-          wh: res.windowHeight
-        });
-      }
-    });
   },
   methods: {
     drawImg: async function(ctx, url, left, top, width, height, isCircle) {
@@ -101,9 +115,7 @@ Component({
           return false;
         }
         return `data:image/jpg;base64,${data}`;
-      } catch (e) {
-        console.log("", e);
-      }
+      } catch (e) {}
     },
     drawQr: async function(ctx, qr, { x, y, w, h, bgc }) {
       ctx.fillStyle = bgc;
@@ -237,11 +249,11 @@ Component({
       this.setData({
         step: 1
       });
-      const { ww, wh, bg } = this.data;
+      const { bg, ww, wh } = this.data;
+      // const {  } = this.getImageInfo(bg);
       const context = wx.createCanvasContext("poster", this);
       // 画背景
-      const bgImage = await this.getImageUrl(bg);
-      await this.drawImg(context, bgImage, 0, 0, ww, wh);
+      await this.drawImg(context, bg, 0, 0, ww, wh);
       // 画头像
       // const { avatar, name, institution = {} } = wx.getStorageSync("user");
       // const instName = institution.name || "未知机构";

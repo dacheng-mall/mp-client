@@ -1,5 +1,4 @@
-export const apiUrl = "http://192.168.1.97:10010/";
-export const pcApiUrl = "http://192.168.0.103:10010/";
+export const apiUrl = "http://localhost:10010/";
 export const aliApiUrl = "https://api.idacheng.cn:443/";
 export const source = "http://res.idacheng.cn/";
 export const sourceSSL = "https://img.idacheng.cn/";

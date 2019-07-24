@@ -137,7 +137,7 @@ Page({
     let data = null;
     if (id) {
       [data] = await get("v1/api/sys/activity", { id });
-    } else {
+    } else if (a) {
       [data] = await get("v1/api/sys/activity", { autoId: a });
     }
     if (data) {
@@ -145,9 +145,12 @@ Page({
       data.dateStart = moment(data.dateStart).format("YYYY-MM-DD");
       data.dateEnd = moment(data.dateEnd).format("YYYY-MM-DD");
       data.createTime = moment(data.createTime).format("YYYY-MM-DD");
+      if (data.description) {
+        data.description = this.normalizeDescription(data.description);
+      }
       // 初始化海报信息
       const poster = {
-        p_page: 'pages/activity/detail',
+        p_page: "pages/activity/detail",
         p_title: data.name,
         p_scene: `?a=${data.autoId}`
       };
@@ -194,6 +197,127 @@ Page({
         step: null
       });
     }
+  },
+  normalizeDescription: function(json) {
+    try {
+      const text = JSON.parse(json);
+      const res = text.map((item, i) => {
+        switch (item.type) {
+          case "text": {
+            const t = {
+              name: "div",
+              attrs: { style: "" },
+              children: [
+                {
+                  type: "text",
+                  text: item.value
+                }
+              ]
+            };
+            for (let key in item) {
+              switch (key) {
+                case "align": {
+                  t.attrs.style += `text-align:${item[key]};`;
+                  break;
+                }
+                case "italic": {
+                  if (item[key]) {
+                    t.attrs.style += `font-style:italic;`;
+                  }
+                  break;
+                }
+                case "throughline": {
+                  if (item[key]) {
+                    if (/text-decoration:underline;/.test(t.attrs.style)) {
+                      t.attrs.style = t.attrs.style.replace(
+                        /text-decoration:underline;/g,
+                        "text-decoration:underline line-through;"
+                      );
+                    } else {
+                      t.attrs.style += `text-decoration:line-through;`;
+                    }
+                  }
+                  break;
+                }
+                case "underline": {
+                  if (item[key]) {
+                    if (/text-decoration:line-through;/.test(t.attrs.style)) {
+                      t.attrs.style = t.attrs.style.replace(
+                        /text-decoration:line-through;/g,
+                        "text-decoration:line-through underline;"
+                      );
+                    } else {
+                      t.attrs.style += `text-decoration:underline;`;
+                    }
+                  }
+                  break;
+                }
+                case "padding": {
+                  t.attrs.style += `padding:${item[key]}px;`;
+                  break;
+                }
+                case "size": {
+                  t.attrs.style += `font-size:${item[key]}px;`;
+                  break;
+                }
+                case "weight": {
+                  if (item[key]) {
+                    t.attrs.style += `font-weight:bold;`;
+                  }
+                  break;
+                }
+              }
+            }
+            return t;
+          }
+          case "image": {
+            const img = {
+              name: "img",
+              attrs: { style: "width:100%", src: `${source}${item.value}` }
+            };
+            return img;
+          }
+          case "list": {
+            const ul = {
+              name: "ul",
+              attrs: {},
+              children: []
+            };
+            item.value.forEach(({ label, content }, i) => {
+              const lab = {
+                name: "div",
+                attrs: { style: "position:absolute;left:0;top:0;width:128px;" },
+                children: [
+                  {
+                    type: "text",
+                    text: label
+                  }
+                ]
+              };
+              const cont = {
+                name: "div",
+                children: [
+                  {
+                    type: "text",
+                    text: content
+                  }
+                ]
+              };
+              const li = {
+                name: "li",
+                attrs: { style: "position:relative;padding-left:128px;" },
+                children: [lab, cont]
+              };
+              ul.children.push(li);
+            });
+            return ul;
+          }
+          default: {
+          }
+        }
+      });
+      return res;
+    } catch (e) {}
   },
   fetchSaleman: async function(id, autoId) {
     let data = null;

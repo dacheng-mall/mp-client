@@ -19,7 +19,6 @@
   background-color: #aaa;
   border-radius: 20rpx;
   box-shadow: 0 0 20px #999;
-  width: 80%;
 }
 .button_wrap {
   height: 128rpx;

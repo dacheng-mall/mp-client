@@ -1,8 +1,8 @@
 <view class="wrap">
   <canvas wx:if="{{step === 1}}" class="canvas" style="width: {{ww}}px;height:{{wh}}px;" canvas-id="poster" />
-  <view wx:if="{{step === 2}}" class="preview" style="width: {{ww}}px;height:{{wh}}px;">
+  <view wx:if="{{step === 2}}" class="preview" style="width: {{ww}}px;height:{{_wh}}px;">
     <view class="preview_img">
-      <image src="{{preview}}" mode="aspectFit" style="height: {{wh * 0.8}}px" />
+      <image src="{{preview}}" mode="aspectFit" style="height: {{wh * 0.75}}px;width: {{ww * 0.75}}px" />
     </view>
     <view class="button_wrap">
       <button bindtap="preview" class="btn btn-primary btn-large">预览</button>
