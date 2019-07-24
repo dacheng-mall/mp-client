@@ -100,7 +100,20 @@ Page({
     // 先确定需要删除哪些标签
     // 如果salesmanId, institutionId, activityId, productId有任意一个, 关联常态显示
     // 如果qrType.bindSalesman === 0 不需要绑定业务员, 否则判断是否存在institutionId, 如果不存在, 所有业务员都可以绑定, 如果有institutionId, 则仅属于该机构的业务员可以绑定
-
+    // qrType.bindSalesman 0: 不绑定业务员, 1: 强制绑定业务员; 2: 强制绑定业务员,只能业务员修改绑定信息; 3: 强制绑定业务员,业务员和客户都能修改
+    const alert4MMissingSalesman = (bindSalesman, data) => {
+      if(bindSalesman > 0 && bindSalesman !== 2 && !data.salesmanId) {
+        // 这都是要强制绑定业务员的, 如果这个码没有绑定业务员, 不允许客户提交信息
+        initTag = "linked";
+        keys[2].disabled = true;
+        wx.showModal({
+          title: '无效二维码',
+          content: '未绑定客户经理, 请联系您的客户经理及时绑定',
+          showCancel: false,
+          confirmText: '知道了'
+        })
+      }
+    }
     switch (user.userType) {
       case 2: {
         const { bindSalesman } = data.qrType;
@@ -120,7 +133,6 @@ Page({
               // 不强制绑定业务员信息的时候, 采集信息作为公开信息, 所有用户可见
               initTag = "editor";
               keys[0].disabled = true;
-              keys[2].disabled = false;
               break;
             }
             case 2: {
@@ -131,6 +143,7 @@ Page({
               break;
             }
           }
+          alert4MMissingSalesman(bindSalesman, data);
           keys[1].disabled = false;
         } else if (data.userId === user.id) {
           // 已经绑定过了, 绑定者是当前用户
@@ -185,12 +198,13 @@ Page({
           if (!data.userId) {
             // 没有客户绑定过
             // 当前业务员作为客户领取了码
-            initTag = "linked";
+            initTag = "editor";
             keys[0].disabled = true;
             keys[1].disabled = false;
             switch (data.qrType.bindSalesman) {
               case 2: {
                 // 业务员可编辑
+                initTag = "linked";
                 keys[2].disabled = true;
                 break;
               }
@@ -200,6 +214,7 @@ Page({
                 break;
               }
             }
+          alert4MMissingSalesman(data.qrType.bindSalesman, data);
           } else if (data.userId && data.userId === user.id) {
             // 当前业务员作为客户领取了码
             switch (data.qrType.bindSalesman) {
@@ -274,6 +289,7 @@ Page({
                 break;
               }
             }
+
             keys[0].disabled = true;
             keys[1].disabled = false;
           } else if (data.userId === user.id) {
@@ -394,7 +410,7 @@ Page({
     }
   },
   initEditor: function() {
-    const user = wx.getStorageSync("user");
+    // const user = wx.getStorageSync("user");
     let fields = this.data.qrType.fields;
     let value = this.data.fields;
     value = value ? JSON.parse(value) : {};
@@ -402,8 +418,12 @@ Page({
     const defaultValues = {};
     if (fields) {
       fields.map(({ code }, i) => {
-        // 整理初始值
-        defaultValues[code] = value[code] || user[code];
+        // 整理初始值, 不自动填入用户的name
+        // if (code !== "name") {
+        //   defaultValues[code] = value[code] || user[code];
+        // }
+        // 不自动回填用户信息
+        defaultValues[code] = value[code];
       });
     }
     this.setData({

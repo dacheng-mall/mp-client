@@ -108,7 +108,7 @@ Component({
           scene: this.properties.scene,
           width: this.properties.width
         });
-        if (data < 20000) {
+        if (data.length < 20000) {
           wx.showToast({
             title: "定制海报失败, 请重试"
           });
