@@ -1,3 +1,4 @@
+<headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
 <view class="detail-wrap">
   <scroll-view class="detail-main" animation="{{animation}}" style="position: relative">
     <swiper-x needInit="{{needInitSwiper}}" bind:initilized="initilized" video="{{detail[current].video}}" images="{{detail[current].images}}" size="{{screenWidth}},{{screenWidth}}"></swiper-x>
@@ -42,4 +43,3 @@
     </view>
   </view>
 </view>
-<back-home />

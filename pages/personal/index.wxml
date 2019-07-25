@@ -6,7 +6,7 @@
     <view class="user-info">
       <view class="name">{{user.name}}</view>
       <view class="inst" wx:if="{{user.userType === 4}}">{{user.institution.name}}</view>
-      <view wx:if="{{user.userType === 4}}" class="inst grade" style="">{{user.gradeName}}</view>
+      <view wx:if="{{user.userType === 4 && user.gradeName}}" class="inst grade" style="">{{user.gradeName}}</view>
     </view>
     <view wx:if="{{user.userType === 2 }}" class="header-btn">
       <button bindtap="bindInst" class="btn-large btn-warning">加入机构</button>

@@ -1,4 +1,4 @@
-<nothing wx:if="{{data.data.length < 1}}" />
+<nothing wx:if="{{data.length < 1}}" />
 <view wx:else>
   <view class="scrollWrap">
     <view class="title" wx:if="{{type === 'salesman'}}">
@@ -17,8 +17,8 @@
           {{item.autoId}}
         </view>
         <view class="main">
-          <view class="type">{{item.typeName}}</view>
-          <view class="time">{{item[type + 'BindTime'] || ''}}</view>
+          <view class="type">{{item.hasSent ? custom.name + ' 领取' : '暂未送出'}}</view>
+          <view class="time">{{item.hasSent ? item.userBindTime : item.salesmanBindTime}}</view>
         </view>
         <view class="right">
           <icon-x type="right" size="{{32}}" />

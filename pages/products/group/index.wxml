@@ -25,4 +25,3 @@
     </button>
   </view>
 </view>
-<back-home wx:if="{{!favorites}}" />

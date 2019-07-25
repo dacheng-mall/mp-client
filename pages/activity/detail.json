@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "swiper-x": "/components/page/swiper",
-    "poster": "/components/poster/index"
-  }
+    "poster": "/components/poster/index",
+    "headerNavbar": "/components/navigator/index"
+  },
+  "navigationStyle": "custom"
 }

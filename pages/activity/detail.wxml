@@ -1,7 +1,8 @@
-<view wx:if="{{step === null}}" style="display: flex; flex-direction: column; flex: 1; height: {{height}}px;">
-  <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff">
+<headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
+<view wx:if="{{step === null}}" style="display: flex; flex-direction: column; flex: 1; height: {{height - 64}}px;">
+  <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff;overflow-y: auto;">
     <nothing wx:if="{{!id}}" />
-    <scroll-view wx:else scroll-y="{{true}}" style="height: 100%;">
+    <view wx:else>
       <swiper wx:if="{{images && images.length > 1}}" style="height: {{width}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
         <block wx:for="{{images}}" wx:key="{{id}}" wx:for-item="img">
           <swiper-item>
@@ -72,7 +73,7 @@
         <!-- <view class="description">{{description}}</view> -->
         <rich-text nodes="{{description}}" />
       </view>
-    </scroll-view>
+    </view>
   </view>
   <!-- 业务员, 有权限, 没有报名时看到的 -->
   <view wx:if="{{(user.userType === 4 && enable) && sign && sign.length < 1}}" class="footer">
@@ -81,9 +82,9 @@
       立即报名
     </button>
     <view wx:else>请稍候...</view>
-    <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
+    <!-- <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
-    </view>
+    </view> -->
   </view>
   <!-- 业务员, 有权限, 报名后看到的 -->
   <view wx:if="{{(user.userType === 4 && enable) && sign.length > 0}}" class="footer">
@@ -91,9 +92,9 @@
     <!-- <text class="foot-info">{{customCount}}人预约</text> -->
     <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
     <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
-    <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
+    <!-- <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
-    </view>
+    </!-->
   </view>
   <!-- 无权限的业务员和客户看到的 -->
   <view wx:if="{{user.userType === 2 || (user.userType === 4 && !enable)}}" class="footer">
@@ -105,9 +106,9 @@
       预约申请
     </button>
     <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
-    <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
+    <!-- <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
-    </view>
+    </view> -->
   </view>
 </view>
 <!-- 领取礼物面板 -->

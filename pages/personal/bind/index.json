@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "设置机构信息"
+  "navigationBarTitleText": "设置机构信息",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "headerNavbar": "/components/navigator/index"
+  }
 }

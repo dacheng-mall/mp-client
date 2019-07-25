@@ -4,6 +4,17 @@ import { uri, getRoute } from "./utils/util";
 import { homePath } from "./setting";
 
 App({
+  onLaunch: function(){
+    console.log();
+    wx.getSystemInfo({ // 获取设备信息
+      success: (res) => {
+        this.globalData.systeminfo = res
+      },
+    })
+    // 获得胶囊按钮位置信息
+    this.globalData.headerBtnPosi = wx.getMenuButtonBoundingClientRect()
+    console.log('this.globalData', this.globalData)
+  },
   onShow: function(res) {
     this.globalData.initState = res;
     const onShowTimer = setTimeout(() => {
@@ -54,6 +65,7 @@ App({
           .then(data => {
             this.globalData.openid = data.user ? data.user.openid : data.openid;
             this.getUserInfo(data);
+            wx.setStorageSync("lastTimestamp", new Date().valueOf());
           })
           .catch(err => console.log("----", err));
       }
@@ -113,6 +125,7 @@ App({
     }
   },
   afterLogin: function(user, token) {
+    console.log('afterLogin')
     this.globalData.userInfo = user;
     wx.setStorageSync("user", user);
     if (token) {
@@ -151,9 +164,11 @@ App({
       ) {
         // 当前页面和预期页面不同, 且是预期页面不是授权页面或启动页时
         // 跳转预期页面
-        wx.reLaunch({
-          url: uri(path, query, true)
-        });
+        if(path !== 'pages/personal/bind/index') {
+          wx.reLaunch({
+            url: uri(path, query, true)
+          });
+        }
       } else {
         this.goHome(cur);
       }

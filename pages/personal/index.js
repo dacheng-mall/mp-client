@@ -45,11 +45,17 @@ Page({
   onShow: function() {
     const ts = new Date().valueOf();
     const force = wx.getStorageSync("force");
+    const lastTimestamp = wx.getStorageSync("lastTimestamp");
+    const user = wx.getStorageSync("user");
     wx.removeStorage({
       key: "force"
     });
-    if (force || !this.data.timestamp || ts - this.data.timestamp > 7200000) {
+    if (force || !lastTimestamp || ts - lastTimestamp > 7200000) {
       wx.startPullDownRefresh();
+    } else if (user) {
+      this.setData({
+        user
+      });
     }
   },
   fetch: function() {
@@ -61,9 +67,10 @@ Page({
               if (data.user) {
                 // 注册过的, 用数据库的最新数据渲染页面
                 this.setData({
-                  user: data.user,
-                  timestamp: new Date().valueOf()
+                  user: data.user
                 });
+                wx.setStorageSync("lastTimestamp", new Date().valueOf());
+                wx.setStorageSync("user", data.user);
                 setToken(data.token);
                 resolve(data.user);
               } else {

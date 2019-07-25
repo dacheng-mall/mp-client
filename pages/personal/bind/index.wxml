@@ -1,17 +1,21 @@
-<form bindsubmit="formSubmit" bindreset="formReset" style="flex: 1;">
+<headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
+<view wx:if="{{!user}}" style="text-align: center; color: #999; padding-top: 30px">
+  正在初始化...
+</view>
+<form wx:else bindsubmit="formSubmit" bindreset="formReset" style="flex: 1;">
   <view style="" class="wrap">
     <view class="form-wrap">
       <view class="section">
         <view class="sectionTitle">
           机构
-          <text class="required">(必填)</text>
+          <text class="required">{{disabled ? '' : '(必填)'}}</text>
         </view>
         <input class="sectionInput" value="{{institutionName}}" catchtap="pickInst" disabled="{{true}}" name="institutionId" placeholder="请选择所属机构" />
       </view>
       <view wx:if="{{grade.length > 0}}" class="section">
         <view class="sectionTitle">
           职级
-          <text class="required">(必填)</text>
+          <text class="required"></text>
         </view>
         <picker bindchange="changeGrade" value="{{gradeIndex}}" mode="selector" range="{{grade}}" range-key="name" class="sectionInput" name="gradeId" placeholder="请选择所属机构">
           <view class="picker">{{gradeName || '请选择职级'}}</view>
@@ -19,8 +23,8 @@
       </view>
       <view class="section">
         <view class="sectionTitle">
-          真实姓名
-          <text class="required">(必填)</text>
+          姓名
+          <text class="required">(必填, 请填写真实姓名)</text>
         </view>
         <input class="sectionInput" name="name" value="{{user.name}}" placeholder="请输入真实姓名" />
       </view>

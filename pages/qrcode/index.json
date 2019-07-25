@@ -3,7 +3,9 @@
     "editor-x": "./editor/index",
     "detail": "./detail/index",
     "linked": "./linked/index",
-    "tab": "./tabs/index"
+    "tab": "./tabs/index",
+    "headerNavbar": "/components/navigator/index"
   },
-  "navigationBarTitleText": "二维码"
+  "navigationBarTitleText": "二维码",
+  "navigationStyle": "custom"
 }

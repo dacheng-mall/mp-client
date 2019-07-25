@@ -8,6 +8,15 @@ Page({
     currentKey: "",
     mainImage: null,
     source,
+    nvabarData: {
+      showCapsule: 1, // 是否显示左上角图标   1表示显示    0表示不显示
+      title: '码详情',
+      textColor: "#fff", // 标题颜色
+      bgColor: "#00bcbd", // 导航栏背景颜色
+      btnBgColor: "#459d9f", // 胶囊按钮背景颜色
+      iconColor: "white", // icon颜色 black/white
+      borderColor: "rgba(255, 255, 255, 0.3)" // 边框颜色 格式为 rgba()，透明度为0.3
+    },
     keys: [
       {
         name: "详情",

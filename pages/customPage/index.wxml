@@ -15,4 +15,3 @@
     </view>
   </view>
 </scroll-view>
-<back-home path="{{path}}" />

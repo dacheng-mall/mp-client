@@ -1,3 +1,4 @@
+<headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
 <nothing wx:if="{{invalid === 'yes'}}" iconName="frown" text="无效二维码" />
 <view class="wrap" wx:esleif="{{id}}">
   <tab style="height: 100%; overflow: hidden" keys="{{keys}}" currentKey="{{currentKey}}" bind:onChange="changeTab">
