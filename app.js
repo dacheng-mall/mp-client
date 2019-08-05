@@ -4,16 +4,16 @@ import { uri, getRoute } from "./utils/util";
 import { homePath } from "./setting";
 
 App({
-  onLaunch: function(){
-    console.log();
-    wx.getSystemInfo({ // 获取设备信息
-      success: (res) => {
-        this.globalData.systeminfo = res
-      },
-    })
+  onLaunch: function() {
+    wx.getSystemInfo({
+      // 获取设备信息
+      success: res => {
+        this.globalData.systeminfo = res;
+      }
+    });
     // 获得胶囊按钮位置信息
-    this.globalData.headerBtnPosi = wx.getMenuButtonBoundingClientRect()
-    console.log('this.globalData', this.globalData)
+    this.globalData.headerBtnPosi = wx.getMenuButtonBoundingClientRect();
+    this.checkIsIPhoneX();
   },
   onShow: function(res) {
     this.globalData.initState = res;
@@ -22,6 +22,26 @@ App({
       clearTimeout(onShowTimer);
     }, 500);
   },
+  checkIsIPhoneX: function() {
+    const self = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        // 根据 model 进行判断
+        if (/iPhone\sX/.test(res.model)) {
+          self.globalData.isIPX = true;
+          self.globalData.headerBtnPosi = {
+            right: self.globalData.headerBtnPosi.right - 10,
+            bottom: 82,
+            height: 32,
+            left: 317,
+            top: 50,
+            width: 87
+          };
+        }
+      }
+    });
+  },
+
   setNavHeight: function() {
     wx.getSystemInfo({
       success: res => {
@@ -125,7 +145,6 @@ App({
     }
   },
   afterLogin: function(user, token) {
-    console.log('afterLogin')
     this.globalData.userInfo = user;
     wx.setStorageSync("user", user);
     if (token) {
@@ -164,11 +183,12 @@ App({
       ) {
         // 当前页面和预期页面不同, 且是预期页面不是授权页面或启动页时
         // 跳转预期页面
-        if(path !== 'pages/personal/bind/index') {
+        if (!this.globalData.dontJump) {
           wx.reLaunch({
             url: uri(path, query, true)
           });
         }
+        delete this.globalData.dontJump;
       } else {
         this.goHome(cur);
       }

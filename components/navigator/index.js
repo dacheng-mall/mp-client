@@ -1,4 +1,3 @@
-
 import { homePath } from "../../setting";
 const app = getApp();
 Component({
@@ -68,9 +67,6 @@ Component({
       wx.reLaunch({
         url: `/${homePath}`
       });
-      // wx.navigateTo({
-      //   url: "/pages/index/index"
-      // });
     }
   }
 });

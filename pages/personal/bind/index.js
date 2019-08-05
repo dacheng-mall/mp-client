@@ -91,6 +91,8 @@ Page({
       };
       if (user.userType === 4) {
         if (query) {
+          const app = getApp();
+          app.globalData.dontJump = true;
           wx.switchTab({
             url: "/pages/personal/index"
           });
