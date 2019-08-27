@@ -2,10 +2,10 @@
   <view class="navbar-text" style='line-height:{{navbarBtn.height + navbarBtn.top}}px;color:{{navbarData.textColor ? navbarData.textColor : "#000"}};'>
     {{navbarData.title ? navbarData.title : "礼全有"}}
   </view>
-  <view class="navbar-icon" wx:if='{{navbarData.showCapsule ? navbarData.showCapsule : true}}' style="top:{{navbarBtn.top + statusBarHeight}}px;left:{{navbarBtn.right}}px;height:{{navbarBtn.height}}px;">
-    <image wx:if='{{haveBack}}' bindtap="_goBack" class="floatL" src="/access/navbar_back_{{navbarData.iconColor ? navbarData.iconColor : 'black'}}.png"></image>
+  <view class="navbar-icon" bindtap="tapLeft" wx:if='{{navbarData.showCapsule ? navbarData.showCapsule : true}}' style="top:{{navbarBtn.top + statusBarHeight}}px;left:{{navbarBtn.right}}px;height:{{navbarBtn.height}}px;">
+    <image wx:if='{{haveBack}}' class="floatL" src="/access/navbar_back_{{navbarData.iconColor ? navbarData.iconColor : 'black'}}.png"></image>
     <!-- <view wx:if='{{haveBack}}' class="floatL" style="border-color:{{navbarData.borderColor ? navbarData.borderColor : 'rgba(0,0,0,0.3)'}}"></view> -->
-    <view wx:else class="_goHome" bindtap="_goHome">
+    <view wx:else class="_goHome">
       <image src="/access/navbar_home_{{navbarData.iconColor ? navbarData.iconColor : 'black'}}.png"></image>
       首页
     </view>

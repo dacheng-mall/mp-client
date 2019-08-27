@@ -21,13 +21,13 @@ Page({
     needInitSwiper: false,
     nvabarData: {
       showCapsule: 1, // 是否显示左上角图标   1表示显示    0表示不显示
-      title: '商品详情',
+      title: "商品详情",
       textColor: "#fff", // 标题颜色
       bgColor: "#00bcbd", // 导航栏背景颜色
       btnBgColor: "#459d9f", // 胶囊按钮背景颜色
       iconColor: "white", // icon颜色 black/white
       borderColor: "rgba(255, 255, 255, 0.3)" // 边框颜色 格式为 rgba()，透明度为0.3
-    },
+    }
   },
   onLoad(opts) {
     const { screenWidth } = wx.getSystemInfoSync();
@@ -40,7 +40,8 @@ Page({
     this.setData({
       ids: ids,
       current,
-      screenWidth
+      screenWidth,
+      isIPX: getApp().globalData.isIPX
     });
 
     this.fetchDetail(opts.id)

@@ -9,6 +9,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  -webkit-overflow-scrolling: touch;
 }
 .bottom {
   flex-shrink: 0;
@@ -48,9 +49,8 @@
 @import "../../../access/form.wxss";
 
 @import "../getGift.wxss";
-.getGift {
+/* .getGift {
   position: absolute;
-  /* top: 100vh; */
   height: 0;
   width: 100vw;
   opacity: 0;
@@ -58,6 +58,7 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .getGift .top {
   height: 88rpx;
@@ -78,7 +79,7 @@
   flex: 1;
   overflow: auto;
   background-color: #fff;
-}
+} */
 .salesman {
   display: flex;
   align-items: center;

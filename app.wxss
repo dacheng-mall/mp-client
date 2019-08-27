@@ -25,4 +25,5 @@
   overflow: auto;
   flex: 1;
   height: 100%;
+  -webkit-overflow-scrolling: touch;
 }

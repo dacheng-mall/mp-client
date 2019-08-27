@@ -1,7 +1,5 @@
 // pages/start/index.js
 
-let timer;
-let timer2;
 Page({
   data: {
     animationData: {}
@@ -11,7 +9,7 @@ Page({
       timingFunction: "ease"
     });
     this.animation = animation;
-    timer = setInterval(() => {
+    this.timer = setInterval(() => {
       animation
         .opacity(0.6)
         .scale(1.2, 1.2)
@@ -38,11 +36,8 @@ Page({
     }
   },
   onUnload() {
-    if (timer) {
-      clearInterval(timer);
-    }
-    if (timer2) {
-      clearTimeout(timer2);
+    if (this.timer) {
+      clearInterval(this.timer);
     }
   }
 });

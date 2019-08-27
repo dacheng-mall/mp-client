@@ -14,10 +14,6 @@ const TIME = 500; // 点击计数时间间隔阀值, 默认500ms内点击都算�
 const SIZE = 128; // 按钮默认体积
 const REVIZE = 6; // 正常速率修正, 值越大越容易
 
-let timer;
-let reset;
-let listTime;
-
 Component({
   properties: {
     isLogin: {
@@ -164,19 +160,23 @@ Component({
   },
   lifetimes: {
     detached: function() {
-      clearInterval(listTime);
+      if (this.listTime) {
+        clearInterval(this.listTime);
+      }
       this.stopAnimation();
     }
   },
   methods: {
     getGiftsList: async function() {
-      if(!this.data.isLogin) {
-        return
+      if (!this.data.isLogin) {
+        return;
       }
       const timeStamp = new Date().valueOf();
       if (
         !this.data.timeStamp ||
-        (this.data.timeStamp && timeStamp - this.data.timeStamp >= 60000 && this.data.status === 'enable')
+        (this.data.timeStamp &&
+          timeStamp - this.data.timeStamp >= 60000 &&
+          this.data.status === "enable")
       ) {
         let data = await get("v1/api/sys/giftProduct", {
           activityId: this.data.aid,
@@ -203,7 +203,7 @@ Component({
           listAnimate: true
         });
       }
-      listTime = setInterval(() => {
+      this.listTime = setInterval(() => {
         if (this.data.listCurrent < this.data.list.length) {
           this.setData({
             listCurrent: this.data.listCurrent + 1
@@ -216,7 +216,7 @@ Component({
             listCurrent: 0,
             listAnimate: true
           });
-          clearInterval(listTime);
+          clearInterval(this.listTime);
           this.getGiftsList();
         }
       }, 1000);
@@ -228,7 +228,7 @@ Component({
           timingFunction: "ease"
         });
         this.animation = animation;
-        timer = setInterval(() => {
+        this.timer = setInterval(() => {
           animation.scale(1.1, 1.1).step({
             duration: 100
           });
@@ -242,14 +242,14 @@ Component({
       }
     },
     stopAnimation: function() {
-      if (timer) {
-        clearInterval(timer);
+      if (this.timer) {
+        clearInterval(this.timer);
         this.setData({
           animationData: null
         });
       }
-      if (listTime) {
-        clearInterval(listTime);
+      if (this.listTime) {
+        clearInterval(this.listTime);
       }
     },
     getStyle: (size, rate) => {
@@ -311,17 +311,13 @@ Component({
     },
     checkGift: async function() {
       wx.navigateTo({
-        url: `/pages/personal/mySpeedKill/index?activityId=${
-          this.data.aid
-        }&productId=${this.data.pid}`
+        url: `/pages/personal/mySpeedKill/index?activityId=${this.data.aid}&productId=${this.data.pid}`
       });
     },
     checkCustomers: async function() {
       const user = wx.getStorageSync("user");
       wx.navigateTo({
-        url: `/pages/personal/myActivity/myCustomer?aid=${this.data.aid}&sid=${
-          user.id
-        }&type=at_second_kill`
+        url: `/pages/personal/myActivity/myCustomer?aid=${this.data.aid}&sid=${user.id}&type=at_second_kill`
       });
     },
     kill: function(e) {

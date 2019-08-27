@@ -14,7 +14,6 @@
 }
 .navbar-icon {
   position: fixed;
-  display: flex;
   /* border-radius: 64rpx;
   border: 0.5px solid rgba(255, 255, 255, 0.3); */
   box-sizing: border-box;

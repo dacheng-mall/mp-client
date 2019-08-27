@@ -58,15 +58,16 @@ Component({
     });
   },
   methods: {
-    _goBack: function() {
-      wx.navigateBack({
-        delta: 1
-      });
-    },
-    _goHome: function() {
-      wx.reLaunch({
-        url: `/${homePath}`
-      });
+    tapLeft: function(){
+      if(this.data.haveBack) {
+        wx.navigateBack({
+          delta: 1
+        });
+      } else {
+        wx.reLaunch({
+          url: `/${homePath}`
+        });
+      }
     }
   }
 });
