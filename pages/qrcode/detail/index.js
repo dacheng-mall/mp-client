@@ -3,18 +3,18 @@ Component({
     bottom: null,
     img: null,
     typeName: null,
+    // fields: {
+    //   type: String,
+    //   observer: function(newVal) {
+    //     if (newVal) {
+    //       this.setData({
+    //         fds: JSON.parse(newVal)
+    //       });
+    //     }
+    //   },
+    //   value: ""
+    // },
     fields: {
-      type: String,
-      observer: function(newVal) {
-        if (newVal) {
-          this.setData({
-            fds: JSON.parse(newVal)
-          });
-        }
-      },
-      value: ""
-    },
-    wokao: {
       type: String,
       observer: function(newVal) {
         if (newVal) {

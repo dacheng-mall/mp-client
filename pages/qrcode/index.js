@@ -9,6 +9,7 @@ Page({
     currentKey: "",
     mainImage: null,
     source,
+    isIPX: false,
     nvabarData: {
       showCapsule: 1, // 是否显示左上角图标   1表示显示    0表示不显示
       title: '码详情',
@@ -42,7 +43,8 @@ Page({
   onLoad() {
     this.fetch(this.options);
     this.setData({
-      contHeight: getContHeight()
+      contHeight: getContHeight(),
+      isIPX: getApp().globalData.isIPX
     })
   },
   // 业务员绑定码

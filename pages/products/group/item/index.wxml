@@ -3,7 +3,7 @@
     <icon-x type="check-circle{{checked ? '-fill' : ''}}" color="{{checked ? '#00bcbd' : '#eee'}}" size="{{64}}" />
   </view>
   <view class="cont-wrap" catchtap="goDetail" data-id="{{data.id}}">
-    <image class="img" src="{{source}}{{data.mainImageUrl}}" />
+    <image class="img" src="{{source}}{{data.mainImageUrl}}" lazy-load="{{true}}" />
     <view class="item-info">
       <view class="item-name" data-index="{{data.index}}">
         {{data.title}}

@@ -1,3 +1,3 @@
 <view>
-  <image style="width: 100%;float:left" mode="widthFix" src="{{data.value}}" />
+  <image style="width: 100%;float:left" mode="widthFix" src="{{data.value}}" lazy-load="{{true}}" />
 </view>

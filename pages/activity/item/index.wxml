@@ -1,7 +1,7 @@
 <view class="item-wrap" catch:tap="tap">
   
   <view class="body">
-    <image class="img" style="width:{{width}}px;height:{{height}}px" mode="widthFix" src="{{source}}{{item.images[0].url}}" />
+    <image class="img" style="width:{{width}}px;height:{{height}}px" mode="widthFix" src="{{source}}{{item.images[0].url}}" lazy-load="{{true}}" />
     <view class="info">
       <view class="title">{{item.name}}</view>
       <view class="institution-name">{{item.institution.name}}</view>

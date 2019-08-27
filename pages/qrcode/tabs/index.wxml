@@ -4,7 +4,7 @@
       <slot wx:if="{{item.key === currentKey}}" name="{{item.key}}"></slot>
     </block>
   </view>
-  <view wx:if="{{freeCount > 1}}" class="tabsBtnWrap">
+  <view wx:if="{{freeCount > 1}}" class="tabsBtnWrap" style="padding-bottom: {{isIPX ? '20px' : 0}}">
     <block wx:for="{{keys}}" wx:key="{{item.key}}">
       <view wx:if="{{!item.disabled}}" bind:tap="change" data-key="{{item.key}}" class="tabBtn" style="color: {{currentKey === item.key ? selectedColor : color}}; border-color:  {{currentKey === item.key ? selectedColor : '#eee'}}">
         <icon-x type="{{item.icon}}" color="{{currentKey === item.key ? selectedColor : color}}" size="{{64}}" />

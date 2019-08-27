@@ -1,9 +1,9 @@
 <headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
 <nothing wx:if="{{invalid === 'yes'}}" iconName="frown" text="无效二维码" />
 <view class="wrap" wx:esleif="{{id}}" style="height: {{contHeight}}px">
-  <tab style="height: 100%; overflow: hidden" keys="{{keys}}" currentKey="{{currentKey}}" bind:onChange="changeTab">
+  <tab style="height: 100%; overflow: hidden" keys="{{keys}}" currentKey="{{currentKey}}" bind:onChange="changeTab" isIPX="{{isIPX}}">
     <view slot="detail" class="detail">
-      <detail bottom="{{batch.description}}" img="{{mainImage}}" typeName="{{qrType.name}}" fields="{{qrType.fields}}" wokao="{{fields}}" template="{{qrType.template}}" />
+      <detail bottom="{{batch.description}}" img="{{mainImage}}" typeName="{{qrType.name}}" fields="{{qrType.fields}}" fields="{{fields}}" template="{{qrType.template}}" />
     </view>
     <linked slot="linked" canBindUser="{{canBindUser}}" canBindSalesman="{{canBindSalesman}}" bind:bindEvent="bindEvent" product="{{product}}" institution="{{institution}}" activity="{{activity}}" custom="{{custom}}" salesman="{{salesman}}" />
     <view slot="editor">

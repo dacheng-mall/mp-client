@@ -14,6 +14,9 @@ Component({
         });
       }
     },
+    isIPX: {
+      type: Boolean,
+    },
     currentKey: {
       type: String,
       value: "",
