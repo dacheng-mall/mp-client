@@ -99,6 +99,20 @@ function validateName(string, msg = "名字的长度不得超过18个字") {
   }
   return false;
 }
+
+function getContHeight() {
+  const app = getApp();
+  try {
+    const sysInfo = wx.getSystemInfoSync();
+    let headerPosi = app.globalData.headerBtnPosi; // 胶囊位置信息
+    return (
+      sysInfo.screenHeight -
+      (2 * headerPosi.bottom - headerPosi.height - sysInfo.statusBarHeight)
+    );
+  } catch (e) {
+    console.log(e);
+  }
+}
 module.exports = {
   mockFetch,
   formatTime,
@@ -108,5 +122,6 @@ module.exports = {
   validateCarLisence,
   validateIdcard,
   validateName,
-  getRoute
+  getRoute,
+  getContHeight
 };

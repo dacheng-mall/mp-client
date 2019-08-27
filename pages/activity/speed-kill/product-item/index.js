@@ -1,9 +1,7 @@
 import moment from "moment";
 import { get } from "../../../../utils/request";
 import { source } from "../../../../setting";
-import regeneratorRuntime, {
-  async
-} from "../../../../utils/regenerator-runtime/runtime";
+import regeneratorRuntime from "../../../../utils/regenerator-runtime/runtime";
 
 const CLICK_ATTR = {
   start: null,

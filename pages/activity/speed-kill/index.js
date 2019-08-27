@@ -1,13 +1,11 @@
-import { get, post, put } from "../../../utils/request";
-import moment from "moment";
+import { get, post } from "../../../utils/request";
 import {
-  uri,
-  getRoute,
   parseQuery,
   validateMobile,
-  validateName
+  validateName,
+  getContHeight
 } from "../../../utils/util";
-import { source, sourceSSL } from "../../../setting";
+import { source } from "../../../setting";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 const app = getApp();
@@ -62,17 +60,9 @@ Page({
     return data;
   },
   getContHeight: function() {
-    try {
-      const sysInfo = wx.getSystemInfoSync();
-      let headerPosi = app.globalData.headerBtnPosi; // 胶囊位置信息
-      this.setData({
-        contHeight:
-          sysInfo.screenHeight -
-          (2 * headerPosi.bottom - headerPosi.height - sysInfo.statusBarHeight)
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.setData({
+      contHeight: getContHeight()
+    });
   },
   fetch: async function(options) {
     if (this.options.scene) {

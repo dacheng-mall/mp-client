@@ -1,4 +1,5 @@
 import { get, put } from "../../utils/request";
+import { getContHeight } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 Page({
@@ -40,6 +41,9 @@ Page({
   },
   onLoad() {
     this.fetch(this.options);
+    this.setData({
+      contHeight: getContHeight()
+    })
   },
   // 业务员绑定码
   bSalesman() {

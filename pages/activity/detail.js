@@ -1,7 +1,7 @@
 // import _ from 'lodash';
 import { get, post, put } from "../../utils/request";
 import moment from "moment";
-import { uri, getRoute, parseQuery } from "../../utils/util";
+import { uri, getRoute, parseQuery, getContHeight } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 const validateMobile = /^1(3|4|5|7|8)\d{9}$/;
@@ -46,18 +46,10 @@ Page({
     });
   },
   
-  getContHeight: function() {
-    try {
-      const sysInfo = wx.getSystemInfoSync();
-      let headerPosi = app.globalData.headerBtnPosi; // 胶囊位置信息
-      this.setData({
-        contHeight:
-          sysInfo.screenHeight -
-          (2 * headerPosi.bottom - headerPosi.height - sysInfo.statusBarHeight)
-      });
-    } catch (e) {
-      console.log(e);
-    }
+  getContHeight: function() {    
+    this.setData({
+      contHeight: getContHeight()
+    });
   },
   showGetPanel: function() {
     this.animation

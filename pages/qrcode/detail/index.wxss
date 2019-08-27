@@ -5,7 +5,6 @@
 }
 .content {
   flex: 1;
-  overflow-y: auto
 }
 .description {
   font-size: 16px;
