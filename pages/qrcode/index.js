@@ -333,7 +333,11 @@ Page({
         break;
       }
       default: {
-        return;
+        initTag = "detail";
+        keys[0].disabled = false;
+        keys[1].disabled = false;
+        keys[2].disabled = true;
+        break;
       }
     }
     const freeCount = keys.filter(({ disabled }) => !disabled).length;

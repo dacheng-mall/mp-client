@@ -46,7 +46,7 @@ const showLoading = (url, show) => {
       if (show) {
         wx.showLoading({
           title: "加载中...",
-          mask: true,
+          mask: true
         });
       } else {
         wx.hideLoading();
@@ -138,10 +138,23 @@ export default function request(url, { data, method }, other) {
           clearTimeout(errorTimer);
         }
         errorTimer = setTimeout(() => {
-          const app = getApp();
-          if (app && app._login) {
-            app._clear(app._login);
-          }
+          wx.showModal({
+            title: "温馨提示",
+            content: "抱歉! 您的权限不足, 登录后获取更多权限!",
+            confirmText: "登录/注册",
+            cancelText: "不",
+            success: function(res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: "/pages/start/author"
+                });
+              }
+            }
+          });
+          // const app = getApp();
+          // if (app && app._login) {
+          //   app._clear(app._login);
+          // }
           clearTimeout(errorTimer);
         }, 1000);
       }
