@@ -3,7 +3,7 @@
 }
 .item-wrap .institution-name {
   color: #666;
-  font-size: 36rpx;
+  font-size: 28rpx;
   margin-bottom: 10rpx
 }
 .item-wrap .body {

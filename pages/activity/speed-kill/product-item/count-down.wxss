@@ -1,0 +1,36 @@
+.jump,
+.silence,
+.stop {
+  font-size: 14px;
+}
+.silence .date,
+.silence .time,
+.silence .msg {
+  font-size: 22px;
+  color: #461e91
+}
+.silence .time {
+  font-size: 23px;
+  font-weight: bold;
+}
+.silence .time.small {
+  font-size: 24px;
+  font-weight: normal;
+}
+.silence .time.middle {
+  font-size: 44px;
+  font-weight: normal;
+}
+.silence .time.large {
+  font-size: 58px;
+  font-weight: bold;
+}
+.last {
+  font-size: 16px;
+  color: #666
+}
+
+.silence .msg {
+  font-size: 26px;
+  font-weight: bold;
+}

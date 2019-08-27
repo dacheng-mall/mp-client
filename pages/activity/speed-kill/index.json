@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "poster": "/components/poster/index",
+    "headerNavbar": "/components/navigator/index",
+    "item": "./product-item/index",
+    "indicator": "./product-item/indicator"
+  },
+  "navigationStyle": "custom"
+}

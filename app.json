@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/start/index",
+    "pages/activity/index",
     "pages/start/author",
     "pages/products/list/index",
     "pages/products/detail/index",
@@ -10,10 +10,12 @@
     "pages/personal/myGift/index",
     "pages/personal/myActivity/index",
     "pages/personal/myActivity/myCustomer",
+    "pages/personal/mySpeedKill/index",
+    "pages/personal/mySpeedKill/detail",
     "pages/personal/bind/index",
     "pages/personal/bind/instList",
-    "pages/activity/index",
     "pages/activity/detail",
+    "pages/activity/speed-kill/index",
     "pages/home/index",
     "pages/filter/index",
     "pages/qrcode/index",
@@ -60,7 +62,8 @@
     "icon-x": "/components/icon/index",
     "back-home": "/components/favo-entry/index",
     "nothing": "/components/nothing/index",
-    "btn": "/components/button/index"
+    "btn": "/components/button/index",
+    "login-btn": "/components/login-btn/index"
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,36 @@
+<view class="wrap">
+  <image src="{{source}}{{image}}" mode="widthFix" class="image-wrap" />
+  <view animation="{{killAnimation}}" wx:if="{{customerEnable && signed && !hasGift}}" class="btn {{(status !== 'enable' || !isLogin) ? 'disabled' : ''}}" catch:tap="kill" style="{{style}}">
+    <view wx:if="{{!isLogin}}" class="notLogin">未登录</view>
+    <count-down bind:reload="reload" wx:elif="{{status === 'waiting'}}" beginTime="{{beginTime}}" now="{{now}}" leaveTime="{{leaveTime}}" active="{{active}}" status="{{status}}"></count-down>
+    <view wx:elif="{{status !== 'enable'}}">售罄</view>
+    <view wx:else class="doing" animation="{{animationData}}">
+      <view class="doing-title">抢购</view>
+      <view class="doing-info">疯狂点击</view>
+    </view>
+    <!-- <image src="/access/btn-txt.png" mode="aspectFit" /> -->
+  </view>
+  <view wx:elif="{{hasGift}}" class="btn warning" style="{{style}}" bind:tap="checkGift">
+    <view class="gift">我的奖品</view>
+  </view>
+  <view wx:elif="{{enable}}" class="btn warning" style="{{style}}" bind:tap="checkCustomers">
+    <view class="gift">我的客户</view>
+  </view>
+  <view wx:elif="{{!signed}}" class="btn disabled" style="{{style}}">
+    <view class="btn-date">{{_beginTime.date}}</view>
+    <view class="btn-time">{{_beginTime.m}}{{_beginTime.s}}</view>
+    <view class="btn-msg">{{_beginTime.msg}}</view>
+  </view>
+  <view wx:if="{{list.length > 0}}" style="background-color: {{primaryColor}}" class="list-wrap">
+    <view class="list-title">中奖名单</view>
+    <scroll-view class="list" style="height: {{listHeight}}" scroll-y="{{true}}" scroll-into-view="{{list[listCurrent].id}}" scroll-with-animation="{{listAnimate}}">
+      <block wx:for="{{list}}" wx:key="{{item.id}}">
+        <view class="list-item" id="{{item.id}}">
+          <view class="list-item-info">{{item.customerName}} ({{item.customerMobile}})</view>
+          <view class="list-item-date">{{item.createTime}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <paragraph data="{{content}}"></paragraph>
+</view>

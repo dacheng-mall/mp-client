@@ -16,11 +16,6 @@ Component({
   },
   lifetimes: {
     attached() {
-      // getFavorites('favorites').then(data => {
-      //   this.setData({
-      //     favorites: data
-      //   })
-      // })
     },
   },
   methods: {

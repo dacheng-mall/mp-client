@@ -1,0 +1,4 @@
+<view class="{{activity ? 'activity' : ''}}">
+  <view>{{date}}</view>
+  <view>{{time}}</view>
+</view>

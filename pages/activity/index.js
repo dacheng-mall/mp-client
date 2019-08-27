@@ -28,8 +28,19 @@ Page({
     // })
   },
   tap: function(e) {
-    wx.navigateTo({
-      url: `/pages/activity/detail?id=${e.detail}`
-    });
+    const { id, type } = e.detail;
+    switch (type) {
+      case "at_second_kill": {
+        wx.navigateTo({
+          url: `/pages/activity/speed-kill/index?id=${id}`
+        });
+        break;
+      }
+      default: {
+        wx.navigateTo({
+          url: `/pages/activity/detail?id=${id}`
+        });
+      }
+    }
   }
 });

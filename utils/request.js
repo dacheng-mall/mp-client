@@ -38,7 +38,8 @@ const showLoading = (url, show) => {
     case url === "api/sys/favorites/set":
     case /^v1\/api\/public\/saveImg/.test(url):
     case /^v1\/api\/sys\/favorites\/productIds/.test(url):
-    case /^v1\/api\/wx\/createWXAQRCode/.test(url): {
+    case /^v1\/api\/wx\/createWXAQRCode/.test(url):
+    case /^v1\/api\/sys\/giftProduct/.test(url): {
       break;
     }
     default: {

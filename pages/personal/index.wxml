@@ -1,12 +1,18 @@
 <view class="page-wrap wrap">
   <view class="header">
     <view class="avatar">
-      <image src="{{user.avatar}}" />
+      <image wx:if="{{user && user.avatar}}" src="{{user.avatar}}" />
+      <view wx:else>囧</view>
     </view>
-    <view class="user-info">
+    <view wx:if="{{user}}" class="user-info">
       <view class="name">{{user.name}}</view>
       <view class="inst" wx:if="{{user.userType === 4}}">{{user.institution.name}}</view>
-      <view wx:if="{{user.userType === 4 && user.gradeName}}" class="inst grade" style="">{{user.gradeName}}</view>
+      <view wx:if="{{user.userType === 4 && user.gradeName}}" class="inst grade" style="">
+        {{user.gradeName}}
+      </view>
+    </view>
+    <view wx:else class="user-info" bind:tap="login">
+      <view class="name">注册/登录</view>
     </view>
     <view wx:if="{{user.userType === 2 }}" class="header-btn">
       <button bindtap="bindInst" class="btn-large btn-warning">加入机构</button>
@@ -16,6 +22,6 @@
     </view>
   </view>
   <view class="list">
-    <listView data="{{list}}" userType="{{user.userType}}" />
+    <listView data="{{menu}}" userType="{{user.userType}}" />
   </view>
 </view>

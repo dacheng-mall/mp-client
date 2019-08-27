@@ -1,0 +1,1 @@
+<button class="btn btn-large btn-primary" bind:tap="go2login">登录/注册</button>

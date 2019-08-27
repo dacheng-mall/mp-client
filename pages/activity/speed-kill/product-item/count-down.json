@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "paragraph": "/components/paragraph/index"
+  }
+}

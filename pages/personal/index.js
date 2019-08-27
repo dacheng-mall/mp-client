@@ -3,54 +3,87 @@ import { uri, getRoute } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
+const MENU = [
+  {
+    title: "经理人专区",
+    userType: 4,
+    items: [
+      {
+        name: "活动",
+        icon: "crown-fill",
+        iconColor: "#00bcbd",
+        color: "#fff",
+        path: "/pages/personal/myActivity/index"
+      },
+      {
+        name: "客户",
+        icon: "team",
+        iconColor: "#00bcbd",
+        color: "#fff",
+        path: "/pages/personal/myActivity/myCustomer"
+      },
+      {
+        name: "我的码",
+        icon: "qrcode",
+        iconColor: "#ff3366",
+        color: "#fff",
+        path: "/pages/qrcode/list/index?type=salesman"
+      }
+    ]
+  },
+  {
+    title: "活动专区",
+    userType: null,
+    items: [
+      {
+        name: "抢购",
+        icon: "trophy-fill",
+        iconColor: "#ff4d4d",
+        color: "#fff",
+        path: "/pages/personal/mySpeedKill/index"
+      },
+      {
+        name: "预约",
+        icon: "check-circle-fill",
+        iconColor: "#00bcbd",
+        color: "#fff",
+        path: "/pages/personal/myGift/index"
+      },
+      {
+        name: "我的码",
+        icon: "qrcode",
+        iconColor: "#009899",
+        color: "#fff",
+        path: "/pages/qrcode/list/index?type=user"
+      }
+    ]
+  }
+];
 Page({
   data: {
     source,
     timestamp: null,
-    list: [
-      {
-        name: "我的预约",
-        icon: "gift-fill",
-        iconColor: "#00bcbd",
-        color: "#999",
-        path: "/pages/personal/myGift/index",
-        userType: null
-      },
-      {
-        name: "我的活动",
-        icon: "thunderbolt-fill",
-        iconColor: "#00bcbd",
-        color: "#999",
-        path: "/pages/personal/myActivity/index",
-        userType: 4
-      },
-      {
-        name: "我送出的礼物",
-        icon: "qrcode",
-        iconColor: "#ff3366",
-        color: "#999",
-        path: "/pages/qrcode/list/index?type=salesman",
-        userType: 4
-      },
-      {
-        name: "我领取的礼物",
-        icon: "qrcode",
-        iconColor: "#00bcbd",
-        color: "#999",
-        path: "/pages/qrcode/list/index?type=user",
-        userType: null
-      }
-    ]
+    menu: MENU
   },
   onShow: function() {
     const ts = new Date().valueOf();
     const force = wx.getStorageSync("force");
     const lastTimestamp = wx.getStorageSync("lastTimestamp");
     const user = wx.getStorageSync("user");
+    if (!user || user.userType === 2) {
+      const menu = MENU.filter(({ userType }) => !userType);
+      this.setData({
+        menu
+      });
+    } else {
+      this.setData({
+        menu: [...MENU]
+      });
+    }
     wx.removeStorage({
       key: "force"
     });
-    if (force || !lastTimestamp || ts - lastTimestamp > 7200000) {
+    if (user && (force || !lastTimestamp || ts - lastTimestamp > 7200000)) {
       wx.startPullDownRefresh();
     } else if (user) {
       this.setData({
@@ -75,6 +108,7 @@ Page({
                 resolve(data.user);
               } else {
                 // 没注册过, 请缓存, 坐等app的注册
+                wx.stopPullDownRefresh();
                 const app = getApp();
                 app._clear();
               }
@@ -100,6 +134,11 @@ Page({
     wx.removeStorageSync("bind_name");
     wx.navigateTo({
       url: "/pages/personal/bind/index"
+    });
+  },
+  login: function() {
+    wx.navigateTo({
+      url: "/pages/start/author"
     });
   }
 });

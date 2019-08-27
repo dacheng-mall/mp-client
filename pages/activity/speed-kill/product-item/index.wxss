@@ -1,0 +1,112 @@
+.wrap {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+}
+.image-wrap {
+  /* display: inline; */
+  float: left;
+  width: 100%;
+  clear: both;
+}
+.wrap .btn {
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  text-align: center;
+  border-radius: 50%;
+  border: 2px solid #ffcece;
+  background: linear-gradient(to bottom, #f02c5d, #b3002c);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+}
+.my-customers {
+  position: fixed;
+  z-index: 999;
+}
+.wrap .btn.disabled {
+  background: linear-gradient(to bottom, #cfcfcf, #9c9c9c);
+  border: 2px solid #aaaaaa;
+  color: #666;
+  font-size: 64rpx;
+}
+.wrap .btn.warning {
+  background: linear-gradient(to right, #1077a0, #004a6d);
+  border: 2px solid #24abff;
+  color: #666;
+  font-size: 64rpx;
+}
+.wrap .btn image {
+  width: 80%;
+  height: 80%;
+}
+.wrap .count-down {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  padding: 20px 0;
+  font-size: 22px;
+  width: 100%;
+  text-align: center;
+}
+.gift {
+  font-size: 44rpx;
+  color: #fff;
+}
+.notLogin {
+  font-size: 32px;
+  color: #777;
+}
+.btn-date {
+  font-size: 44rpx;
+  margin-top: 10rpx;
+  color: #333;
+}
+.btn-time {
+  font-size: 44rpx;
+  color: #333;
+}
+.btn-msg {
+  font-size: 64rpx;
+}
+.doing-title {
+  font-size: 88rpx;
+  color: #fff;
+}
+.doing-info {
+  font-size: 40rpx;
+  color: #fff;
+}
+.list-wrap {
+  padding: 10px;
+  clear: both;
+}
+.list-wrap .list {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.list-wrap .list-title {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px
+}
+.list-wrap .list-item {
+  padding: 5px 10px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.list-item-info {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis
+}
+.list-item-date {
+  width: 256rpx;
+  text-align: right;
+  opacity: 0.6;
+}

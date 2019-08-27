@@ -1,0 +1,95 @@
+<headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
+<view class="body" style="height: {{contHeight}}px">
+  <view class="cont">
+    <view class="products-wrap">
+      <swiper class="products" current="{{current || 0}}" circular="{{true}}" bindchange="productChange">
+        <block wx:for="{{activityProducts}}" wx:key="{{item.id}}">
+          <swiper-item>
+            <item gifts="{{gifts}}" primaryColor="{{item.primaryColor}}" bind:kill="kill" disabled="{{stopKill}}" signed="{{signed}}" isLogin="{{!!user}}" enable="{{enable}}" customerEnable="{{customerEnable}}" product="{{item.product.content}}" pid="{{item.productId}}" aid="{{item.activityId}}" image="{{images[index + 1].url}}" active="{{current === index}}" status="{{item.status}}" beginTime="{{item.beginTime}}" finishTime="{{item.finishTime}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view wx:if="{{activityProducts.length > 1}}" class="index-wrap">
+      <block wx:for="{{activityProducts}}" wx:key="index_{{index}}">
+        <view class="index-item">
+          <indicator activity="{{current === index}}" data-index="{{index}}" beginTime="{{item.beginTime}}" status="{{item.status}}" current="{{index}}" catch:tap="change" />
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="bottom">
+    <view wx:if="{{!user}}" style="padding: 10px;">
+      <login-btn />
+    </view>
+    <view wx:elif="{{customerEnable && (!customerSign || customerSign.length < 1)}}" class="btn-wrap">
+      <button class="btn btn-large btn-primary" catch:tap="showGetPanel">立即报名</button>
+    </view>
+    <view wx:elif="{{enable}}" class="btn-wrap">
+      <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
+      <poster btnText="生成海报并分享" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
+    </view>
+    <view wx:if="{{isIPX}}" class="ipX-safe-bottom" />
+  </view>
+</view>
+<view class="getGift" animation="{{animationData}}" style="height: 0">
+  <form bindsubmit="searchSalesman" class="formWrap" wx:if="{{step === 0}}">
+    <view class="top" style="height: 144rpx">
+      <view>通过工号查询您的客户经理</view>
+      <view>
+        <button form-type="submit" class="btn btn-small btn-warning">下一步</button>
+      </view>
+    </view>
+    <view class="middle">
+      <view class="section">
+        <view class="sectionTitle">手机号</view>
+        <input name="mobile" value="" placeholder="请输入您的客户经理的手机号" />
+      </view>
+      <view wx:if="{{smList && smList.length > 0}}" class="smList">
+        <view class="smList-title">请选择(点击)您的客户经理</view>
+        <block wx:for="{{smList}}" wx:key="{{item.id}}">
+          <view class="smList-item" bind:tap="selectSalesman" data-item="{{item}}">
+            <image class="smList-avarta" src="{{item.avatar}}"></image>
+            <view class="smList-info">
+              <view>{{item.name}}</view>
+              <view>{{item.mobile}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </form>
+  <form bindsubmit="customerSign" wx:if="{{step === 1}}" class="formWrap">
+    <view class="top" style="height: 144rpx">
+      <view class="salesman">
+        <image class="salesman-avatar" src="{{salesman.avatar}}" mode="aspectFit" style="width: 88rpx; height: 88rpx" />
+        <view class="salesman-info">
+          <view>{{salesman.name}}({{salesman.gradeName}})</view>
+          <view>{{salesman.institution.name}}</view>
+        </view>
+      </view>
+      <view>
+        <button form-type="submit" class="btn btn-small btn-warning">立即报名</button>
+      </view>
+    </view>
+    <view class="middle">
+      <view class="section">
+        <view class="sectionTitle">
+          姓名
+          <text class="required">(必填)</text>
+        </view>
+        <input name="name" placeholder="请输入真实姓名" />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">
+          手机号
+          <text class="required">(必填)</text>
+        </view>
+        <input name="mobile" value="{{user.mobile}}" type="number" placeholder="请输入手机号" />
+      </view>
+    </view>
+  </form>
+  <view class="bottom">
+    <icon-x type="close-circle" size="{{88}}" color="#ccc" catch:tap="hideGetPanel"></icon-x>
+  </view>
+</view>

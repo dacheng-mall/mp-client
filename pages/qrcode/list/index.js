@@ -4,7 +4,6 @@ import { source } from "../../../setting";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
 const PAGE_DEF = { page: 1, pageSize: 10 };
-let scrollTimer = "";
 
 Page({
   data: {

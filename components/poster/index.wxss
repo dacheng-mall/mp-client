@@ -1,4 +1,4 @@
-@import '../../access/button.wxss';
+@import "../../access/button.wxss";
 
 .preview {
   background-color: #eee;
@@ -27,9 +27,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
-.button_wrap button{
+.button_wrap button {
   flex: auto;
   margin: 0 10rpx;
 }
@@ -37,4 +37,14 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+.btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  padding: 0 44rpx;
+  font-size: 32rpx;
+  background: linear-gradient(to right, #ff9933, #cc3f00);
+  color: #fff;
+  margin: 0 0 0 10px;
 }

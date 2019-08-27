@@ -71,6 +71,8 @@ export const getFavorites = () =>
     })
     .then(data => {
       return data;
+    }).catch((e) => {
+      return null
     });
 
 export const setFavorites = ids => {

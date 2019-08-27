@@ -29,7 +29,7 @@ Page({
     }
     if (this.options.ids) {
       this.fetch();
-      wx.hideTabBar({animation:false});
+      wx.hideTabBar({ animation: false });
     }
   },
   fetch: async function() {
@@ -96,9 +96,12 @@ Page({
     });
   },
   onRemove: async function() {
+    const user = wx.getStorageSync("user");
+    if (!user) {
+      return;
+    }
     const { ids, list } = this.data;
-    const { id } = wx.getStorageSync("user");
-    await post("api/sys/favorites/delete", { ids, userId: id });
+    await post("api/sys/favorites/delete", { ids, userId: user.id });
     const newStore = await getFavorites();
     const newList = list.filter(d => !ids.includes(d.id));
     ids.forEach((d, i) => {

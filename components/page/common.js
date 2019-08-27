@@ -1,5 +1,4 @@
 const { source, pathPrefix } = require("../../setting");
-import { getFavorites } from "../../utils/tools";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
 module.exports = Behavior({

@@ -20,3 +20,43 @@
   color: #666;
   font-size: 32rpx;
 }
+.logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+}
+.app-title {
+  font-size: 24px;
+  margin: 10px auto;
+  color: #333;
+}
+.app-sub-title {
+  font-size: 16px;
+  color: #999;
+  margin: 0 auto 10px;
+}
+.info-box {
+  width: 90%;
+  padding-top: 32px;
+  margin-top: 32px;
+  border-top: 1px solid #eee
+}
+.info-box .info-title {
+  color: #333;
+  margin: 10px 0;
+}
+.info-box .info-sub-title {
+  color: #ccc;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.info-box .info-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 44px;
+}
+.info-box .info-btn .btn {
+  flex: 1;
+  margin: 0 5px;
+}

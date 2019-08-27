@@ -1,0 +1,116 @@
+.body {
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.body .cont {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.bottom {
+  flex-shrink: 0;
+  width: 100%;
+  background-color: #eee;
+  border-top: 1px solid #ddd;
+}
+.btn-wrap {
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn-wrap button {
+  flex: 1;
+}
+.ipX-safe-bottom {
+  height: 40rpx;
+}
+.products-wrap {
+  flex: 1;
+  background-color: #eee;
+}
+.products {
+  height: 100%;
+}
+.index-wrap {
+  display: flex;
+  flex-direction: row;
+  height: 64px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.index-item {
+  flex: 1;
+}
+@import "../../../access/form.wxss";
+
+@import "../getGift.wxss";
+.getGift {
+  position: absolute;
+  /* top: 100vh; */
+  height: 0;
+  width: 100vw;
+  opacity: 0;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.getGift .top {
+  height: 88rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+  background-color: #eee;
+  border-bottom: 1px solid #ddd;
+}
+.getGift .bottom {
+  text-align: center;
+  height: 128rpx;
+  line-height: 128rpx;
+}
+.getGift .middle {
+  flex: 1;
+  overflow: auto;
+  background-color: #fff;
+}
+.salesman {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.salesman-info {
+  margin-left: 8rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+.salesman-avatar {
+  border-radius: 50%;
+}
+.smList {
+  padding: 20rpx;
+}
+.smList .smList-title {
+  color: #666;
+  font-size: 32rpx;
+}
+.smList .smList-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin: 10rpx 0;
+  padding: 20rpx;
+}
+.smList-avarta {
+  width: 96rpx;
+  height: 96rpx;
+  margin-right: 10rpx;
+}

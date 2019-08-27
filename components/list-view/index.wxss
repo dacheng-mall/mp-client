@@ -1,5 +1,12 @@
 .wrap {
-  border: 1px solid #eee;
-  border-radius: 16rpx;
-  background-color: #fff;
+  /* border: 1px solid #eee; */
+  /* border-radius: 16rpx; */
+  /* background-color: #fff; */
+  display: flex;
+  width: 100%;
+}
+.title {
+  font-size: 32rpx;
+  color: #666;
+  margin: 20px 0 10px;
 }

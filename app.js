@@ -83,7 +83,9 @@ App({
       success: res => {
         get("api/wx/token_bycode", { code: res.code })
           .then(data => {
-            this.globalData.openid = data.user ? data.user.openid : data.openid;
+            this.globalData.userInfo.openid = data.user
+              ? data.user.openid
+              : data.openid;
             this.getUserInfo(data);
             wx.setStorageSync("lastTimestamp", new Date().valueOf());
           })
@@ -115,23 +117,17 @@ App({
   getUserInfo: function(data) {
     const { openid, user, token, userInfo } = data;
     if (openid) {
-      // 没注册过
-      const { path } = getRoute();
-      if (path !== "pages/start/author") {
-        wx.navigateTo({
-          url: "/pages/start/author"
-        });
-      }
+      this.register(this.globalData.userInfo);
     } else if (user && token) {
       // 注册过
       this.afterLogin(user, token);
     } else if (userInfo) {
       // 刚获取过用户信息, 注册
-      userInfo.openid = this.globalData.openid;
+      userInfo.openid = this.globalData.userInfo.openid;
       if (userInfo.openid) {
         this.register(userInfo);
       } else {
-        // this._login();
+        this._login();
       }
     }
     return;
@@ -155,6 +151,18 @@ App({
     get("v1/api/sys/favorites/productIds", { userId: user.id }).then(res => {
       wx.setStorageSync("favorites", res);
     });
+    const routes1 = getCurrentPages();
+    if (
+      routes1.length > 1 &&
+      routes1[routes1.length - 1].route === "pages/start/author"
+    ) {
+      wx.navigateBack({
+        delta: 1
+      });
+    } else {
+      
+    }
+    return;
     const routes = getCurrentPages();
     if (routes.length > 0) {
       const cur = routes[routes.length - 1].route;
@@ -228,7 +236,7 @@ App({
         const { scene } = wx.getLaunchOptionsSync();
         that.globalData.scene = scene;
         that.setNavHeight();
-        that._login();
+        // that._login();
       }
     });
   },

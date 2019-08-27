@@ -1,5 +1,4 @@
 import {
-  getFavorites,
   setFavorites,
   getStorageWithKey
 } from "../../utils/tools";
@@ -16,7 +15,6 @@ Component({
   },
   lifetimes: {
     attached() {
-      // getFavorites();
     },
     ready() {
       const query = wx.createSelectorQuery().in(this);

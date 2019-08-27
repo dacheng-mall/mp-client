@@ -174,7 +174,7 @@ Page({
       }
     }
     const favoData = await getFavorites();
-    if (favoData.includes(data.id)) {
+    if (favoData && favoData.includes(data.id)) {
       data.favorite = true;
     } else {
       data.favorite = false;

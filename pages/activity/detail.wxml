@@ -1,5 +1,5 @@
 <headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
-<view wx:if="{{step === null}}" style="display: flex; flex-direction: column; flex: 1; height: {{height - 64}}px;">
+<view class="body" wx:if="{{step === null}}" style="display: flex; flex-direction: column; flex: 1; height: {{contHeight}}px;">
   <view style="display: flex; flex-direction: column; flex: 1; background-color: #fff;overflow-y: auto;">
     <nothing wx:if="{{!id}}" />
     <view wx:else>
@@ -94,7 +94,7 @@
     <poster btnText="生成海报并分享" styles="height: 88rpx;line-height: 88rpx;border-radius: 44rpx;padding: 0 44rpx;font-size: 32rpx;background: linear-gradient(to right, #ff9933 , #cc3f00); color: #fff; margin: 0 0 0 10px;" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
     <!-- <view wx:if="{{showHome}}" class="showHome" catch:tap="showHome">
       <icon-x type="home" size="{{40}}" color="#00bcbd" />
-    </!-->
+    </! -->
   </view>
   <!-- 无权限的业务员和客户看到的 -->
   <view wx:if="{{user.userType === 2 || (user.userType === 4 && !enable)}}" class="footer">
@@ -112,15 +112,20 @@
   </view>
 </view>
 <!-- 领取礼物面板 -->
-<view class="getGift" animation="{{animationData}}">
+<view class="getGift" animation="{{animationData}}" style="height: 0">
   <form bindsubmit="checkSalesman" class="formWrap" wx:if="{{step === 0}}">
     <view class="top">
       <view class="getInfo">您的客户经理是谁?</view>
       <button form-type="submit" class="btn btn-small btn-warning">下一步</button>
     </view>
-    <view class="section">
-      <view class="section__title">通过手机号查询您的客户经理</view>
-      <input name="salesmanMobile" value="" type="number" placeholder="请输入您的客户经理的手机号" />
+    <view class="middle" wx:if="{{step === 0}}">
+      <view class="section">
+        <view class="sectionTitle">
+          通过手机号查询您的客户经理
+          <text class="required">(必填)</text>
+        </view>
+        <input name="salesmanMobile" value="" type="number" placeholder="请输入您的客户经理的手机号" />
+      </view>
     </view>
   </form>
   <view class="top" wx:if="{{step === 1}}">

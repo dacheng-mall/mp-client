@@ -1,10 +1,10 @@
 .getGift {
   position: absolute;
-  top: 100vh;
+  /* top: 100vh; */
   height: 0;
   width: 100vw;
   opacity: 0;
-  background-color: #eee;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -62,27 +62,4 @@
 }
 .nextBtn {
   min-width: 128rpx;
-}
-.formWrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.section {
-  padding: 10rpx;
-}
-.section .section__title {
-  font-size: 28rpx;
-  color: #999;
-  margin-bottom: 10rpx;
-}
-
-.section input,
-.section textarea {
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 10rpx;
-  padding: 10rpx;
-  width: auto;
-  font-size: 28rpx;
 }

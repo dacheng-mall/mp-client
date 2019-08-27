@@ -10,7 +10,7 @@
       <button bindtap="cancel" class="btn-default btn-ghost">取消</button>
     </view>
   </view>
-  <button wx:if="{{step === 0}}" style="{{styles}}"  bindtap="create" class="share_button">
+  <button wx:if="{{step === 0}}" style="{{styles}}"  bindtap="create" class="share_button {{styles ? '' : 'btn'}}">
     {{btnText}}
   </button>
 </view>

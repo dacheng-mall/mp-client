@@ -35,11 +35,12 @@ Component({
         width: screenWidth - 20,
         height: screenWidth - 20
       });
-    },
+    }
   },
   methods: {
     tap() {
-      this.triggerEvent("itemTouch", this.data.item.id);
+      const { id, activityType } = this.data.item;
+      this.triggerEvent("itemTouch", { id, type: activityType });
     }
   }
 });

@@ -3,20 +3,25 @@ import { get, put } from "../../../utils/request";
 import moment from "moment";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
+const DEF_PAGINATION = { page: 1, pageSize: 10, pageCount: 0 };
+
 Page({
   data: {
     source,
     list: [],
-    pagination: { page: 1, pageSize: 10, pageCount: 0 },
+    pagination: { ...DEF_PAGINATION },
     loading: false
   },
   onLoad: async function() {
     const user = wx.getStorageSync("user");
     this.fetch({ salesmanId: user.id });
   },
-  fetch: async function({ salesmanId, pageInfo = { page: 1, pageSize: 1 } }) {
+  fetch: async function({ salesmanId, pageInfo = {} }) {
+    const {
+      pagination: { page, pageSize }
+    } = this.data;
     const { data, pagination } = await get(
-      `v1/api/sys/activitySalesmen/${pageInfo.page}/${pageInfo.pageSize}`,
+      `v1/api/sys/activitySalesmen/${pageInfo.page || page}/${pageInfo.pageSize || pageSize}`,
       {
         salesmanId
       }
@@ -57,6 +62,7 @@ Page({
       return {
         id: item.id,
         name: item.activity.name,
+        type: item.activity.activityType,
         dateStart: moment(item.activity.dateStart).format("YYYY-MM-DD"),
         dateEnd: moment(item.activity.dateEnd).format("YYYY-MM-DD"),
         image: item.activity.images[0] ? item.activity.images[0].url : null,
@@ -81,10 +87,10 @@ Page({
     }
   },
   tap: function(e) {
-    const { aid } = e.currentTarget.dataset;
+    const { aid, atype } = e.currentTarget.dataset;
     const salesmanId = this.data.salesmanId;
     wx.navigateTo({
-      url: `/pages/personal/myActivity/myCustomer?sid=${salesmanId}&aid=${aid}`
+      url: `/pages/personal/myActivity/myCustomer?sid=${salesmanId}&aid=${aid}&type=${atype}`
     });
   }
 });

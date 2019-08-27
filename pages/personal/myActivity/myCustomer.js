@@ -1,3 +1,4 @@
+import moment from "moment";
 import { source } from "../../../setting";
 import { get, put } from "../../../utils/request";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
@@ -13,31 +14,54 @@ Page({
     this.fetch(this.options);
     const { windowHeight } = wx.getSystemInfoSync();
     this.setData({
-      windowHeight
+      windowHeight,
+      ...this.options
     });
   },
-  fetch: async function({ sid, aid, pageInfo = { page: 1, pageSize: 16 } }) {
+  fetch: async function({
+    sid,
+    aid,
+    type,
+    pageInfo = { page: 1, pageSize: 16 }
+  }) {
     this.setData({
       loading: true
     });
+    const params = {};
+    const user = wx.getStorageSync("user");
+    if (sid) {
+      params.salesmanId = sid;
+    } else if (user && user.userType === 4) {
+      params.salesmanId = user.id;
+    } else {
+      wx.navigateBack({
+        delta: 1
+      });
+      return;
+    }
+    if (aid) {
+      params.activityId = aid;
+    }
+    if (type !== undefined) {
+      params.type = type === "at_second_kill" ? "seckill" : ""
+    }
     const { data, pagination } = await get(
-      `v1/api/sys/giftNew/${pageInfo.page}/${pageInfo.pageSize}`,
-      {
-        activityId: aid,
-        salesmanId: sid
-      }
+      `v1/api/sys/giftProduct/${pageInfo.page}/${pageInfo.pageSize}`,
+      params
     );
     if (
       data.length > 0 &&
       pagination.pageCount > this.data.pagination.pageCount
     ) {
-      const { list, activity } = this.normalizeData(data);
+      // const { list, activity } = this.normalizeData(data);
       if (pagination.page > pagination.pageCount) {
         pagination.page = pagination.pageCount;
       }
+      data.map(d => {
+        d.createTime = moment(d.createTime).format("YYYY-MM-DD HH:mm:ss");
+      });
       this.setData({
-        activity,
-        list: [...this.data.list, ...list],
+        list: [...this.data.list, ...data],
         pagination,
         loading: false
       });
@@ -53,20 +77,20 @@ Page({
     } = data[0];
 
     const list = data.map(item => ({
-      name: item.custom.name,
-      id: item.custom.id,
-      mobile: item.custom.mobile,
-      avatar: item.custom.avatar,
+      name: item.customerName,
+      id: item.customerId,
+      mobile: item.customerMobile,
+      avatar: item.productImage,
       gifts: item.giftProducts,
       status: item.status
     }));
-    const activity = {
-      institutionName: institution.name,
-      name
-    };
+    // const activity = {
+    //   institutionName: institution.name,
+    //   name
+    // };
     return {
-      list,
-      activity
+      list
+      // activity
     };
   },
   onReachBottom() {
@@ -88,5 +112,5 @@ Page({
         phoneNumber: mobile
       });
     }
-  },
+  }
 });

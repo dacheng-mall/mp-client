@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.7",
+	"libVersion": "2.8.0",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 30,
 			"list": [
 				{
 					"id": 0,
@@ -259,6 +259,20 @@
 					"name": "扫码进活动",
 					"pathName": "pages/activity/detail",
 					"query": "scene=%3Fa%3D11",
+					"scene": null
+				},
+				{
+					"id": 29,
+					"name": "秒杀活动详情",
+					"pathName": "pages/activity/speed-kill/index",
+					"query": "scene=%3Fa%3D23%26sa%3D3945",
+					"scene": 1011
+				},
+				{
+					"id": -1,
+					"name": "pages/activity/speed-kill/index",
+					"pathName": "pages/activity/speed-kill/index",
+					"query": "id=de4f673ba2604b988d01fde667f8e692",
 					"scene": null
 				}
 			]

@@ -1,5 +1,8 @@
-<view class="wrap">
-  <block wx:for="{{data}}" wx:key="{{index}}_list_item">
-    <item data="{{item}}" userType="{{userType}}" isFirst="{{index === 0}}" />
-  </block>
+<view wx:for="{{data}}" wx:key="{{index}}_list_wrap">
+  <view class="title">{{item.title}}</view>
+  <view class="wrap">
+    <block wx:for="{{item.items}}" wx:key="{{index}}_list_item" wx:for-item="child" wx:for-index="childIndex">
+      <item data="{{child}}" userType="{{child.userType}}" width="{{itemWidth}}" isFirst="{{childIndex === 0}}" />
+    </block>
+  </view>
 </view>

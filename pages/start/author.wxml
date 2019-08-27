@@ -1,8 +1,20 @@
 <view class="author-wrap">
-  <open-data type="userAvatarUrl" class="avatar"></open-data>
-  <open-data type="userNickName" class="nickname"></open-data>
-  <button wx:if="{{canIUse}}" bind:getuserinfo="bindGetUserInfo" open-type="getUserInfo" type="primary">
-    授权登录
-  </button>
+  <image src="/access/logo.png" mode="aspectFit" class="logo"></image>
+  <view class="app-title">礼全有</view>
+  <view class="app-sub-title">保险人的展业引擎</view>
+  <!-- <open-data type="userAvatarUrl" class="avatar"></open-data>
+  <open-data type="userNickName" class="nickname"></open-data> -->
+  <view wx:if="{{canIUse}}" class="info-box">
+    <view class="info-title">该程序将获取以下授权:</view>
+    <view class="info-sub-title"> - 获得您的公开信息 (昵称, 头像等) </view>
+    <view class="info-btn">
+      <button bind:tap="back" class="btn btn-disable btn-large">
+        拒绝
+      </button>
+      <button bind:getuserinfo="bindGetUserInfo" open-type="getUserInfo" class="btn btn-primary btn-large">
+        允许
+      </button>
+    </view>
+  </view>
   <view wx:else>请升级微信版本</view>
 </view>

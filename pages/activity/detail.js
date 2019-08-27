@@ -6,6 +6,7 @@ import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 const validateMobile = /^1(3|4|5|7|8)\d{9}$/;
 
+const app = getApp();
 Page({
   data: {
     source,
@@ -23,6 +24,7 @@ Page({
   },
   onShow: function() {
     wx.hideShareMenu();
+    this.getContHeight();
     const user = wx.getStorageSync("user");
     this.setData({
       user,
@@ -43,11 +45,24 @@ Page({
       timingFunction: "ease"
     });
   },
-  // onShow: function() {},
+  
+  getContHeight: function() {
+    try {
+      const sysInfo = wx.getSystemInfoSync();
+      let headerPosi = app.globalData.headerBtnPosi; // 胶囊位置信息
+      this.setData({
+        contHeight:
+          sysInfo.screenHeight -
+          (2 * headerPosi.bottom - headerPosi.height - sysInfo.statusBarHeight)
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  },
   showGetPanel: function() {
     this.animation
-      .top(0)
-      .height("100vh")
+      .bottom(0)
+      .height(this.data.contHeight)
       .opacity(1)
       .step();
     // 如果有业务员id则直接选礼物, 否则到选择业务员的界面
@@ -58,7 +73,7 @@ Page({
   },
   hideGetPanel: function() {
     this.animation
-      .top("100vh")
+      .bottom(0)
       .height(0)
       .opacity(0)
       .step();
@@ -430,6 +445,7 @@ Page({
       if (prod.checked) {
         baseInfo.products.push({
           productId: prod.id,
+          productName: prod.name || prod.title,
           count: prod.totalCount
         });
       }

@@ -1,0 +1,22 @@
+<nothing wx:if="{{data.length < 1}}" />
+<view wx:else>
+  <block wx:for="{{data}}" wx:key="{{item.id}}">
+    <view hover-class="item-active" class="item">
+      
+      <image class="img" src="{{source}}{{item.productImage}}" mode="aspectFit" bind:tap="goDetail" data-id="{{item.activityId}}" />
+      
+      <view class="main" catch:tap="call" data-mobile="{{item.salesmanMobile}}" data-name="{{item.salesmanName}}">
+        <view class="name">{{item.activityName}}</view>
+        <view class="product">{{item.productName}}({{item.count}}件)</view>
+        <view class="salesman" style="color:green">{{item.salesmanName}}<icon-x type="phone" size="{{32}}" color="green"></icon-x></view>
+        <view class="time">{{item.createTime}}</view>
+      </view>
+      <view class="right">
+        <button catch:tap="receive" data-id="{{item.id}}" data-index="{{index}}" wx:if="{{item.status === 'waiting'}}" class="btn btn-primary btn-small">
+          签收
+        </button>
+        <view class="receive" wx:elif="{{item.status === 'received'}}">已签收</view>
+      </view>
+    </view>
+  </block>
+</view>
