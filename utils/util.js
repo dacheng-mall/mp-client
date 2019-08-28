@@ -101,10 +101,9 @@ function validateName(string, msg = "名字的长度不得超过18个字") {
 }
 
 function getContHeight() {
-  const app = getApp();
   try {
     const sysInfo = wx.getSystemInfoSync();
-    let headerPosi = app.globalData.headerBtnPosi; // 胶囊位置信息
+    let headerPosi = wx.getMenuButtonBoundingClientRect(); // 胶囊位置信息
     return (
       sysInfo.screenHeight -
       (2 * headerPosi.bottom - headerPosi.height - sysInfo.statusBarHeight)

@@ -5,41 +5,39 @@ import { homePath } from "./setting";
 
 App({
   onLaunch: function() {
-    wx.getSystemInfo({
-      // 获取设备信息
-      success: res => {
-        this.globalData.systeminfo = res;
-      }
-    });
+    this.globalData.systeminfo = wx.getSystemInfoSync();
+  },
+  onShow: function(res) {
+    this.globalData.initState = res;
+    this.checkUpdate();
+    // const onShowTimer = setTimeout(() => {
+    //   clearTimeout(onShowTimer);
+    // }, 500);
     // 获得胶囊按钮位置信息
     this.globalData.headerBtnPosi = wx.getMenuButtonBoundingClientRect();
     this.checkIsIPhoneX();
   },
-  onShow: function(res) {
-    this.globalData.initState = res;
-    const onShowTimer = setTimeout(() => {
-      this.checkUpdate();
-      clearTimeout(onShowTimer);
-    }, 500);
-  },
   checkIsIPhoneX: function() {
-    const self = this;
-    wx.getSystemInfo({
-      success: function(res) {
-        // 根据 model 进行判断
-        if (/iPhone\sX/.test(res.model)) {
-          self.globalData.isIPX = true;
-          self.globalData.headerBtnPosi = {
-            right: self.globalData.headerBtnPosi.right - 10,
-            bottom: 82,
-            height: 32,
-            left: 317,
-            top: 50,
-            width: 87
-          };
-        }
-      }
-    });
+    if (/^iPhone\sX/.test(wx.getSystemInfoSync().model)) {
+      this.globalData.isIPX = true;
+    }
+    // const self = this;
+    // wx.getSystemInfo({
+    //   success: function(res) {
+    //     // 根据 model 进行判断
+    //     if (/^iPhone\sX/.test(res.model)) {
+    //       self.globalData.isIPX = true;
+    //       self.globalData.headerBtnPosi = {
+    //         right: self.globalData.headerBtnPosi.right - 10,
+    //         bottom: 82,
+    //         height: 32,
+    //         left: 317,
+    //         top: 50,
+    //         width: 87
+    //       };
+    //     }
+    //   }
+    // });
   },
 
   setNavHeight: function() {
@@ -160,7 +158,6 @@ App({
         delta: 1
       });
     } else {
-      
     }
     return;
     const routes = getCurrentPages();

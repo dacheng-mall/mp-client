@@ -1,14 +1,14 @@
-<view class='navbar-wrap' style='height:{{navbarHeight}}px;padding-top:{{statusBarHeight}}px;background:{{navbarData.bgColor ? navbarData.bgColor : "#fff"}}'>
-  <view class="navbar-text" style='line-height:{{navbarBtn.height + navbarBtn.top}}px;color:{{navbarData.textColor ? navbarData.textColor : "#000"}};'>
-    {{navbarData.title ? navbarData.title : "礼全有"}}
-  </view>
-  <view class="navbar-icon" bindtap="tapLeft" wx:if='{{navbarData.showCapsule ? navbarData.showCapsule : true}}' style="top:{{navbarBtn.top + statusBarHeight}}px;left:{{navbarBtn.right}}px;height:{{navbarBtn.height}}px;">
-    <image wx:if='{{haveBack}}' class="floatL" src="/access/navbar_back_{{navbarData.iconColor ? navbarData.iconColor : 'black'}}.png"></image>
+<view class='navbar-wrap' style='height:{{navbarHeight}}px;margin-bottom: {{statusBarHeight}}px;padding-top:{{statusBarHeight}}px;background:{{navbarData.bgColor ? navbarData.bgColor : "#fff"}}'>
+  <view class="navbar-icon" bindtap="tapLeft" wx:if='{{navbarData.showCapsule ? navbarData.showCapsule : true}}' style="top:{{padding + statusBarHeight}}px;left:{{padding * 2}}px;height:{{navbarBtn.height}}px;">
+    <image wx:if='{{haveBack}}' class="floatL" src="/access/navbar_back_{{navbarData.iconColor ? navbarData.iconColor : 'white'}}.png"></image>
     <!-- <view wx:if='{{haveBack}}' class="floatL" style="border-color:{{navbarData.borderColor ? navbarData.borderColor : 'rgba(0,0,0,0.3)'}}"></view> -->
     <view wx:else class="_goHome">
-      <image src="/access/navbar_home_{{navbarData.iconColor ? navbarData.iconColor : 'black'}}.png"></image>
+      <image src="/access/navbar_home_{{navbarData.iconColor ? navbarData.iconColor : 'white'}}.png"></image>
       首页
     </view>
+  </view>
+  <view class="navbar-text" style='line-height:{{titleHeight}}px;color:{{navbarData.textColor ? navbarData.textColor : "#000"}};'>
+    {{navbarData.title ? navbarData.title : "礼全有"}}
   </view>
 </view>
 <view class="navbar-loading" style='height:{{navbarHeight}}px;line-height:{{navbarHeight}}px;'>

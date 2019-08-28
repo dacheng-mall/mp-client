@@ -13,8 +13,12 @@
   font-size: 23px;
   font-weight: bold;
 }
+.time.mini {
+  font-size: 12px;
+  font-weight: normal;
+}
 .silence .time.small {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
 }
 .silence .time.middle {

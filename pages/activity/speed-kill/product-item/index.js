@@ -337,12 +337,12 @@ Component({
         .step({
           duration: 300
         });
-      animation
-        .scale(1, 1)
-        .opacity(1)
-        .step({
-          duration: 200
-        });
+      // animation
+      //   .scale(1, 1)
+      //   .opacity(1)
+      //   .step({
+      //     duration: 200
+      //   });
 
       this.setData({
         killAnimation: animation.export()

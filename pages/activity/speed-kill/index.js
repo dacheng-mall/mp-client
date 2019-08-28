@@ -17,7 +17,7 @@ Page({
       textColor: "#fff", // 标题颜色
       bgColor: "#00bcbd", // 导航栏背景颜色
       btnBgColor: "#459d9f", // 胶囊按钮背景颜色
-      iconColor: "white", // icon颜色 black/white
+      // iconColor: "white", // icon颜色 black/white
       borderColor: "rgba(255, 255, 255, 0.3)" // 边框颜色 格式为 rgba()，透明度为0.3
     },
     source,
@@ -229,8 +229,20 @@ Page({
       this.init(this.options);
     }
   },
-  selectSalesman: async function(e) {
-    const salesman = e.currentTarget.dataset.item;
+  selectSalesman: async function(e, data) {
+    let salesman = null;
+    if (e) {
+      salesman = e.currentTarget.dataset.item;
+    } else if (data) {
+      salesman = data;
+    }
+    if (!salesman) {
+      wx.showToast({
+        title: "无效客户经理",
+        icon: "none"
+      });
+      return;
+    }
     const isAuthSalesman = await this.checkSalesman(
       salesman.institutionId,
       this.data.institutionId
@@ -263,10 +275,12 @@ Page({
       return;
     }
     const salesmans = await get("v1/api/sys/user", { userType: 4, mobile });
-    if (salesmans.length > 0) {
+    if (salesmans.length > 1) {
       this.setData({
         smList: salesmans
       });
+    } else if (salesmans.length === 1) {
+      this.selectSalesman(null, salesmans[0]);
     } else {
       wx.showToast({
         title: "根据您提供的手机号未找到客户经理",
@@ -365,9 +379,7 @@ Page({
           success: function(res) {
             if (res.confirm) {
               wx.navigateTo({
-                url: `/pages/personal/mySpeedKill/index?activityId=${
-                  data.activityId
-                }&productId=${data.productId}`
+                url: `/pages/personal/mySpeedKill/index?activityId=${data.activityId}&productId=${data.productId}`
               });
             }
           }
@@ -392,5 +404,21 @@ Page({
   },
   getGifts: async function(activityId, customId) {
     return await get("v1/api/sys/giftProduct", { activityId, customId });
+  },
+  onShareAppMessage: function() {
+    // 业务员分享功能
+    const { name, autoid: sa, userType } =
+      this.data.user || wx.getStorageSync("user");
+    const { enable, autoId: a, images } = this.data;
+    const params = {
+      title: `${name}邀您0元抢购`,
+      imageUrl: `${source}${images[0].url}`
+    };
+    if (userType === 4 && enable) {
+      params.path = `/pages/activity/speed-kill/index?a=${a}&sa=${sa}`;
+    } else {
+      params.path = `/pages/activity/speed-kill/index?a=${a}`;
+    }
+    return params;
   }
 });

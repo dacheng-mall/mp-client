@@ -1,12 +1,12 @@
-<view wx:if="{{status !== 'waiting'}}" class="stop">
+<cover-view wx:if="{{status !== 'waiting'}}" class="stop">
   {{text.msg}}
-</view>
-<view wx:elif="{{jump}}" class="silence">
-  <view class="last">距离开抢剩余</view>
-  <view class="time {{text.size}}">{{text.msg}}</view>
-</view>
-<view wx:else class="silence">
-  <view class="date" wx:if="{{text.date}}">{{text.date}}</view>
-  <view class="time" wx:if="{{text.time}}">{{text.time}}</view>
-  <view class="msg" wx:if="{{text.msg}}">{{text.msg}}</view>
-</view>
+</cover-view>
+<cover-view wx:elif="{{jump}}" class="silence">
+  <cover-view class="last">距离开抢剩余</cover-view>
+  <cover-view class="time {{text.size}}">{{text.msg}}</cover-view>
+</cover-view>
+<cover-view wx:else class="silence">
+  <cover-view class="time" wx:if="{{text.date}}">{{text.date}}</cover-view>
+  <cover-view class="time" wx:if="{{text.time}}">{{text.time}}</cover-view>
+  <cover-view class="msg" wx:if="{{text.msg}}">{{text.msg}}</cover-view>
+</cover-view>

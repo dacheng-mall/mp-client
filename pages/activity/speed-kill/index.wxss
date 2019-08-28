@@ -1,5 +1,4 @@
 .body {
-  height: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -7,15 +6,12 @@
 .body .cont {
   flex: 1;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
   -webkit-overflow-scrolling: touch;
 }
 .bottom {
   flex-shrink: 0;
   width: 100%;
   background-color: #eee;
-  border-top: 1px solid #ddd;
 }
 .btn-wrap {
   padding: 10rpx;
@@ -29,7 +25,8 @@
   height: 40rpx;
 }
 .products-wrap {
-  flex: 1;
+  /* flex: 1; */
+  height: 100%;
   background-color: #eee;
 }
 .products {
@@ -49,6 +46,17 @@
 @import "../../../access/form.wxss";
 
 @import "../getGift.wxss";
+.formWrap {
+  flex: 1
+}
+.getGift .top {
+  justify-content: space-between;
+}
+.getGift .middle {
+  flex: 1;
+  overflow: auto;
+  background-color: #fff;
+} 
 /* .getGift {
   position: absolute;
   height: 0;
@@ -60,26 +68,12 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
-.getGift .top {
-  height: 88rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20rpx;
-  background-color: #eee;
-  border-bottom: 1px solid #ddd;
-}
+
 .getGift .bottom {
   text-align: center;
   height: 128rpx;
   line-height: 128rpx;
-}
-.getGift .middle {
-  flex: 1;
-  overflow: auto;
-  background-color: #fff;
-} */
+}*/
 .salesman {
   display: flex;
   align-items: center;

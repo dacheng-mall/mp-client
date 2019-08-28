@@ -25,6 +25,9 @@
     <view wx:elif="{{customerEnable && (!customerSign || customerSign.length < 1)}}" class="btn-wrap">
       <button class="btn btn-large btn-primary" catch:tap="showGetPanel">立即报名</button>
     </view>
+    <view wx:elif="{{customerEnable && (gifts && gifts.length > 0)}}" class="btn-wrap">
+      <button class="btn btn-large btn-primary" open-type="share">邀请好友一起抢</button>
+    </view>
     <view wx:elif="{{enable}}" class="btn-wrap">
       <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
       <poster btnText="生成海报并分享" page="{{p_page}}" bg="{{p_bg}}" scene="{{p_scene}}" title="{{p_title}}"></poster>
@@ -35,9 +38,9 @@
 <view class="getGift" animation="{{animationData}}" style="height: 0">
   <form bindsubmit="searchSalesman" class="formWrap" wx:if="{{step === 0}}">
     <view class="top" style="height: 144rpx">
-      <view>通过工号查询您的客户经理</view>
+      <view>通过手机号查询您的客户经理</view>
       <view>
-        <button form-type="submit" class="btn btn-small btn-warning">下一步</button>
+        <button form-type="submit" class="btn btn-small btn-warning">查询</button>
       </view>
     </view>
     <view class="middle">
@@ -45,7 +48,7 @@
         <view class="sectionTitle">手机号</view>
         <input name="mobile" value="" placeholder="请输入您的客户经理的手机号" />
       </view>
-      <view wx:if="{{smList && smList.length > 0}}" class="smList">
+      <view wx:if="{{smList && smList.length > 1}}" class="smList">
         <view class="smList-title">请选择(点击)您的客户经理</view>
         <block wx:for="{{smList}}" wx:key="{{item.id}}">
           <view class="smList-item" bind:tap="selectSalesman" data-item="{{item}}">

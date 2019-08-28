@@ -56,7 +56,7 @@ Component({
   },
   data: {
     interval: null,
-    text: { msg: "正在计算剩余时间" }
+    text: { msg: "正在计算", size: 'mini' }
   },
   lifetimes: {
     detached: function() {
@@ -76,10 +76,21 @@ Component({
       switch (true) {
         case time > last: {
           const date = moment(begin).format("MM月DD日");
-          const time = moment(begin).format("HH:mm:ss");
+          const timeHour = moment(begin).format("HH");
+          const timeMinute = moment(begin).format("mm");
+          const timeSecnod = moment(begin).format("ss");
+          let time = '';
+          if(timeMinute === '00' && timeSecnod === '00') {
+            time = `${timeHour}点整`
+          } else if (timeSecnod === '00' && timeMinute !== '00') {
+            time = `${timeHour}点${timeMinute}分`
+          } else if(timeSecnod !== '00' && timeMinute !== '00'){
+            time = `${timeHour}点${timeMinute}分${timeSecnod}秒`
+          } else if (timeSecnod !== '00' && timeMinute === '00') {
+            time = `${timeHour}点${timeSecnod}秒`
+          }
           this.setData({
             jump: false,
-            // text: `${Math.floor(time / day)} 天后开抢`
             text: { date, time, msg: "开抢" }
           });
           break;

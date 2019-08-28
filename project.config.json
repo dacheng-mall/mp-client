@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.0",
+	"libVersion": "2.8.1",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -216,7 +216,7 @@
 					"id": 22,
 					"name": "扫码2",
 					"pathName": "pages/qrcode/index",
-					"query": "scene=%3Fid%3D262",
+					"query": "scene=id=21099",
 					"scene": 1047
 				},
 				{
@@ -271,6 +271,13 @@
 				{
 					"id": -1,
 					"name": "pages/activity/speed-kill/index",
+					"pathName": "pages/activity/speed-kill/index",
+					"query": "id=de4f673ba2604b988d01fde667f8e692",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "抢购活动(列表进入)",
 					"pathName": "pages/activity/speed-kill/index",
 					"query": "id=de4f673ba2604b988d01fde667f8e692",
 					"scene": null
