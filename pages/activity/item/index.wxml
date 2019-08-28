@@ -1,7 +1,7 @@
 <view class="item-wrap" catch:tap="tap">
   
   <view class="body">
-    <image class="img" style="width:{{width}}px;height:{{height}}px" mode="widthFix" src="{{source}}{{item.images[0].url}}" lazy-load="{{true}}" />
+    <image class="img" wx:if="{{width}}" style="width:{{width}}px;" mode="widthFix" src="{{source}}{{item.images[0].url}}?imageView2/2/w/{{width}}" lazy-load="{{true}}" />
     <view class="info">
       <view class="title">{{item.name}}</view>
       <view class="institution-name">{{item.institution.name}}</view>
@@ -12,17 +12,6 @@
         {{item.products.length}} 选 {{item.totalCount}}
       </view>
       <button class="free-text">免费领取 惊喜豪礼</button>
-      <!-- <scroll-view class="gift-wrap" scroll-x="{{true}}">
-        <view class="gift-list" style="width: {{item.products.length * 276}}rpx">
-          <block wx:for="{{item.products}}" wx:for-item="gift" wx:key="{{gift.id}}">
-            <view class="gift-item">
-              <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}" />
-              <view class="gift-name">{{gift.title}}({{gift.totalCount}}件)</view>
-              <view class="gift-price">￥{{gift.price * gift.totalCount}}</view>
-            </view>
-          </block>
-        </view>
-      </scroll-view> -->
     </view>
   </view>
 </view>

@@ -1,5 +1,5 @@
 <view class="wrap">
-  <image src="{{source}}{{image}}" mode="widthFix" class="image-wrap" />
+  <image src="{{source}}{{image}}?imageView2/2/w/480" mode="widthFix" class="image-wrap" />
   <view animation="{{killAnimation}}" wx:if="{{customerEnable && signed && !hasGift}}" class="btn {{(status !== 'enable' || !isLogin) ? 'disabled' : ''}}" catch:tap="kill" style="{{style}}">
     <view wx:if="{{!isLogin}}" class="notLogin">未登录</view>
     <count-down bind:reload="reload" wx:elif="{{status === 'waiting'}}" beginTime="{{beginTime}}" now="{{now}}" leaveTime="{{leaveTime}}" active="{{active}}" status="{{status}}"></count-down>

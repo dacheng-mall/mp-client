@@ -1,5 +1,5 @@
-<view bind:touchstart="doubleTap" bind:touchmove="clearFirstTap" data-id="{{data.id}}" class="item-wrap" style="width: {{size === 2 ? styles.width_2x : styles.width_1x}}px;height: {{styles.height}}px">
-  <image class="main-img" style="height:{{data.type === 'product' ? styles.width_1x : styles.height}}px" mode="aspectFill" src="{{data.image}}" lazy-load="{{true}}" />
+<view wx:if="{{styles.width_1x}}" bind:touchstart="doubleTap" bind:touchmove="clearFirstTap" data-id="{{data.id}}" class="item-wrap" style="width: {{size === 2 ? styles.width_2x : styles.width_1x}}px;height: {{styles.height}}px">
+  <image class="main-img" style="height:{{data.type === 'product' ? styles.width_1x : styles.height}}px" mode="aspectFill" src="{{data.image}}?imageView2/2/w/{{size === 2 ? styles.width_2x : styles.width_1x}}" lazy-load="{{true}}" />
   <view wx:if="{{data.favorite}}" class="favorite">
     <icon-x data-type="like" type="cart-fill" color="#fff" size="{{32}}" />
   </view>

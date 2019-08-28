@@ -32,7 +32,7 @@ Component({
     attached: function() {
       const { screenWidth } = wx.getSystemInfoSync();
       this.setData({
-        width: screenWidth - 20,
+        width: Math.floor(screenWidth - 20),
         height: screenWidth - 20
       });
     }

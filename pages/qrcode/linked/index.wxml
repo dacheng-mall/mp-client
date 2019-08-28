@@ -28,7 +28,7 @@
   <view wx:if="{{activity}}" class="linkedItem" bindtap="goDetail" data-type="activity" data-id="{{activity.id}}">
     <view class="label">活动</view>
     <view class="cont flexCont">
-      <image src="{{source}}{{activity.images[0].url}}" class="productImg" mode="aspectFit" />
+      <image src="{{source}}{{activity.images[0].url}}?imageView2/2/w/96" class="productImg" mode="aspectFit" />
       <view class="main">
         <view>{{activity.name}}</view>
         <view class="subTitle">报名人数: {{activity.salesmanCount}}</view>
@@ -42,7 +42,7 @@
   <view wx:if="{{product}}" class="linkedItem" bindtap="goDetail" data-type="product" data-id="{{product.id}}">
     <view class="label">商品</view>
     <view class="cont flexCont">
-      <image src="{{source}}{{product.mainImageUrl}}" class="productImg" mode="aspectFit" />
+      <image src="{{source}}{{product.mainImageUrl}}?imageView2/2/w/96" class="productImg" mode="aspectFit" />
       <view class="main">
         <view>{{product.title}}</view>
         <view class="price">¥{{product.price}}</view>

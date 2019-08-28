@@ -13,7 +13,7 @@
     <block wx:for="{{list}}" wx:key="{{item.id}}">
       <view class="item">
         <view class="customer" catch:tap="makePhoneCall" data-mobile="{{item.customerMobile}}">
-          <image class="avatar" src="{{source}}{{item.productImage}}" mode="aspectFill" />
+          <image class="avatar" src="{{source}}{{item.productImage}}?imageView2/2/w/88" mode="aspectFill" />
           <view class="info">
             <view class="name">{{item.customerName}}</view>
             <view class="product">{{item.productName}}({{item.count}}件)</view>

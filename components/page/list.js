@@ -23,10 +23,10 @@ Component({
         .boundingClientRect(res => {
           const { width } = res;
           const styles = {};
-          styles.width_2x = width - 20;
-          styles.width_1x = (width - 30) / 2;
-          styles.height = styles.width_1x * 1.45;
-          styles.height_txt = styles.width_1x * 0.4;
+          styles.width_2x = Math.floor(width - 20);
+          styles.width_1x = Math.floor((width - 30) / 2);
+          styles.height = Math.floor(styles.width_1x * 1.45);
+          styles.height_txt = Math.floor(styles.width_1x * 0.4);
           this.setData({
             styles
           });
