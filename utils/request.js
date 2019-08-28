@@ -141,7 +141,7 @@ export default function request(url, { data, method }, other) {
           wx.showModal({
             title: "温馨提示",
             content: "抱歉! 您的权限不足, 登录后获取更多权限!",
-            confirmText: "登录/注册",
+            confirmText: "授权登录",
             cancelText: "不",
             success: function(res) {
               if (res.confirm) {

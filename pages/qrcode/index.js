@@ -40,7 +40,7 @@ Page({
       }
     ]
   },
-  onLoad() {
+  onShow(){
     this.fetch(this.options);
     this.setData({
       contHeight: getContHeight(),
@@ -339,6 +339,19 @@ Page({
         break;
       }
       default: {
+        wx.showModal({
+          title: "温馨提示",
+          content: "登录后获取更多权限",
+          confirmText: "登录",
+          cancelText: "不",
+          success: function(res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: "/pages/start/author"
+              });
+            }
+          }
+        });
         initTag = "detail";
         keys[0].disabled = false;
         keys[1].disabled = false;
