@@ -406,18 +406,20 @@ Page({
     return await get("v1/api/sys/giftProduct", { activityId, customId });
   },
   onShareAppMessage: function() {
-    // 业务员分享功能
-    const { name, autoid: sa, userType } =
+    const { name, id: sid, userType } =
       this.data.user || wx.getStorageSync("user");
-    const { enable, autoId: a, images } = this.data;
+    const { enable, id, images, gifts } = this.data;
     const params = {
       title: `${name}邀您0元抢购`,
       imageUrl: `${source}${images[0].url}`
     };
     if (userType === 4 && enable) {
-      params.path = `/pages/activity/speed-kill/index?a=${a}&sa=${sa}`;
+      params.path = `/pages/activity/speed-kill/index?id=${id}&sid=${sid}`;
+    } else if(gifts && gifts.length > 0) {
+      const salesmanId = gifts[0].salesmanId
+      params.path = `/pages/activity/speed-kill/index?id=${id}&sid=${salesmanId}`;
     } else {
-      params.path = `/pages/activity/speed-kill/index?a=${a}`;
+      params.path = `/pages/activity/speed-kill/index?id=${id}`
     }
     return params;
   }
