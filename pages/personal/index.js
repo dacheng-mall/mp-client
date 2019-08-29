@@ -1,5 +1,5 @@
-import { get, setToken } from "../../utils/request";
-import { uri, getRoute } from "../../utils/util";
+import { get, setToken, put } from "../../utils/request";
+import { notice } from "../../utils/util";
 import { source } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
@@ -7,6 +7,7 @@ const MENU = [
   {
     title: "经理人专区",
     userType: 4,
+    split: 4,
     items: [
       {
         name: "活动",
@@ -28,12 +29,20 @@ const MENU = [
         iconColor: "#ff3366",
         color: "#fff",
         path: "/pages/qrcode/list/index?type=salesman"
+      },
+      {
+        name: "我的机构",
+        icon: "home",
+        iconColor: "#ffb366",
+        color: "#fff",
+        todo: "bindInst"
       }
     ]
   },
   {
-    title: "活动专区",
+    title: "通用",
     userType: null,
+    split: 4,
     items: [
       {
         name: "抢购",
@@ -55,6 +64,30 @@ const MENU = [
         iconColor: "#009899",
         color: "#fff",
         path: "/pages/qrcode/list/index?type=user"
+      },
+      {
+        name: "加入机构",
+        icon: "home",
+        iconColor: "#ff6600",
+        color: "#fff",
+        userType: 2,
+        todo: "bindInst"
+      },
+      {
+        name: "加入机构",
+        icon: "home",
+        iconColor: "#ff6600",
+        color: "#fff",
+        userType: 2,
+        todo: "bindInst"
+      },
+      {
+        name: "退出机构",
+        icon: "stop",
+        iconColor: "#ccc",
+        color: "#666",
+        userType: 4,
+        todo: "unbindInst"
       }
     ]
   }
@@ -63,23 +96,16 @@ Page({
   data: {
     source,
     timestamp: null,
-    menu: MENU
+    menu: [...MENU]
   },
   onShow: function() {
     const ts = new Date().valueOf();
     const force = wx.getStorageSync("force");
     const lastTimestamp = wx.getStorageSync("lastTimestamp");
     const user = wx.getStorageSync("user");
-    if (!user || user.userType === 2) {
-      const menu = MENU.filter(({ userType }) => !userType);
-      this.setData({
-        menu
-      });
-    } else {
-      this.setData({
-        menu: [...MENU]
-      });
-    }
+    this.setData({
+      menu: [...MENU]
+    });
     wx.removeStorage({
       key: "force"
     });
@@ -87,8 +113,24 @@ Page({
       wx.startPullDownRefresh();
     } else if (user) {
       this.setData({
-        user
+        user,
+        menu: [...MENU]
       });
+    }
+  },
+  todo: function(e) {
+    const { type } = e.detail;
+    if (type) {
+      switch (type) {
+        case "bindInst": {
+          this.bindInst();
+          break;
+        }
+        case "unbindInst": {
+          this.unbindInst();
+          break;
+        }
+      }
     }
   },
   fetch: function() {
@@ -99,18 +141,23 @@ Page({
             .then(data => {
               if (data.user) {
                 // 注册过的, 用数据库的最新数据渲染页面
-                this.setData({
-                  user: data.user
-                });
                 wx.setStorageSync("lastTimestamp", new Date().valueOf());
                 wx.setStorageSync("user", data.user);
                 setToken(data.token);
+                this.setData({
+                  user: data.user,
+                  menu: [...MENU]
+                });
                 resolve(data.user);
               } else {
-                // 没注册过, 请缓存, 坐等app的注册
+                // 没注册过, 清缓存, 坐等app的注册
                 wx.stopPullDownRefresh();
                 const app = getApp();
                 app._clear();
+                notice({
+                  content: "您还没有注册",
+                  confirmText: "一键注册"
+                });
               }
             })
             .catch(err => rej(err));
@@ -136,9 +183,29 @@ Page({
       url: "/pages/personal/bind/index"
     });
   },
+  unbindInst: async function() {
+    const user = wx.getStorageSync("user");
+    const data = await put("v1/api/sys/user", {
+      id: user.id,
+      institutionId: null,
+      gradeId: null,
+      gradeName: null,
+      code: null,
+      userType: 2
+    });
+    if (data) {
+      wx.startPullDownRefresh();
+    }
+  },
   login: function() {
     wx.navigateTo({
       url: "/pages/start/author"
+    });
+  },
+  setting: function() {
+
+    wx.navigateTo({
+      url: "/pages/personal/setting"
     });
   }
 });

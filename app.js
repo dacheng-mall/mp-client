@@ -79,6 +79,13 @@ App({
     }
     wx.login({
       success: res => {
+        /**
+         * 调用服务端接口获取用户信息
+         * 如果用户没有注册过, 返回openid
+         * 否则, 返回user数据和token
+         * 先设置全局用户信息里的openid, 这是必然可以得到的
+         * 然后用服务端返回的数据调用getUserInfo, 在此方法里解析data
+        */
         get("api/wx/token_bycode", { code: res.code })
           .then(data => {
             this.globalData.userInfo.openid = data.user
@@ -113,14 +120,23 @@ App({
       });
   },
   getUserInfo: function(data) {
+    /**
+     * 此方法
+     * 有可能是授权页面直接触发的
+     * 
+     * 也有可能是由_login方法触发的
+     * 
+     * 最终还是要afterLogin
+     */
     const { openid, user, token, userInfo } = data;
     if (openid) {
+      // 从login过来的, 没有用户信息, 需要注册
       this.register(this.globalData.userInfo);
     } else if (user && token) {
       // 注册过
       this.afterLogin(user, token);
     } else if (userInfo) {
-      // 刚获取过用户信息, 注册
+      // 从授权过来的, 刚获取过用户信息, 
       userInfo.openid = this.globalData.userInfo.openid;
       if (userInfo.openid) {
         this.register(userInfo);

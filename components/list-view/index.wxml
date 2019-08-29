@@ -1,8 +1,8 @@
-<view wx:for="{{data}}" wx:key="{{index}}_list_wrap">
+<view wx:for="{{items}}" wx:key="{{index}}_list_wrap">
   <view class="title">{{item.title}}</view>
   <view class="wrap">
     <block wx:for="{{item.items}}" wx:key="{{index}}_list_item" wx:for-item="child" wx:for-index="childIndex">
-      <item data="{{child}}" userType="{{child.userType}}" width="{{itemWidth}}" isFirst="{{childIndex === 0}}" />
+      <item data="{{child}}" userType="{{child.userType}}" width="{{item.itemWidth}}" isSplit="{{(childIndex + 1) % (item.split || 3) === 0}}" bind:todo="todo" />
     </block>
   </view>
 </view>

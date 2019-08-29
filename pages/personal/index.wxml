@@ -14,14 +14,12 @@
     <view wx:else class="user-info" bind:tap="login">
       <view class="name">注册/登录</view>
     </view>
-    <view wx:if="{{user.userType === 2 }}" class="header-btn">
-      <button bindtap="bindInst" class="btn-large btn-warning">加入机构</button>
-    </view>
-    <view wx:if="{{user.userType === 4 }}" class="header-btn">
-      <button bindtap="bindInst" class="btn-small btn-success">修改机构信息</button>
+    <view wx:if="{{user}}" class="header-btn" bindtap="setting">
+      <!-- <button bindtap="bindInst" class="btn-large btn-warning">加入机构</button> -->
+      <icon-x type="setting" size="{{44}}" color="#fff"></icon-x>
     </view>
   </view>
   <view class="list">
-    <listView data="{{menu}}" userType="{{user.userType}}" />
+    <listView data="{{menu}}" userType="{{user.userType}}" bind:todo="todo" />
   </view>
 </view>

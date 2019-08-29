@@ -2,12 +2,11 @@ import { get, put, setToken } from "../../../utils/request";
 import {
   validateMobile,
   validateIdcard,
-  validateName
+  validateName,
+  notice
 } from "../../../utils/util";
 import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
 
-let interval = "";
-let timeout = 0;
 const INIT_STATE = {
   rootInst: "",
   institutionId: "",
@@ -154,7 +153,7 @@ Page({
   fetchGrade: async function(rootInst) {
     const data = await get("v1/api/sys/grade", { institutionId: rootInst });
     if (data.length < 1) {
-      wx.showModal({
+      notice({
         title: "警告!",
         content: "您选择的机构没有职级数据, 请联系机构管理员添加职级信息"
       });

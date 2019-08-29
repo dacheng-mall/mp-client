@@ -1,4 +1,4 @@
-<view bindtap="jump" wx:if="{{!data.userType || userType == data.userType}}" class="item" style="background-color: {{data.iconColor}}; width: {{width}}px;height: {{width}}px">
+<view bindtap="tap" wx:if="{{!data.userType || userType == data.userType}}" class="item" style="background-color: {{data.iconColor}}; width: {{width}}px;height: {{width}}px; margin-right: {{isSplit ? '0' : '10px'}}">
   <icon-x type="{{data.icon}}" color="{{data.color}}" size="{{width * 0.6}}" />
   <text class="name" style="color: {{data.color}}">{{data.name}}</text>
 </view>

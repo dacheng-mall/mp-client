@@ -112,6 +112,34 @@ function getContHeight() {
     console.log(e);
   }
 }
+
+function notice(props = {}) {
+  wx.showModal({
+    title: props.title || "温馨提示",
+    content: props.content || `登录后您将获得更多权限`,
+    confirmText: props.confirmText || "授权登录",
+    cancelText: props.cancelText || "不",
+    complete: res => {
+      if (props.msg) {
+        console.log("notice: \n", props.msg);
+      }
+      if (res.confirm) {
+        if (props.confirm instanceof Function) {
+          props.confirm();
+        } else if (props.confirm === undefined) {
+          wx.navigateTo({
+            url: "/pages/start/author"
+          });
+        }
+      } else {
+        if (props.cancel instanceof Function) {
+          props.cancel();
+        }
+      }
+    }
+  });
+}
+
 module.exports = {
   mockFetch,
   formatTime,
@@ -122,5 +150,6 @@ module.exports = {
   validateIdcard,
   validateName,
   getRoute,
-  getContHeight
+  getContHeight,
+  notice
 };

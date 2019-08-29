@@ -4,6 +4,6 @@
   "navigationBarTitleText": "我的",
   "backgroundColor": "#00bcbd",
   "usingComponents": {
-    "listView": "../../components/list-view/index"
+    "listView": "/components/list-view/index"
   }
 }

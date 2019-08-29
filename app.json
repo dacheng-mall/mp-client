@@ -14,6 +14,7 @@
     "pages/personal/mySpeedKill/detail",
     "pages/personal/bind/index",
     "pages/personal/bind/instList",
+    "pages/personal/setting/index",
     "pages/activity/detail",
     "pages/activity/speed-kill/index",
     "pages/home/index",

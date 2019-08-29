@@ -1,4 +1,5 @@
 import { apiUrl, aliApiUrl } from "../setting.js";
+import { notice } from "./util";
 
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";
@@ -130,7 +131,10 @@ export default function request(url, { data, method }, other) {
       if (err.statusCode !== 401) {
         wx.showToast({
           title: err.data || "请求异常",
-          icon: "none"
+          icon: "none",
+          complete: function() {
+            console.log(`[${err.statusCode}]error: ${options.url}`);
+          }
         });
       } else {
         // 401异常在这里处理
@@ -138,23 +142,11 @@ export default function request(url, { data, method }, other) {
           clearTimeout(errorTimer);
         }
         errorTimer = setTimeout(() => {
-          wx.showModal({
-            title: "温馨提示",
+          notice({
             content: "抱歉! 您的权限不足, 登录后获取更多权限!",
             confirmText: "授权登录",
-            cancelText: "不",
-            success: function(res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: "/pages/start/author"
-                });
-              }
-            }
+            msg: `[401]error: ${options.url}`
           });
-          // const app = getApp();
-          // if (app && app._login) {
-          //   app._clear(app._login);
-          // }
           clearTimeout(errorTimer);
         }, 1000);
       }

@@ -4,6 +4,7 @@
   /* background-color: #fff; */
   display: flex;
   width: 100%;
+  flex-wrap: wrap 
 }
 .title {
   font-size: 32rpx;
