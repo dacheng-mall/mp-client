@@ -1,5 +1,5 @@
 <view class="wrap">
-  <image src="{{source}}{{image}}?imageView2/2/w/480" mode="widthFix" class="image-wrap" />
+  <image src="{{source}}{{image}}?imageView2/2/w/640" mode="widthFix" class="image-wrap" />
   <view wx:if="{{list.length > 0}}" style="background-color: {{primaryColor}}" class="list-wrap">
     <view class="list-title">中奖名单</view>
     <scroll-view class="list" style="height: {{listHeight}}" scroll-y="{{true}}" scroll-into-view="{{list[listCurrent].id}}" scroll-with-animation="{{listAnimate}}">
@@ -14,25 +14,25 @@
   <!-- <view style="height:2000px;opacity: 0.2; background-color:#000"></view> -->
   <paragraph data="{{content}}"></paragraph>
   <!-- <cover-view class="cover"> -->
-    <cover-view animation="{{killAnimation}}" wx:if="{{customerEnable && signed && !hasGift}}" class="cover btn {{(status !== 'enable' || !isLogin) ? 'disabled' : ''}}" catch:tap="kill">
-      <cover-view wx:if="{{!isLogin}}" class="notLogin">未登录</cover-view>
-      <count-down bind:reload="reload" wx:elif="{{status === 'waiting'}}" beginTime="{{beginTime}}" now="{{now}}" leaveTime="{{leaveTime}}" active="{{active}}" status="{{status}}"></count-down>
-      <cover-view wx:elif="{{status !== 'enable'}}">售罄</cover-view>
-      <cover-view wx:else class="doing" animation="{{animationData}}">
-        <cover-view class="doing-title">抢购</cover-view>
-        <cover-view class="doing-info">疯狂点击</cover-view>
-      </cover-view>
+  <cover-view animation="{{killAnimation}}" wx:if="{{customerEnable && signed && !hasGift}}" class="cover btn {{(status !== 'enable' || !isLogin) ? 'disabled' : ''}}" catch:tap="kill">
+    <cover-view wx:if="{{!isLogin}}" class="notLogin">未登录</cover-view>
+    <count-down bind:reload="reload" wx:elif="{{status === 'waiting'}}" beginTime="{{beginTime}}" now="{{now}}" leaveTime="{{leaveTime}}" active="{{active}}" status="{{status}}"></count-down>
+    <cover-view wx:elif="{{status !== 'enable'}}">售罄</cover-view>
+    <cover-view wx:else class="doing" animation="{{animationData}}">
+      <cover-view class="doing-title">抢购</cover-view>
+      <cover-view class="doing-info">疯狂点击</cover-view>
     </cover-view>
-    <cover-view wx:elif="{{hasGift}}" class="cover btn warning" bind:tap="checkGift">
-      <cover-view class="gift">我的奖品</cover-view>
-    </cover-view>
-    <cover-view wx:elif="{{enable}}" class="cover btn warning" bind:tap="checkCustomers">
-      <cover-view class="gift">我的客户</cover-view>
-    </cover-view>
-    <cover-view wx:elif="{{!signed}}" class="cover btn disabled">
-      <cover-view class="btn-date">{{_beginTime.date}}</cover-view>
-      <cover-view class="btn-time">{{_beginTime.m}}{{_beginTime.s}}</cover-view>
-      <cover-view class="btn-msg">{{_beginTime.msg}}</cover-view>
-    </cover-view>
+  </cover-view>
+  <cover-view wx:elif="{{hasGift}}" class="cover btn warning" bind:tap="checkGift">
+    <cover-view class="gift">我的奖品</cover-view>
+  </cover-view>
+  <cover-view wx:elif="{{enable}}" class="cover btn warning" bind:tap="checkCustomers">
+    <cover-view class="gift">我的客户</cover-view>
+  </cover-view>
+  <cover-view wx:elif="{{!signed}}" class="cover btn disabled">
+    <cover-view class="btn-date">{{_beginTime.date}}</cover-view>
+    <cover-view class="btn-time">{{_beginTime.m}}{{_beginTime.s}}</cover-view>
+    <cover-view class="btn-msg">{{_beginTime.msg}}</cover-view>
+  </cover-view>
   <!-- </cover-view> -->
 </view>

@@ -14,7 +14,7 @@
       <swiper class="swiper-imgs" current="{{swiperCurrent}}" indicator-dots="{{true}}" autoplay="{{current === 'image'}}" interval="{{5000}}" duration="{{500}}" bind:animationfinish="change">
         <block wx:for="{{images}}" wx:key="{{index}}_image">
           <swiper-item>
-            <image class="swiper-image" mode="aspectFit" style="{{sizeStyle}}" src="{{item.url}}" />
+            <image class="swiper-image" mode="aspectFit" style="{{sizeStyle}}" src="{{item.url}}?imageView2/2/w/640" />
           </swiper-item>
         </block>
       </swiper>

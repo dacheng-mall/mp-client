@@ -13,7 +13,7 @@
   <view class="activity-products">
     <block wx:for="{{_data.giftProducts}}" wx:key="{{item.product.id}}">
       <view class="product">
-        <image src="{{source}}{{item.product.mainImageUrl}}?imageView2/2/w/88" class="img" />
+        <image src="{{source}}{{item.product.mainImageUrl}}?imageView2/2/w/128" class="img" />
         <view class="product-info">
           <view class="product-info-title">{{item.product.title}}</view>
           <view class="product-info-price">￥{{item.product.price}}</view>

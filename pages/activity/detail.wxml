@@ -6,12 +6,12 @@
       <swiper wx:if="{{images && images.length > 1}}" style="height: {{width}}px; background-color: #fff" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
         <block wx:for="{{images}}" wx:key="{{id}}" wx:for-item="img">
           <swiper-item>
-            <image wx:if="{{width}}" class="img" mode="aspectFill" src="{{source}}{{img.url}}?imageView2/2/w/{{width}}" />
+            <image wx:if="{{width}}" class="img" mode="aspectFill" src="{{source}}{{img.url}}?imageView2/2/w/720" />
           </swiper-item>
         </block>
       </swiper>
       <view wx:if="{{images && images.length === 1}}" style="height: {{width}}px; background-color: #fff">
-        <image wx:if="{{width}}" class="img" mode="aspectFill" src="{{source}}{{images[0].url}}?imageView2/2/w/{{width}}" />
+        <image wx:if="{{width}}" class="img" mode="aspectFill" src="{{source}}{{images[0].url}}?imageView2/2/w/720" />
       </view>
       <view class="content">
         <view class="title">{{name}}</view>
@@ -32,7 +32,7 @@
           <view class="gift-list" style="width: {{products.length * 276}}rpx">
             <block wx:for="{{products}}" wx:for-item="gift" wx:key="{{gift.id}}">
               <view class="gift-item" catch:tap="productDetail" data-id="{{gift.id}}">
-                <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}?imageView2/2/w/96" lazy-load="{{true}}" />
+                <image class="gift-img" src="{{source}}{{gift.mainImageUrl}}?imageView2/2/w/128" lazy-load="{{true}}" />
                 <view class="gift-name">{{gift.title}}</view>
                 <view class="gift-price">￥{{gift.price * gift.totalCount}}</view>
                 <view class="gift-count">x{{gift.totalCount}}</view>
@@ -140,7 +140,7 @@
         <view class="giftCheckbox" catch:tap="chooseGift" data-id="{{gift.id}}" data-index="{{index}}">
           <icon-x type="check-circle{{gift.checked ? '-fill' : ''}}" color="{{gift.checked ? '#00bcbd' : '#ddd'}}" size="{{64}}" />
         </view>
-        <image class="gifItemImg" type="aspectFit" src="{{source}}{{gift.mainImageUrl}}?imageView2/2/w/96" lazy-load="{{true}}" />
+        <image class="gifItemImg" type="aspectFit" src="{{source}}{{gift.mainImageUrl}}?imageView2/2/w/128" lazy-load="{{true}}" />
         <view class="gifItemName">
           <text>{{gift.title}}</text>
           <text>x{{gift.totalCount}}</text>
@@ -154,7 +154,7 @@
       <view class="getInfo">
         <view class="hasChoosed" style="width: {{iWantThem.length * 129}}rpx">
           <block wx:for="{{products}}" wx:for-item="got" wx:key="{{got.id}}">
-            <image wx:if="{{got.checked}}" src="{{source}}{{got.mainImageUrl}}?imageView2/2/w/96" mode="aspectFill" lazy-load="{{true}}" />
+            <image wx:if="{{got.checked}}" src="{{source}}{{got.mainImageUrl}}?imageView2/2/w/128" mode="aspectFill" lazy-load="{{true}}" />
           </block>
         </view>
       </view>
