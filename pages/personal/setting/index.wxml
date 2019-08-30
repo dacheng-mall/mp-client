@@ -1,0 +1,13 @@
+<view class="author-wrap">
+  <image src="/access/logo.png" mode="aspectFit" class="logo"></image>
+  <view class="app-title">礼全有</view>
+  <view class="app-sub-title">保险人的展业引擎</view>
+  <view class="info-box">
+    <button bind:tap="checkUpdate" class="btn btn-primary btn-large">
+      检查更新 (v{{version}})
+    </button>
+    <button bind:tap="logout" class="btn btn-large">
+      清空缓存, 并安全登出
+    </button>
+  </view>
+</view>

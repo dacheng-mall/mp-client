@@ -1,10 +1,18 @@
 import { notice } from "../../utils/util";
+import { SPLIT, GUTTER } from './index';
 
 Component({
   properties: {
     data: {
       type: Object,
-      value: {}
+      value: {},
+      observer: function(newVal, oldVal) {
+        if(newVal.size > 1){
+          this.setData({
+            width: newVal.size * this.properties.width + (newVal.size - 1) * 10
+          })
+        }
+      }
     },
     userType: {
       type: Number
@@ -12,7 +20,13 @@ Component({
     width: {
       type: Number
     },
-    isSplit: {
+    height: {
+      type: Number
+    },
+    index: {
+      type: Number
+    },
+    isRowEnd: {
       type: Boolean
     }
   },

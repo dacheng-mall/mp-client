@@ -1,0 +1,26 @@
+.author-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx;
+  margin-top: 20%;
+}
+.logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+}
+.app-title {
+  font-size: 24px;
+  margin: 10px auto;
+  color: #333;
+}
+.app-sub-title {
+  font-size: 16px;
+  color: #999;
+  margin: 0 auto 10px;
+}
+.info-box button {
+  margin-top: 10px;
+}

@@ -217,7 +217,7 @@ App({
       this.goHome();
     }
   },
-  checkUpdate: function() {
+  checkUpdate: function(msg) {
     const updateManager = wx.getUpdateManager();
     const that = this;
     // 检查是否有新版本
@@ -249,7 +249,11 @@ App({
         const { scene } = wx.getLaunchOptionsSync();
         that.globalData.scene = scene;
         that.setNavHeight();
-        // that._login();
+        if(msg) {
+          wx.showToast({
+            title: '已是最新版本'
+          })
+        }
       }
     });
   },

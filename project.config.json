@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 23,
+			"current": 32,
 			"list": [
 				{
 					"id": 0,
@@ -280,6 +280,13 @@
 					"name": "抢购活动(列表进入)",
 					"pathName": "pages/activity/speed-kill/index",
 					"query": "id=de4f673ba2604b988d01fde667f8e692",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "设置",
+					"pathName": "pages/personal/setting/index",
+					"query": "",
 					"scene": null
 				}
 			]

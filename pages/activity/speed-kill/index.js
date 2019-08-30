@@ -48,8 +48,8 @@ Page({
     const data = await this.fetch(options);
     if (data.enable) {
       // 如果是业务员, 自动报名
-      this.salesmanSign(data);
-      this.setPoster(data);
+      await this.salesmanSign(data);
+      await this.setPoster(data);
     }
   },
   getCustomerSigned: async function(activityId, customerId) {
@@ -332,18 +332,14 @@ Page({
     });
   },
   salesmanSign: async function(data) {
-    const { user = {}, sign = [], id } = data;
+    const { sign = [], id } = data;
+    const user = wx.getStorageSync('user')
     if (user.id && (sign && sign.length < 1)) {
       // 用户是业务员, 而且有权限参与但是没报名
-      const signed = await this.sign(id, user.id);
-      if (signed) {
-        const poster = {
-          p_page: "pages/activity/speed-kill/index",
-          p_title: data.name,
-          p_scene: `?a=${data.autoId}&sa=${user.autoId}`
-        };
-      }
+      const res = await this.sign(id, user.id);
+      return res 
     }
+    return user
   },
   sign: async function(activityId, salesmanId) {
     const data = await post("v1/api/sys/activity/salesmanSignActivity", {

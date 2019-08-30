@@ -10,24 +10,27 @@ const MENU = [
     split: 4,
     items: [
       {
-        name: "活动",
+        name: "我报名的活动",
         icon: "crown-fill",
         iconColor: "#00bcbd",
         color: "#fff",
+        size: 2,
         path: "/pages/personal/myActivity/index"
       },
       {
-        name: "客户",
+        name: "我的客户",
         icon: "team",
         iconColor: "#00bcbd",
         color: "#fff",
+        size: 2,
         path: "/pages/personal/myActivity/myCustomer"
       },
       {
-        name: "我的码",
+        name: "我送出的礼物(码)",
         icon: "qrcode",
         iconColor: "#ff3366",
         color: "#fff",
+        size: 2,
         path: "/pages/qrcode/list/index?type=salesman"
       },
       {
@@ -35,6 +38,7 @@ const MENU = [
         icon: "home",
         iconColor: "#ffb366",
         color: "#fff",
+        size: 2,
         todo: "bindInst"
       }
     ]
@@ -59,19 +63,11 @@ const MENU = [
         path: "/pages/personal/myGift/index"
       },
       {
-        name: "我的码",
-        icon: "qrcode",
+        name: "我的礼物",
+        icon: "gift",
         iconColor: "#009899",
         color: "#fff",
         path: "/pages/qrcode/list/index?type=user"
-      },
-      {
-        name: "加入机构",
-        icon: "home",
-        iconColor: "#ff6600",
-        color: "#fff",
-        userType: 2,
-        todo: "bindInst"
       },
       {
         name: "加入机构",
@@ -183,18 +179,34 @@ Page({
       url: "/pages/personal/bind/index"
     });
   },
-  unbindInst: async function() {
-    const user = wx.getStorageSync("user");
-    const data = await put("v1/api/sys/user", {
-      id: user.id,
-      institutionId: null,
-      gradeId: null,
-      gradeName: null,
-      code: null,
-      userType: 2
+  unbindInst: function() {
+    const institutionName = this.data.user.institution.name;
+    wx.showModal({
+      title: "警告",
+      content: `您确认要从 ${institutionName} 中退出吗?`,
+      confirmText: "不退出",
+      confirmColor: "green",
+      cancelText: "退出",
+      cancelColor: "#ccc",
+      success: res => {
+        if (!res.confirm) {
+          quit();
+        }
+      }
     });
-    if (data) {
-      wx.startPullDownRefresh();
+    async function quit() {
+      const user = wx.getStorageSync("user");
+      const data = await put("v1/api/sys/user", {
+        id: user.id,
+        institutionId: null,
+        gradeId: null,
+        gradeName: null,
+        code: null,
+        userType: 2
+      });
+      if (data) {
+        wx.startPullDownRefresh();
+      }
     }
   },
   login: function() {
@@ -203,9 +215,8 @@ Page({
     });
   },
   setting: function() {
-
     wx.navigateTo({
-      url: "/pages/personal/setting"
+      url: "/pages/personal/setting/index"
     });
   }
 });

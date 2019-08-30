@@ -15,7 +15,6 @@
       <view class="name">注册/登录</view>
     </view>
     <view wx:if="{{user}}" class="header-btn" bindtap="setting">
-      <!-- <button bindtap="bindInst" class="btn-large btn-warning">加入机构</button> -->
       <icon-x type="setting" size="{{44}}" color="#fff"></icon-x>
     </view>
   </view>

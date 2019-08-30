@@ -188,21 +188,31 @@ Page({
         dataset: { id }
       }
     } = e;
-    const { id: userId } = await getStorageWithKey("user");
-    const res = await post("api/sys/favorites/set", { userId, ids: [id] });
-    const title = res.type === "remove" ? "移出购物车" : "加入购物车";
-    wx.showToast({
-      title
-    });
-    await setFavorites(res.ids);
-    this.data.detail[this.data.current].favorite =
-      res.type === "remove" ? false : true;
-    this.setData({
-      detail: [...this.data.detail]
-    });
+    const { id: userId } = wx.getStorageSync("user");
+    try {
+      const res = await post("api/sys/favorites/set", { userId, ids: [id] });
+      const title = res.type === "remove" ? "移出购物车" : "加入购物车";
+      wx.showToast({
+        title
+      });
+      await setFavorites(res.ids);
+      this.data.detail[this.data.current].favorite =
+        res.type === "remove" ? false : true;
+      this.setData({
+        detail: [...this.data.detail]
+      });
+    } catch (e) {}
   },
-  onShareAppMessage(options) {
-    // console.log(options.webViewUrl);
+  onShareAppMessage() {
+    const { name } = wx.getStorageSync("user");
+    const { current, detail } = this.data;
+    const data = detail[current];
+    const params = {
+      title: `${name ? `${name}向您推荐-` : ''}${data.title}`,
+      imageUrl: `${source}${data.mainImageUrl}`,
+      path: `/pages/products/detail/index?id=${data.id}`
+    };
+    return params;
   },
   touchstart(e) {
     if (this.data.ids.length > 1) {
@@ -291,15 +301,4 @@ Page({
       withShareTicket: false
     });
   },
-  onShareAppMessage(e) {
-    const target = this.data.detail[this.data.current];
-    const path = uri(this.route, this.options);
-    if (target) {
-      return {
-        title: target.title,
-        path,
-        imageUrl: target.images[0].url
-      };
-    }
-  }
 });

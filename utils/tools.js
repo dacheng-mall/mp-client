@@ -1,4 +1,5 @@
 import { get } from "./request";
+import { notice } from "./util";
 
 Date.prototype.Format = function(fmt) {
   const o = {
@@ -72,7 +73,10 @@ export const getFavorites = () =>
     .then(data => {
       return data;
     }).catch((e) => {
-      return null
+      // console.log(e.errMsg)
+      // if(e.errMsg) {
+      //   notice()
+      // }
     });
 
 export const setFavorites = ids => {

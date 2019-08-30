@@ -11,3 +11,4 @@ export const pathPrefix = {
   category: "/pages/products/list/index"
 };
 export const tel = "037163325600";
+export const version = "1.23.2"
