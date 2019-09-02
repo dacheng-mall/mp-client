@@ -4,7 +4,7 @@ import { notice } from "./util";
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";
 
-const baseURL = apiUrl;
+const baseURL = aliApiUrl;
 export function getApi() {
   return baseURL;
 }

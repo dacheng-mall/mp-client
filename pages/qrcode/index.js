@@ -611,6 +611,8 @@ Page({
       wx.login({
         success: async function(res) {
           const { encryptedData, iv } = params;
+          console.log(res.code, encryptedData, iv)
+          // return
           const data = await post("v1/api/wx/decryptData", {
             code: res.code,
             encryptedData,
