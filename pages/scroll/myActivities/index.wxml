@@ -1,4 +1,4 @@
-<nothing wx:if="{{list.length < 1}}" />
+<!-- <nothing wx:if="{{list.length < 1}}" />
 <scroll-view wx:else scroll-y="{{true}}">
   <block wx:for="{{list}}" wx:key="{{item.id}}">
     <view class="activiyItem" data-aid="{{item.activityId}}" data-aType="{{item.type}}" catch:tap="tap">
@@ -10,4 +10,12 @@
       <text class="status">{{item.statusName}}</text>
     </view>
   </block>
-</scroll-view>
+</scroll-view> -->
+<view class="activiyItem" data-aid="{{item.activityId}}" data-aType="{{item.type}}" catch:tap="tap">
+  <image wx:if="{{item.image}}" class="img" src="{{source}}{{item.image}}?imageView2/2/w/128" mode="aspectFill" />
+  <view class="info">
+    <view class="title">{{item.name}}</view>
+    <view class="date">{{item.dateStart}}至{{item.dateEnd}}</view>
+  </view>
+  <text class="status">{{item.statusName}}</text>
+</view>

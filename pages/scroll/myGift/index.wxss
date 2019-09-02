@@ -37,3 +37,4 @@
   font-size: 32rpx;
   color: #999
 }
+@import '../../../access/button.wxss';

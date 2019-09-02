@@ -6,7 +6,7 @@ Component({
     data: {
       type: Object,
       value: {},
-      observer: function(newVal, oldVal) {
+      observer: function(newVal) {
         if(newVal.size > 1){
           this.setData({
             width: newVal.size * this.properties.width + (newVal.size - 1) * 10
@@ -43,6 +43,7 @@ Component({
         return;
       }
       if (this.properties.data.path) {
+        console.log('this.properties.data.path', this.properties.data.path)
         wx.navigateTo({
           url: this.properties.data.path
         });

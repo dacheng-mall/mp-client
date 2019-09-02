@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 32,
+			"current": 33,
 			"list": [
 				{
 					"id": 0,
@@ -287,6 +287,13 @@
 					"name": "设置",
 					"pathName": "pages/personal/setting/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 33,
+					"name": "通用列表页",
+					"pathName": "pages/scroll-list/index",
+					"query": "type=activity",
 					"scene": null
 				}
 			]

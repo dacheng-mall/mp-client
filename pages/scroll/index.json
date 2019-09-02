@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#00bcbd",
+  "usingComponents": {
+    "activity": "./activity/index",
+    "myActivities": "./myActivities/index",
+    "qr": "./qr/index",
+    "myGift": "./myGift/index"
+  }
+}

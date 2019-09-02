@@ -1,0 +1,13 @@
+<view class="item-wrap" catch:tap="tap">
+  <view class="body">
+    <image class="img" wx:if="{{width}}" mode="widthFix" src="{{source}}{{item.images[0].url}}?imageView2/2/w/640" lazy-load="{{true}}" />
+    <view class="info">
+      <view class="title">{{item.name}}</view>
+      <view class="institution-name">{{item.institution.name}}</view>
+      <view class="range">{{item.dateStart}} 到 {{item.dateEnd}}</view>
+    </view>
+    <view class="gift" wx:if="{{item.activityType !== 'at_second_kill'}}">
+      <view class="free-text">免费领取 惊喜豪礼</view>
+    </view>
+  </view>
+</view>
