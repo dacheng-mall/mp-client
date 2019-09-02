@@ -1,6 +1,6 @@
-import { get, put } from "../../utils/request";
+import { get, put, post } from "../../utils/request";
 import { getContHeight } from "../../utils/util";
-import { source } from "../../setting";
+import { source, middleNumber } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 Page({
   data: {
@@ -12,7 +12,7 @@ Page({
     isIPX: false,
     nvabarData: {
       showCapsule: 1, // 是否显示左上角图标   1表示显示    0表示不显示
-      title: '码详情',
+      title: "码详情",
       textColor: "#fff", // 标题颜色
       bgColor: "#00bcbd", // 导航栏背景颜色
       btnBgColor: "#459d9f", // 胶囊按钮背景颜色
@@ -40,12 +40,12 @@ Page({
       }
     ]
   },
-  onShow(){
+  onShow() {
     this.fetch(this.options);
     this.setData({
       contHeight: getContHeight(),
       isIPX: getApp().globalData.isIPX
-    })
+    });
   },
   // 业务员绑定码
   bSalesman() {
@@ -117,18 +117,18 @@ Page({
     // 如果qrType.bindSalesman === 0 不需要绑定业务员, 否则判断是否存在institutionId, 如果不存在, 所有业务员都可以绑定, 如果有institutionId, 则仅属于该机构的业务员可以绑定
     // qrType.bindSalesman 0: 不绑定业务员, 1: 强制绑定业务员; 2: 强制绑定业务员,只能业务员修改绑定信息; 3: 强制绑定业务员,业务员和客户都能修改
     const alert4MMissingSalesman = (bindSalesman, data) => {
-      if(bindSalesman > 0 && bindSalesman !== 2 && !data.salesmanId) {
+      if (bindSalesman > 0 && bindSalesman !== 2 && !data.salesmanId) {
         // 这都是要强制绑定业务员的, 如果这个码没有绑定业务员, 不允许客户提交信息
         initTag = "linked";
         keys[2].disabled = true;
         wx.showModal({
-          title: '无效二维码',
-          content: '未绑定客户经理, 请联系您的客户经理及时绑定',
+          title: "无效二维码",
+          content: "未绑定客户经理, 请联系您的客户经理及时绑定",
           showCancel: false,
-          confirmText: '知道了'
-        })
+          confirmText: "知道了"
+        });
       }
-    }
+    };
     switch (user.userType) {
       case 2: {
         const { bindSalesman } = data.qrType;
@@ -229,7 +229,7 @@ Page({
                 break;
               }
             }
-          alert4MMissingSalesman(data.qrType.bindSalesman, data);
+            alert4MMissingSalesman(data.qrType.bindSalesman, data);
           } else if (data.userId && data.userId === user.id) {
             // 当前业务员作为客户领取了码
             switch (data.qrType.bindSalesman) {
@@ -582,5 +582,48 @@ Page({
         break;
       }
     }
+  },
+  makeCall: async function(e) {
+    const { encryptedData, iv, bindNumberB } = e.detail;
+    console.log(encryptedData, iv, bindNumberB);
+    const data = await get("v1/api/sys/callStatistics/get_info", {
+      qrid: this.data.id
+    });
+    if (!data.duration || data.duration < 100) {
+      const pn = await this.getWXPhoneNumber(e.detail);
+      console.log("phoneNumber", pn);
+      if (pn.phoneNumber) {
+        const bindRes = await this.bindAXB({
+          qrid: this.data.id,
+          middleNumber: "13044122112",
+          bindNumberA: pn.phoneNumber,
+          bindNumberB
+        });
+        console.log('bindRes', bindRes)
+      }
+    } else {
+      // 此时不使用号码隐藏功能
+    }
+  },
+
+  getWXPhoneNumber: async function(params) {
+    return new Promise((resole, reject) => {
+      wx.login({
+        success: async function(res) {
+          const { encryptedData, iv } = params;
+          const data = await post("v1/api/wx/decryptData", {
+            code: res.code,
+            encryptedData,
+            iv
+          });
+          resole(data);
+          // console.log('-------', data)
+          // return data;
+        }
+      });
+    });
+  },
+  bindAXB: async function(params) {
+    const d = await post("v1/api/sys/callLogs", params);
   }
 });

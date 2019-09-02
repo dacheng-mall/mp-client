@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 32,
+			"current": 23,
 			"list": [
 				{
 					"id": 0,
@@ -223,7 +223,7 @@
 					"id": 23,
 					"name": "扫码3",
 					"pathName": "pages/qrcode/index",
-					"query": "scene=%3Fid%3D21353",
+					"query": "scene=%3Fid%3D221",
 					"scene": 1047
 				},
 				{

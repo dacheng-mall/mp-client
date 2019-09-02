@@ -7,15 +7,21 @@
       <rich-text class="content" nodes="{{temp.nodes}}"></rich-text>
       <view>
         <block wx:for="{{temp.more}}" wx:key="{{item.key}}">
-          <button wx:if="{{!item.disabled}}" class="btn" style="{{item.style}}" bindtap="onTap" data-info="{{item}}">
+          <!-- <button wx:if="{{!item.disabled}}" class="btn" style="{{item.style}}" bindtap="onTap" data-info="{{item}}">
+            {{item.text}}
+          </!-->
+          <button open-type="getPhoneNumber" wx:if="{{!item.disabled}}" style="{{item.style}}" class="btn" bindgetphonenumber="getPhoneNumber" data-info="{{item}}">
             {{item.text}}
           </button>
         </block>
+        <!-- <block wx:for="{{temp.more}}" wx:key="{{item.key}}">
+          <button wx:if="{{!item.disabled}}" class="btn" style="{{item.style}}" bindtap="onTap" data-info="{{item}}">
+            {{item.text}}
+          </button>
+        </block> -->
       </view>
     </view>
-    <view wx:else class="none">
-      暂无信息
-    </view>
+    <view wx:else class="none">暂无信息</view>
   </view>
   <view class="description">{{bottom}}</view>
 </view>

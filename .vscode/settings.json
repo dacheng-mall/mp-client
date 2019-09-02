@@ -2,7 +2,7 @@
   "gitlens.advanced.messages": {
       "suppressShowKeyBindingsNotice": true
   },
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "editor.tabSize": 2,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDragAndDrop": false,
