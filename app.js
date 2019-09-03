@@ -156,6 +156,8 @@ App({
   },
   afterLogin: function(user, token) {
     this.globalData.userInfo = user;
+    wx.setStorageSync("session_key", user.session_key);
+    delete user.session_key;
     wx.setStorageSync("user", user);
     if (token) {
       setToken(token);
@@ -173,7 +175,6 @@ App({
       wx.navigateBack({
         delta: 1
       });
-    } else {
     }
     return;
     const routes = getCurrentPages();

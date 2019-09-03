@@ -1,5 +1,5 @@
 import { get, put, post } from "../../utils/request";
-import { getContHeight } from "../../utils/util";
+import { getContHeight, declassify, checkSession } from "../../utils/util";
 import { source, middleNumber } from "../../setting";
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 Page({
@@ -41,6 +41,7 @@ Page({
     ]
   },
   onShow() {
+    checkSession();
     this.fetch(this.options);
     this.setData({
       contHeight: getContHeight(),
@@ -584,48 +585,53 @@ Page({
     }
   },
   makeCall: async function(e) {
-    const { encryptedData, iv, bindNumberB } = e.detail;
-    console.log(encryptedData, iv, bindNumberB);
     const data = await get("v1/api/sys/callStatistics/get_info", {
-      qrid: this.data.id
+      qrId: this.data.id
+    });
+    const { bindNumberB } = e.detail;
+    this.setData({
+      // 把当前要被叫的电话号码记录下来
+      currentNumber: bindNumberB
     });
     if (!data.duration || data.duration < 100) {
       const pn = await this.getWXPhoneNumber(e.detail);
-      console.log("phoneNumber", pn);
       if (pn.phoneNumber) {
         const bindRes = await this.bindAXB({
-          qrid: this.data.id,
-          middleNumber: "13044122112",
+          qrId: this.data.id,
+          middleNumber,
           bindNumberA: pn.phoneNumber,
-          bindNumberB
+          bindNumberB,
+          callbackUrl: "http://api.idacheng.com/api/sys/callLogs/callback"
         });
-        console.log('bindRes', bindRes)
+        console.log("bindRes", bindRes);
+        if (bindRes && bindRes.middleNumber) {
+          this.callRealNumber(bindRes.middleNumber);
+        }
       }
     } else {
-      // 此时不使用号码隐藏功能
+      this.callRealNumber();
     }
   },
 
   getWXPhoneNumber: async function(params) {
-    return new Promise((resole, reject) => {
-      wx.login({
-        success: async function(res) {
-          const { encryptedData, iv } = params;
-          console.log(res.code, encryptedData, iv)
-          // return
-          const data = await post("v1/api/wx/decryptData", {
-            code: res.code,
-            encryptedData,
-            iv
-          });
-          resole(data);
-          // console.log('-------', data)
-          // return data;
-        }
-      });
-    });
+    const { encryptedData, iv } = params;
+    // 在这里获得session_key
+    const data = await declassify(encryptedData, iv);
+    return data;
   },
   bindAXB: async function(params) {
     const d = await post("v1/api/sys/callLogs", params);
+    if (d && d.middleNumber) {
+      wx.makePhoneCall({
+        phoneNumber: d.middleNumber
+      });
+    } else {
+      this.callRealNumber();
+    }
+  },
+  callRealNumber(number) {
+    wx.makePhoneCall({
+      phoneNumber: number || this.data.currentNumber
+    });
   }
 });

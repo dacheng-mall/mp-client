@@ -1,3 +1,5 @@
+import { post } from "./request";
+
 const formatTime = date => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -140,6 +142,61 @@ function notice(props = {}) {
   });
 }
 
+function checkSession() {
+  wx.checkSession({
+    success: function() {
+      const session_key = wx.getStorageSync("session_key");
+      if (!session_key) {
+        // 如果本地没有session_key
+        getCode();
+      }
+    },
+    fail: function() {
+      getCode();
+    }
+  });
+}
+function getCode() {
+  wx.removeStorageSync("session_key");
+  wx.login({
+    success: ({ code }) => {
+      wx.setStorageSync("__code__", code);
+    }
+  });
+}
+function declassify(encryptedData, iv) {
+  const session_key = wx.getStorageSync("session_key");
+  const code = wx.getStorageSync("__code__");
+  return new Promise((res, rej) => {
+    const params = {
+      encryptedData,
+      iv
+    };
+    if (session_key) {
+      params.session_key = session_key;
+      params.code = "code";
+    } else if (code) {
+      params.code = code;
+    } else {
+      wx.showToast({
+        title: "没有授权, 请重新重打电话",
+        icon: "none"
+      });
+      return;
+    }
+    post("v1/api/wx/decryptData", params).then(data => {
+      if (data) {
+        if (data.session_key) {
+          wx.setStorageSync("session_key", data.session_key);
+          wx.removeStorageSync("__code__");
+        }
+        res(data);
+      } else {
+        rej();
+      }
+    });
+  });
+}
 module.exports = {
   mockFetch,
   formatTime,
@@ -151,5 +208,8 @@ module.exports = {
   validateName,
   getRoute,
   getContHeight,
-  notice
+  notice,
+  declassify,
+  checkSession,
+  getCode
 };
