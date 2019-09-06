@@ -1,18 +1,19 @@
-import {version} from '../../../setting'
+import { version } from "../../../setting";
 Page({
   data: {
     version
   },
-  logout: function(){
+  logout: function() {
     wx.clearStorageSync();
+    wx.setStorageSync("clear", true);
     wx.switchTab({
-      url: '/pages/personal/index'
-    })
+      url: "/pages/personal/index"
+    });
   },
-  checkUpdate: function(){
+  checkUpdate: function() {
     const app = getApp();
-    if(app.checkUpdate instanceof Function) {
-      app.checkUpdate(true)
+    if (app.checkUpdate instanceof Function) {
+      app.checkUpdate(true);
     }
   }
-})
+});

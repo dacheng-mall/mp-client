@@ -32,7 +32,6 @@ export const common = {
         for: this.data.query.hasCustom ? "salesman" : "customer"
       });
     } else if(this.data.name === "myGift"){
-      console.log(this.data)
       this.setData({
         for: this.data.query.salesmanId ? "salesman" : "customer"
       });
@@ -66,7 +65,6 @@ export const common = {
       pagination: { pageCount, page },
       query
     } = this.data;
-    console.log(pageCount, page, query);
     if (pageCount > page) {
       this.setData({
         pagination: { ...this.data.pagination, page: page + 1 }

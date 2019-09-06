@@ -1,10 +1,7 @@
-<view>
-  <nothing wx:if="{{list.length < 1}}" />
-  <block wx:for="{{list}}" wx:key="{{item.id}}">
-    <activity wx:if="{{name === 'activity'}}" data="{{item}}" />
-    <myActivities wx:if="{{name === 'myActivities'}}" data="{{item}}" />
-    <giftProduct wx:if="{{name === 'giftProduct'}}" data="{{item}}" for="{{for}}" />
-    <qr wx:if="{{name === 'qr'}}" data="{{item}}" for="{{for}}" />
-    <myGift wx:if="{{name === 'myGift'}}" data="{{item}}" for="{{for}}" />
-  </block>
-</view>
+<nothing wx:if="{{list.length < 1}}" />
+<block wx:for="{{list}}" wx:key="{{item.id}}">
+  <activity wx:if="{{name === 'activity'}}" data="{{item}}" />
+  <myActivities wx:if="{{name === 'myActivities'}}" data="{{item}}" />
+  <qr wx:if="{{name === 'qr'}}" data="{{item}}" for="{{for}}" />
+  <myGift wx:if="{{name === 'myGift'}}" data="{{item}}" for="{{for}}" />
+</block>
