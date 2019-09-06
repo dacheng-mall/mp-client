@@ -96,15 +96,20 @@ Page({
   data: {
     source,
     timestamp: null,
-    menu: [...MENU],
-    testData: [
-      { name: "hello", id: "test0" },
-      { name: "world", id: "test1" },
-      { name: "again", id: "test2" }
-    ],
-    pagination: { page: 1, pageSize: 10 }
+    menu: [...MENU]
   },
   onShow: function() {
+    const clear = wx.getStorageSync("clear");
+    if (clear) {
+      wx.clearStorageSync();
+      this.setData({
+        source,
+        timestamp: null,
+        user: null,
+        menu: [...MENU]
+      });
+      return;
+    }
     const ts = new Date().valueOf();
     const force = wx.getStorageSync("force");
     const lastTimestamp = wx.getStorageSync("lastTimestamp");

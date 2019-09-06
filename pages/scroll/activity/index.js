@@ -7,7 +7,6 @@ Component({
       type: Object,
       value: {},
       observer: function(newVal) {
-        console.log(newVal)
         // 只要prop.data发生变更就做一次集中处理
         newVal.dateStart = moment(newVal.dateStart).format(
           "YYYY-MM-DD HH:mm:ss"
