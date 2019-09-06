@@ -1,0 +1,16 @@
+<view hover-class="qrItemDown" class="qrItem" bindtap="goDetail" data-id="{{item.id}}">
+  <view class="autoId {{item.autoId > 9999 && 'mini'}} {{item.hasSent && 'hasSent'}}">
+    {{item.autoId}}
+  </view>
+  <view class="main" wx:if="{{for === 'salesman'}}">
+    <view class="type">{{item.customerName + ' 领取'}}</view>
+    <view class="time">{{item.hasSent ? item.userBindTime : item.salesmanBindTime}}</view>
+  </view>
+  <view class="main" wx:if="{{for === 'customer'}}">
+    <view class="type">{{item.salesmanName + ' 发放'}}</view>
+    <view class="time">{{item.hasSent ? item.userBindTime : item.salesmanBindTime}}</view>
+  </view>
+  <view class="right">
+    <icon-x type="right" size="{{32}}" />
+  </view>
+</view>

@@ -1,0 +1,51 @@
+/* pages/scroll/qr/index.wxss */
+.qrItem {
+  margin: 40rpx;
+  border: 1px solid #eee;
+  box-shadow: 0 5px 10px #eee;
+  border-radius: 20rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+.qrItemDown {
+  box-shadow: none;
+  opacity: 0.5
+}
+.autoId {
+  width: 128rpx;
+  height: 128rpx;
+  line-height: 128rpx;
+  background-color: #ccc;
+  text-align: center;
+  color: #fff;
+  font-size: 44rpx;
+}
+.hasSent {
+  background-color: #00bcbd;
+}
+.mini {
+  font-size: 28rpx;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  padding: 0 10rpx;
+}
+.type {
+  color: #555;
+  font-size: 32rpx;
+}
+.time {
+  color: #aaa;
+  font-size: 32rpx;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 64rpx;
+}

@@ -15,7 +15,7 @@ const MENU = [
         iconColor: "#00bcbd",
         color: "#fff",
         size: 2,
-        path: "/pages/personal/myActivity/index"
+        path: "/pages/scroll/index?pageType=myActivities"
       },
       {
         name: "我的客户",
@@ -23,7 +23,8 @@ const MENU = [
         iconColor: "#00bcbd",
         color: "#fff",
         size: 2,
-        path: "/pages/personal/myActivity/myCustomer"
+        // path: "/pages/personal/myActivity/myCustomer"
+        path: "/pages/scroll/index?pageType=myCustomers"
       },
       {
         name: "我送出的礼物(码)",
@@ -31,7 +32,8 @@ const MENU = [
         iconColor: "#ff3366",
         color: "#fff",
         size: 2,
-        path: "/pages/qrcode/list/index?type=salesman"
+        // path: "/pages/qrcode/list/index?type=salesman"
+        path: "/pages/scroll/index?pageType=myQR"
       },
       {
         name: "我的机构",
@@ -53,21 +55,23 @@ const MENU = [
         icon: "trophy-fill",
         iconColor: "#ff4d4d",
         color: "#fff",
-        path: "/pages/personal/mySpeedKill/index"
+        path: "/pages/scroll/index?pageType=mySpeedKill"
       },
       {
         name: "预约",
         icon: "check-circle-fill",
         iconColor: "#00bcbd",
         color: "#fff",
-        path: "/pages/personal/myGift/index"
+        // path: "/pages/personal/myGift/index"
+        path: "/pages/scroll/index?pageType=gift"
       },
       {
         name: "我的礼物",
         icon: "gift",
         iconColor: "#009899",
         color: "#fff",
-        path: "/pages/qrcode/list/index?type=user"
+        // path: "/pages/qrcode/list/index?type=user"
+        path: "/pages/scroll/index?pageType=myQRGift"
       },
       {
         name: "加入机构",
@@ -92,7 +96,13 @@ Page({
   data: {
     source,
     timestamp: null,
-    menu: [...MENU]
+    menu: [...MENU],
+    testData: [
+      { name: "hello", id: "test0" },
+      { name: "world", id: "test1" },
+      { name: "again", id: "test2" }
+    ],
+    pagination: { page: 1, pageSize: 10 }
   },
   onShow: function() {
     const ts = new Date().valueOf();

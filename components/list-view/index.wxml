@@ -1,5 +1,5 @@
 <view wx:for="{{items}}" wx:key="{{index}}_list_wrap">
-  <view class="title">{{item.title}}</view>
+  <view wx:if="{{item.title}}" class="title">{{item.title}}</view>
   <view class="wrap">
     <block wx:for="{{item.items}}" wx:key="{{index}}_list_item" wx:for-item="child" wx:for-index="childIndex">
       <item data="{{child}}" gutter="{{item.gutter}}" index="{{childIndex}}" userType="{{child.userType}}" width="{{item.itemWidth}}" height="{{item.itemWidth}}" isRowEnd="{{item.isRowEnd}}" bind:todo="todo" />

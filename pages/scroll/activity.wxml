@@ -1,0 +1,6 @@
+<view>
+  <nothing wx:if="{{list.length < 1}}" />
+  <block wx:for="{{list}}" wx:key="{{item.id}}">
+    <activity data="{{item}}" />
+  </block>
+</view>

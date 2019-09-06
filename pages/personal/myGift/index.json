@@ -1,5 +1,0 @@
-{
-  "usingComponents": {
-    "gifts": "./components/gift/index"
-  }
-}

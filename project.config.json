@@ -288,6 +288,13 @@
 					"pathName": "pages/personal/setting/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 33,
+					"name": "通用列表页",
+					"pathName": "pages/scroll-list/index",
+					"query": "type=activity",
+					"scene": null
 				}
 			]
 		}

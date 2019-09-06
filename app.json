@@ -1,17 +1,13 @@
 {
   "pages": [
-    "pages/activity/index",
+    "pages/scroll/activity",
+    "pages/scroll/index",
     "pages/start/author",
     "pages/products/list/index",
     "pages/products/detail/index",
     "pages/products/group/index",
     "pages/customPage/index",
     "pages/personal/index",
-    "pages/personal/myGift/index",
-    "pages/personal/myActivity/index",
-    "pages/personal/myActivity/myCustomer",
-    "pages/personal/mySpeedKill/index",
-    "pages/personal/mySpeedKill/detail",
     "pages/personal/bind/index",
     "pages/personal/bind/instList",
     "pages/personal/setting/index",
@@ -30,7 +26,7 @@
       {
         "selectedIconPath": "access/thunderbolt-fill.png",
         "iconPath": "access/thunderbolt.png",
-        "pagePath": "pages/activity/index",
+        "pagePath": "pages/scroll/activity",
         "text": "活动"
       },
       {

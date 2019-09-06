@@ -1,6 +1,7 @@
 <scroll-view scroll-y="{{true}}">
   <nothing wx:if="{{data.length < 1}}" />
-  <block wx:for="{{data}}" wx:key="{{item.id}}">
+  <!-- <scroll data="{{data}}" type="activity" fetchApi="v1/api/sys/activity" query="status=1"></scroll> -->
+  <!-- <block wx:for="{{data}}" wx:key="{{item.id}}">
     <item data="{{item}}" bind:itemTouch="tap" />
-  </block>
+  </block> -->
 </scroll-view>
