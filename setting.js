@@ -1,3 +1,4 @@
+// export const apiUrl = "http://192.168.31.225:10010/";
 export const apiUrl = "http://192.168.1.16:10010/";
 // export const apiUrl = "http://192.168.0.101:10010/";
 // export const apiUrl = "http://192.168.66.180:10010/";
@@ -11,4 +12,7 @@ export const pathPrefix = {
   category: "/pages/products/list/index"
 };
 export const tel = "037163325600";
-export const version = "1.23.2"
+export const version = "1.24.1";
+export const winnerLookAppid = "746838";
+export const winnerLookToken = "119070400416457081e6f63ff67baa58";
+export const middleNumber = "13044122112";

@@ -2,6 +2,7 @@
 import { get, post, put, setToken, getToken } from "./utils/request";
 import { uri, getRoute } from "./utils/util";
 import { homePath } from "./setting";
+const gio = require("./utils/growingio/index.js").default;
 
 App({
   onLaunch: function() {
@@ -85,7 +86,7 @@ App({
          * 否则, 返回user数据和token
          * 先设置全局用户信息里的openid, 这是必然可以得到的
          * 然后用服务端返回的数据调用getUserInfo, 在此方法里解析data
-        */
+         */
         get("api/wx/token_bycode", { code: res.code })
           .then(data => {
             this.globalData.userInfo.openid = data.user
@@ -123,9 +124,9 @@ App({
     /**
      * 此方法
      * 有可能是授权页面直接触发的
-     * 
+     *
      * 也有可能是由_login方法触发的
-     * 
+     *
      * 最终还是要afterLogin
      */
     const { openid, user, token, userInfo } = data;
@@ -136,7 +137,7 @@ App({
       // 注册过
       this.afterLogin(user, token);
     } else if (userInfo) {
-      // 从授权过来的, 刚获取过用户信息, 
+      // 从授权过来的, 刚获取过用户信息,
       userInfo.openid = this.globalData.userInfo.openid;
       if (userInfo.openid) {
         this.register(userInfo);
@@ -175,6 +176,8 @@ App({
       });
     } else {
     }
+    const { id, name, userType, avatar, autoId, gander } = user;
+    gio("setVisitor", { id, name, userType, avatar, autoId, gander });
     return;
     const routes = getCurrentPages();
     if (routes.length > 0) {
@@ -249,10 +252,10 @@ App({
         const { scene } = wx.getLaunchOptionsSync();
         that.globalData.scene = scene;
         that.setNavHeight();
-        if(msg) {
+        if (msg) {
           wx.showToast({
-            title: '已是最新版本'
-          })
+            title: "已是最新版本"
+          });
         }
       }
     });
