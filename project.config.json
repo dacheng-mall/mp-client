@@ -23,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.1",
+	"libVersion": "2.8.2",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 33,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -73,10 +73,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "测试自定义页面",
 					"pathName": "pages/customPage/index",
-					"query": "code=hello",
+					"query": "code=block",
 					"scene": null
 				},
 				{

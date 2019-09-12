@@ -1,5 +1,5 @@
 // export const apiUrl = "http://192.168.31.225:10010/";
-export const apiUrl = "http://192.168.1.16:10010/";
+export const apiUrl = "http://192.168.1.33:10010/";
 // export const apiUrl = "http://192.168.0.101:10010/";
 // export const apiUrl = "http://192.168.66.180:10010/";
 export const aliApiUrl = "https://api.idacheng.cn:443/";
