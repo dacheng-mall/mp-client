@@ -1,0 +1,9 @@
+.header-swiper {
+  position: relative;
+}
+.header-bg {
+  position: absolute;
+  background-color: #00bcbd;
+  height: 128rpx;
+  width: 100%;
+}

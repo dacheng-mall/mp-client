@@ -1,7 +1,12 @@
-<swiper style="height: {{swiperHeight}}px" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
-  <block wx:for="{{_data.data}}" wx:key="{{item.id}}">
-    <swiper-item bind:tap="click" data-path="{{item.path}}">
-      <image class="img" mode="widthFix" src="{{item.image}}" />
-    </swiper-item>
-  </block>
-</swiper>
+<view class="swiper-wrap">
+  <view class="swiper-background" wx:if="{{attributes.color}}" style="background-color: {{attributes.color}}"></view>
+  <swiper style="height: {{swiperHeight}}px" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" duration="{{500}}">
+    <block wx:for="{{_data.data}}" wx:key="{{item.id}}">
+      <swiper-item bind:tap="click" data-path="{{item.path}}">
+        <view style="padding: {{attributes.padding}}px;">
+          <image class="img" mode="widthFix" src="{{item.image}}" style="border-radius: {{attributes.padding ? 10 : 0}}px" />
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

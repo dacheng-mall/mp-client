@@ -2,3 +2,12 @@
 .img {
   width: 100%;
 }
+.swiper-wrap {
+  position: relative;
+}
+.swiper-background {
+  position: absolute;
+  height: 88px;
+  width: 100%;
+  border-radius: 0 0 50% 50%
+}

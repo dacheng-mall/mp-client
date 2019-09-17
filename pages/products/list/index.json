@@ -3,6 +3,9 @@
     "products": "/components/products/index",
     "list-x": "/components/page/list"
   },
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "惊喜商城",
+  "backgroundColor": "#00bcbd",
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 60
 }

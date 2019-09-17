@@ -1,4 +1,6 @@
 {
+  "navigationBarTitleText": "我的收藏",
+  "backgroundColor": "#00bcbd",
   "usingComponents": {
     "item": "./item/index"
   }

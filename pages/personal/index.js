@@ -46,7 +46,7 @@ const MENU = [
     ]
   },
   {
-    title: "通用",
+    title: "个人专区",
     userType: null,
     split: 4,
     items: [
@@ -89,6 +89,29 @@ const MENU = [
         userType: 4,
         todo: "unbindInst"
       }
+    ]
+  },
+  {
+    title: "惊喜",
+    userType: null,
+    split: 4,
+    items: [
+      {
+        name: "商城",
+        icon: "gift-fill",
+        iconColor: "#ff4d4d",
+        color: "#fff",
+        path: "/pages/products/list/index",
+        size: 3
+      },
+      {
+        name: "我的收藏",
+        icon: "heart-fill",
+        iconColor: "#00bcbd",
+        color: "#fff",
+        path: "/pages/products/group/index",
+        size: 1
+      },
     ]
   }
 ];

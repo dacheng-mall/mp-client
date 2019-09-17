@@ -24,22 +24,10 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "access/thunderbolt-fill.png",
-        "iconPath": "access/thunderbolt.png",
-        "pagePath": "pages/scroll/activity",
-        "text": "活动"
-      },
-      {
-        "selectedIconPath": "access/gift-fill.png",
-        "iconPath": "access/gift.png",
-        "pagePath": "pages/home/index",
-        "text": "惊喜"
-      },
-      {
-        "selectedIconPath": "access/heart-fill.png",
-        "iconPath": "access/heart.png",
-        "pagePath": "pages/products/group/index",
-        "text": "喜欢"
+        "selectedIconPath": "access/home-fill.png",
+        "iconPath": "access/home.png",
+        "pagePath": "pages/customPage/index",
+        "text": "首页"
       },
       {
         "selectedIconPath": "access/user-fill.png",
