@@ -315,9 +315,8 @@ Component({
       });
     },
     checkCustomers: async function() {
-      const user = wx.getStorageSync("user");
       wx.navigateTo({
-        url: `/pages/personal/myActivity/myCustomer?aid=${this.data.aid}&sid=${user.id}&type=at_second_kill`
+        url: `/pages/scroll/index?activityId=${this.data.aid}&pageType=myCustomers`
       });
     },
     kill: function(e) {

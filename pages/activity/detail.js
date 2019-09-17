@@ -157,6 +157,12 @@ Page({
       [data] = await get("v1/api/sys/activity", { autoId: a });
     }
     if (data) {
+      if(data.activityType === 'at_second_kill') {
+        wx.redirectTo({
+          url: `/pages/activity/speed-kill/index?id=${data.id}`
+        })
+        return
+      }
       const { screenWidth, windowHeight } = wx.getSystemInfoSync();
       data.dateStart = moment(data.dateStart).format("YYYY-MM-DD");
       data.dateEnd = moment(data.dateEnd).format("YYYY-MM-DD");

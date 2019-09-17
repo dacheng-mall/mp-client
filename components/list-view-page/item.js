@@ -115,7 +115,6 @@ Component({
             title: "此功能即将开放, 敬请期待...",
             icon: "none"
           });
-
         }
       }
       // if (this.properties.data.path) {
