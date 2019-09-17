@@ -13,5 +13,8 @@
     <view wx:if="{{item.type === 'article'}}">
       <paragraph-x data="{{item.data}}" index="{{index}}"></paragraph-x>
     </view>
+    <view wx:if="{{item.type === 'block'}}">
+      <list-view bindtodo="todo" data="{{item}}" index="{{index}}"></list-view>
+    </view>
   </view>
 </scroll-view>

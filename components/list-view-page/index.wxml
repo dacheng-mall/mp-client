@@ -1,0 +1,7 @@
+<view style="margin: {{attributes.gutter}}px 0 0 {{attributes.gutter}}px">
+  <view class="wrap" style="flex-wrap: {{attributes.breakLine ? 'wrap' : 'nowrap'}}">
+    <block wx:for="{{_data}}" wx:key="{{child.id}}" wx:for-item="child" wx:for-index="childIndex">
+      <item data="{{child}}" gutter="{{attributes.gutter}}" index="{{childIndex}}" userType="{{attributes.userType}}" width="{{attributes.itemWidth}}" height="{{attributes.itemHeight}}" isRowEnd="{{item.isRowEnd}}" bind:todo="todo" />
+    </block>
+  </view>
+</view>

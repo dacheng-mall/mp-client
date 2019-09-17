@@ -1,0 +1,14 @@
+.wrap {
+  /* border: 1px solid #eee; */
+  /* border-radius: 16rpx; */
+  /* background-color: #fff; */
+  display: flex;
+  width: 100%;
+  overflow-x: auto
+}
+
+.title {
+  font-size: 32rpx;
+  color: #666;
+  margin: 20px 0 10px;
+}

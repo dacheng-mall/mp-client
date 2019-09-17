@@ -76,7 +76,7 @@
 					"id": 2,
 					"name": "测试自定义页面",
 					"pathName": "pages/customPage/index",
-					"query": "code=block",
+					"query": "code=home",
 					"scene": null
 				},
 				{

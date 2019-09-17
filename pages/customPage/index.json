@@ -4,6 +4,7 @@
     "list-x": "/components/page/list",
     "grid-x": "/components/page/grid",
     "paragraph-x": "/components/paragraph/index",
-    "searcher": "/components/searcher/index"
+    "searcher": "/components/searcher/index",
+    "list-view": "/components/list-view-page/index"
   }
 }
