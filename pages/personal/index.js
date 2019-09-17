@@ -10,7 +10,7 @@ const MENU = [
     split: 4,
     items: [
       {
-        name: "我报名的活动",
+        name: "我的活动",
         icon: "crown-fill",
         iconColor: "#00bcbd",
         color: "#fff",
@@ -23,16 +23,14 @@ const MENU = [
         iconColor: "#00bcbd",
         color: "#fff",
         size: 2,
-        // path: "/pages/personal/myActivity/myCustomer"
         path: "/pages/scroll/index?pageType=myCustomers"
       },
       {
-        name: "我送出的礼物(码)",
-        icon: "qrcode",
+        name: "送出礼物",
+        icon: "gift",
         iconColor: "#ff3366",
         color: "#fff",
-        size: 2,
-        // path: "/pages/qrcode/list/index?type=salesman"
+        size: 1,
         path: "/pages/scroll/index?pageType=myQR"
       },
       {
@@ -40,8 +38,16 @@ const MENU = [
         icon: "home",
         iconColor: "#ffb366",
         color: "#fff",
-        size: 2,
+        size: 1,
         todo: "bindInst"
+      },
+      {
+        name: "我的个人码",
+        icon: "qrcode",
+        iconColor: "#9966ff",
+        color: "#fff",
+        size: 2,
+        path: "/pages/personal/myQr/index"
       }
     ]
   },

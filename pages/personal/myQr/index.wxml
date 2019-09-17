@@ -1,0 +1,11 @@
+<headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
+<view wx:if="{{src}}" class="qr-wrap">
+  <image class="qr" src="{{src}}" />
+  <image class="avatar" src="{{avatar}}" mode="aspectFit" />
+</view>
+<view class="info">
+  <view class="title">使用说明</view>
+  <view>当您拜访客户时</view>
+  <view>请让客户使用微信扫一扫功能</view>
+  <view>扫描您的个人码</view>
+</view>

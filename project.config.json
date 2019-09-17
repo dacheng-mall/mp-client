@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 34,
 			"list": [
 				{
 					"id": 0,
@@ -294,6 +294,13 @@
 					"name": "通用列表页",
 					"pathName": "pages/scroll-list/index",
 					"query": "type=activity",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/personal/myQr/index",
+					"pathName": "pages/personal/myQr/index",
+					"query": "",
 					"scene": null
 				}
 			]

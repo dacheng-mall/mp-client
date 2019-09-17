@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/customPage/index",
     "pages/scroll/activity",
     "pages/scroll/index",
     "pages/start/author",
     "pages/products/list/index",
     "pages/products/detail/index",
     "pages/products/group/index",
-    "pages/customPage/index",
     "pages/personal/index",
+    "pages/personal/myQr/index",
     "pages/personal/bind/index",
     "pages/personal/bind/instList",
     "pages/personal/setting/index",
@@ -16,7 +17,7 @@
     "pages/home/index",
     "pages/filter/index",
     "pages/qrcode/index",
-    "pages/qrcode/list/index"
+    "pages/qrcode/list"
   ],
   "tabBar": {
     "color": "#707070",

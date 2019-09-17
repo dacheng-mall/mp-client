@@ -62,11 +62,14 @@ Component({
                     break;
                   }
                   case "WX_CODE": {
+                    wx.navigateTo({
+                      url: `/${res.path}`
+                    })
                     break;
                   }
                   default: {
                     wx.showToast({
-                      title: "只能扫二维码或小程序码",
+                      title: "无效二维码",
                       icon: "none"
                     });
                   }
@@ -82,16 +85,9 @@ Component({
             break;
           }
           case "code-personal": {
-            // 个人码
-            // 老子想缓存个人码到缓存里, 缓存一个本地的地址到localstorage
-            // 是否可以不缓存?
-            // 先不缓存, 每次重新生成, 带上时间戳
-            const ts = new Date().valueOf();
-            // post('v1/api/wx/createWXAQRCode', { page: 'pages/qrcode/index', scene: `?said=${user.autoId}&ts=${ts}` }).then((blobObj) => {
-            //   const src = `data:image/jpg;base64,${blobObj}`
-            //   wx.
-            // })
-            break;
+            wx.navigateTo({
+              url: '/pages/personal/myQr/index'
+            })
           }
           case "infomation": {
             // 个人信息
@@ -103,7 +99,6 @@ Component({
             break;
           }
         }
-        return;
       } else {
         const { id, type } = this.properties.data;
         if (id && type) {
@@ -117,14 +112,6 @@ Component({
           });
         }
       }
-      // if (this.properties.data.path) {
-      //   wx.navigateTo({
-      //     url: this.properties.data.path
-      //   });
-      // } else if (this.properties.data.todo) {
-      //   this.triggerEvent("todo", { type: this.properties.data.todo });
-      // } else {
-      // }
     }
   }
 });
