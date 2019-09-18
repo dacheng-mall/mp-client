@@ -42,7 +42,7 @@ const MENU = [
         todo: "bindInst"
       },
       {
-        name: "我的个人码",
+        name: "我的身份码",
         icon: "qrcode",
         iconColor: "#9966ff",
         color: "#fff",

@@ -5,7 +5,7 @@ Page({
   data: {
     nvabarData: {
       showCapsule: 1, // 是否显示左上角图标   1表示显示    0表示不显示
-      title: "个人码",
+      title: "身份码",
       textColor: "#fff", // 标题颜色
       bgColor: "#00bcbd", // 导航栏背景颜色
       btnBgColor: "#459d9f", // 胶囊按钮背景颜色

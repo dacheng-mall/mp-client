@@ -87,7 +87,8 @@ Component({
           case "code-personal": {
             wx.navigateTo({
               url: '/pages/personal/myQr/index'
-            })
+            });
+            break;
           }
           case "infomation": {
             // 个人信息

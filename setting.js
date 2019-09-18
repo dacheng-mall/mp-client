@@ -12,7 +12,7 @@ export const pathPrefix = {
   category: "/pages/products/list/index"
 };
 export const tel = "037163325600";
-export const version = "1.24.1";
+export const version = "1.24.3";
 export const winnerLookAppid = "746838";
 export const winnerLookToken = "119070400416457081e6f63ff67baa58";
 export const middleNumber = "13044122112";
