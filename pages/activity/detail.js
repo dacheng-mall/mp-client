@@ -157,12 +157,23 @@ Page({
       [data] = await get("v1/api/sys/activity", { autoId: a });
     }
     if (data) {
-      if(data.activityType === 'at_second_kill') {
-        wx.redirectTo({
-          url: `/pages/activity/speed-kill/index?id=${data.id}`
-        })
-        return
+      switch(data.activityType){
+        case 'at_second_kill': {
+          wx.redirectTo({
+            url: `/pages/activity/speed-kill/index?id=${data.id}`
+          })
+          return
+        }
+        case 'at_lottery': {
+          wx.redirectTo({
+            url: `/pages/activity/lottery/index?id=${data.id}`
+          })
+          return
+        }
       }
+      // if(data.activityType === 'at_second_kill') {
+      //   return
+      // }
       const { screenWidth, windowHeight } = wx.getSystemInfoSync();
       data.dateStart = moment(data.dateStart).format("YYYY-MM-DD");
       data.dateEnd = moment(data.dateEnd).format("YYYY-MM-DD");

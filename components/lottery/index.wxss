@@ -1,0 +1,129 @@
+.wrap {
+  position: relative;
+  margin: 0 auto;
+  background: linear-gradient(
+    to bottom,
+    #ffd146 0%,
+    #ffd146 3%,
+    #ffc005 5%,
+    #ffc005 95%,
+    #d17000 100%
+  );
+  box-shadow: 0 0 5px 0 #c45b1e;
+  border-radius: 10px;
+  border: 1px solid #5c400e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wrap .bg {
+  position: absolute;
+  z-index: 1;
+}
+.bg-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.bg-item .light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f55c5c;
+  box-shadow: 0 0 5px 3px rgb(255, 238, 162);
+  transition-property: transform height width;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+.bg-item .light.odd {
+  width: 15px;
+  height: 15px;
+  background-color: #fffda1;
+}
+.wrap .cont {
+  position: relative;
+  z-index: 2;
+  border-radius: 10px;
+  background-color: #f15105;
+  box-shadow: 0 0 5px 0 #b44200;
+}
+.item,
+.lottery {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.item-cont {
+  width: 90%;
+  height: 90%;
+  background: linear-gradient(
+    to bottom,
+    #ffeb6c 0%,
+    #ffe63d 10%,
+    #ffe63d 80%,
+    #f5bb1c 95%,
+    #f5bb1c 100%
+  );
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  box-shadow: 0 0 3px 0 #d84343;
+  color: #852f08;
+  transition-property: transform color height width;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+.active.item-cont {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #e6cc27 10%,
+    #ffb325 90%,
+    #e68210 100%
+  );
+  box-shadow: 0 0 10px 0 #c22d2d;
+}
+.lottery {
+  width: 95%;
+  height: 95%;
+  font-size: 16px;
+  background: linear-gradient(
+    to bottom,
+    #ff4b3c 0%,
+    #ff8f89 3%,
+    #ff4b3c 10%,
+    #ff4b3c 90%,
+    #f33726 100%
+  );
+  box-shadow: 0 0 20px 10px #fdd243;
+  z-index: 999;
+  color: #fff;
+}
+.lottery-text {
+  font-size: 32px;
+}
+.times {
+  width: 80%;
+  text-align: center;
+  background-color: #ffa099;
+  margin: 0 5px;
+  border-radius: 5px;
+  color: #680c04;
+  font-size: 14px;
+}

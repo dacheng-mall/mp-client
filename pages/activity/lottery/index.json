@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "headerNavbar": "/components/navigator/index",
+    "lottery": "/components/lottery/index"
+  },
+  "navigationStyle": "custom"
+}

@@ -2,7 +2,7 @@
 import { get, post, put, setToken, getToken } from "./utils/request";
 import { uri, getRoute } from "./utils/util";
 import { homePath } from "./setting";
-const gio = require("./utils/growingio/index.js").default;
+// const gio = require("./utils/growingio/index.js").default;
 
 App({
   onLaunch: function() {
@@ -177,7 +177,7 @@ App({
     } else {
     }
     const { id, name, userType, avatar, autoId, gander } = user;
-    gio("setVisitor", { id, name, userType, avatar, autoId, gander });
+    // gio("setVisitor", { id, name, userType, avatar, autoId, gander });
     return;
     const routes = getCurrentPages();
     if (routes.length > 0) {

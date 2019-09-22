@@ -1,0 +1,41 @@
+.body {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  background-color: #230a4f
+}
+.body .cont {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.bottom {
+  flex-shrink: 0;
+  width: 100%;
+  background-color: #eee;
+}
+.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%
+}
+.lottery {
+  position: absolute;
+  top: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.rules {
+  margin: 10px 0 0;
+  background-color: #fff;
+  width: 128px;
+  opacity: 0.7;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 20px
+}

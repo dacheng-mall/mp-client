@@ -1,0 +1,38 @@
+<view class="wrap" style="width: {{size.wrap}}px;height: {{size.wrap}}px;">
+  <view class="bg" style="width: {{size.wrap}}px;height: {{size.wrap}}px; left: 0; top: 0">
+    <block wx:for="{{size.bgItems}}" wx:key="bg_{{index}}">
+      <view
+        class="bg-item"
+        style="left: {{item.left}}px; top: {{item.top}}px; rigth: {{item.right}}px; bottom: {{item.bottom}}px; width: {{item.width}}; height: {{item.height}}"
+      >
+        <view
+          class="light {{index % 2 === 0 && twinkle ? 'odd' : ''}} {{index % 2 !== 0 && !twinkle ? 'odd' : ''}}"
+        ></view>
+      </view>
+    </block>
+  </view>
+  <view class="cont" style="width: {{size.cont}}px;height: {{size.cont}}px;">
+    <block wx:for="{{items}}" wx:key="{{index}}">
+      <view
+        class="item"
+        style="width: {{size.item}}px;height: {{size.item}}px; left: {{item.pos.x * size.item}}px; top: {{item.pos.y * size.item}}px"
+      >
+        <view class="item-cont {{current === index ? 'active' : ''}}">
+          <image wx:if="{{item.images}}" src="{{item.images}}" mode="aspectFit" class="img" />
+          <view>{{item.showName[0]}}</view>
+          <view>{{item.showName[1]}}</view>
+        </view>
+      </view>
+    </block>
+    <view
+      class="item"
+      style="left: {{size.item}}px; top: {{size.item}}px; width: {{size.item}}px; height: {{size.item}}px"
+    >
+      <view class="item-cont lottery" bind:tap="lottery">
+        <text class="lottery-text">抽奖</text>
+        <view class="times">剩{{times}}次机会</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- <button bind:tap="test" type="primary">测试</button> -->

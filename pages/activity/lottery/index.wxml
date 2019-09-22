@@ -1,0 +1,17 @@
+<headerNavbar navbar-data="{{nvabarData}}"></headerNavbar>
+<view class="body" style="height: {{contHeight}}px">
+  <view class="cont">
+    <image class="bg-img" src="{{source}}{{images[1].url}}" mode="widthFix" />
+    <view class="lottery">
+      <lottery
+        data="{{activityProducts}}"
+        bind:onStart="onStart"
+        bind:onEnd="onEnd"
+        bind:onResult="onResult"
+        times="{{times}}"
+      />
+    <view class="rules">活动规则</view>
+    </view>
+  </view>
+  <view class="bottom"></view>
+</view>

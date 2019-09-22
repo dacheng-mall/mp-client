@@ -1,5 +1,0 @@
-<!-- 这是自定义组件的内部WXML结构 -->
-<view wx:if="{{visible}}" class="inner" catchtouchmove="handleTouchMove">
-  <image mode="widthFix" class="image" bindtap="onClickTarget" src="{{message.contentMetadata.components[0].config.src}}"></image>
-  <view class="close" bindtap="handleClose">╳</view>
-</view>

@@ -14,6 +14,7 @@
     "pages/personal/setting/index",
     "pages/activity/detail",
     "pages/activity/speed-kill/index",
+    "pages/activity/lottery/index",
     "pages/home/index",
     "pages/filter/index",
     "pages/qrcode/index",
