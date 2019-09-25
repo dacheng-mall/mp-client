@@ -1,26 +1,26 @@
 <view class="table-wrap" style="height: {{height}}px">
   <nothing wx:if="{{list.length < 1}}" />
-  <scroll-view class="tbody" scroll-y>
+  <view class="tbody">
     <block wx:for="{{list}}" wx:key="{{item.id}}">
       <item state="{{state}}" data="{{item}}" ids="{{ids}}" index="{{index}}" bind:itemTap="itemTap" bind:titleTap="titleTap" />
     </block>
-  </scroll-view>
+  </view>
   <view class="bottom-bar" wx:if="{{!favorites}}">
-    <button disabled="{{list.length === 0}}" class="btn btn-small btn-danger" bindtap="chooseAll">
+    <button disabled="{{list.length === 0}}" class="btn btn-large btn-danger" bindtap="chooseAll">
       {{chooseState ? '不选' : '全选'}}
     </button>
-    <button disabled="{{ids.length === 0}}" class="btn btn-small btn-primary" open-type="share">
+    <button disabled="{{ids.length === 0}}" class="btn btn-large btn-primary" open-type="share">
       分享
     </button>
   </view>
   <view wx:if="{{favorites}}" class="bottom-bar">
-    <button disabled="{{list.length === 0}}" class="btn-small btn-default" bindtap="chooseAll">
+    <button disabled="{{list.length === 0}}" class="btn-large btn-default" bindtap="chooseAll">
       {{chooseState ? '不选' : '全选'}}
     </button>
-    <button disabled="{{ids.length === 0}}" class="btn-small btn-warning" bindtap="onRemove">
+    <button disabled="{{ids.length === 0}}" class="btn-large btn-warning" bindtap="onRemove">
       移出购物车
     </button>
-    <button disabled="{{ids.length === 0}}" class="btn-small btn-primary" open-type="share">
+    <button disabled="{{ids.length === 0}}" class="btn-large btn-primary" open-type="share">
       分享
     </button>
   </view>

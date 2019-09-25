@@ -12,41 +12,41 @@ const MENU = [
       {
         name: "我的活动",
         icon: "crown-fill",
-        iconColor: "#00bcbd",
-        color: "#fff",
-        size: 2,
+        iconColor: "#fff",
+        color: "#00bcbd",
+        size: 1,
         path: "/pages/scroll/index?pageType=myActivities"
       },
       {
         name: "我的客户",
         icon: "team",
-        iconColor: "#00bcbd",
-        color: "#fff",
-        size: 2,
+        iconColor: "#fff",
+        color: "#00bcbd",
+        size: 1,
         path: "/pages/scroll/index?pageType=myCustomers"
       },
       {
         name: "送出礼物",
         icon: "gift",
-        iconColor: "#ff3366",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         size: 1,
         path: "/pages/scroll/index?pageType=myQR"
       },
       {
-        name: "我的机构",
-        icon: "home",
-        iconColor: "#ffb366",
-        color: "#fff",
+        name: "我的信息",
+        icon: "info-circle-fill",
+        iconColor: "#fff",
+        color: "#00bcbd",
         size: 1,
         todo: "bindInst"
       },
       {
         name: "我的身份码",
         icon: "qrcode",
-        iconColor: "#9966ff",
-        color: "#fff",
-        size: 2,
+        iconColor: "#fff",
+        color: "#00bcbd",
+        size: 1,
         path: "/pages/personal/myQr/index"
       }
     ]
@@ -59,39 +59,39 @@ const MENU = [
       {
         name: "抢购",
         icon: "trophy-fill",
-        iconColor: "#ff4d4d",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         path: "/pages/scroll/index?pageType=mySpeedKill"
       },
       {
         name: "预约",
         icon: "check-circle-fill",
-        iconColor: "#00bcbd",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         // path: "/pages/personal/myGift/index"
         path: "/pages/scroll/index?pageType=gift"
       },
       {
         name: "我的礼物",
         icon: "gift",
-        iconColor: "#009899",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         // path: "/pages/qrcode/list/index?type=user"
         path: "/pages/scroll/index?pageType=myQRGift"
       },
       {
         name: "加入机构",
         icon: "home",
-        iconColor: "#ff6600",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         userType: 2,
         todo: "bindInst"
       },
       {
         name: "退出机构",
         icon: "stop",
-        iconColor: "#ccc",
-        color: "#666",
+        iconColor: "#fff",
+        color: "#00bcbd",
         userType: 4,
         todo: "unbindInst"
       }
@@ -105,16 +105,16 @@ const MENU = [
       {
         name: "商城",
         icon: "gift-fill",
-        iconColor: "#ff4d4d",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         path: "/pages/products/list/index",
-        size: 3
+        size: 1
       },
       {
         name: "我的收藏",
         icon: "heart-fill",
-        iconColor: "#00bcbd",
-        color: "#fff",
+        iconColor: "#fff",
+        color: "#00bcbd",
         path: "/pages/products/group/index",
         size: 1
       },

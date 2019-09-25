@@ -2,7 +2,7 @@
   <view wx:if="{{attributes.showName}}" class="title">{{name}}</view>
   <view class="wrap" style="flex-wrap: {{attributes.breakLine ? 'wrap' : 'nowrap'}}">
     <block wx:for="{{_data}}" wx:key="{{child.id}}" wx:for-item="child" wx:for-index="childIndex">
-      <item data="{{child}}" gutter="{{attributes.gutter}}" index="{{childIndex}}" userType="{{attributes.userType}}" width="{{attributes.itemWidth}}" height="{{attributes.itemHeight}}" isRowEnd="{{item.isRowEnd}}" bind:todo="todo" />
+      <item data="{{child}}" gutter="{{attributes.gutter}}" index="{{childIndex}}" userType="{{child.userType || attributes.userType}}" width="{{attributes.itemWidth}}" height="{{attributes.itemHeight}}" isRowEnd="{{item.isRowEnd}}" bind:todo="todo" />
     </block>
   </view>
 </view>

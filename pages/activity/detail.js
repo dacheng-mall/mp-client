@@ -178,10 +178,10 @@ Page({
     if (data) {
       switch (data.activityType) {
         case "at_second_kill": {
-          wx.redirectTo({
-            url: `/pages/activity/speed-kill/index${query}`
-          });
-          return;
+              wx.redirectTo({
+                url: `/pages/activity/speed-kill/index${query}`
+              });
+              return;
         }
         case "at_lottery": {
           wx.redirectTo({
@@ -190,9 +190,6 @@ Page({
           return;
         }
       }
-      // if(data.activityType === 'at_second_kill') {
-      //   return
-      // }
       const { screenWidth, windowHeight } = wx.getSystemInfoSync();
       data.dateStart = moment(data.dateStart).format("YYYY-MM-DD");
       data.dateEnd = moment(data.dateEnd).format("YYYY-MM-DD");

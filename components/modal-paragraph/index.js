@@ -49,6 +49,7 @@ Component({
       if (visible) {
         this.animation
           .opacity(0)
+          .bottom('-100px')
           .height(0)
           .step({
             duration: 300
@@ -56,8 +57,8 @@ Component({
       } else {
         this.animation
           .opacity(1)
-          .left(0)
           .bottom(0)
+          .left(0)
           .height(getContHeight())
           .step({
             duration: 300

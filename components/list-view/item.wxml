@@ -1,4 +1,4 @@
 <view bindtap="tap" wx:if="{{!data.userType || userType == data.userType}}" class="item" style="background-color: {{data.iconColor}}; width: {{width}}px;height: {{height}}px; margin-right: {{data.isRowEnd ? '0' : '10px'}}">
-  <icon-x type="{{data.icon}}" color="{{data.color}}" size="64" />
+  <icon-x type="{{data.icon}}" color="{{data.color}}" size="80" />
   <text class="name" style="color: {{data.color}}">{{data.name}}</text>
 </view>

@@ -43,7 +43,7 @@
   padding: 10rpx;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center
 }
 .btn-wrap > .component{
   flex: 1;

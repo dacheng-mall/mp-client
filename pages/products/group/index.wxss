@@ -41,7 +41,8 @@
   padding: 10rpx;
   background-color: #ddd;
   border-top: 1px solid #ccc;
-  justify-content: stretch
+  justify-content: stretch;
+  padding: 10px 0 24px;
 }
 .btn {
   width: 45%;

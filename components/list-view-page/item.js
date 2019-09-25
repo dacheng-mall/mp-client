@@ -20,7 +20,7 @@ Component({
       }
     },
     userType: {
-      type: Number
+      type: String
     },
     width: {
       type: Number
@@ -43,9 +43,19 @@ Component({
   methods: {
     tap: function() {
       const user = wx.getStorageSync("user");
-      if (!user) {
+      if (this.data.userType !== '0' && !user) {
         notice();
         return;
+      }
+      if(
+        (this.data.userType === '2' && user.userType !== 2) ||
+        (this.data.userType === '4' && user.userType !== 4 )
+      ) {
+        wx.showToast({
+          title: '您无权限使用该功能',
+          icon: 'none'
+        })
+        return
       }
       if (this.properties.data.type === "function") {
         switch (this.properties.data.id) {
@@ -72,12 +82,7 @@ Component({
                   }
                 }
               },
-              fail: function() {
-                wx.showToast({
-                  title: "扫码失败, 请重试",
-                  icon: "none"
-                });
-              }
+              fail: function() {}
             });
             break;
           }
