@@ -40,7 +40,6 @@ Component({
   methods: {
     tap() {
       const { id, activityType } = this.data.item;
-      console.log(this.data.item)
       switch (activityType) {
         case "at_second_kill": {
           wx.navigateTo({

@@ -49,7 +49,6 @@ Component({
         : null;
       res.customerName = d.custom.name;
       res.salesmanName = d.salesman.name;
-      console.log("res", res);
       return res;
     },
     goDetail: function(e) {

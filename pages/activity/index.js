@@ -20,13 +20,6 @@ Page({
       });
     }
   },
-  onPullDownRefresh() {
-    // wx.startPullDownRefresh({
-    //   complates: function(){
-    //     console.log('刷新')
-    //   }
-    // })
-  },
   tap: function(e) {
     const { id, type } = e.detail;
     switch (type) {

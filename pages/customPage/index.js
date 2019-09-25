@@ -41,9 +41,7 @@ Page({
       });
     }
   },
-  todo: function(e){
-    console.log('todo', e)
-  },
+  todo: function(e){},
   click: function(e) {
     const { path } = e.detail;
     if (path) {

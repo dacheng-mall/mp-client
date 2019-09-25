@@ -8,12 +8,10 @@ Component({
     }
   },
   methods: {
-    go2login: function(){
-      // const app = getApp();
-      // console.log(app);
+    go2login: function() {
       wx.navigateTo({
         url: "/pages/start/author"
       });
     }
   }
-})
+});

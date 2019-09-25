@@ -1,6 +1,5 @@
 import { source } from "../../setting";
 import { notice } from "../../utils/util";
-import { post } from "../../utils/request";
 
 Component({
   data: {
@@ -11,7 +10,6 @@ Component({
       type: Object,
       value: {},
       observer: function(newVal) {
-        console.log("newVal", newVal);
         if (newVal.size > 1) {
           this.setData({
             width:
@@ -56,7 +54,6 @@ Component({
             wx.scanCode({
               onlyFromCamera: true,
               success: function(res) {
-                console.log(res);
                 switch (res.scanType) {
                   case "QR_CODE": {
                     break;
@@ -64,7 +61,7 @@ Component({
                   case "WX_CODE": {
                     wx.navigateTo({
                       url: `/${res.path}`
-                    })
+                    });
                     break;
                   }
                   default: {
@@ -86,7 +83,7 @@ Component({
           }
           case "code-personal": {
             wx.navigateTo({
-              url: '/pages/personal/myQr/index'
+              url: "/pages/personal/myQr/index"
             });
             break;
           }

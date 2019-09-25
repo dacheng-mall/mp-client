@@ -1,6 +1,5 @@
 import { get, post } from "../../utils/request";
 import {
-  parseQuery,
   validateMobile,
   validateName,
   getContHeight
@@ -29,9 +28,6 @@ Component({
     styles: {
       type: String,
       value: "",
-      observer: function(newval) {
-        console.log(newval);
-      }
     }
   },
   data: {

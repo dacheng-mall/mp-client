@@ -11,7 +11,6 @@ Component({
       type: Object,
       observer: function(newVal) {
         if (newVal) {
-          console.log(newVal);
           this.setData({
             item: this.normalize(newVal)
           });

@@ -86,7 +86,6 @@ Page({
       query += encodeURIComponent(`?a=${a}`)
     }
     params.path = `/pages/activity/lottery/index${query}`;
-    console.log(params.path)
     return params;
   },
   fetch: async function() {
@@ -150,7 +149,6 @@ Page({
     }
   },
   afterSign: function(e) {
-    console.log(e);
     if (e.detail.id) {
       this.setData({
         signed: true,
@@ -166,9 +164,7 @@ Page({
     });
   },
   // 抽奖的逻辑
-  onStart: function() {
-    console.log("start");
-  },
+  onStart: function() {},
   onEnd: function(e) {
     const {
       user: { id: customerId },
@@ -180,7 +176,6 @@ Page({
     // 这里调用生成领取记录的接口
     const { id } = this.data;
     const { nullIndex, target, stop, index } = e.detail;
-    console.log(nullIndex, target, index);
     if (target.isNull) {
       await post("v1/api/sys/giftProduct/seckill", {
         activityId: id
@@ -209,7 +204,6 @@ Page({
             break;
           }
         }
-        console.log("error", e);
       }
     }
   },
@@ -218,13 +212,11 @@ Page({
     wx.navigateTo({
       url: `/pages/scroll/index?pageType=mySpeedKill&activityId=${id}`
     });
-    console.log(e);
   },
   myCustomers: function(e) {
     const { id } = this.data;
     wx.navigateTo({
       url: `/pages/scroll/index?pageType=myCustomers&activityId=${id}`
     });
-    console.log(e);
   }
 });

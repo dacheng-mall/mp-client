@@ -38,7 +38,6 @@ Component({
   },
   lifetimes: {
     attached: function() {
-      console.log(this);
       this.animation = wx.createAnimation({
         timingFunction: "ease"
       });
@@ -47,7 +46,6 @@ Component({
   methods: {
     trigger: function() {
       const { visible } = this.data;
-      console.log(this.animation);
       if (visible) {
         this.animation
           .opacity(0)

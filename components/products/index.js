@@ -23,14 +23,6 @@ Component({
       value: ""
     }
   },
-  lifetimes: {
-    attached() {
-      // console.log("attached ", this.properties.favorites);
-    },
-    ready() {
-      // console.log("ready", this.data);
-    }
-  },
   data: {
     _data: {}
   },

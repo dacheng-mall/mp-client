@@ -72,12 +72,7 @@ export const getFavorites = () =>
     })
     .then(data => {
       return data;
-    }).catch((e) => {
-      // console.log(e.errMsg)
-      // if(e.errMsg) {
-      //   notice()
-      // }
-    });
+    }).catch((e) => {});
 
 export const setFavorites = ids => {
   wx.setStorageSync("favorites", ids);
