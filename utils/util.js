@@ -121,7 +121,7 @@ function notice(props = {}) {
     cancelText: props.cancelText || "不",
     complete: res => {
       if (props.msg) {
-        console.log("notice: \n", props.msg);
+        console.error("notice: \n", props.msg);
       }
       if (res.confirm) {
         if (props.confirm instanceof Function) {

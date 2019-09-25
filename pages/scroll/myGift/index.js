@@ -51,6 +51,8 @@ Component({
       productImage: d.productImage,
       productName: d.productName,
       status: d.status,
+      img: d.img,
+      activityType: d.activityType,
       createTime: d.createTime
         ? moment(d.createTime).format("YYYY-MM-DD HH:mm:ss")
         : "--"
@@ -63,7 +65,7 @@ Component({
           if (customerMobile) {
             wx.showModal({
               title: "联系客户",
-              content: `${customerName || '未知姓名'}, ${customerMobile}`,
+              content: `${customerName || "未知姓名"}, ${customerMobile}`,
               confirmText: "拨打电话",
               success: function(res) {
                 if (res.confirm) {
@@ -81,7 +83,7 @@ Component({
           if (salesmanMobile) {
             wx.showModal({
               title: "联系客户经理",
-              content: `${salesmanName || '未知姓名'}, ${salesmanMobile}`,
+              content: `${salesmanName || "未知姓名"}, ${salesmanMobile}`,
               confirmText: "拨打电话",
               success: function(res) {
                 if (res.confirm) {
@@ -98,9 +100,25 @@ Component({
     },
     goDetail: function(e) {
       const { id } = e.currentTarget.dataset;
-      wx.navigateTo({
-        url: `/pages/activity/speed-kill/index?id=${id}`
-      });
+      switch (this.data.item.activityType) {
+        case "at_lottery": {
+          wx.navigateTo({
+            url: `/pages/activity/lottery/index?id=${id}`
+          });
+          break;
+        }
+        case "at_second_kill": {
+          wx.navigateTo({
+            url: `/pages/activity/speed-kill/index?id=${id}`
+          });
+          break;
+        }
+        default: {
+          wx.navigateTo({
+            url: `/pages/activity/detail?id=${id}`
+          });
+        }
+      }
     },
     receive: function(e) {
       wx.showModal({

@@ -4,7 +4,7 @@ import { notice } from "./util";
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";
 
-const baseURL = apiUrl;
+const baseURL = aliApiUrl;
 export function getApi() {
   return baseURL;
 }
@@ -129,13 +129,20 @@ export default function request(url, { data, method }, other) {
     .catch(err => {
       showLoading();
       if (err.statusCode !== 401) {
-        wx.showToast({
-          title: err.data || "请求异常",
-          icon: "none",
-          complete: function() {
-            console.log(`[${err.statusCode}]error: ${options.url}`);
+        switch (true) {
+          case /^v1\/api\/sys\/giftProduct\/seckill/.test(url): {
+            throw err.data
           }
-        });
+          default: {
+            wx.showToast({
+              title: err.data || "请求异常",
+              icon: "none",
+              complete: function() {
+                console.log(`[${err.statusCode}]error: ${options.url}`);
+              }
+            });
+          }
+        }
       } else {
         // 401异常在这里处理
         if (errorTimer) {
@@ -143,10 +150,12 @@ export default function request(url, { data, method }, other) {
         }
         errorTimer = setTimeout(() => {
           notice({
-            content: "抱歉! 您的权限不足, 登录后获取更多权限!",
+            content: "抱歉! 您尚未授权, 授权登录后获取更多权限!",
             confirmText: "授权登录",
             msg: `[401]error: ${options.url}`
           });
+          // 清除本地存储
+          wx.clearStorageSync();
           clearTimeout(errorTimer);
         }, 1000);
       }

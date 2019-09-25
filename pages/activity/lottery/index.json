@@ -1,7 +1,11 @@
 {
   "usingComponents": {
     "headerNavbar": "/components/navigator/index",
-    "lottery": "/components/lottery/index"
+    "lottery": "/components/lottery/index",
+    "poster": "/components/poster/index",
+    "customer-sign": "/components/customer-sign/index",
+    "count-down": "/components/count-down/index",
+    "modal-paragraph": "/components/modal-paragraph/index"
   },
   "navigationStyle": "custom"
 }

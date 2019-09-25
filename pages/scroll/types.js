@@ -8,9 +8,9 @@ const TYPES = {
   },
   mySpeedKill: {
     api: "v1/api/sys/giftProduct",
-    query: { customId: "user_id", type: "seckill" },
+    query: { customId: "user_id", type: "seckill", notEmpty: 1 },
     pagination: { page: 1, pageSize: 8 },
-    title: "我的抢购",
+    title: "我的奖品",
     name: "myGift"
   },
   gift: {

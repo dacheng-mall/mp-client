@@ -1,0 +1,12 @@
+<view class="btn" style="{{styles}}" bind:tap="trigger">{{title}}</view>
+<view class="cont" animation="{{animation}}">
+  <view class="cont-wrap" wx:if="{{content}}">
+    <paragraph data="{{content}}" />
+  </view>
+  <view wx:else class="cont-wrap">
+    {{text}}
+  </view>
+  <view class="bottom">
+    <icon-x type="close-circle" size="{{88}}" color="#ccc" catch:tap="trigger"></icon-x>
+  </view>
+</view>

@@ -1,0 +1,72 @@
+<view
+  class="getGift"
+  animation="{{animationData}}"
+  style="height: 0; width: {{width}}px; overflow: hidden"
+>
+  <form bindsubmit="search" class="formWrap" wx:if="{{step === 0}}">
+    <view class="top" style="height: 144rpx">
+      <view>通过手机号查询您的客户经理</view>
+      <view>
+        <button form-type="submit" class="btn btn-small btn-warning">查询</button>
+      </view>
+    </view>
+    <view class="middle">
+      <view class="section">
+        <view class="sectionTitle">手机号</view>
+        <input name="mobile" value="" placeholder="请输入您的客户经理的手机号" />
+      </view>
+      <view wx:if="{{smList && smList.length > 1}}" class="smList">
+        <view class="smList-title">请选择(点击)您的客户经理</view>
+        <block wx:for="{{smList}}" wx:key="{{item.id}}">
+          <view class="smList-item" bind:tap="selected" data-item="{{item}}">
+            <image wx:if="{{item.avatar}}" class="smList-avarta" src="{{item.avatar}}" />
+            <view class="smList-info">
+              <view>{{item.name}}</view>
+              <view>{{item.mobile}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </form>
+  <form bindsubmit="sign" wx:if="{{step === 1}}" class="formWrap">
+    <view class="top" style="height: 144rpx">
+      <view class="salesman">
+        <image
+          wx:if="{{salesman.avatar}}"
+          class="salesman-avatar"
+          src="{{salesman.avatar}}"
+          mode="aspectFit"
+          style="width: 88rpx; height: 88rpx"
+        />
+        <view class="salesman-info">
+          <view>{{salesman.name}}({{salesman.gradeName}})</view>
+          <view>{{salesman.institution.name}}</view>
+        </view>
+      </view>
+      <view>
+        <button form-type="submit" class="btn btn-small btn-warning">立即报名</button>
+      </view>
+    </view>
+    <view class="middle">
+      <view class="section">
+        <view class="sectionTitle">
+          姓名
+          <text class="required">(必填)</text>
+        </view>
+        <input name="name" placeholder="请输入真实姓名" />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">
+          手机号
+          <text class="required">(必填)</text>
+        </view>
+        <input name="mobile" value="{{user.mobile}}" type="number" placeholder="请输入手机号" />
+      </view>
+    </view>
+  </form>
+  <view class="bottom">
+    <icon-x type="close-circle" size="{{88}}" color="#ccc" catch:tap="hideGetPanel"></icon-x>
+  </view>
+</view>
+<button class="btn btn-large btn-primary" catch:tap="showPanel">{{title}}</button>

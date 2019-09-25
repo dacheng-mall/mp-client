@@ -12,6 +12,10 @@
   height: 192rpx;
   width: 192rpx;
   margin-right: 10px;
+  text-align: center;
+  line-height: 192rpx;
+  background-color: #ddd;
+  color: #999
 }
 .item .main {
   display: flex;

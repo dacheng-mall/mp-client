@@ -14,7 +14,7 @@ Page({
     step: null,
     nvabarData: {
       showCapsule: 1, // 是否显示左上角图标   1表示显示    0表示不显示
-      title: '活动详情',
+      title: "活动详情",
       textColor: "#fff", // 标题颜色
       bgColor: "#00bcbd", // 导航栏背景颜色
       btnBgColor: "#459d9f", // 胶囊按钮背景颜色
@@ -45,8 +45,8 @@ Page({
       timingFunction: "ease"
     });
   },
-  
-  getContHeight: function() {    
+
+  getContHeight: function() {
     this.setData({
       contHeight: getContHeight()
     });
@@ -150,25 +150,44 @@ Page({
     }
   },
   fetch: async function({ id, sid, a, sa }) {
+    const { scene } = wx.getLaunchOptionsSync();
     let data = null;
     if (id) {
       [data] = await get("v1/api/sys/activity", { id });
     } else if (a) {
       [data] = await get("v1/api/sys/activity", { autoId: a });
     }
-    if (data) {
-      switch(data.activityType){
-        case 'at_second_kill': {
-          wx.redirectTo({
-            url: `/pages/activity/speed-kill/index?id=${data.id}`
-          })
-          return
+    let query = '?';
+    switch(scene){
+      case 1047:
+      case 1048:
+      case 1049: {
+        query += `a=${a}`;
+        if(sa) {
+          query += `sa=${sa}`;
         }
-        case 'at_lottery': {
+        break;
+      }
+      default: {
+        query += `id=${id}`;
+        if(sid) {
+          query += `sid=${sid}`;
+        }
+      }
+    }
+    if (data) {
+      switch (data.activityType) {
+        case "at_second_kill": {
           wx.redirectTo({
-            url: `/pages/activity/lottery/index?id=${data.id}`
-          })
-          return
+            url: `/pages/activity/speed-kill/index${query}`
+          });
+          return;
+        }
+        case "at_lottery": {
+          wx.redirectTo({
+            url: `/pages/activity/lottery/index${query}`
+          });
+          return;
         }
       }
       // if(data.activityType === 'at_second_kill') {

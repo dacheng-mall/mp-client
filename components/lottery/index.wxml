@@ -28,11 +28,44 @@
       class="item"
       style="left: {{size.item}}px; top: {{size.item}}px; width: {{size.item}}px; height: {{size.item}}px"
     >
-      <view class="item-cont lottery" bind:tap="lottery">
+      <view
+        class="item-cont lottery {{disabled || times < 1 ? 'disabled' : ''}}"
+        bind:tap="lottery"
+      >
         <text class="lottery-text">抽奖</text>
-        <view class="times">剩{{times}}次机会</view>
+        <view wx:if="{{!disabled}}" class="times">{{times}}次机会</view>
       </view>
     </view>
+  </view>
+</view>
+<view class="result" animation="{{animationData}}">
+  <view class="result-wrap sorry" wx:if="{{result.isNull}}">
+    <view class="title sorry">真遗憾</view>
+    <view class="result-cont">下次一定中大奖!!</view>
+  </view>
+  <view class="result-wrap" wx:elif="{{!result.isNull}}">
+    <view class="title great">
+      <view>恭喜你</view>
+      <view class="result-cont-level">获得 {{result.showName[0]}}</view>
+    </view>
+    <view class="result-cont">
+      <image
+        wx:if="{{result.images}}"
+        src="{{result.images}}"
+        mode="aspectFit"
+        class="result-cont-img"
+      />
+      <view class="result-cont-name">{{result.showName[1]}} x {{result.totalCount}}</view>
+    </view>
+  </view>
+  <view class="result-btn">
+    <view class="btn default" bind:tap="showResult">知道了</view>
+    <view
+      wx:if="{{!result.isNull}}"
+      class="btn success"
+      bind:tap="showDetail"
+      data-index="{{current}}"
+    >查看我的奖品</view>
   </view>
 </view>
 <!-- <button bind:tap="test" type="primary">测试</button> -->

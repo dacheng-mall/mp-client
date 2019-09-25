@@ -1,17 +1,65 @@
 <headerNavbar navbar-data="{{nvabarData}}"></headerNavbar>
 <view class="body" style="height: {{contHeight}}px">
   <view class="cont">
-    <image class="bg-img" src="{{source}}{{images[1].url}}" mode="widthFix" />
+    <image
+      wx:if="{{images[1].url}}"
+      class="bg-img"
+      src="{{source}}{{images[1].url}}"
+      mode="widthFix"
+    />
     <view class="lottery">
       <lottery
         data="{{activityProducts}}"
         bind:onStart="onStart"
         bind:onEnd="onEnd"
         bind:onResult="onResult"
+        bind:showMyPrize="showMyPrize"
         times="{{times}}"
+        disabled="{{status === 'visible' || enable}}"
       />
-    <view class="rules">活动规则</view>
+      <modal-paragraph title="活动规则" data="{{description}}" />
     </view>
   </view>
-  <view class="bottom"></view>
+  <view class="bottom">
+    <view wx:if="{{!user}}" class="btn-wrap">
+      <login-btn />
+    </view>
+    <view wx:elif="{{customerEnable && !signed}}" class="btn-wrap">
+      <view class="component">
+        <customer-sign
+          aid="{{id}}"
+          sid="{{sid}}"
+          instId="{{institutionId}}"
+          bind:afterSign="afterSign"
+        />
+      </view>
+    </view>
+    <view wx:elif="{{customerEnable && status === 'visible'}}" class="btn-wrap">
+      <view class="component">
+        <count-down
+          bind:reload="reload"
+          beginTime="{{dateActive}}"
+          now="{{now}}"
+          leaveTime="{{leaveTime}}"
+          active="{{true}}"
+          styles="font-size: 22px;text-align: center; color: #999"
+        />
+      </view>
+    </view>
+    <view wx:elif="{{customerEnable}}" class="btn-wrap">
+      <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
+      <button class="btn btn-large btn-danger" bind:tap="showMyPrize">我的奖品</button>
+    </view>
+    <view wx:elif="{{enable}}" class="btn-wrap">
+      <button class="btn btn-large btn-primary" open-type="share">邀请好友</button>
+      <button class="btn btn-large btn-danger" bind:tap="myCustomers">我的客户</button>
+      <poster
+        btnText="分享海报"
+        page="{{p_page}}"
+        bg="{{p_bg}}"
+        scene="{{p_scene}}"
+        title="{{p_title}}"
+      />
+    </view>
+  </view>
 </view>

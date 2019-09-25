@@ -17,12 +17,17 @@ Component({
     },
     times: {
       type: Number,
-      value: 3
+      value: 0
+    },
+    disabled: {
+      type: Boolean,
+      value: true
     }
   },
   data: {
     current: null,
     pow: 4, // 精度概率,
+    result: null
   },
   lifetimes: {
     attached: function() {
@@ -42,7 +47,7 @@ Component({
     init: function(data) {
       this.setData({ ...this.makeItems(data), size: this.getSize() });
     },
-    getSize: function(rate = 0.9) {
+    getSize: function(rate = 0.85) {
       const res = Object.create(null);
       const { windowWidth } = wx.getSystemInfoSync();
       res.wrap = windowWidth * rate;
@@ -124,10 +129,11 @@ Component({
     // 生成真实奖项, 均匀插入若干无奖项, 使奖项数量达到8
     makeItems: function(data) {
       let itemsCount = data.length; // 奖项数量
-      if (itemsCount > count) {
+      const maxCount = count - 1; // 最大奖项数量需要至少比总格子数少一, 需要留个空奖项
+      if (itemsCount > maxCount) {
         // 奖项超过8项时, 取前8项
-        data = data.slice(0, count);
-        itemsCount = count;
+        data = data.slice(0, maxCount);
+        itemsCount = maxCount;
       } else if (itemsCount < 1) {
         return;
       }
@@ -147,6 +153,7 @@ Component({
       });
       // 需要填充空奖项的数量
       const nullItemCount = count - itemsCount;
+      let nullIndex = "";
       if (nullItemCount > 0) {
         // 如果存在空奖项, 计算空奖项的概率
         nullRate = (1 - probability) / nullItemCount;
@@ -158,8 +165,10 @@ Component({
         while (data.length < count) {
           data.splice(i * 2, 0, {
             showName: nullName,
-            probability: nullRate
+            probability: nullRate,
+            isNull: true
           });
+          nullIndex += i * 2 + ",";
           i++;
         }
         i = null;
@@ -207,7 +216,7 @@ Component({
           }
         }
       });
-      return { items: data, MAX };
+      return { items: data, MAX, nullIndex };
     },
     getRange: function(start, max, probability) {
       const res = new Array(2);
@@ -217,20 +226,26 @@ Component({
     },
     // 抽奖
     lottery: function() {
-      const { isRunning, times } = this.data;
-      if(times < 1 || isRunning) {
-        return
+      const { isRunning, times, disabled } = this.data;
+      if (disabled || times < 1 || isRunning) {
+        return;
       }
       this.triggerEvent("onStart");
       // 启动抽奖动画
       this.runAnimation();
       // 先转2秒再计算中奖结果
+      const randomNull = (() => {
+        const nullIndex = this.data.nullIndex.split(",");
+        const res = this.random(0, nullIndex.length - 2);
+        return nullIndex[res];
+      })();
       setTimeout(() => {
         const target = this.getResult();
         this.triggerEvent("onResult", {
-          ...this.data.items[target],
+          target: this.data.items[target],
           stop: this.stopAnimation.bind(this),
-          target
+          index: target,
+          nullIndex: randomNull
         });
         // 计算完毕后准备停止
         // 停止逻辑放在外层父组件
@@ -299,16 +314,60 @@ Component({
             this.setData({
               isRunning: false
             });
-            this.triggerEvent("onEnd", { target });
+            this.triggerEvent("onEnd", { target: this.data.items[target] });
+            this.showResult(target);
           }
           this.jump();
         }, pervTime);
         jumpIndex++;
       }
     },
+    showResult: function(index) {
+      const { windowHeight: height } = wx.getSystemInfoSync();
+      if (!this.data.result) {
+        this.animation = wx.createAnimation({
+          duration: 300,
+          timingFunction: "ease"
+        });
+        this.animation
+          .top(0)
+          .left(0)
+          .height(height)
+          .width("100%")
+          .opacity(1)
+          .step();
+        this.setData({
+          animationData: this.animation.export(),
+          result: this.data.items[index]
+        });
+      } else {
+        this.hideResult();
+      }
+    },
+    hideResult: function() {
+      this.animation
+        .top("50%")
+        .left("50%")
+        .height(0)
+        .width(0)
+        .opacity(0)
+        .step();
+      this.setData({
+        animationData: this.animation.export(),
+        result: null
+      });
+    },
+    showDetail: function(e) {
+      const { index } = e.currentTarget.dataset;
+      const target = this.data.items[index];
+      this.hideResult();
+      if (!target.isNull) {
+        this.triggerEvent("showMyPrize", target);
+      }
+    },
     // 生成区间内的随机数
-    random: function() {
-      return Math.floor(Math.random() * (1 - MAX) + MAX);
+    random: function(n = 1, m = MAX) {
+      return Math.floor(Math.random() * (n - m) + m);
     },
     // 测试真实概率与预期概率差异
     test: function() {

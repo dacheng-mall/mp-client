@@ -1,28 +1,52 @@
 <view hover-class="item-active" class="item">
-  <image class="img" src="{{source}}{{item.productImage}}?imageView2/2/w/128" mode="aspectFit" bind:tap="goDetail" data-id="{{item.activityId}}" />
+  <image
+    class="img"
+    wx:if="{{item.productImage}}"
+    src="{{source}}{{item.productImage}}?imageView2/2/w/128"
+    mode="aspectFit"
+    bind:tap="goDetail"
+    data-id="{{item.activityId}}"
+  />
+  <image
+    class="img"
+    wx:elif="{{item.img}}"
+    src="{{source}}{{item.img}}?imageView2/2/w/128"
+    mode="aspectFit"
+    bind:tap="goDetail"
+    data-id="{{item.activityId}}"
+  />
+  <view class="img" wx:else bind:tap="goDetail" data-id="{{item.activityId}}">{{'>_<'}}</view>
   <view class="main" catch:tap="call">
-    <view class="name">{{item.activityName}}</view>
-    <view class="product" wx:if="{{item.productName}}">{{item.productName}}({{item.count}}件)</view>
+    <view class="name" wx:if="{{item.productName}}">{{item.productName}}({{item.count}}件)</view>
+    <view class="product">{{item.activityName}}</view>
     <view wx:if="{{for === 'customer' && item.salesmanName}}" class="salesman" style="color:green">
       {{item.salesmanName}}
       <icon-x type="phone" size="{{32}}" color="green"></icon-x>
     </view>
-    <view wx:elif="{{for === 'salesman' && item.customerName}}" class="salesman" style="color:green">
+    <view
+      wx:elif="{{for === 'salesman' && item.customerName}}"
+      class="salesman"
+      style="color:green"
+    >
       {{item.customerName}}
       <icon-x type="phone" size="{{32}}" color="green"></icon-x>
     </view>
     <view class="time">{{item.createTime}}</view>
   </view>
   <view wx:if="{{for === 'customer'}}" class="right">
-    <button catch:tap="receive" data-id="{{item.id}}" data-index="{{index}}" wx:if="{{item.status === 'waiting' || item.status === '0'}}" class="btn btn-primary btn-small">
-      签收
-    </button>
-    <view class="receive" wx:elif="{{item.status === 'received' || item.status === '1' }}">
-      已签收
-    </view>
+    <button
+      catch:tap="receive"
+      data-id="{{item.id}}"
+      data-index="{{index}}"
+      wx:if="{{item.status === 'waiting' || item.status === '0'}}"
+      class="btn btn-primary btn-small"
+    >签收</button>
+    <view class="receive" wx:elif="{{item.status === 'received' || item.status === '1' }}">已签收</view>
+    <view></view>
   </view>
   <view wx:elif="{{for === 'salesman'}}" class="right">
     <view class="receive" wx:if="{{item.status === 'received' || item.status === '1' }}">已签收</view>
-    <view class="waiting" wx:else>待签收</view>
+    <view class="waiting" wx:elif="{{item.status === 'waiting' || item.status === '0'}}">待签收</view>
+    <view class="waiting" wx:elif="{{item.status === 'empty'}}">未中奖</view>
   </view>
 </view>

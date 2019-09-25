@@ -1,0 +1,6 @@
+<view wx:if="{{jump}}" class="silence" style="{{styles}}">
+  <view class="time">{{text}}{{jumpText}}</view>
+</view>
+<view wx:else class="silence" style="{{styles}}">
+  <view class="time">{{text}}{{silenceText}}</view>
+</view>

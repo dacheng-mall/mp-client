@@ -2,7 +2,13 @@
   <image src="{{source}}{{image}}?imageView2/2/w/640" mode="widthFix" class="image-wrap" />
   <view wx:if="{{list.length > 0}}" style="background-color: {{primaryColor}}" class="list-wrap">
     <view class="list-title">中奖名单</view>
-    <scroll-view class="list" style="height: {{listHeight}}" scroll-y="{{true}}" scroll-into-view="{{list[listCurrent].id}}" scroll-with-animation="{{listAnimate}}">
+    <scroll-view
+      class="list"
+      style="height: {{listHeight}}"
+      scroll-y="{{true}}"
+      scroll-into-view="{{list[listCurrent].id}}"
+      scroll-with-animation="{{listAnimate}}"
+    >
       <block wx:for="{{list}}" wx:key="{{item.id}}">
         <view class="list-item" id="{{item.id}}">
           <view class="list-item-info">{{item.customerName}} ({{item.customerMobile}})</view>
@@ -14,9 +20,22 @@
   <!-- <view style="height:2000px;opacity: 0.2; background-color:#000"></view> -->
   <paragraph data="{{content}}"></paragraph>
   <!-- <cover-view class="cover"> -->
-  <cover-view animation="{{killAnimation}}" wx:if="{{customerEnable && signed && !hasGift}}" class="cover btn {{(status !== 'enable' || !isLogin) ? 'disabled' : ''}}" catch:tap="kill">
+  <cover-view
+    animation="{{killAnimation}}"
+    wx:if="{{customerEnable && signed && !hasGift}}"
+    class="cover btn {{(status !== 'enable' || !isLogin) ? 'disabled' : ''}}"
+    catch:tap="kill"
+  >
     <cover-view wx:if="{{!isLogin}}" class="notLogin">未登录</cover-view>
-    <count-down bind:reload="reload" wx:elif="{{status === 'waiting'}}" beginTime="{{beginTime}}" now="{{now}}" leaveTime="{{leaveTime}}" active="{{active}}" status="{{status}}"></count-down>
+    <count-down
+      bind:reload="reload"
+      wx:elif="{{status === 'waiting'}}"
+      beginTime="{{beginTime}}"
+      now="{{now}}"
+      leaveTime="{{leaveTime}}"
+      active="{{active}}"
+      status="{{status}}"
+    />
     <cover-view wx:elif="{{status !== 'enable'}}">售罄</cover-view>
     <cover-view wx:else class="doing" animation="{{animationData}}">
       <cover-view class="doing-title">抢购</cover-view>

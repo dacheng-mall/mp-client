@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 35,
+			"current": 37,
 			"list": [
 				{
 					"id": 0,
@@ -305,9 +305,23 @@
 				},
 				{
 					"id": 35,
-					"name": "抽奖2",
+					"name": "扫码抽奖",
 					"pathName": "pages/activity/lottery/index",
-					"query": "id=e7e0484a16f84d3ba155e569a18d9fcd",
+					"query": "scene=%3Fa%3D14%26sa%3D10903",
+					"scene": 1047
+				},
+				{
+					"id": 36,
+					"name": "链接抽奖",
+					"pathName": "pages/activity/lottery/index",
+					"query": "scene=%3Fa%3D14%26sa%3D10903",
+					"scene": 1096
+				},
+				{
+					"id": -1,
+					"name": "跳转抽奖",
+					"pathName": "pages/activity/lottery/index",
+					"query": "id=1adc3bde6428478cb490c69e89511894",
 					"scene": null
 				}
 			]

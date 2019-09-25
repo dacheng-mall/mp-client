@@ -23,7 +23,7 @@
 }
 .lottery {
   position: absolute;
-  top: 300px;
+  top: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,4 +38,13 @@
   text-align: center;
   padding: 5px 0;
   border-radius: 20px
+}
+.btn-wrap {
+  padding: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn-wrap > .component{
+  flex: 1;
 }

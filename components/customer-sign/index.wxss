@@ -1,0 +1,98 @@
+@import "../../access/form.wxss";
+@import "../../access/button.wxss";
+
+.getGift {
+  position: fixed;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  z-index: 99;
+}
+.getGift .top {
+  height: 88rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 20rpx;
+  background-color: #eee;
+  border-bottom: 1px solid #ddd
+}
+.getGift .bottom {
+  text-align: center;
+  height: 128rpx;
+  line-height: 128rpx;
+  padding-bottom: 20px;
+}
+.getGift .middle {
+  flex: 1;
+  overflow: auto;
+  background-color: #f5f5f5;
+}
+.formWrap {
+  flex: 1
+}
+.getGift .top {
+  justify-content: space-between;
+}
+.getGift .middle {
+  flex: 1;
+  overflow: auto;
+  background-color: #fff;
+} 
+/* .getGift {
+  position: absolute;
+  height: 0;
+  width: 100vw;
+  opacity: 0;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.getGift .bottom {
+  text-align: center;
+  height: 128rpx;
+  line-height: 128rpx;
+}*/
+.salesman {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.salesman-info {
+  margin-left: 8rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+.salesman-avatar {
+  border-radius: 50%;
+}
+.smList {
+  padding: 20rpx;
+}
+.smList .smList-title {
+  color: #666;
+  font-size: 32rpx;
+}
+.smList .smList-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin: 10rpx 0;
+  padding: 20rpx;
+}
+.smList-avarta {
+  width: 96rpx;
+  height: 96rpx;
+  margin-right: 10rpx;
+}
+.btn {
+  flex: 1
+}
