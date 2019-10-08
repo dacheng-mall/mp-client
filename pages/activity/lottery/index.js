@@ -79,14 +79,21 @@ Page({
       title: `${name}邀您抽大奖`,
       imageUrl: `${source}${images[0].url}`
     };
-    let query = `?scene=`
+    let query = `?scene=`;
     if (userType === 4 && enable) {
-      query += encodeURIComponent(`?a=${a}&sa=${sa}`)
+      query += encodeURIComponent(`?a=${a}&sa=${sa}`);
     } else {
-      query += encodeURIComponent(`?a=${a}`)
+      query += encodeURIComponent(`?a=${a}`);
     }
     params.path = `/pages/activity/lottery/index${query}`;
     return params;
+  },
+  cantLottery: function(data) {
+    const { status, enable, signed } = data;
+    if (status === "enable" && !enable && signed) {
+      return false;
+    }
+    return true;
   },
   fetch: async function() {
     if (this.options.scene) {
@@ -106,6 +113,7 @@ Page({
         p.images = `${source}${p.images}`;
       });
       data.sid = sa;
+      data.disabled = this.cantLottery(data);
       this.setData(data);
       return data;
     } else if (this.options.id) {
@@ -121,6 +129,7 @@ Page({
       data.activityProducts.map(p => {
         p.images = `${source}${p.images}`;
       });
+      data.disabled = this.cantLottery(data);
       this.setData(data);
       return data;
     }
@@ -150,10 +159,7 @@ Page({
   },
   afterSign: function(e) {
     if (e.detail.id) {
-      this.setData({
-        signed: true,
-        customerSign: [...this.data.customerSign, e.detail]
-      });
+      this.fetch();
     }
   },
   afterLottery: async function(activityId, customId) {

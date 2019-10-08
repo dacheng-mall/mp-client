@@ -15,7 +15,7 @@
         bind:onResult="onResult"
         bind:showMyPrize="showMyPrize"
         times="{{times}}"
-        disabled="{{status === 'visible' || enable}}"
+        disabled="{{disabled}}"
       />
       <modal-paragraph title="活动规则" data="{{description}}" />
     </view>

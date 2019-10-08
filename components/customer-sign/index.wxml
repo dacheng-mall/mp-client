@@ -69,4 +69,4 @@
     <icon-x type="close-circle" size="{{88}}" color="#ccc" catch:tap="hideGetPanel"></icon-x>
   </view>
 </view>
-<button class="btn btn-large btn-primary" catch:tap="showPanel">{{title}}</button>
+<button class="btn btn-large btn-danger" catch:tap="showPanel">{{title}}</button>
