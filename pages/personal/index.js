@@ -5,6 +5,22 @@ import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
 const MENU = [
   {
+    title: "内勤工具",
+    userType: 4,
+    roles: 'staff',
+    split: 4,
+    items: [
+      {
+        name: "生成出勤码",
+        icon: "qrcode",
+        iconColor: "#fff",
+        color: "#f30",
+        size: 1,
+        path: "/pages/generateQrCode/index?type=join&timestamp&location"
+      },
+    ]
+  },
+  {
     title: "经理人专区",
     userType: 4,
     split: 4,

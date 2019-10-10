@@ -66,6 +66,7 @@ Component({
               success: function(res) {
                 switch (res.scanType) {
                   case "QR_CODE": {
+                    console.log(res.result)
                     break;
                   }
                   case "WX_CODE": {
@@ -82,7 +83,9 @@ Component({
                   }
                 }
               },
-              fail: function() {}
+              fail: function(e) {
+                console.log(e)
+              }
             });
             break;
           }

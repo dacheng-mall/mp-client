@@ -1,0 +1,8 @@
+<view wx:if="{{!preview}}" class="creating">正在生成中...</view>
+<canvas
+  bind:tap="preview"
+  class="canvas"
+  canvas-id="qrcode"
+  style="width: {{size}}px; height: {{size}}px"
+/>
+<button class="save-btn" wx:if="{{preview && showSaveBtn}}" bind:tap="saveToAlbum">保存至相册</button>

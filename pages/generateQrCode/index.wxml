@@ -1,0 +1,1 @@
+<create-qrcode showSaveBtn="{{false}}"></create-qrcode>

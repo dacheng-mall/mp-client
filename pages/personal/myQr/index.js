@@ -23,7 +23,7 @@ Page({
     if (!src && user) {
       try {
         const blob = await post("v1/api/wx/createWXAQRCode", {
-          page: "pages/qrcode/list/index",
+          page: "pages/qrcode/personal/index",
           scene: `?said=${user.autoId}`
         });
         wx.setStorageSync("my-qr-code", src);

@@ -1,0 +1,22 @@
+.creating {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  color: #ccc;
+  padding: 20px;
+  z-index: 1
+}
+.canvas {
+  position: relative;
+  z-index: 2
+}
+.save-btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 16px;
+  background: linear-gradient(to right, #00bcbd, #0e85bd);
+  color: #fff;
+  width: 150px;
+}

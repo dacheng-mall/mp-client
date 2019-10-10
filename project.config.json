@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 37,
+			"current": 38,
 			"list": [
 				{
 					"id": 0,
@@ -322,6 +322,13 @@
 					"name": "跳转抽奖",
 					"pathName": "pages/activity/lottery/index",
 					"query": "id=1adc3bde6428478cb490c69e89511894",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "二维码中转页面",
+					"pathName": "pages/qrcode/transfer/index",
+					"query": "",
 					"scene": null
 				}
 			]

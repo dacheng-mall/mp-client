@@ -1,0 +1,8 @@
+{
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "生成出勤码",
+  "backgroundColor": "#00bcbd",
+  "usingComponents": {
+    "create-qrcode": "/components/create-qrcode/index"
+  }
+}
