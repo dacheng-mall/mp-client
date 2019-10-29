@@ -15,6 +15,10 @@ Component({
     showSaveBtn: {
       type: Boolean,
       value: true
+    },
+    logo: {
+      type: String,
+      value: ''
     }
   },
   data: {
@@ -71,20 +75,23 @@ Component({
         });
       }
     },
+
     create: function() {
       const { windowWidth } = wx.getSystemInfoSync();
+      console.log(wx.getSystemInfoSync())
       this.setData({
         size: windowWidth
       });
+      const ct = Math.floor((new Date().valueOf()) / 1000)
       api.draw({
-        str: this.data.scene,
+        str: `${this.data.scene}&ct=${ct}`,
         canvas: "qrcode",
         size: windowWidth,
         context: this,
-        ecc: 2,
+        ecc: 3,
+        logo: this.data.logo,
         callback: () => {
           setTimeout(() => {
-            // await this.save();
             this.save(windowWidth);
           }, 200);
         }

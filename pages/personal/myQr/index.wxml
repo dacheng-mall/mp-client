@@ -1,11 +1,9 @@
 <headerNavbar navbar-data='{{nvabarData}}'></headerNavbar>
-<view wx:if="{{src}}" class="qr-wrap">
-  <image class="qr" src="{{src}}" />
-  <image class="avatar" src="{{avatar}}" mode="aspectFit" />
-</view>
+<create-qrcode wx:if="{{scene}}" scene="{{scene}}" logo="{{avatar}}"></create-qrcode>
 <view class="info">
-  <view class="title">使用说明</view>
-  <view>当您拜访客户时</view>
-  <view>请让客户使用微信扫一扫功能</view>
-  <view>扫描您的个人码</view>
+  <view class="title">使用说明:</view>
+  <view>这是您的在本系统内的身份码;</view>
+  <view>微信扫一扫功能, 可以识别此码;</view>
+  <view>礼全有系统内置扫一扫功能, 也可以识别此码;</view>
+  <view>拜访客户时, 可以向您的客户出示此码, 客户扫码后;</view>
 </view>

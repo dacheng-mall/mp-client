@@ -9,24 +9,30 @@
   align-items: center;
 }
 .header .avatar {
-  border-radius: 50%;
   width: 128rpx;
   height: 128rpx;
-  overflow: hidden;
   margin: 0 20rpx;
-  border: 2px solid #fff;
-  background-color: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-shrink: 0;
   color: #ccc;
-  font-size: 64rpx;
+  position: relative;
 }
 .header .avatar image {
   width: 128rpx;
   height: 128rpx;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background-color: #ddd;
   float: left;
+}
+.header .avatar .editor {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  border-radius: 50%;
+  background-color: #fff;
+  width: 44rpx;
+  height: 44rpx;
 }
 .header .user-info {
   display: flex;

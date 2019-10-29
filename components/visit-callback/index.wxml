@@ -1,0 +1,113 @@
+<form class="comment-wrap" bind:submit="submit" animation="{{showComment}}">
+  <view class="comment">
+    <view class="top">
+      <view bind:tap="hidePanel">
+        <icon-x type="close-circle" color="#999" size="{{64}}" style="position:relative; top: 1px" />
+      </view>
+      <button form-type="submit" class="btn btn-large btn-warning">
+        <icon-x type="check" color="#fff" size="32" style="position:relative; top: 2px" />提交评价
+      </button>
+    </view>
+    <view class="middle">
+      <view class="section">
+        <view class="sectionTitle">评级</view>
+        <stars value="{{stars}}" bind:onChange="starChange" />
+        <input
+          style="position: absolute; left: -1000px; background-color: #ddd;width: 0; height: 1px; opacity: 0"
+          type="number"
+          name="stars"
+          class="hide"
+          value="{{stars}}"
+        />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">印象</view>
+        <tags bind:onChange="tagsChange" />
+        <input
+          style="position: absolute; left: -1000px; background-color: #ddd;width: 0; height: 1px; opacity: 0"
+          name="tags"
+          class="hide"
+          value="{{tags}}"
+        />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">
+          姓名
+          <text class="required">(必填)</text>
+        </view>
+        <input name="name" value="{{defautValue.name}}" placeholder="请输入" />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">
+          手机号
+          <text class="required">(必填)</text>
+        </view>
+        <input name="mobile" value="{{defautValue.mobile}}" type="number" placeholder="请输入" />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">身份证号</view>
+        <input name="idCard" value="{{defautValue.idCard}}" type="idCard" placeholder="请输入" />
+      </view>
+      <view class="section">
+        <view class="sectionTitle">评价</view>
+        <textarea name="description" placeholder="请输入" />
+      </view>
+    </view>
+  </view>
+</form>
+<!-- <form bind:submit="submit" class="comment" animation="{{showComment}}">
+  <view class="top">
+    <view bind:tap="hidePanel">
+      <icon-x type="close-circle" color="#999" size="{{64}}" style="position:relative; top: 1px" />
+    </view>
+    <button form-type="submit" class="btn btn-large btn-warning">
+      <icon-x type="check" color="#fff" size="32" style="position:relative; top: 2px" />提交评价
+    </button>
+  </view>
+  <view class="middle"></view>
+  <view class="middle">
+    <view class="section">
+      <view class="sectionTitle">评级</view>
+      <stars value="{{stars}}" bind:onChange="starChange" />
+      <input
+        style="position: absolute; left: -1000px; background-color: #ddd;width: 0; height: 1px; opacity: 0"
+        type="number"
+        name="stars"
+        class="hide"
+        value="{{stars}}"
+      />
+    </view>
+    <view class="section">
+      <view class="sectionTitle">评价</view>
+      <textarea name="description" placeholder="请输入" />
+    </view>
+    <view class="section">
+      <view class="sectionTitle">印象</view>
+      <tags bind:onChange="tagsChange" />
+      <input
+        style="position: absolute; left: -1000px; background-color: #ddd;width: 0; height: 1px; opacity: 0"
+        name="tags"
+        class="hide"
+        value="{{tags}}"
+      />
+    </view>
+    <view class="section">
+      <view class="sectionTitle">
+        姓名
+        <text class="required">(必填)</text>
+      </view>
+      <input name="name" value="{{defautValue.name}}" placeholder="请输入" />
+    </view>
+    <view class="section">
+      <view class="sectionTitle">
+        手机号
+        <text class="required">(必填)</text>
+      </view>
+      <input name="mobile" value="{{defautValue.mobile}}" type="number" placeholder="请输入" />
+    </view>
+    <view class="section">
+      <view class="sectionTitle">身份证号</view>
+      <input name="idCard" value="{{defautValue.idCard}}" type="idCard" placeholder="请输入" />
+    </view>
+  </view>
+</form>-->

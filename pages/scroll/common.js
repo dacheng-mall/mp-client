@@ -1,10 +1,13 @@
 import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
-import { get } from "../../utils/request";
+import { get, post } from "../../utils/request";
 import { parseQuery } from "../../utils/util";
 import { types } from "./types";
 
 export const common = {
-  data: {},
+  data: {
+    list: [],
+    pagination: {}
+  },
   onShow: function() {
     let _type = null;
     if (this.options.pageType) {
@@ -21,30 +24,52 @@ export const common = {
       title: _type.title
     });
     this.setData({
-      ..._type
+      ..._type,
+      list: null
     });
     this.init();
   },
   init: async function() {
-    this.fetch(this.data.pagination, this.data.query);
+    this.fetch(this.data.pagination, this.data.query, this.data.body);
     if (this.data.name === "qr") {
       this.setData({
         for: this.data.query.hasCustom ? "salesman" : "customer"
       });
-    } else if(this.data.name === "myGift"){
+    } else if (this.data.name === "myGift") {
       this.setData({
         for: this.data.query.salesmanId ? "salesman" : "customer"
       });
     }
   },
-  fetch: async function(pagination, query, isMore) {
+  fetch: async function(pagination, query, body, isMore) {
     const { api } = this.data;
     if (typeof query === "string") {
       query = parseQuery(query);
     }
     const { page, pageSize } = pagination;
-    const data = await get(`${api}/${page}/${pageSize}`, query);
+    let data = {};
+    if (/^v1\/api\/sys\/elasticsearch/.test(api)) {
+      query.from = this.data.list ? this.data.list.length : 0;
+      query.size = pageSize;
+      const { hits } = await post(`${api}`, { ...query, body });
+      const {
+        hits: list,
+        total: { value: total }
+      } = hits;
+      data.data = list.map(item => ({ ...item._source, id: item._id }));
+      data.pagination = {
+        ...pagination,
+        total,
+        pageCount: Math.ceil(total / pageSize),
+        page: this.data.list
+          ? Math.floor(this.data.list.length / pageSize) + 1
+          : 1
+      };
+    } else {
+      data = await get(`${api}/${page}/${pageSize}`, query);
+    }
     if (isMore) {
+      console.log();
       this.setData({
         list: [...this.data.list, ...data.data],
         pagination: data.pagination
@@ -63,13 +88,14 @@ export const common = {
   onReachBottom() {
     const {
       pagination: { pageCount, page },
-      query
+      query,
+      body
     } = this.data;
     if (pageCount > page) {
       this.setData({
         pagination: { ...this.data.pagination, page: page + 1 }
       });
-      this.fetch(this.data.pagination, query, true);
+      this.fetch(this.data.pagination, query, body, true);
     }
   }
 };

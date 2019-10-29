@@ -1,0 +1,34 @@
+@import "../../access/button.wxss";
+@import "../../access/form.wxss";
+.comment-wrap {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  background-color: #fff;
+  z-index: 99;
+  width: 100%;
+  opacity: 0
+}
+.comment {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start
+}
+.comment .top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc
+}
+.comment .top .btn {
+  flex-shrink: 1;
+  margin: 0;
+}
+.comment .middle {
+  flex: 1;
+  overflow: auto
+}

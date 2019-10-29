@@ -1,15 +1,20 @@
 <view class="page-wrap wrap">
   <view class="header">
-    <view class="avatar">
+    <view wx:if="{{user}}" class="avatar" bind:tap="syncWXinfo">
       <image wx:if="{{user && user.avatar}}" src="{{user.avatar}}" />
       <view wx:else>囧</view>
+      <view class="editor">
+        <icon-x type="plus-circle-fill" color="#00bcbd" size="44" />
+      </view>
     </view>
     <view wx:if="{{user}}" class="user-info">
       <view class="name">{{user.name}}</view>
       <view class="inst" wx:if="{{user.userType === 4}}">{{user.institution.name}}</view>
-      <view wx:if="{{user.userType === 4 && user.gradeName}}" class="inst grade" style="">
-        {{user.gradeName}}
-      </view>
+      <view
+        wx:if="{{user.userType === 4 && user.gradeName}}"
+        class="inst grade"
+        style
+      >{{user.gradeName}}</view>
     </view>
     <view wx:else class="user-info" bind:tap="login">
       <view class="name">注册/登录</view>

@@ -745,10 +745,49 @@ var api = {
     }
     return out;
   },
+  drawImg: function(ctx, url, left, top, width, height) {
+    const padding = 5;
+    ctx.beginPath();
+    ctx.arc(
+      width / 2 + left,
+      height / 2 + top,
+      width / 2,
+      0,
+      Math.PI * 2,
+      false
+    );
+    ctx.fillStyle="#fff";
+    ctx.fill();
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(
+      width / 2 + left,
+      height / 2 + top,
+      (width - 2 * padding) / 2,
+      0,
+      Math.PI * 2,
+      false
+    );
+    ctx.clip();
+    return new Promise((resolve, reject) => {
+      wx.getImageInfo({
+        src: url,
+        success: res => {
+          ctx.drawImage(res.path, left, top, width, width );
+          ctx.restore();
+          resolve();
+        },
+        fail: e => {
+          reject(e);
+        }
+      });
+    });
+  },
+
   /**
    * 新增$this参数，传入组件的this,兼容在组件中生成
    */
-  draw: function ({str, canvas, size, context, ecc, callback}) {
+  draw: function ({str, canvas, size, context, ecc, callback, logo}) {
     var that = this;
     ecclevel = ecc || ecclevel;
     canvas = canvas || _canvas;
@@ -757,17 +796,16 @@ var api = {
       return;
     }
 
-    // var size = Math.min(cavW, cavH);
     str = that.utf16to8(str);//增加中文显示
-
+    console.log('logo', width)
     var frame = that.getFrame(str),
       // 组件中生成qrcode需要绑定this 
       ctx = wx.createCanvasContext(canvas,context),
       px = Math.round(size / (width + 8));
     var roundedSize = px * (width + 8),
       offset = Math.floor((size - roundedSize) / 2);
-    size = roundedSize;
-    //ctx.clearRect(0, 0, cavW, cavW);
+      console.log(width, px, roundedSize)
+    // size = roundedSize;
     ctx.setFillStyle('#ffffff')
     ctx.fillRect(0, 0, size, size);
     ctx.setFillStyle('#000000');
@@ -778,9 +816,22 @@ var api = {
         }
       }
     }
-    ctx.draw();
-    if(callback) {
-      callback()
+    if(logo) {
+      const logoSize = Math.floor(size / 4)
+      const position = (size - logoSize) / 2;
+      console.log(size, logoSize, position)
+      this.drawImg(ctx, logo, position, position, logoSize, logoSize, true).then(() => {
+        ctx.draw();
+        if(callback) {
+          callback()
+        }
+      })
+    } else {
+      console.log('sfsfs')
+      ctx.draw();
+      if(callback) {
+        callback()
+      }
     }
   }
 }

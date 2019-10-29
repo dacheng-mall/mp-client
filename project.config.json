@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 38,
+			"current": 40,
 			"list": [
 				{
 					"id": 0,
@@ -154,13 +154,6 @@
 					"name": "活动详情withsalesman",
 					"pathName": "pages/activity/detail",
 					"query": "id=7d1cd512d90e4b36ac19b48f115f8ece&sid=2ae51c46a012478e923231fc474b7063",
-					"scene": null
-				},
-				{
-					"id": 14,
-					"name": "领取记录页面",
-					"pathName": "pages/personal/myGift/index",
-					"query": "id= c5ae329a126e4cfb8dc2dc0b0d44ffa3",
 					"scene": null
 				},
 				{
@@ -329,6 +322,26 @@
 					"name": "二维码中转页面",
 					"pathName": "pages/qrcode/transfer/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 39,
+					"name": "扫个人码",
+					"pathName": "pages/personal/selfShow/index",
+					"query": "scene=%3Fsaid%3D10903",
+					"scene": 1047
+				},
+				{
+					"id": -1,
+					"name": "个人展示页面",
+					"pathName": "pages/personal/selfShow/index",
+					"query": "autoId=10903&createTime=1571039039",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "统计图表",
+					"pathName": "pages/analyte/index",
 					"scene": null
 				}
 			]

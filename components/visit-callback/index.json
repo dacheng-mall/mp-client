@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "stars": "/components/stars/index",
+    "tags": "./tags/index"
+  }
+}

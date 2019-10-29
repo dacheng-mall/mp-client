@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "扫码",
+  "backgroundColor": "#00bcbd",
+  "usingComponents": {
+    "headerNavbar": "/components/navigator/index",
+    "visit-callback": "/components/visit-callback/index"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,28 @@
+<view hover-class="item-active" class="item">
+  <image
+    class="img"
+    wx:if="{{item.customerAvatar}}"
+    src="{{item.customerAvatar}}"
+    mode="aspectFit"
+    data-id="{{item.id}}"
+  />
+  <view class="img" wx:else bind:tap="goDetail" data-id="{{item.activityId}}">{{'>_<'}}</view>
+  <view class="main" catch:tap="call">
+    <view class="name" wx:if="{{item.customerName}}">
+      {{item.customerName}}
+      <icon-x wx:if="{{item.mobile}}" type="phone" size="{{32}}" color="green"></icon-x>
+    </view>
+    <view class="time">{{createTime}}</view>
+    <view class="tags" wx:if="{{item.tags}}">{{item.tags}}</view>
+    <view>
+      <block wx:for="{{stars}}" wx:key="{{index}}" wx:for-item="star">
+        <icon-x type="star-fill" color="{{star ? '#f00' : '#aaa'}}" size="32" />
+      </block>
+    </view>
+  </view>
+  <view class="right">
+    <picker bindchange="typeChange" value range="{{types}}" range-key="name">
+      <view class="type">{{current.name || '选择'}}</view>
+    </picker>
+  </view>
+</view>

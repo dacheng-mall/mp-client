@@ -1,0 +1,43 @@
+<headerNavbar navbar-data="{{nvabarData}}"></headerNavbar>
+<view wx:if="{{salesman}}" class="wrap">
+  <image mode="widthFix" src="{{salesman.avatar}}" class="avatar" />
+  <view class="info">
+    <view class="main">{{salesman.name}}</view>
+    <view class="sub">{{salesman.institution.name}}</view>
+    <view class="sub">{{salesman.gradeName}}</view>
+  </view>
+</view>
+<view wx:if="{{!user}}" class="btns">
+  <view style="text-align:center;padding: 20px 0;color: #ccc">登录后可使用更多功能</view>
+  <login-btn />
+</view>
+<view wx:elif="{{!isSelf}}" class="btns">
+  <button
+    wx:if="{{salesman.mobile}}"
+    class="btn btn-primary btn-large"
+    bind:tap="makeCall"
+    data-mobile="{{salesman.mobile}}"
+  >
+    <icon-x type="phone-fill" color="#fff" size="44" style="position:relative; top: 2px" />拨打电话
+  </button>
+  <button class="btn btn-danger btn-large" bind:tap="showPanel">
+    <icon-x type="like-fill" color="#fff" size="44" style="position:relative; top: 2px" />拜访评价
+  </button>
+  <button class="btn btn-disabled btn-large" bind:tap="waiting">
+    <icon-x type="plus-circle-fill" color="#fff" size="44" style="position:relative; top: 2px" />添加好友
+  </button>
+  <visit-callback
+    visiable="{{visiable}}"
+    bind:submit="submit"
+    height="{{_h}}"
+    defautValue="{{user}}"
+  />
+</view>
+<view wx:else class="btns">
+  <button
+    bind:getuserinfo="bindGetUserInfo"
+    open-type="getUserInfo"
+    class="btn btn-primary btn-large"
+  >同步微信用户信息</button>
+  <view style="text-align:center;padding: 20px 0;color: #ccc">更多个人信息编辑功能将陆续开放</view>
+</view>

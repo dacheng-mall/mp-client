@@ -4,7 +4,7 @@ import { notice } from "./util";
 const CONTENT_TYPE = "Content-Type";
 const JSON_TYPE = "application/json";
 
-const baseURL = aliApiUrl;
+const baseURL = apiUrl;
 export function getApi() {
   return baseURL;
 }
@@ -131,7 +131,10 @@ export default function request(url, { data, method }, other) {
       if (err.statusCode !== 401) {
         switch (true) {
           case /^v1\/api\/sys\/giftProduct\/seckill/.test(url): {
-            throw err.data
+            throw err.data;
+          }
+          case /^v1\/api\/sys\/elasticSearch/.test(url):  {
+            throw err;
           }
           default: {
             wx.showToast({

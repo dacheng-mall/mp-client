@@ -1,0 +1,8 @@
+<view class="stars-wrap">
+  <block wx:for="{{stars}}" wx:key="star_{{index}}">
+    <view bind:tap="change" data-index="{{index}}">
+      <icon-x type="star-fill" size="{{64}}" color="{{item ? checkColor : color}}"></icon-x>
+    </view>
+  </block>
+</view>
+<input type="number" name="{{name}}" class="input" value="{{value}}" />

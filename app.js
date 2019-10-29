@@ -100,12 +100,25 @@ App({
     });
   },
   register: function(value) {
-    const { nickName: name, avatarUrl: avatar, gender, openid: openId } = value;
+    const {
+      nickName: name,
+      nickName,
+      country,
+      city,
+      province,
+      avatarUrl: avatar,
+      gender,
+      openid: openId
+    } = value;
     const body = {
       name,
       avatar,
       gender,
       openId,
+      nickName,
+      country,
+      city,
+      province,
       username: openId,
       userType: 2,
       status: 1,

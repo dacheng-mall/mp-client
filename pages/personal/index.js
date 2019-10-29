@@ -7,7 +7,6 @@ const MENU = [
   {
     title: "内勤工具",
     userType: 4,
-    roles: 'staff',
     split: 4,
     items: [
       {
@@ -17,7 +16,7 @@ const MENU = [
         color: "#f30",
         size: 1,
         path: "/pages/generateQrCode/index?type=join&timestamp&location"
-      },
+      }
     ]
   },
   {
@@ -34,8 +33,16 @@ const MENU = [
         path: "/pages/scroll/index?pageType=myActivities"
       },
       {
-        name: "我的客户",
+        name: "我的拜访",
         icon: "team",
+        iconColor: "#fff",
+        color: "#00bcbd",
+        size: 1,
+        path: "/pages/scroll/index?pageType=visit"
+      },
+      {
+        name: "送礼记录",
+        icon: "gift",
         iconColor: "#fff",
         color: "#00bcbd",
         size: 1,
@@ -134,6 +141,14 @@ const MENU = [
         path: "/pages/products/group/index",
         size: 1
       },
+      {
+        name: "分析统计",
+        icon: "star",
+        iconColor: "#fff",
+        color: "#00bcbd",
+        size: 1,
+        path: "/pages/analyte/index"
+      }
     ]
   }
 ];
@@ -187,6 +202,15 @@ Page({
           break;
         }
       }
+    }
+  },
+  syncWXinfo: async function() {
+    console.log("wewew");
+    const { autoId } = wx.getStorageSync("user") || {};
+    if (autoId) {
+      wx.navigateTo({
+        url: `/pages/personal/selfShow/index?autoId=${autoId}`
+      });
     }
   },
   fetch: function() {

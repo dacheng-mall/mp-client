@@ -1,3 +1,5 @@
+import { get } from "./request";
+import moment from "moment";
 const formatTime = date => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -44,7 +46,7 @@ const uri = (url, query = {}, startWithLine) =>
   })(query);
 const parseQuery = query => {
   const _q = query.replace(/^\?/, "");
-  const res = {};
+  const res = Object.create(null);
   _q.split("&").map(item => {
     const [key, value] = item.split("=");
     res[key] = value;
@@ -140,6 +142,102 @@ function notice(props = {}) {
   });
 }
 
+const qiniuToken = () =>
+  new Promise((res, rej) => {
+    debugger;
+    const { uploadToken, deadline } = wx.getStorageSync("qiniu") || {};
+    const now = new Date().valueOf();
+    let token = uploadToken;
+    if (!uploadToken || (!deadline || deadline <= now)) {
+      get("v1/api/sys/qiniu/token")
+        .then(data => {
+          if (data) {
+            data.deadline = now + data.deadline * 1000;
+            wx.setStorageSync("qiniu", data);
+            token = data.uploadToken;
+            res(token);
+          } else {
+            throw "no token";
+          }
+        })
+        .catch(err => rej(err));
+    } else {
+      res(token);
+    }
+  });
+
+const keymaker = () => {
+  const d = moment().format("yyyyMMddhhmmss");
+  const random = parseInt(Math.random() * 10000, 10);
+  return `${d}_${random}__qrcode`;
+};
+const upload = file => {
+  return new Promise((resolve, reject) => {
+    qiniuToken()
+      .then(token => {
+        console.log(file);
+        if (file) {
+          wx.uploadFile({
+            url: "https://upload-z2.qiniup.com",
+            name: keymaker(),
+            filePath: file,
+            header: {
+              "Content-Type": "multipart/form-data"
+            },
+            formData: {
+              token
+            },
+            success: function(res) {
+              let data = JSON.parse(res.data);
+              console.log(res);
+              resolve(data);
+            },
+            fail: function(res) {
+              console.log(res);
+            }
+          });
+
+          // const observable = qiniu.upload(file, keymaker(), token);
+          // return new Promise((res, rej) => {
+          //   observable.subscribe({
+          //     error: err => rej(err),
+          //     complete: data => res(data)
+          //   });
+          // });
+        }
+      })
+      .catch(err => reject(err));
+  });
+};
+const decodeQrcodeQuery = q => {
+  const _q = decodeURIComponent(q);
+  const [url, query] = _q.split("?");
+  const res = Object.create(null);
+  res.url = url;
+  res.query = Object.create(null);
+  if (query) {
+    res.query = parseQuery(query);
+  }
+  return res;
+};
+const scanQrcode = q => {
+  const opt = decodeQrcodeQuery(q);
+  switch (opt.url) {
+    case "https://mp.liquanyou.cn": {
+      const { autoId, ct } = opt.query;
+      wx.redirectTo({
+        url: `/pages/personal/selfShow/index?autoId=${autoId}&createTime=${ct}`
+      });
+      break;
+    }
+    default: {
+      wx.showModal({
+        title: "提示",
+        content: "无法解析此二维码"
+      });
+    }
+  }
+};
 module.exports = {
   mockFetch,
   formatTime,
@@ -151,5 +249,9 @@ module.exports = {
   validateName,
   getRoute,
   getContHeight,
-  notice
+  notice,
+  qiniuToken,
+  upload,
+  decodeQrcodeQuery,
+  scanQrcode
 };

@@ -1,6 +1,0 @@
-.waiting {
-  margin: 50px;
-  font-size: 32px;
-  color: #999;
-  text-align: center
-}

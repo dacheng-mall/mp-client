@@ -6,6 +6,7 @@
     "activity": "./activity/index",
     "myActivities": "./myActivities/index",
     "qr": "./qr/index",
-    "myGift": "./myGift/index"
+    "myGift": "./myGift/index",
+    "visit": "./visit/index"
   }
 }

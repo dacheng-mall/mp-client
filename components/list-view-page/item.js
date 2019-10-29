@@ -1,5 +1,5 @@
 import { source } from "../../setting";
-import { notice } from "../../utils/util";
+import { notice, scanQrcode } from "../../utils/util";
 
 Component({
   data: {
@@ -66,7 +66,7 @@ Component({
               success: function(res) {
                 switch (res.scanType) {
                   case "QR_CODE": {
-                    console.log(res.result)
+                    scanQrcode(res.result)
                     break;
                   }
                   case "WX_CODE": {

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "扫码",
-  "backgroundColor": "#00bcbd",
-  "usingComponents": {
-    "headerNavbar": "/components/navigator/index"
-  }
-}

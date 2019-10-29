@@ -10,6 +10,7 @@
     "pages/personal/index",
     "pages/personal/myQr/index",
     "pages/personal/bind/index",
+    "pages/personal/selfShow/index",
     "pages/personal/bind/instList",
     "pages/personal/setting/index",
     "pages/activity/detail",
@@ -18,9 +19,9 @@
     "pages/home/index",
     "pages/filter/index",
     "pages/qrcode/index",
-    "pages/qrcode/personal/index",
     "pages/qrcode/transfer/index",
-    "pages/generateQrCode/index"
+    "pages/generateQrCode/index",
+    "pages/analyte/index"
   ],
   "tabBar": {
     "color": "#707070",

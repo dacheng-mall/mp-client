@@ -1,0 +1,48 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 20rpx;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+.item .img {
+  height: 192rpx;
+  width: 192rpx;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 192rpx;
+  background-color: #ddd;
+  color: #999
+}
+.item .main {
+  display: flex;
+  flex-direction: column;
+  flex: 1
+}
+.item .main .name {
+  color: #333;
+  font-size: 36rpx;
+}
+.item .main .product {
+  color: #666;
+  font-size: 32rpx;
+}
+.item .main .time {
+  color: #999;
+  font-size: 32rpx;
+}
+.item .right {
+  padding-right: 5px
+}
+.type {
+  font-size: 28rpx;
+  color: #666
+}
+.tags {
+  color: #999;
+  font-size: 14px;
+}
+@import '../../../access/button.wxss';

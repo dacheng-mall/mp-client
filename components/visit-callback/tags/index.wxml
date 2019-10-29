@@ -1,0 +1,10 @@
+<view class="tags">
+  <block wx:for="{{data}}" wx:key="{{index}}">
+    <view
+      bind:tap="onchange"
+      class="tag-item"
+      data-index="{{index}}"
+      style="background-color: {{item.status ? selectedColor : '#fff'}};border-color: {{item.status ? selectedColor : color}}; color: {{item.status ? '#fff' : color}}"
+    >{{item.text}}</view>
+  </block>
+</view>

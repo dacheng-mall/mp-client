@@ -2,7 +2,8 @@
   "navigationBarTitleText": "个人码",
   "backgroundColor": "#00bcbd",
   "usingComponents": {
-    "headerNavbar": "/components/navigator/index"
+    "headerNavbar": "/components/navigator/index",
+    "create-qrcode": "/components/create-qrcode/index"
   },
   "navigationStyle": "custom"
 }

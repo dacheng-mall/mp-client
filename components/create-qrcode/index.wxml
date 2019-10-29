@@ -1,4 +1,4 @@
-<view wx:if="{{!preview}}" class="creating">正在生成中...</view>
+<view wx:if="{{!preview}}" class="creating">生成中...</view>
 <canvas
   bind:tap="preview"
   class="canvas"

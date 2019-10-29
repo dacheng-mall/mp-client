@@ -1,6 +1,3 @@
-import { get, post } from "../../../utils/request";
-import regeneratorRuntime from "../../../utils/regenerator-runtime/runtime";
-
 Page({
   data: {
     nvabarData: {
@@ -17,24 +14,16 @@ Page({
   onLoad: function() {
     this.fetch();
   },
-  fetch: async function() {
+  fetch: function() {
     const user = wx.getStorageSync("user");
-    const src = wx.getStorageSync("my-qr-code");
-    if (!src && user) {
-      try {
-        const blob = await post("v1/api/wx/createWXAQRCode", {
-          page: "pages/qrcode/personal/index",
-          scene: `?said=${user.autoId}`
-        });
-        wx.setStorageSync("my-qr-code", src);
-        this.setData({
-          src: `data:image/jpg;base64,${blob}`,
-          avatar: user.avatar
-        });
-      } catch (e) {}
-    } else if (user) {
+    if (user) {
       this.setData({
-        src,
+        scene: `https://mp.liquanyou.cn?autoId=${user.autoId}&type=personal`,
+        avatar: user.avatar
+      })
+    } else if (user.qrcode) {
+      this.setData({
+        src: user.qrcode,
         avatar: user.avatar
       });
     }
