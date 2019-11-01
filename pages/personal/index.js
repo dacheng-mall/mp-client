@@ -5,15 +5,32 @@ import regeneratorRuntime from "../../utils/regenerator-runtime/runtime";
 
 const MENU = [
   {
+    title: "新功能演示(仅体验员)",
+    userType: null,
+    split: 4,
+    roles: "taste",
+    items: [
+      {
+        name: "拜访统计",
+        icon: "tongji",
+        iconColor: "#fff",
+        color: "#ff3399",
+        size: 1,
+        path: "/pages/analyte/index"
+      }
+    ]
+  },
+  {
     title: "内勤工具",
     userType: 4,
     split: 4,
+    roles: "staff",
     items: [
       {
         name: "生成出勤码",
-        icon: "qrcode",
+        icon: "erweima",
         iconColor: "#fff",
-        color: "#f30",
+        color: "#ff3366",
         size: 1,
         path: "/pages/generateQrCode/index?type=join&timestamp&location"
       }
@@ -34,7 +51,7 @@ const MENU = [
       },
       {
         name: "我的拜访",
-        icon: "team",
+        icon: "wodekehu",
         iconColor: "#fff",
         color: "#00bcbd",
         size: 1,
@@ -42,7 +59,7 @@ const MENU = [
       },
       {
         name: "送礼记录",
-        icon: "gift",
+        icon: "liwujilu",
         iconColor: "#fff",
         color: "#00bcbd",
         size: 1,
@@ -50,7 +67,7 @@ const MENU = [
       },
       {
         name: "送出礼物",
-        icon: "gift",
+        icon: "liwu",
         iconColor: "#fff",
         color: "#00bcbd",
         size: 1,
@@ -66,7 +83,7 @@ const MENU = [
       },
       {
         name: "我的身份码",
-        icon: "qrcode",
+        icon: "shenfenma",
         iconColor: "#fff",
         color: "#00bcbd",
         size: 1,
@@ -81,14 +98,14 @@ const MENU = [
     items: [
       {
         name: "抢购",
-        icon: "trophy-fill",
+        icon: "qianggou1",
         iconColor: "#fff",
         color: "#00bcbd",
         path: "/pages/scroll/index?pageType=mySpeedKill"
       },
       {
         name: "预约",
-        icon: "check-circle-fill",
+        icon: "yuyue1",
         iconColor: "#fff",
         color: "#00bcbd",
         // path: "/pages/personal/myGift/index"
@@ -96,7 +113,7 @@ const MENU = [
       },
       {
         name: "我的礼物",
-        icon: "gift",
+        icon: "wodeliwu",
         iconColor: "#fff",
         color: "#00bcbd",
         // path: "/pages/qrcode/list/index?type=user"
@@ -104,7 +121,7 @@ const MENU = [
       },
       {
         name: "加入机构",
-        icon: "home",
+        icon: "jigou1",
         iconColor: "#fff",
         color: "#00bcbd",
         userType: 2,
@@ -127,7 +144,7 @@ const MENU = [
     items: [
       {
         name: "商城",
-        icon: "gift-fill",
+        icon: "shangchang1",
         iconColor: "#fff",
         color: "#00bcbd",
         path: "/pages/products/list/index",
@@ -135,22 +152,14 @@ const MENU = [
       },
       {
         name: "我的收藏",
-        icon: "heart-fill",
+        icon: "shoucang",
         iconColor: "#fff",
         color: "#00bcbd",
         path: "/pages/products/group/index",
         size: 1
-      },
-      {
-        name: "分析统计",
-        icon: "star",
-        iconColor: "#fff",
-        color: "#00bcbd",
-        size: 1,
-        path: "/pages/analyte/index"
       }
     ]
-  }
+  },
 ];
 Page({
   data: {

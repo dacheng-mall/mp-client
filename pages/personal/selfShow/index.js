@@ -82,6 +82,11 @@ Page({
       visiable: true
     });
   },
+  hidePanel: function() {
+    this.setData({
+      visiable: false
+    });
+  },
   bulk: async function() {
     const data = await post("v1/api/sys/elasticSearch/bulk", [
       {
@@ -136,14 +141,10 @@ Page({
     try {
       myCustomer = await post("v1/api/sys/elasticSearch/get", {
         index: "my_customers",
-        // type: `${salesmanAutoId}_customer`,
         id: `${salesmanAutoId}_${customerAutoId}`
       });
     } catch (error) {
       console.log(error);
-      // if (error.statusCode === 404) {
-      //   // 这个索引不存在
-      // }
     }
     const tasks = [
       {
@@ -192,6 +193,12 @@ Page({
     }
     try {
       const data = await post("v1/api/sys/elasticSearch/bulk", tasks);
+      if (!data.errors) {
+        wx.showToast({
+          title: '评价成功'
+        })
+        this.hidePanel();
+      }
     } catch (error) {}
   },
   waiting: function() {
@@ -206,7 +213,6 @@ Page({
   bindGetUserInfo: async function(e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
-      console.log(e.detail.userInfo);
       const { avatarUrl, ...other } = e.detail.userInfo;
       try {
         const data = await put("v1/api/sys/user", {

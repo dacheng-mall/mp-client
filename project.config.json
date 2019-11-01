@@ -23,14 +23,13 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.2",
+	"libVersion": "2.9.1",
 	"appid": "wxee01568371e5d17b",
 	"projectname": "dacheng-mall",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
 	"isGameTourist": false,
-	"miniprogramRoot": "/",
 	"scripts": {
 		"beforeCompile": "",
 		"beforePreview": "",
@@ -53,6 +52,10 @@
 		},
 		"game": {
 			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -341,6 +344,13 @@
 				{
 					"id": -1,
 					"name": "统计图表",
+					"pathName": "pages/analyte/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/analyte/index",
 					"pathName": "pages/analyte/index",
 					"scene": null
 				}
