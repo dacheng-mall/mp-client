@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/dacheng-mall/mini-program-client#readme",
   "dependencies": {
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "wxapp-computed": "^1.0.1"
   }
 }
